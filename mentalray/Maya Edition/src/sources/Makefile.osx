@@ -1,0 +1,33 @@
+# Mac OS X - Domemaster3D Mental Ray Shader Makefile
+# by Andrew Hazelden  andrewhazelden@gmail.com
+# http://www.andrewhazelden.com
+
+
+CC = gcc
+
+#MAYA_DIR = /Applications/Autodesk/maya2011
+#MAYA_DIR = /Applications/Autodesk/maya2013
+MAYA_DIR = /Applications/Autodesk/maya2012
+
+
+
+INC = -I$(MAYA_DIR)/devkit/mentalray/include
+LIB = 
+LIB_STATIC = 
+CFLAGS = -c -O3 -fPIC -DBIT64 -dynamic -fno-common
+LIBTOOL = libtool
+
+OBJS = domeAFL_FOV_Stereo.o domeAFL_FOV.o domeAFL_WxH.o test_texture.o
+SRCS = domeAFL_FOV_Stereo.c domeAFL_FOV.c domeAFL_WxH.c test_texture.c
+
+all: domeAFL_FOV_Stereo.dylib 
+
+$(OBJS): 
+	$(CC) $(CFLAGS) $(INC) $(LIB) $(SRCS) $(LIB_STATIC)
+
+domeAFL_FOV_Stereo.dylib : $(OBJS) 
+	$(LIBTOOL) -flat_namespace -undefined suppress -dynamic -o domeAFL_FOV_Stereo.dylib  $(OBJS)
+
+clean: 
+	rm -f $(OBJS) 
+	rm -f domeAFL_FOV_Stereo.dylib 
