@@ -1,29 +1,18 @@
 Domemaster3D Stereo Lens Shader
+Version 1.1 - July 28, 2012
 
-Version 1.1
-Updated April 29, 2012
-Added Linux Build + Makefile
-
-Version 1.0
-Released April 18, 2012
-Initial Release
-
-
-Created by Robert Ziche
-http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images
-http://code.google.com/p/domemaster-stereo-shader/
-
-Maya Support by Andrew Hazelden
-andrewhazelden@gmail.com       
+Domemaster3D Maya Port by Andrew Hazelden
+andrew@andrewhazelden.com      
 http://www.andrewhazelden.com/blog
 
-Source Code:
-http://code.google.com/r/andrewhazelden-domemaster-maya/
+Domemaster Stereo shader for 3DS Max  Created by Robert Ziche
+http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images
 
+Source Code:
+http://code.google.com/p/domemaster-stereo-shader/
 
 Based upon Daniel Ott's "DomeAFL" Angular fisheye lens shader
 http://www.thedott.net/shaders/domeAFL/
-
 
 
 About This Shader
@@ -31,8 +20,19 @@ About This Shader
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings.
 
 
--------------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
+Version History
+---------------
+Version 1.1
+Released July 28, 2012
+Added Maya stereo camera rig example, Linux Build + Makefile, new shader icons
+
+
+Version 1.0
+Released April 18, 2012
+
+Initial version of the Domemaster3D shader for Maya
 
 
 Installation Instructions
@@ -44,22 +44,29 @@ Maya on Windows
 1. Unzip the domemaster3D.zip archive.
 
 2. Copy the appropriate "domeAFL_FOV_Stereo.dll" file from either the "Windows 32-bit LIB" or "Windows 64-bit LIB" folder or to your mental ray LIB folder:
+
+On Maya 2012:
 C:\Program Files\Autodesk\Maya2012\mentalray\lib\
+
+On Maya 2013:
+C:\Program Files\Autodesk\Maya2013\mentalray\shaders\
 
 If you are running a 32-bit version of Maya install the 32-bit DLL. If you are running a 64-bit version of Maya install the 64-bit DLL.
 
 
 3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
+
+On Maya 2012:
 C:\Program Files\Autodesk\Maya2012\mentalray\include\
 
+On Maya 2013:
+C:\Program Files\Autodesk\Maya2012\mentalray\shaders\include 
 
 4. Copy the Maya AE Template file "AEdomeAFL_FOV_StereoTemplate.mel" to either the Maya AETemplates folder or to your user account's Maya script folder:
+
 C:\Program Files\Autodesk\Maya2012\scripts\AETemplates\
 or
 My Documents\maya\2012\prefs\scripts
-
-** If you are running a copy of Maya prior to Maya 2011 you don't need to install the AETemplate file:
-AEdomeAFL_FOV_StereoTemplate.mel
 
 
 5. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
@@ -67,7 +74,7 @@ C:\Program Files\Autodesk\Maya2012\icons\
 or
 My Documents\maya\2012\prefs\icons\
 
-6. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", and "domeAFL_WxH" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
+6. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
 
 
 
@@ -78,12 +85,23 @@ This version of the domeAFL_FOV_Stereo shader mental ray shader was compiled for
 1. Unzip the domemaster3D.zip archive.
 
 2. Copy domeAFL_FOV_Stereo.dylib file from the "Mac OS X 64-bit LIB" folder to the mentalray lib directory:
+
+On Maya 2012:
 /Applications/Autodesk/maya2012/Maya.app/Contents/mentalray/lib/
 
 If you want to go inside the Maya.app package, right click on Maya.app and select "Show Package Contents" from the contextual menu.
 
+On Maya 2013:
+/Applications/Autodesk/maya2013/mentalray/shaders/
+
+
 3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
+
+On Maya 2012:
 /Applications/Autodesk/maya2012/Maya.app/Contents/mentalray/include
+
+On Maya 2013:
+/Applications/Autodesk/maya2013/mentalray/shaders/include
 
 4. Copy the Maya AE Template file "AEdomeAFL_FOV_StereoTemplate.mel" to either the Maya AETemplates folder or to your user account's Maya script folder:
 /Applications/Autodesk/maya2012/Maya.app/Contents/scripts/AETemplates/
@@ -94,7 +112,7 @@ or
 5. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
 ~/Library/Preferences/Autodesk/maya/2012-x64/prefs/icons
 
-6. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", and "domeAFL_WxH" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
+6. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
 
 
 Maya on Linux
@@ -123,7 +141,8 @@ AEdomeAFL_FOV_StereoTemplate.mel
 5. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
 /usr/autodesk/maya2012-x64/prefs/icons
 
-6. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", and "domeAFL_WxH" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
+6. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
+
 
 
 3D Studio Max
@@ -140,77 +159,10 @@ If you are running a 32-bit version of 3D Studio Max install the 32-bit DLL. If 
 3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
 \mentalray\shaders_autoload\include
 
-When you start 3D Studio Max, you will have 3 new Lens shaders:
+When you start 3D Studio Max, you will have 4 new Lens shaders:
 "Domemaster Stereo Shader"
 "domeAFL_FOV"
 "domeAFL_WxH"
+"rob_lookup_background"
 
 
-
-Using the Domemaster Stereo Lens Shader in Maya
-------------------------------------------------
-Connect the "domeAFL_FOV_Stereo" lens shader to a camera's .miLensShader input. 
-
-A quick way to make the connection in the Hypershade is to hold down the Control key on your keyboard and, using the Middle-Mouse button, drag the domeAFL_FOV_Stereo lens shader onto the camera's node icon. This will automatically make the node connections.
-
-In the Hypershade work area, if your domeAFL_FOV_Stereo node has a solid red color background that means you need to change your renderer to Mental Ray. 
-
-You can change mental ray to be your default renderer by going to the Window > Settings / Preferences > Preferences menu. In the Preferences window click on the rendering section. Select "mental ray" from the the preferred renderer pop-up menu and click "Save".
-
-You can connect your own custom texture maps to the Separation Multiplier Map, Turn Multiplier Map, and Head Tilt Map attributes.
-
-
--------------------------------------------------------------------------------
-
-
-Domemaster Stereo Lens Shader Controls
----------------------------------------
-Field of View: The field of view for the rendered fisheye image.
-
-Camera: Choices are Center/Left/Right. Selects the camera to use for rendering. Center skips 90% of the calculations and gives you a highly optimized standard Angular Fisheye shader.
-
-Dome Radius: (focus plane) This is actually the distance at which the cameras line of sights converge, so it's not really the dome size. 
-
-Dome Forward Tilt: Dome tilt in degrees. Note that this value is not used unless you enable Dome Tilt Compensation.
-
-Cameras Separation: The initial separation of the L/R cameras.
-
-Separation Multiplier: A value between 0-1 that multiples the Camera Separation. This attribute is meant to be used with a grayscale texture mapped to the screen space using the right button. It's used to control the amount of 3D effect, and eliminate it where desired.
-
-Turn Multiplier: A value 0-1 that controls the amount tof the head turn. To be used with a grayscale texture. Typical use, keep the head straight while looking at the top of the dome.
-
-Head Tilt: A value 0-1 (with 0.5 being the "neutral" value) that tilts the cameras (or head) left/right. 0 means 90 degrees to the left, 1 means 90 degrees to the right (if I remember correctly).
-
-Dome Tilt Compensation: Enabling this option, shifts all the calculations by the # of degrees specified in Dome Forward Tilt. (Basically, it keeps the cameras/head vertical while the dome rotates forward.)
-
-Maps used for the various multipliers and tilt settings will have to be custom made for the proper dome tilt.
-
-Vertical Mode: Enable the vertical dome mode, which automatically adjust the head turn and adds a turn compensation for the upper and lower part of the dome. It's a simplified and optimized version of the Dome Tilt Compensation with a 90 degrees tilt. It is faster and easier to use.
-
-
--------------------------------------------------------------------------------
-
-
-Creating Custom Maps
---------------------
-
-The Separation Multiplier, Turn Multiplier, and Head Tilt attributes support custom texture maps. It is possible to use either a procedural ramp / gradient texture or 2D file textures.
-
-Connecting Custom Texture Maps in Maya:
-It can be challenging to map textures to mental ray's screen space coordinates so I have provided some examples and screenshots. 
-
-Included with this package is a group of screenshots showing the proper node connections (located in the "Connecting Customs Maps in Maya" folder) and two Maya scene files (located inside the "Sample Maya Project" folder.
-
-The Maya scene file "Starting Domemaster Shading Network.ma" is an empty maya scene that has a shading network that shows how to map mental ray textures into the "domeAFL FOV stereo" node's screen space coordinates. There is probably an easier way to do this using a Maya file nodes but I haven't figured it out yet.
-
-The Maya scene file "domemaster3D Scene v4.ma" is a sample scene with a room and several objects that was created with 1 maya unit = 1 cm scale.
-
-
-How to use the rob_lookup_background lens shader
---------------------------------------------
-
-The rob_lookup_background shader lets you preview your screen coordinate space Separation and Head Turn Map textures before you map them to the domemaster shader.
-
-To use the rob_lookup_background shader, connect a greyscale channel like OutValue.R from your shading network to the tex attribute of the rob_lookup_background shader. 
-
-Then connect the rob_lookup_background lens shader to your camera. You need to click 'render' to view the results.
