@@ -1,18 +1,18 @@
 //  Creation Date:	Oct 30 , 2011
-//
+//  
 //  Procedure Name:
 //	AEdomeAFL_FOV_StereoTemplate
 //
 //  Description:
 //	Creates the attribute editor controls for the domeAFL_FOV_Stereo shader
 //
-//	Version:  1.0
+//	Version:  1.1
 //
 //	Author:
 //	Andrew Hazelden
 //
 //	Contact:
-//	andrewhazelden@gmail.com
+//	andrew@andrewhazelden.com
 //
 
 
@@ -64,7 +64,7 @@ global proc AEdomeAFL_FOV_StereoTemplate( string $nodeName )
 				
 				
 				//Define the image orientation attributes
-				editorTemplate -beginLayout "Image Orientation" -collapse 1;
+				editorTemplate -beginLayout "Image Orientation" -collapse 0;
 					editorTemplate -label "Flip X" -annotation "Flips the image horizontally" -addControl "Flip_Ray_X";	
 					editorTemplate -label "Flip Y" -annotation  "Flips the image vertically." -addControl "Flip_Ray_Y";
 				editorTemplate -endLayout;
