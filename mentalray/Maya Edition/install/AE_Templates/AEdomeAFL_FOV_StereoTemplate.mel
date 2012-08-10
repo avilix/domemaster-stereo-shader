@@ -1,0 +1,147 @@
+//  Creation Date:	Oct 30 , 2011
+//
+//  Procedure Name:
+//	AEdomeAFL_FOV_StereoTemplate
+//
+//  Description:
+//	Creates the attribute editor controls for the domeAFL_FOV_Stereo shader
+//
+//	Version:  1.0
+//
+//	Author:
+//	Andrew Hazelden
+//
+//	Contact:
+//	andrewhazelden@gmail.com
+//
+
+
+//Create the attribute editor view for the domeAFL_FOV_Stereo node
+global proc AEdomeAFL_FOV_StereoTemplate( string $nodeName )
+{
+	AEswatchDisplay $nodeName;
+	editorTemplate -beginScrollLayout;
+		editorTemplate 	-beginNoOptimize;
+			editorTemplate -beginLayout "Domemaster Stereo Shader" -collapse 0;
+				editorTemplate 	-beginNoOptimize;
+			
+				editorTemplate -label "Camera" -annotation "Select the camera to render." -addControl "Camera";	
+				
+				editorTemplate -label "Field of View" -annotation "Field of View (degrees)" -addControl "FOV_Angle";	
+				editorTemplate -addSeparator;		
+
+
+				 // Define custom non-mappable slider controls
+				editorTemplate -callCustom 	"AEdomeAFL_FOV_CustomDome_RadiusNew" 
+											"AEdomeAFL_FOV_CustomDome_RadiusReplace" 
+											"Dome_Radius";
+				
+				
+				editorTemplate -callCustom 	"AEdomeAFL_FOV_CustomDome_TiltNew" 
+											"AEdomeAFL_FOV_CustomDome_TiltReplace" 
+											"Dome_Tilt";
+				
+				
+				editorTemplate -callCustom 	"AEdomeAFL_FOV_CustomCameras_SeparationNew" 
+											"AEdomeAFL_FOV_CustomCameras_SeparationReplace" 
+											"Cameras_Separation";
+				
+				editorTemplate -addSeparator;	
+			
+			
+				editorTemplate -label "Dome Tilt Compensation" -annotation "Enables Dome Tilt Compensation" -addControl "Dome_Tilt_Compensation";
+				
+				editorTemplate -label "Vertical Mode" -annotation "Enables Vertical Mode" -addControl "Vertical_Mode";
+
+				//Define the mappable attributes
+				editorTemplate -beginLayout "Custom Maps" -collapse 0;
+					editorTemplate -label "Separation Multiplier" -annotation "Cameras Separation Multiplier Map" -addControl "Cameras_Separation_Map"; 
+					
+					editorTemplate -label "Turn Multiplier" -annotation "Head Turn Multiplier Map" -addControl "Head_Turn_Map";
+					
+					editorTemplate -label "Head Tilt" -annotation "Head Tilt Map" -addControl "Head_Tilt_Map";
+				editorTemplate -endLayout;
+				
+				
+				//Define the image orientation attributes
+				editorTemplate -beginLayout "Image Orientation" -collapse 0;
+					editorTemplate -label "Flip X" -annotation "Flips the image horizontally" -addControl "Flip_Ray_X";	
+					editorTemplate -label "Flip Y" -annotation  "Flips the image vertically." -addControl "Flip_Ray_Y";
+				editorTemplate -endLayout;
+		
+		
+		editorTemplate -endLayout;
+		
+		//Hide the raw numerical camera and view offset fields
+		editorTemplate -suppress "Camera";
+		editorTemplate -suppress "View_Offset";
+		
+		AEdependNodeTemplate $nodeName;
+		
+		//Add any new controls that aren't listed above to the bottom of the attribute editor window 
+		editorTemplate -addExtraControls;
+
+	editorTemplate -endScrollLayout;
+}
+
+
+
+
+
+//This creates the Dome_Radius non mappable sliders in the attribute editor
+global proc AEdomeAFL_FOV_CustomDome_RadiusNew( string $attrName )
+{
+    floatSliderGrp -label "Dome Radius" -annotation "Dome Radius (focus plane)" -field true -maxValue 3600.0 -minValue 1.0 -value 360.0 -fieldMinValue 0.0 -fieldMaxValue 1000000.0 CustomNode_Dome_Radius; 
+	
+	connectControl CustomNode_Dome_Radius $attrName;	
+}
+
+
+
+
+//This creates the Dome_Tilt non mappable sliders in the attribute editor
+global proc AEdomeAFL_FOV_CustomDome_TiltNew( string $attrName )
+{
+	floatSliderGrp -label "Dome Forward Tilt" -annotation "Dome Forward Tilt" -field true -maxValue 90.0 -minValue 0.0 -value 0.0 -fieldMinValue 0.0 -fieldMaxValue 90.0 CustomNode_Dome_Tilt;
+	
+	connectControl CustomNode_Dome_Tilt $attrName;	
+}
+
+
+
+
+//This creates the Cameras_Separation non mappable sliders in the attribute editor
+global proc AEdomeAFL_FOV_CustomCameras_SeparationNew( string $attrName )
+{
+	floatSliderGrp -label "Cameras Separation" -annotation "Cameras Separation" -field true -maxValue 100.0 -minValue 0.0 -value 6.0 -fieldMinValue 0 -fieldMaxValue 1000000.0 CustomNode_Cameras_Separation;
+
+	connectControl CustomNode_Cameras_Separation $attrName;	
+}
+
+
+
+//Replace an existing item
+global proc AEdomeAFL_FOV_CustomCameras_SeparationReplace( string $attrName )
+{
+// Install connection between the floatSliderGrp and the Cameras_Separation attribute
+	connectControl CustomNode_Cameras_Separation $attrName;
+}
+
+
+
+
+//Replace an existing item
+global proc AEdomeAFL_FOV_CustomDome_RadiusReplace( string $attrName )
+{
+// Install connection between the floatSliderGrp and the Dome_Radius attribute
+	connectControl CustomNode_Dome_Radius $attrName;
+}
+
+
+
+//Replace an existing item
+global proc AEdomeAFL_FOV_CustomDome_TiltReplace( string $attrName )
+{
+// Install connection between the floatSliderGrp and the Dome_Tilt attribute
+	connectControl CustomNode_Dome_Tilt $attrName;
+}

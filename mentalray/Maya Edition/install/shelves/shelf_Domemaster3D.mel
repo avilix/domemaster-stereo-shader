@@ -1,0 +1,158 @@
+global proc shelf_Domemaster3D () {
+    global string $gBuffStr;
+    global string $gBuffStr0;
+    global string $gBuffStr1;
+
+
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "AutoMagic Fulldome 3D Scene" 
+        -enableBackground 0
+        -align "center" 
+        -label "AutoMagic" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_magicDome.png" 
+        -image1 "render_magicDome.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Creating the AutoMagic Fulldome 3D DomeGrid Scene\")\nimport fulldomeStereoRig as domerig\ndomerig.createFulldomeStereoRig()\ndomerig.createDomeGrid()\ndomerig.createTestShapes()\ndomerig.setRenderRes()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Fulldome Stereo Rig" 
+        -enableBackground 0
+        -align "center" 
+        -label "Stereo Rig" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.792793 0.792793 0.792793 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_domeAFL_FOV_Stereo.png" 
+        -image1 "render_domeAFL_FOV_Stereo.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Create a Domemaster3D Stereo Rig\")\nimport fulldomeStereoRig as domerig\ndomerig.createFulldomeStereoRig()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Screen Space Texture" 
+        -enableBackground 0
+        -align "center" 
+        -label "DomeTexture" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_rob_lookup_background.png" 
+        -image1 "render_rob_lookup_background.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Creating a Domemaster3D screen space texture\")\nimport fulldomeStereoRig as domerig\ndomerig.createRobLookup()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Screen Space Ramp" 
+        -enableBackground 0
+        -align "center" 
+        -label "DomeRamp" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_domeRamp.png" 
+        -image1 "render_domeRamp.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print('Creating a screen space ramp texture')\nimport fulldomeStereoRig as domerig\ndomerig.createDomeRampTexture()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "DomeAFL_FOV" 
+        -enableBackground 0
+        -align "center" 
+        -label "DomeAFL_FOV" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_domeAFL_FOV.png" 
+        -image1 "render_domeAFL_FOV.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Creating a domeAFL_FOV camera\")\nimport fulldomeStereoRig as domerig\ndomerig.createDomeAFL_FOV_Camera()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "DomeAFL_WxH" 
+        -enableBackground 0
+        -align "center" 
+        -label "DomeAFL_WxH" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_domeAFL_WxH.png" 
+        -image1 "render_domeAFL_WxH.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Creating a domeAFL_WxH camera\")\nimport fulldomeStereoRig as domerig\ndomerig.createDomeAFL_WxH_Camera()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+
+} 

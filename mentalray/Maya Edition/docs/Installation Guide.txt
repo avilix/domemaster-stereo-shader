@@ -1,11 +1,11 @@
 Domemaster3D Stereo Lens Shader
-Version 1.1 - July 28, 2012
+Version 1.2 - Aug 8, 2012
 
 Domemaster3D Maya Port by Andrew Hazelden
 andrew@andrewhazelden.com      
 http://www.andrewhazelden.com/blog
 
-Domemaster Stereo shader for 3DS Max  Created by Robert Ziche
+Domemaster Stereo shader for 3DS Max Created by Robert Ziche
 http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images
 
 Source Code:
@@ -24,6 +24,20 @@ The Domemaster Stereo lens shader is a custom mental ray shader that creates a s
 
 Version History
 ---------------
+
+Version 1.2
+Released Aug 8, 2012
+Added a Domemaster3D shelf, enabled domeAFL_FOV_Stereo FlipX/FlipY options, created a python stereo rig setup script, added an automatic screen space file texture and ramp texture script
+
+The Maya Domemaster3D shelf has buttons for the following features
+Creating a Domemaster3D stereo camera rig
+Creating a hemispherical yellow wireframe test scene + stereo
+camera rig
+Creating a screen space file texture
+creating a screen space ramp texture
+Creating a 2D domeAFL_FOV node + camera
+Creating a 2D domeAFL_WxH node + camera
+
 Version 1.1
 Released July 28, 2012
 Added Maya stereo camera rig example, Linux Build + Makefile, new shader icons
@@ -44,7 +58,6 @@ Maya on Windows
 1. Unzip the domemaster3D.zip archive.
 
 2. Copy the appropriate "domeAFL_FOV_Stereo.dll" file from either the "Windows 32-bit LIB" or "Windows 64-bit LIB" folder or to your mental ray LIB folder:
-
 On Maya 2012:
 C:\Program Files\Autodesk\Maya2012\mentalray\lib\
 
@@ -55,7 +68,6 @@ If you are running a 32-bit version of Maya install the 32-bit DLL. If you are r
 
 
 3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
-
 On Maya 2012:
 C:\Program Files\Autodesk\Maya2012\mentalray\include\
 
@@ -69,12 +81,18 @@ or
 My Documents\maya\2012\prefs\scripts
 
 
-5. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
+5. Copy the python scripts "__init__.py" and "fulldomeStereoRig.py" from the "scripts" folder to your user account's Maya script folder:
+My Documents\maya\2012\prefs\scripts
+
+6. Copy the "shelf_Domemaster3D.mel" file from the "shelves" folder to your user account's Maya shelves folder:
+My Documents\maya\2012\prefs\shelves
+
+7. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
 C:\Program Files\Autodesk\Maya2012\icons\
 or
 My Documents\maya\2012\prefs\icons\
 
-6. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
+8. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
 
 
 
@@ -85,7 +103,6 @@ This version of the domeAFL_FOV_Stereo shader mental ray shader was compiled for
 1. Unzip the domemaster3D.zip archive.
 
 2. Copy domeAFL_FOV_Stereo.dylib file from the "Mac OS X 64-bit LIB" folder to the mentalray lib directory:
-
 On Maya 2012:
 /Applications/Autodesk/maya2012/Maya.app/Contents/mentalray/lib/
 
@@ -96,7 +113,6 @@ On Maya 2013:
 
 
 3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
-
 On Maya 2012:
 /Applications/Autodesk/maya2012/Maya.app/Contents/mentalray/include
 
@@ -108,11 +124,16 @@ On Maya 2013:
 or
 ~/Library/Preferences/Autodesk/maya/2012-x64/prefs/scripts
 
+5. Copy the python scripts "__init__.py" and "fulldomeStereoRig.py" from the "scripts" folder to your user account's Maya script folder:
+~/Library/Preferences/Autodesk/maya/2012-x64/prefs/scripts
 
-5. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
+6. Copy the "shelf_Domemaster3D.mel" file from the "shelves" folder to your user account's Maya shelves folder:
+~/Library/Preferences/Autodesk/maya/2012-x64/prefs/shelves
+
+7. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
 ~/Library/Preferences/Autodesk/maya/2012-x64/prefs/icons
 
-6. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
+8. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
 
 
 Maya on Linux
@@ -122,10 +143,20 @@ This version of the domeAFL_FOV_Stereo shader mental ray shader was compiled for
 1. Unzip the domemaster3D.zip archive.
 
 2. Copy domeAFL_FOV_Stereo.so file from the "Linux X 64-bit LIB" folder to the mentalray lib directory:
+On Maya 2012:
 /usr/autodesk/maya2012-x64/mentalray/lib
 
+On Maya 2013:
+/usr/autodesk/maya2012-x64/mentalray/shaders/
+
+
 3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
+
+On Maya 2012:
 /usr/autodesk/maya2012-x64/mentalray/include
+
+On Maya 2013:
+/usr/autodesk/maya2012-x64/mentalray/shaders/include
 
 4. Copy the Maya AE Template file "AEdomeAFL_FOV_StereoTemplate.mel" to either the Maya AETemplates folder or to your user account's Maya script folder:
 /usr/autodesk/maya2012-x64/scripts/AETemplates/
@@ -137,6 +168,16 @@ or
 ** If you are running a copy of Maya prior to Maya 2011 you don't need to install the AETemplate file:
 AEdomeAFL_FOV_StereoTemplate.mel
 
+
+5. Copy the python scripts "__init__.py" and "fulldomeStereoRig.py" from the "scripts" folder to the Maya script folder:
+/usr/autodesk/maya2012-x64/scripts
+or
+~/maya/2012-x64/prefs/scripts
+
+
+
+6. Copy the "shelf_Domemaster3D.mel" file from the "shelves" folder to your user account's Maya shelves folder:
+~/maya/2012-x64/prefs/shelves
 
 5. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
 /usr/autodesk/maya2012-x64/prefs/icons
