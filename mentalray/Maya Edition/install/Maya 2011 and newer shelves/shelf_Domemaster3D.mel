@@ -20,8 +20,8 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_magicDome.png" 
-        -image1 "render_magicDome.png" 
+        -image "render_magicDome.xpm" 
+        -image1 "render_magicDome.xpm" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -45,8 +45,8 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.792793 0.792793 0.792793 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_domeAFL_FOV_Stereo.png" 
-        -image1 "render_domeAFL_FOV_Stereo.png" 
+        -image "render_domeAFL_FOV_Stereo.xpm" 
+        -image1 "render_domeAFL_FOV_Stereo.xpm" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -70,8 +70,8 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_rob_lookup_background.png" 
-        -image1 "render_rob_lookup_background.png" 
+        -image "render_rob_lookup_background.xpm" 
+        -image1 "render_rob_lookup_background.xpm" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -95,8 +95,8 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_domeRamp.png" 
-        -image1 "render_domeRamp.png" 
+        -image "render_domeRamp.xpm" 
+        -image1 "render_domeRamp.xpm" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
@@ -120,12 +120,12 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_domeAFL_FOV.png" 
-        -image1 "render_domeAFL_FOV.png" 
+        -image "render_domeAFL_FOV.xpm" 
+        -image1 "render_domeAFL_FOV.xpm" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "print(\"Creating a domeAFL_FOV camera\")\nimport fulldomeStereoRig as domerig\ndomerig.createDomeAFL_FOV_Camera()" 
+        -command "print(\"Creating a domeAFL_FOV camera\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createDomeAFL_FOV_Camera()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -145,12 +145,62 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_domeAFL_WxH.png" 
-        -image1 "render_domeAFL_WxH.png" 
+        -image "render_domeAFL_WxH.xpm" 
+        -image1 "render_domeAFL_WxH.xpm" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "print(\"Creating a domeAFL_WxH camera\")\nimport fulldomeStereoRig as domerig\ndomerig.createDomeAFL_WxH_Camera()" 
+        -command "print(\"Creating a domeAFL_WxH camera\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createDomeAFL_WxH_Camera()" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Color Material" 
+        -enableBackground 0
+        -align "center" 
+        -label "Color" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "colorMaterial.xpm" 
+        -image1 "colorMaterial.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "#color material\nprint(\"Creating a DomeAFL compatible Color MIA Material\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorMiaMaterial()\n" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Color + Bump Material" 
+        -enableBackground 0
+        -align "center" 
+        -label "C+Bump" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "bumpMaterial.xpm" 
+        -image1 "bumpMaterial.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "#color bump material\nprint(\"Creating a DomeAFL compatible Color and Bump MIA Material\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorBumpMiaMaterial()\n" 
         -sourceType "python" 
         -commandRepeatable 1
     ;

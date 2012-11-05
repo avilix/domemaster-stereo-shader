@@ -119,106 +119,6 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release_2011|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="2"
-			CharacterSet="2"
-			WholeProgramOptimization="1"
-			>
-			<Tool
-				Name="VCPreBuildEventTool"
-			/>
-			<Tool
-				Name="VCCustomBuildTool"
-				CommandLine="copy $(OutDir)\$(ProjectName).dll $(OutDir)\$(ProjectName)_32_2011.dll&#x0D;&#x0A;"
-				AdditionalDependencies="$(OutDir)\$(ProjectName).dll"
-				Outputs="$(OutDir)\$(ProjectName)_32_2011.dll"
-			/>
-			<Tool
-				Name="VCXMLDataGeneratorTool"
-			/>
-			<Tool
-				Name="VCWebServiceProxyGeneratorTool"
-			/>
-			<Tool
-				Name="VCMIDLTool"
-			/>
-			<Tool
-				Name="VCCLCompilerTool"
-				AdditionalOptions="-c -DQMC -DMI_MODULE= -DMI_PRODUCT_RAY -DWIN_NT -DEVIL_ENDIAN -D_WIN32_WINNT=0x0400 -DNV_CG -D_SECURE_SCL=0 -DHYPERTHREAD -DX86 -I."
-				Optimization="3"
-				InlineFunctionExpansion="2"
-				EnableIntrinsicFunctions="false"
-				FavorSizeOrSpeed="1"
-				OmitFramePointers="true"
-				EnableFiberSafeOptimizations="false"
-				WholeProgramOptimization="false"
-				AdditionalIncludeDirectories="&quot;C:\Program Files (x86)\Autodesk\Maya2013\mentalray\devkit\include&quot;"
-				PreprocessorDefinitions="_WIN32"
-				StringPooling="true"
-				RuntimeLibrary="2"
-				BufferSecurityCheck="false"
-				EnableFunctionLevelLinking="false"
-				ForceConformanceInForLoopScope="true"
-				WarningLevel="3"
-				Detect64BitPortabilityProblems="false"
-				DebugInformationFormat="0"
-				CallingConvention="0"
-			/>
-			<Tool
-				Name="VCManagedResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCResourceCompilerTool"
-			/>
-			<Tool
-				Name="VCPreLinkEventTool"
-			/>
-			<Tool
-				Name="VCLinkerTool"
-				AdditionalOptions="/nodefaultlib:LIBC.LIB ws2_32.lib mpr.lib opengl32.lib"
-				AdditionalDependencies="shader.lib"
-				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;C:\Program Files (x86)\Autodesk\Maya2013\mentalray\devkit\lib\nt&quot;"
-				EnableUAC="false"
-				DelayLoadDLLs=""
-				GenerateDebugInformation="false"
-				GenerateMapFile="true"
-				MapFileName="mapfile"
-				HeapCommitSize="0"
-				StackReserveSize="2097152"
-				StackCommitSize="4096"
-				OptimizeReferences="1"
-				EnableCOMDATFolding="0"
-				LinkTimeCodeGeneration="0"
-				RandomizedBaseAddress="0"
-				DataExecutionPrevention="0"
-				TargetMachine="1"
-			/>
-			<Tool
-				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
-			/>
-			<Tool
-				Name="VCXDCMakeTool"
-			/>
-			<Tool
-				Name="VCBscMakeTool"
-			/>
-			<Tool
-				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCPostBuildEventTool"
-			/>
-		</Configuration>
-		<Configuration
 			Name="Release|x64"
 			OutputDirectory="$(SolutionDir)$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
@@ -296,6 +196,106 @@
 				RandomizedBaseAddress="0"
 				DataExecutionPrevention="0"
 				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release_2011|Win32"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="2"
+			CharacterSet="2"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+				CommandLine="copy $(OutDir)\$(ProjectName).dll $(OutDir)\$(ProjectName)_32_2011.dll&#x0D;&#x0A;"
+				AdditionalDependencies="$(OutDir)\$(ProjectName).dll"
+				Outputs="$(OutDir)\$(ProjectName)_32_2011.dll"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions="-c -DQMC -DMI_MODULE= -DMI_PRODUCT_RAY -DWIN_NT -DEVIL_ENDIAN -D_WIN32_WINNT=0x0400 -DNV_CG -D_SECURE_SCL=0 -DHYPERTHREAD -DX86 -I."
+				Optimization="3"
+				InlineFunctionExpansion="2"
+				EnableIntrinsicFunctions="false"
+				FavorSizeOrSpeed="1"
+				OmitFramePointers="true"
+				EnableFiberSafeOptimizations="false"
+				WholeProgramOptimization="false"
+				AdditionalIncludeDirectories="&quot;C:\Program Files (x86)\Autodesk\Maya2013\mentalray\devkit\include&quot;"
+				PreprocessorDefinitions="_WIN32"
+				StringPooling="true"
+				RuntimeLibrary="2"
+				BufferSecurityCheck="false"
+				EnableFunctionLevelLinking="false"
+				ForceConformanceInForLoopScope="true"
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="false"
+				DebugInformationFormat="0"
+				CallingConvention="0"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions="/nodefaultlib:LIBC.LIB ws2_32.lib mpr.lib opengl32.lib"
+				AdditionalDependencies="shader.lib"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;C:\Program Files (x86)\Autodesk\Maya2013\mentalray\devkit\lib\nt&quot;"
+				EnableUAC="false"
+				DelayLoadDLLs=""
+				GenerateDebugInformation="false"
+				GenerateMapFile="true"
+				MapFileName="mapfile"
+				HeapCommitSize="0"
+				StackReserveSize="2097152"
+				StackCommitSize="4096"
+				OptimizeReferences="1"
+				EnableCOMDATFolding="0"
+				LinkTimeCodeGeneration="0"
+				RandomizedBaseAddress="0"
+				DataExecutionPrevention="0"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"

@@ -6,7 +6,7 @@
  *	Versions:
  *	0.1.0	First version released to public. No Offset and Flip options.
  * 
- *  0.1.1 Andrew Hazelden modification adding flip controls. Aug 4, 2012
+ *  0.1.1 [Andrew Hazelden] modification adding flip controls. Aug 4, 2012
  *  
  *****************************************************************************/
 
@@ -14,7 +14,7 @@
 #include <math.h>
 #include "shader.h"
 
-#define _VER_	"domeAFL_FOV_Stereo ver: 0.1.0"
+#define _VER_	"domeAFL_FOV_Stereo ver: 0.1.1"
 
 #define	CENTERCAM	0
 #define	LEFTCAM		1
@@ -232,12 +232,12 @@ DLLEXPORT miBoolean domeAFL_FOV_Stereo(
 		mi_point_from_camera(state, &org, &org);
 		
 
-		// Flip the ray direction about the y-axis
+		// Flip the X ray direction about the Y-axis
 		if(*mi_eval_boolean(&params->Flip_Ray_X)) { 
 			org.x = (-org.x);
 			ray.x = (-ray.x);
 		}
-		// Flip the ray direction about the x-axis
+		// Flip the Y ray direction about the X-axis
 		if(*mi_eval_boolean(&params->Flip_Ray_Y)) {
 			org.z = (-org.z);
 			ray.z = (-ray.z);

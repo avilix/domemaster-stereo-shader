@@ -1,5 +1,5 @@
 # Linux - Domemaster3D Mental Ray Shader Makefile
-# by Andrew Hazelden  andrewhazelden@gmail.com
+# by Andrew Hazelden  andrew@andrewhazelden.com
 # http://www.andrewhazelden.com
 
 CC = gcc

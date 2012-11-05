@@ -1,5 +1,5 @@
 # Mac OS X - Domemaster3D Mental Ray Shader Makefile
-# by Andrew Hazelden  andrewhazelden@gmail.com
+# by Andrew Hazelden  andrew@andrewhazelden.com
 # http://www.andrewhazelden.com
 
 # You can compile this file from the command line using:
@@ -43,7 +43,7 @@ clean:
 	rm -rf domeAFL_FOV_Stereo.dylib
 
 install:	
-	cp domeAFL_FOV_Stereo.dylib $(MAYA_DIR)/mentalray/shaders
-	cp ../include/domeAFL_FOV_Stereo.mi $(MAYA_DIR)/mentalray/shaders/include
+	cp ./domeAFL_FOV_Stereo.dylib $(MAYA_DIR)/mentalray/shaders
+	cp ./domeAFL_FOV_Stereo.mi $(MAYA_DIR)/mentalray/shaders/include
 
 go: clean all install

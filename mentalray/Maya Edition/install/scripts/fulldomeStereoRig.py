@@ -1,7 +1,28 @@
 """
-Domemaster3D Fulldome Stereo Rig V1.2 
+Domemaster3D Fulldome Stereo Rig V1.3 
 Created by Andrew Hazelden  andrew@andrewhazelden.com
-V1.2 Released Aug 8, 2012
+
+This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
+
+
+Version History
+----------------
+
+Version 1.3
+Released Nov 4, 2012
+Moved FOV and WxH functions into domeMaterial.py, changed the default lens shader connections to support the mental ray sky and sun system.
+
+
+Version 1.1
+Released Aug 14, 2012
+Improved python code and made it Maya 2010 compatible.
+
+
+Version 1.0 
+Released Aug 6, 2012
+First release of the Domemaster3D auto-setup python scripts.
+
+
 
 Installation instructions
 -------------------------
@@ -103,26 +124,6 @@ domerig.setRenderRes()
 --------------------------------------
 --------------------------------------
 
-Domemaster3D createDomeAFL_WxH_Camera
-----------------------
-A python function to create a domeAFL_WxH lens shader and attach it to a camera.
-
-Run using the command:
-import fulldomeStereoRig as domerig
-domerig.createDomeAFL_WxH_Camera()
---------------------------------------
---------------------------------------
-
-Domemaster3D createDomeAFL_FOV_Camera
-----------------------
-A python function to create a domeAFL_FOV lens shader and attach it to a camera.
-
-Run using the command:
-import fulldomeStereoRig as domerig
-domerig.createDomeAFL_FOV_Camera()
---------------------------------------
---------------------------------------
-
 """
 
 
@@ -175,7 +176,6 @@ A python function to create a fulldome stereo rig in Maya.
 """
 	
 def createFulldomeStereoRig():
-
 	import maya.cmds as cmds
 	#import maya.mel as mm	
 	
@@ -231,15 +231,32 @@ def createFulldomeStereoRig():
 	# ---------------------------------------------------------------------
 	dome_lens_center_cam = cmds.shadingNode( 'domeAFL_FOV_Stereo', n='center_domeAFL_FOV_Stereo', asUtility=True  ) 
 	cmds.setAttr(dome_lens_center_cam+'.Camera', 0 ) #Set the view to center
-	cmds.connectAttr( dome_lens_center_cam+'.message', rig[0]+'CenterCamShape.miLensShader' )
 
 	dome_lens_left_cam = cmds.shadingNode( 'domeAFL_FOV_Stereo', n='left_domeAFL_FOV_Stereo', asUtility=True ) 
 	cmds.setAttr( dome_lens_left_cam+'.Camera', 1 ) #Set the view to left
-	cmds.connectAttr( dome_lens_left_cam+'.message', rig[1]+'Shape.miLensShader' ) #stereoCameraLeftShape.miLensShader
 
 	dome_lens_right_cam = cmds.shadingNode( 'domeAFL_FOV_Stereo', n='right_domeAFL_FOV_Stereo', asUtility=True ) 
 	cmds.setAttr( dome_lens_right_cam+'.Camera', 2 ) #Set the view to right
-	cmds.connectAttr( dome_lens_right_cam+'.message', rig[2]+'Shape.miLensShader' ) #stereoCameraRightShape.miLensShader
+
+	# ---------------------------------------------------------------------
+	#Connect the lens shaders
+	# ---------------------------------------------------------------------
+	
+	# Primary lens shader connection:
+	# Connect to the .miLensShaderList[0] input on the camera
+	cmds.connectAttr( dome_lens_center_cam+'.message', rig[0]+'CenterCamShape.miLensShaderList[0]' )
+	cmds.connectAttr( dome_lens_left_cam+'.message', rig[1]+'Shape.miLensShaderList[0]' ) #stereoCameraLeftShape.miLensShaderList[0]
+	cmds.connectAttr( dome_lens_right_cam+'.message', rig[2]+'Shape.miLensShaderList[0]' ) #stereoCameraRightShape.miLensShaderList[0]
+
+	# Alternate lens shader connection:
+	# Connect directly to the first .miLensShader input on the camera
+	# Note: This first lens shader connection is overwritten by the mental ray Sun & Sky system
+	#cmds.connectAttr( dome_lens_center_cam+'.message', rig[0]+'CenterCamShape.miLensShader' )
+	#cmds.connectAttr( dome_lens_left_cam+'.message', rig[1]+'Shape.miLensShader' ) #stereoCameraLeftShape.miLensShader
+	#cmds.connectAttr( dome_lens_right_cam+'.message', rig[2]+'Shape.miLensShader' ) #stereoCameraRightShape.miLensShader
+
+
+
 
 	# ---------------------------------------------------------------------
 	# Link the common left and right camera attributes to the center camera
@@ -442,11 +459,17 @@ def createDomeGrid():
 	mm.eval("assignSG domeSurfaceShader polyDome;")
 	#('domeSurfaceShaderSG', edit=True, forceElement='polyDomeShape')
 	
+	#Set the polygon surface to be transparent
+	cmds.setAttr( dome_shader_name+'.outTransparency', 1, 1, 1, type="double3")
+
 	#Create a Display layer
 	cmds.select( dome_name[0], 'MeshGroup', replace=True);
-	cmds.createDisplayLayer( name="domeGridLayer", number=1, nr=True)
-	#Set the layer color to yellow
-	cmds.setAttr('domeGridLayer.color', 17) 
+	
+	#Check if the domeGridLayer exists
+	if not cmds.objExists('domeGridLayer'):
+		cmds.createDisplayLayer( name="domeGridLayer", number=1, nr=True)
+		#Set the layer color to yellow
+		cmds.setAttr('domeGridLayer.color', 17) 
 	
 """
 Domemaster3D createTestShapes
@@ -493,7 +516,7 @@ def	createTestShapes():
 	cmds.setAttr( 'domeTestLight.rotateY', 47)
 	cmds.setAttr( 'domeTestLight.rotateZ', -62)
 	# Scale the stereo camera rig locator larger 
-	cmds.setAttr(dome_light+'.locatorScale', 15) #Scale light icon
+	cmds.setAttr( 'domeTestLightShape.locatorScale', 15) #Scale light icon
 	
 	
 """
@@ -586,97 +609,3 @@ def createDomeRampTexture():
 	cmds.connectAttr( rob_tex_vector+'.outValue.outValueX', dome_ramp+'.uvCoord.uCoord' )
 	cmds.connectAttr( rob_tex_vector+'.outValue.outValueY', dome_ramp+'.uvCoord.vCoord' )
 
-"""
-Domemaster3D createDomeAFL_FOV_Camera
-----------------------
-A python function to create a domeAFL_FOV lens shader and attach it to a camera.
-"""	
-def createDomeAFL_FOV_Camera():
-	import maya.cmds as cmds
-	#import maya.mel as mm	
-	
-	#Variables
-	
-	# ---------------------------------------------------------------------
-	# Create the stereo rig
-	# ---------------------------------------------------------------------
-	
-	# Create a camera and get the shape name.
-	cameraName = cmds.camera(name='domeAFL_FOV_Camera')
-	cameraShape = cameraName[1]
-	
-	# ---------------------------------------------------------------------
-	# Create the domeAFL_FOV node
-	# ---------------------------------------------------------------------
-	domeAFL_lens_node = cmds.shadingNode( 'domeAFL_FOV', n='domeAFL_FOV', asUtility=True  ) 
-	cmds.connectAttr( domeAFL_lens_node+'.message', cameraShape+'.miLensShader' )
-	
-	# Scale the stereo camera rig locator larger 
-	cmds.setAttr(cameraShape+'.locatorScale', 10) #Scale Camera icon
-	
-	cmds.setAttr( cameraName[0]+'.rotateX', 90)
-	cmds.setAttr( cameraName[0]+'.rotateY', 0)
-	cmds.setAttr( cameraName[0]+'.rotateZ', 0)
-	
-	# Changes the render settings to set the stereo camera to be a renderable camera
-	#cmds.setAttr( 'stereoCameraLeftShape.renderable', 1)
-	#cmds.setAttr( 'stereoCameraRightShape.renderable', 1)
-	cmds.setAttr( cameraShape+'.renderable', 1) #domeAFL_FOV_CameraShape
-	cmds.setAttr( 'topShape.renderable', 0)
-	cmds.setAttr( 'sideShape.renderable', 0)
-	cmds.setAttr( 'frontShape.renderable', 0)
-	cmds.setAttr( 'perspShape.renderable', 0)
-	
-	# ---------------------------------------------------------------------
-	# Setup the stereo rig camera attributes
-	# ---------------------------------------------------------------------
-	cmds.setAttr( cameraShape+'.focalLength', 4 )
-
-"""
-Domemaster3D createDomeAFL_WxH_Camera
-----------------------
-A python function to create a domeAFL_WxH lens shader and attach it to a camera.
-"""	
-
-def createDomeAFL_WxH_Camera():
-	import maya.cmds as cmds
-	#import maya.mel as mm	
-	
-	#Variables
-	
-	# ---------------------------------------------------------------------
-	# Create the stereo rig
-	# ---------------------------------------------------------------------
-	
-	# Create a camera and get the shape name.
-	cameraName = cmds.camera(name='domeAFL_WxH_Camera')
-	cameraShape = cameraName[1]
-	
-	# ---------------------------------------------------------------------
-	# Create the domeAFL_FOV node
-	# ---------------------------------------------------------------------
-	domeAFL_WxH_lens_node = cmds.shadingNode( 'domeAFL_WxH', n='domeAFL_WxH', asUtility=True  ) 
-	cmds.connectAttr( domeAFL_WxH_lens_node+'.message', cameraShape+'.miLensShader' )
-	
-	# Scale the stereo camera rig locator larger 
-	cmds.setAttr(cameraShape+'.locatorScale', 10) #Scale Camera icon
-	
-	cmds.setAttr( cameraName[0]+'.rotateX', 90)
-	cmds.setAttr( cameraName[0]+'.rotateY', 0)
-	cmds.setAttr( cameraName[0]+'.rotateZ', 0)
-	
-	# Changes the render settings to set the stereo camera to be a renderable camera
-	cmds.setAttr( cameraShape+'.renderable', 1) #domeAFL_WxH_CameraShape
-	cmds.setAttr( 'topShape.renderable', 0)
-	cmds.setAttr( 'sideShape.renderable', 0)
-	cmds.setAttr( 'frontShape.renderable', 0)
-	cmds.setAttr( 'perspShape.renderable', 0)
-	
-	# ---------------------------------------------------------------------
-	# Setup the stereo rig camera attributes
-	# ---------------------------------------------------------------------
-	cmds.setAttr( cameraShape+'.focalLength', 4 )
-
-
-
-	
