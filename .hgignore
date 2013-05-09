@@ -1,3 +1,14 @@
-.DS_Store
-.mayaSwatches
-Thumbs.db
+syntax: glob
+
+*.DS_Store
+*.mayaSwatches
+*Thumbs.db
+*.AppleDouble*
+*.swatch
+*.Parent
+*.o
+
+syntax: regexp
+.*\#.*\#$
+
+

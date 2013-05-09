@@ -1,0 +1,258 @@
+Domemaster3D Stereo Lens Shader
+Version 1.3.2 - April 16, 2013
+
+Domemaster3D Maya Port by Andrew Hazelden
+andrew@andrewhazelden.com      
+http://www.andrewhazelden.com/blog
+
+Domemaster Stereo shader for 3DS Max Created by Roberto Ziche
+http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images
+
+Source Code:
+http://code.google.com/p/domemaster-stereo-shader/
+
+Based upon Daniel Ott's "DomeAFL" Angular fisheye lens shader
+http://www.thedott.net/shaders/domeAFL/
+
+
+About This Shader
+------------------
+The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
+
+The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "Center" camera option in the DomeAFL_FOV_Stereo shader.
+
+
+The Maya Domemaster3D shelf has buttons for the following features:
+
+-The "AutoMagic" tool creates a Domemaster3D fulldome stereo camera rig and a hemispherical yellow wireframe test scene
+-The "Stereo Rig" tool creates a standard Domemaster3D stereo camera rig
+-The "Dome Texture" tool creates a screen space file texture
+-The "DomeRamp" tool creates a screen space ramp texture
+-The "DomeAFL_FOV" tool creates a standard 2D domeAFL_FOV node + camera
+-The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
+-The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
+-The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
+
+-----------------------------------------------------------------------
+
+Version History
+---------------
+
+Version 1.3.2
+Released  April 16, 2013
+Updated domemaster mental ray include file for improved 3DS Max GUI layout.
+
+Added Maya 2014 support
+
+The Maya camera connections for the lens shaders have been updated
+
+The location of the default domemaster control map textures is now in the C:\Program Files\Domemaster3D\sourceimages folder on Windows or the /Applications/Domemaster3D/sourceimages folder on Mac OS X. The Domemaster3D shelf tools have been updated to automatically link to the new sourceimages folder.
+
+There is a fix for the issue where the mental ray physical sky & sun system will overwrite existing connections to the .miLensShader port. The physical sky & sun system will now use the miLensShaderList[0] connection on a camera.
+
+
+Version 1.3
+Released Nov 4, 2012
+Changed the DomeAFL_FOV and DomeADL_WxH source code to match the view orientation of the camera and the domemaster stereo lens shader. Recompiled the Domemaster3D Mac / Windows mental ray shaders.
+
+Added a python script for creating a domeAFL compatible mia_material shading network. This should solve the typical "blurry grey line" texture sampling artifact that happens near the spring line.
+
+Changed the default lens shader connections in the python scripts to support the mental ray sky and sun system.
+
+
+Version 1.2.1
+Released Aug 14, 2012
+Added a Maya 2010 shelf and improved the python script. Created XPM formatted icons for the Domemaster3D shelf, create bar, and Hypershade nodes for Maya 2010 backwards compatibility.
+
+
+Version 1.2
+Released Aug 8, 2012
+Added a Domemaster3D shelf, enabled domeAFL_FOV_Stereo FlipX/FlipY options, created a python stereo rig setup script, added an automatic screen space file texture and ramp texture script
+
+
+Version 1.1
+Released July 28, 2012
+Added Maya stereo camera rig example, Linux Build + Makefile, new shader icons
+
+
+Version 1.0
+Released April 18, 2012
+
+Initial version of the Domemaster3D shader for Maya
+
+
+Installation Instructions
+-------------------------
+
+Maya on Windows
+---------------
+
+1. Unzip the domemaster3D.zip archive.
+
+2. Copy the appropriate "domeAFL_FOV_Stereo.dll" file from either the "Windows 32-bit LIB" or "Windows 64-bit LIB" folder or to your mental ray LIB folder:
+On Maya 2012:
+C:\Program Files\Autodesk\Maya2012\mentalray\lib\
+
+On Maya 2013:
+C:\Program Files\Autodesk\Maya2013\mentalray\shaders\
+
+If you are running a 32-bit version of Maya install the 32-bit DLL. If you are running a 64-bit version of Maya install the 64-bit DLL.
+
+
+3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
+On Maya 2012:
+C:\Program Files\Autodesk\Maya2012\mentalray\include\
+
+On Maya 2013:
+C:\Program Files\Autodesk\Maya2012\mentalray\shaders\include 
+
+4. Copy the Maya AE Template file "AEdomeAFL_FOV_StereoTemplate.mel" to either the Maya AETemplates folder or to your user account's Maya script folder:
+
+C:\Program Files\Autodesk\Maya2012\scripts\AETemplates\
+or
+My Documents\maya\2012\prefs\scripts
+
+
+5. Copy the python scripts "__init__.py", "domeMaterial.py", and "fulldomeStereoRig.py" from the "scripts" folder to your user account's Maya script folder:
+My Documents\maya\2012\prefs\scripts
+
+6. Copy the "shelf_Domemaster3D.mel" file from the "shelves" folder to your user account's Maya shelves folder:
+My Documents\maya\2012\prefs\shelves
+
+7. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
+C:\Program Files\Autodesk\Maya2012\icons\
+or
+My Documents\maya\2012\prefs\icons\
+
+8. Copy the textures from the "sourceimages" folder to your current project's sourceimage directory. 
+
+The textures "checker.iff" and "bumpChecker.iff" are the default file textures applied when the Color Material or Color + bump material shelf icons are run. 
+
+The head_tilt_map, separation_map, and turn_map textures are used to set up the DomeAFL_FOV_Stereo rig.
+
+9. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
+
+
+
+Maya on Mac OS X
+---------------
+This version of the domeAFL_FOV_Stereo shader mental ray shader was compiled for Maya 2011 and 2012 for Mac OS X 64-bit. Mac OS X 10.6 Snow Leopard is required.
+
+1. Unzip the domemaster3D.zip archive.
+
+2. Copy domeAFL_FOV_Stereo.dylib file from the "Mac OS X 64-bit LIB" folder to the mentalray lib directory:
+On Maya 2012:
+/Applications/Autodesk/maya2012/Maya.app/Contents/mentalray/lib/
+
+If you want to go inside the Maya.app package, right click on Maya.app and select "Show Package Contents" from the contextual menu.
+
+On Maya 2013:
+/Applications/Autodesk/maya2013/mentalray/shaders/
+
+
+3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
+On Maya 2012:
+/Applications/Autodesk/maya2012/Maya.app/Contents/mentalray/include
+
+On Maya 2013:
+/Applications/Autodesk/maya2013/mentalray/shaders/include
+
+4. Copy the Maya AE Template file "AEdomeAFL_FOV_StereoTemplate.mel" to either the Maya AETemplates folder or to your user account's Maya script folder:
+/Applications/Autodesk/maya2012/Maya.app/Contents/scripts/AETemplates/
+or
+~/Library/Preferences/Autodesk/maya/2012-x64/prefs/scripts
+
+5. Copy the python scripts "__init__.py", "domeMaterial.py", and "fulldomeStereoRig.py" from the "scripts" folder to your user account's Maya script folder:
+~/Library/Preferences/Autodesk/maya/2012-x64/prefs/scripts
+
+6. Copy the "shelf_Domemaster3D.mel" file from the "shelves" folder to your user account's Maya shelves folder:
+~/Library/Preferences/Autodesk/maya/2012-x64/prefs/shelves
+
+7. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
+~/Library/Preferences/Autodesk/maya/2012-x64/prefs/icons
+
+8. Copy the textures from the "sourceimages" folder to your current project's sourceimage directory. 
+
+The textures "checker.iff" and "bumpChecker.iff" are the default file textures applied when the Color Material or Color + bump material shelf icons are run. 
+
+The head_tilt_map, separation_map, and turn_map textures are used to set up the DomeAFL_FOV_Stereo rig.
+
+9. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
+
+
+Maya on Linux
+---------------
+This version of the domeAFL_FOV_Stereo shader mental ray shader was compiled for Maya 64-bit on RHEL 6.2.
+
+1. Unzip the domemaster3D.zip archive.
+
+2. Copy domeAFL_FOV_Stereo.so file from the "Linux X 64-bit LIB" folder to the mentalray lib directory:
+On Maya 2012:
+/usr/autodesk/maya2012-x64/mentalray/lib
+
+On Maya 2013:
+/usr/autodesk/maya2013-x64/mentalray/shaders/
+
+
+3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
+
+On Maya 2012:
+/usr/autodesk/maya2012-x64/mentalray/include
+
+On Maya 2013:
+/usr/autodesk/maya2013-x64/mentalray/shaders/include
+
+4. Copy the Maya AE Template file "AEdomeAFL_FOV_StereoTemplate.mel" to either the Maya AETemplates folder or to your user account's Maya script folder:
+/usr/autodesk/maya2012-x64/scripts/AETemplates/
+or
+~/maya/2012-x64/prefs/scripts
+
+
+
+** If you are running a copy of Maya prior to Maya 2010 you don't need to install the AETemplate file:
+AEdomeAFL_FOV_StereoTemplate.mel
+
+
+5. Copy the python scripts "__init__.py", "domeMaterial.py", and "fulldomeStereoRig.py" from the "scripts" folder to the Maya script folder:
+/usr/autodesk/maya2012-x64/scripts
+or
+~/maya/2012-x64/prefs/scripts
+
+
+6. Copy the "shelf_Domemaster3D.mel" file from the "shelves" folder to your user account's Maya shelves folder:
+~/maya/2012-x64/prefs/shelves
+
+7. Copy the Hypershade icons from the "Icons" folder to your Maya icons directory or to your user account's Maya icons directory:
+/usr/autodesk/maya2012-x64/prefs/icons
+
+8. Copy the textures from the "sourceimages" folder to your current project's sourceimage directory. 
+
+The textures "checker.iff" and "bumpChecker.iff" are the default file textures applied when the Color Material or Color + bump material shelf icons are run. 
+
+The head_tilt_map, separation_map, and turn_map textures are used to set up the DomeAFL_FOV_Stereo rig.
+
+9. The next time you start Maya you will find the "domeAFL_FOV_Stereo", "domeAFL_FOV", "domeAFL_WxH", and "rob_lookup_background" lens shaders in the Hypershade. Look in the create bar under the mental ray > lenses section.
+
+
+
+3D Studio Max
+--------------
+
+1. Unzip the domemaster3D.zip archive.
+
+2. Copy the appropriate "domeAFL_FOV_Stereo.dll" file from either the "Windows 32-bit LIB" or "Windows 64-bit LIB" folder or to your mental ray shaders folder:
+\mentalray\shaders_autoload\shaders
+
+If you are running a 32-bit version of 3D Studio Max install the 32-bit DLL. If you are running a 64-bit version of 3D Studio Max install the 64-bit DLL.
+
+
+3. Copy the "domeAFL_FOV_Stereo.mi" mental ray include file to:
+\mentalray\shaders_autoload\include
+
+When you start 3D Studio Max, you will have 4 new Lens shaders:
+"Domemaster Stereo Shader"
+"domeAFL_FOV"
+"domeAFL_WxH"
+"rob_lookup_background"
+
+
