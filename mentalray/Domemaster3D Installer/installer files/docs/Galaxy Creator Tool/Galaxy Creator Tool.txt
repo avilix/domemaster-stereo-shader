@@ -1,0 +1,57 @@
+Galaxy Creator Tool
+Version 1.0 - May 17, 2013
+
+The galaxy creator tool is an addon for the Domemaster3D Toolset. The tool helps create dynamic galaxies. 
+
+The Galaxy Creator tool is a new GUI for Martin Watt's classic galaxies.mel script.
+
+Installation
+-------------
+If you are running Maya 2010 installed the files in the "Maya 2010 files" folder.
+
+For Maya 2011+ use the maay 2011+ files folder.
+
+Install the script, icons, and self items. You need to replace the existing domemaster3D shelf to get the new galaxy creator tool.
+
+
+Operation
+----------
+Click on the galaxy icon in the Domemaster3D shelf to run the tool.
+
+You can set the size and look of the galaxy using the GUI tools.
+
+The Galaxy Orientation control sets what view the galaxy is poisitoned in: Top/Front/Right
+
+Here are a few galaxy values you can try out:
+
+Galaxy #1
+ Spiral 1:
+ Stars: 2000
+ Radius: 20
+ Spiral Arms: 5 
+ Galaxy Turns: 1
+ 
+Ring Galaxy #2:
+ Stars: 2000
+ Radius: 20
+ Spiral Arms: 400 
+ Galaxy Turns: 5
+ 
+Circular Galaxy #3
+ Stars: 3000
+ Radius: 20
+ Spiral Arms: 400 
+ Galaxy Turns: 10
+
+You can run the Galaxy Creator script multiple times and mix-and match the different galaxies in your scene.
+
+If you delete a spiral galaxy, don't forget to remove the unwanted nucelus particle shape too.
+
+You can stack multiple gaseous spiral gallaxies in the scene and change their colors and particle radius values to get interesting shading effects.
+
+The galaxy shader uses a combined shading group with a particleCloud and surfaceShader to represent the galaxy particle colors. 
+
+The surfaceShader is used for the realtime viewport and the particleCloud is used for the cloud effect in the render view.
+
+The Connect All newtonFields checbox links all of the galaxy newton fields to all of the particles. You can manually control these fields in the Dynamic Relationship Editor window.
+

@@ -1,0 +1,501 @@
+/*
+ Galaxy Creator GUI V1.0
+ 
+ Version 1.0 - May 14, 2013
+ by Andrew Hazelden
+ 
+ This is a Maya GUI wrapper for Martin Watt's galaxy script
+ 
+
+ To use the Galaxies Creator MEL script run the following MEL commands:
+ print("Galaxy Creator");
+ source "galaxyCreator.mel";
+ galaxyCreator();
+ 
+ 
+ Nice galaxies:
+ 
+ Spiral 1:
+ Stars: 2000
+ Radius: 20
+ Spiral Arms: 5 
+ Galaxy Turns: 1
+ 
+ Ring Galaxy 1:
+ Stars: 2000
+ Radius: 20
+ Spiral Arms: 400 
+ Galaxy Turns: 5
+ 
+ Stars: 3000
+ Radius: 20
+ Spiral Arms: 400 
+ Galaxy Turns: 10
+ 
+*/
+
+global proc galaxyCreator(){
+
+    if (`window -exists galaxyWin`)
+    {
+      deleteUI galaxyWin;
+      windowPref -remove galaxyWin;
+    }
+
+    string $galaxyWindow = `window -title "Galaxy Creator v1.1" -widthHeight 455 450 galaxyWin`;  
+    columnLayout -adjustableColumn true;
+    
+    // Spiral vs Elliptical galaxies option
+    // // Create the Galaxy Shape Pop-up Menu
+    // optionMenuGrp
+    //   -label "Galaxy Shape"  
+    //   menuGalaxyShape;
+    // 
+    //   menuItem -label "Circular Galaxy";
+    //   menuItem -label "Elliptical Galaxy";
+
+    //Galaxy Presets
+    //button -label "Galaxy Preset 1" -command "doGalaxyPreset1()"; 
+    //button -label "Galaxy Preset 2" -command "doGalaxyPreset2()"; 
+    //button -label "Galaxy Preset 3" -command "doGalaxyPreset2()"; 
+        
+
+    // Create a divider bar
+    separator -height 20 -style "in";
+
+    
+
+    // Create the Galaxy Orientation Pop-up Menu  
+    optionMenuGrp
+      -label "Galaxy Orientation"
+      -columnAlign 1 "right"
+      menuGalaxyOrient;
+      
+    menuItem -label "Right View";
+    menuItem -label "Top View";
+    menuItem -label "Front View";
+      
+    //Preselect the "Top View" pop-up menu option
+    optionMenuGrp -edit
+      -select 2
+      menuGalaxyOrient;
+
+    intSliderGrp -label "Stars" -field true
+      -minValue 2 -maxValue 25000
+      -fieldMinValue 2 -fieldMaxValue 200000
+      -value 2000 sliderGalaxyNumStars;
+        
+    intSliderGrp -label "Galaxy Radius" -field true
+      -minValue -1 -maxValue 20000
+      -fieldMinValue -1 -fieldMaxValue 20000
+      -value 20 sliderGalaxyNumRadius;
+        
+    intSliderGrp -label "Spiral Arms" -field true
+      -minValue 2 -maxValue 20000
+      -fieldMinValue 2 -fieldMaxValue 200000
+      -value 5 sliderGalaxyNumSpiralArms;
+        
+    floatSliderGrp -label "Galaxy Turns" -field true
+      -minValue -0.1 -maxValue 2000
+      -fieldMinValue -0.1 -fieldMaxValue 2000
+      -value 1 sliderGalaxyNumTurns;
+           
+    floatFieldGrp -label "Galaxy Origin" 
+      -numberOfFields 3 -value1 0 -value2 0 -value3 0 
+      -extraLabel "XYZ" fieldGalaxyCentre;  
+       
+    floatFieldGrp -label "Galaxy Velocity" 
+      -numberOfFields 3 -value1 0 -value2 0 -value3 0 
+      -extraLabel "speed" fieldGalaxyVel;
+         
+    //Connect All particles to Newton Fields
+    checkBox -label "Connect All newtonFields"  
+      -value 1
+      changeAllGalaxyFields;
+           
+         
+    // Create a divider bar
+    separator -height 20 -style "in";
+    
+    //===============
+    // Nucleus Color
+    //===============
+    
+    colorSliderGrp -label "Nucleus Color" 
+      -rgb 1.0 0.898 0.753 sliderNucleusColor;
+   
+      
+    floatSliderGrp -label "Nucleus Particle Radius" -field true
+      -minValue -0.01 -maxValue 20
+      -fieldMinValue -0.01 -fieldMaxValue 20
+      -value 3 sliderNucleusRadius;     
+    
+    //==============
+    // Galaxy Color 
+    //==============   
+    //
+    // Reference Colors:
+    // RGB yellow = 1 1 0.5
+    // RGB Violet = 0.467 0.380 0.502
+    // RGB Peachy Orange = 1.0 0.898 0.753
+    // RGB Dark Blue gas = 0.039 0.035 0.110
+    //============== 
+    
+    //==============
+    // Whispy Gas Color 
+    //============== 
+    // RGB Dark Blue gas = 0.039 0.035 0.110
+    // outer whisp glow bright blue = 0.096 0.086 0.270
+    // cloud transparent = 0.878
+    // incandescence = 0.174 0.174 0.174
+      
+    
+    colorSliderGrp -label "Galaxy Color" 
+      -rgb 0.467 0.380 0.502 sliderGalaxyColor;
+      
+    floatSliderGrp -label "Galaxy Particle Radius" -field true
+      -minValue -0.01 -maxValue 20
+      -fieldMinValue -0.01 -fieldMaxValue 20
+      -value 0.5 sliderParticleRadius;
+    
+    
+    // Add a Galaxy particleCloud Shader
+    checkBox -label "Add Cloud Material"  
+      -value 1
+      changeGalaxyMaterial;
+    
+    separator -height 20 -style "in";
+    
+    intFieldGrp -label "Extend Playback Time" 
+      -numberOfFields 1 -value1 2000 
+      -extraLabel "frames" fieldPaybackEnd;
+      
+    separator -height 20 -style "in";
+
+    button -label "Create Galaxy" -command "doGalaxy()"; 
+   
+    showWindow $galaxyWindow;
+    
+    
+    //Get the current window size
+    print ("\n\nWindow Size: ");
+    print (`window -q -widthHeight galaxyWin`);
+    print ("\n");
+
+}
+
+
+global proc doGalaxyPreset1(){
+int $numStars = 2000;
+int $radius  = 20;
+int $numSpiralArms = 5;
+float $numTurns = 1;
+}
+
+global proc doGalaxyPreset2(){
+int $numStars = 2000;
+int $radius  = 20;
+int $numSpiralArms = 400;
+float $numTurns = 5;
+}
+
+global proc doGalaxyPreset2(){
+int $numStars = 3000;
+int $radius  = 20;
+int $numSpiralArms = 400;
+float $numTurns = 10;
+}
+
+
+
+global proc doGalaxy(){
+
+  //Get the GUI Values
+  int $numStars =`intSliderGrp -query -value sliderGalaxyNumStars`;
+  int $numSpiralArms =`intSliderGrp -query -value sliderGalaxyNumSpiralArms`;
+  int $radius  =`intSliderGrp -query -value sliderGalaxyNumRadius`;
+  float $numTurns =`floatSliderGrp -query -value sliderGalaxyNumTurns`;
+  
+  
+  float $centre[3] = {0,0,0};
+  $centre[0] = `floatFieldGrp -query -value1 fieldGalaxyCentre`;
+  $centre[1] = `floatFieldGrp -query -value2 fieldGalaxyCentre`;
+  $centre[2] = `floatFieldGrp -query -value3 fieldGalaxyCentre`;
+  
+  float $vel[3] = {0,0,0};
+  $vel[0] = `floatFieldGrp -query -value1 fieldGalaxyVel`; 
+  $vel[1] = `floatFieldGrp -query -value2 fieldGalaxyVel`; 
+  $vel[2] = `floatFieldGrp -query -value3 fieldGalaxyVel`; 
+  
+  int $planarDir = `optionMenuGrp -q -sl menuGalaxyOrient` - 1;
+  
+  // Spiral vs Elliptical galaxies option
+  //int $galaxyShape = `optionMenuGrp -q -sl menuGalaxyShape` - 1;       
+
+  float $partiRadius =`floatSliderGrp -query -value sliderParticleRadius`; 
+  float $nucleusRadius =`floatSliderGrp -query -value sliderNucleusRadius`;
+  
+  
+  //===========================
+  //Set up the Galaxy material
+  //===========================
+  
+  string $galaxyCloudMaterialName = `shadingNode -asShader particleCloud -name "galaxyCloudMaterial"`;
+  string $galaxyMaterialName = `shadingNode -asShader surfaceShader -name "galaxySurfaceMaterial"`;
+  
+  //Set up the material SG
+  string $galaxyMaterialSG =`sets -renderable true -noSurfaceShader true -empty -name "galaxyCloudMaterialSG"`;
+
+  //Read the color from the swatch
+  float $galaxyRGBcolor[] = `colorSliderGrp -query -rgb sliderGalaxyColor`;
+  
+  print ("RGB Color");
+  print ($galaxyRGBcolor);
+  print ("\n");
+  
+  //Update the shader's color attribute
+  setAttr ($galaxyCloudMaterialName+".color") -type double3 $galaxyRGBcolor[0] $galaxyRGBcolor[1] $galaxyRGBcolor[2];
+  setAttr ($galaxyMaterialName+".outColor") -type double3 $galaxyRGBcolor[0] $galaxyRGBcolor[1] $galaxyRGBcolor[2];
+  
+  //Connect the shading group to the material
+  connectAttr -f ($galaxyCloudMaterialName+".outColor") ($galaxyMaterialSG+".volumeShader");
+  connectAttr -f ($galaxyMaterialName+".outColor") ($galaxyMaterialSG+".surfaceShader");
+
+  
+  
+  //===========================
+  //Set up the Nucleus material
+  //===========================
+  string $nucleusCloudMaterialName = `shadingNode -asShader particleCloud -name "nucleusCloudMaterial"`;
+  string $nucleusMaterialName = `shadingNode -asShader surfaceShader -name "nucleusSurfaceMaterial"`;
+  
+  //Set up the material SG
+  string $nucleusMaterialSG =`sets -renderable true -noSurfaceShader true -empty -name "nucleusCloudMaterialSG"`;
+
+  //Read the color from the swatch
+  float $nucleusRGBcolor[] = `colorSliderGrp -query -rgb sliderNucleusColor`;
+  
+  print ("RGB Color");
+  print ($nucleusRGBcolor);
+  print ("\n");
+  
+  //Update the shader's color attribute
+  setAttr ($nucleusCloudMaterialName+".color") -type double3 $nucleusRGBcolor[0] $nucleusRGBcolor[1] $nucleusRGBcolor[2];
+  setAttr ($nucleusMaterialName+".outColor") -type double3 $nucleusRGBcolor[0] $nucleusRGBcolor[1] $nucleusRGBcolor[2];
+  
+  
+  //Connect the shading group to the material
+  connectAttr -f ($nucleusCloudMaterialName+".outColor") ($nucleusMaterialSG+".volumeShader");
+  connectAttr -f ($nucleusMaterialName+".outColor") ($nucleusMaterialSG+".surfaceShader");
+
+  
+  //Connect All particles to Newton Fields
+  int $connectAllNewtonFields = `checkBox -query -value changeAllGalaxyFields`;
+  
+  
+  // Add galaxy material settings
+  int $GalaxyMaterial = `checkBox -query -value changeGalaxyMaterial`;
+
+  
+  // Debug the user input values
+  print ("[Stars] " +  $numStars + "\n");
+  print ("[Sprials] " + $numSpiralArms + "\n");
+  print ("[Radius] " + $radius + "\n");
+  print ("[Turns] " + $numTurns + "\n");
+  print ("[Translate] [X] "  + $centre[0] + " [Y] " + $centre[1] + " [Z] " + $centre[2] + "\n");
+  print ("[Velocity] [X] " + $vel[0] + " [Y] " + $vel[1] + " [Z] " + $vel[2] + "\n");
+  print ("\n");
+  
+  //Spiral vs Ellipse Galaxy
+  //print ("[Galaxy Shape] " + $galaxyShape + "\n");
+  
+  //Galaxy Orientation
+  //print ("[Galaxy Orientation Value] " + $planarDir + "\n");
+  switch ($planarDir) {
+    case 0:
+      print ("[Galaxy Orientation] " + "Right" + "\n");
+      break;
+    
+    case 1:
+      print ("[Galaxy Orientation] " + "Top" + "\n");
+      break;
+    
+    case 2:
+      print ("[Galaxy Orientation] " + "Front" + "\n");
+      break;
+    
+    default:
+      break;
+    }
+  
+  
+  
+  print ("\n");
+  
+  //load the galaxies script
+  source "galaxies.mel";
+  
+  
+  // //Debug test
+  // //Create a very twisty vertical galaxy
+  //spiralGalaxy( 2000, 400, 20, 5,   
+  //            {-20,20,0},  {0,0,0},
+  //           0);
+
+  
+  //Create the Spiral Galaxy
+  string $galaxy_particles[] = spiralGalaxy($numStars, $numSpiralArms, 
+                                          $radius, $numTurns, 
+                                          $centre, 
+                                          $vel, 
+                                          $planarDir);
+  
+  
+  string $activeNucleusShape = getObjectShapeNode($galaxy_particles[1]);
+  string $activeStarShape = getObjectShapeNode($galaxy_particles[2]);
+  
+  print ( "\n\n[Objects created] ");
+  print ( $galaxy_particles);
+  print ( "\n\n");
+  
+  print ("[nucleus] " +  $activeNucleusShape + "\n");
+  print ("[stars] " +  $activeStarShape + "\n");
+  
+  //Debug test value
+  //string $activeStarShape = "particleShape2.particleRenderType";
+  //setAttr ($activeStarShape) 8;
+
+  
+  if ($GalaxyMaterial){
+  
+    //Apply the galaxyCloudMaterialSG material to the particles
+    sets -e -forceElement ($galaxyMaterialSG) ($activeStarShape);
+    
+    //Apply the nucleusCloudMaterialSG material to the particles
+    sets -e -forceElement ($nucleusMaterialSG) ($activeNucleusShape);
+    
+    // set particle rendering attributes
+    setAttr ($activeStarShape + ".particleRenderType") 8;  //Cloud S/w type
+
+    addAttr -is true -ln "betterIllumination" -at bool -dv false ($activeStarShape);
+    addAttr -is true -ln "surfaceShading" -at "float" -min 0 -max 1 -dv 0 ($activeStarShape);
+    addAttr -is true -ln "threshold" -at "float" -min 0 -max 10 -dv 0 ($activeStarShape);
+    addAttr -is true -ln "radius" -at "float" -min 0 -max 20 -dv 1 ($activeStarShape);
+    addAttr -is true -ln "flatShaded" -at bool -dv false ($activeStarShape);
+
+    setAttr ($activeStarShape + ".betterIllumination") 1;  // better illumination
+    setAttr ($activeStarShape + ".radius") $partiRadius;            // select radius
+
+
+    // set particle rendering attributes
+    setAttr ($activeNucleusShape + ".particleRenderType") 8;  //Cloud S/w type
+
+    addAttr -is true -ln "betterIllumination" -at bool -dv false ($activeNucleusShape);
+    addAttr -is true -ln "surfaceShading" -at "float" -min 0 -max 1 -dv 0 ($activeNucleusShape);
+    addAttr -is true -ln "threshold" -at "float" -min 0 -max 10 -dv 0 ($activeNucleusShape);
+    addAttr -is true -ln "radius" -at "float" -min 0 -max 20 -dv 1 ($activeNucleusShape);
+    addAttr -is true -ln "flatShaded" -at bool -dv false ($activeNucleusShape);  
+
+    setAttr ($activeNucleusShape + ".betterIllumination") 1;  // better illumination
+    setAttr ($activeNucleusShape + ".radius") $nucleusRadius;            // select radius
+
+    
+    //Set up the RadiusPP attributes
+    addAttr -ln radiusPP -dt doubleArray ($activeNucleusShape);
+    addAttr -ln radiusPP0 -dt doubleArray ($activeNucleusShape);
+    
+    addAttr -ln radiusPP -dt doubleArray ($activeStarShape);
+    addAttr -ln radiusPP0 -dt doubleArray ($activeStarShape);
+    
+    //===========================================
+    //Set up the particleCloud material settings
+    //===========================================
+    
+    //Set the particle shader glow setting
+    setAttr ($galaxyCloudMaterialName + ".glowIntensity") 0.4;
+
+    //Set shader density
+    setAttr ($galaxyCloudMaterialName + ".blobMap") -type double3 0.075 0.075 0.075 ;
+    
+    //Set the cloud to be partially transparent
+    setAttr ($galaxyCloudMaterialName + ".transparency") -type double3 0.08 0.08 0.08 ;
+    setAttr ($galaxyMaterialName + ".outTransparency") -type double3 0.3 0.3 0.3 ;
+    
+    
+    //Set the particle shader glow setting
+    setAttr ($nucleusCloudMaterialName + ".glowIntensity") 0.4;
+
+    //Set shader density
+    setAttr ($nucleusCloudMaterialName + ".blobMap") -type double3 0.075 0.075 0.075 ;
+    
+    //Set the cloud to be partially transparent
+    setAttr ($nucleusCloudMaterialName + ".transparency") -type double3 0.08 0.08 0.08 ;
+    setAttr ($nucleusMaterialName + ".outTransparency") -type double3 0.3 0.3 0.3 ;
+
+    
+    // Add shader glow attributes
+    setAttr "shaderGlow1.glowIntensity" 1.0;
+    setAttr "shaderGlow1.glowSpread" 0.05;
+    setAttr "shaderGlow1.glowFilterWidth" 2;
+    setAttr "shaderGlow1.haloIntensity" 0.1;
+    setAttr "shaderGlow1.haloSpread" 0.3; 
+  }
+  
+  
+  if($connectAllNewtonFields){
+    
+    print("Connecting the NewtonFields to the particleShapes.\n");
+
+    //Find the particleShapes
+    string $allGalaxyParticleShapes[];
+    $allGalaxyParticleShapes = `ls -type particle`;
+    int $totalParticleCount = `size $allGalaxyParticleShapes`;
+    
+    //Find the newtonFields
+    string $allGalaxyFields[];
+    $allGalaxyFields = `ls -type newtonField`;
+    int $totalFieldCount = `size $allGalaxyFields`;
+    
+    
+    //Scan the particleShapes
+    int $i;
+    for( $i = 0 ; $i<$totalParticleCount; $i++ ) {
+      print($i + ": " + $allGalaxyParticleShapes[$i] + "\n");
+      
+      //Scan the newtonFields
+      int $j;
+      for( $j = 0 ; $j<$totalFieldCount; $j++ ) {
+        print("   " + $j + ": " + $allGalaxyFields[$j] + "\n");
+        
+        //Connecting all of the NewtonFields to all of the particleShapes
+        connectDynamic -fields ($allGalaxyFields[$j]) ($allGalaxyParticleShapes[$i]);
+      }
+      
+    }
+    print("\n");
+    
+  }
+  
+  
+  
+  //Toggle particle count HUD
+  //getParticleCount();
+  //ToggleParticleCount;
+  
+  
+  
+  
+  
+  
+  // Set 2000 frames of playback
+  int $theEndTime = `intFieldGrp -query -value1 fieldPaybackEnd`; 
+  playbackOptions -e -min 1 -max $theEndTime;
+  
+
+}
+
+
+global proc string getObjectShapeNode ( string $object ) {
+  string $shapes[] = `listRelatives -children -shapes $object`;
+  return $shapes[0];
+}

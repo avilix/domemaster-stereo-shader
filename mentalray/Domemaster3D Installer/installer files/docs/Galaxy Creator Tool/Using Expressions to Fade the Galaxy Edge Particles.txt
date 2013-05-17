@@ -1,0 +1,64 @@
+Using Expressions to Fade the Galaxy Edge Particles
+V1.0 - May 17, 2013
+By Andrew Hazelden
+
+When creating a particle based galaxy in Maya you can use a radiusPP particle expression to  you can control the particle fade off between the center and edges of the galaxy shape. (RadiusPP stands for Radius Per Particle.)
+
+A RadiusPP attribute is created automatically by the Galaxy Creator script. If you use the MEL script editor to run the old galaxies.mel script you need to add the RadiusPP value manually. 
+
+Select the particleShape node. In the attribute editor use the "Add a Dynamic attribute" section to add a per particle attribute. Click on the General button. 
+
+In the Add Attribute window click on the particle tab and select RadiusPP. Click the OK button to close the window. The RadiusPP value gives you control over the width of each particle in the particleShape node.
+
+If the attribute was added correctly a RadiusPP attribute should be listed in the Per Particle (Array) attribute section. If RadiusPP doesn't show up, try selecting and then deslecting the particle shape.
+
+
+
+
+Let's Add a Particle Creation Expression
+
+Right click on the field to the right of the RadiusPP attribute and select "Creation Expression...". This will add a new particle creation expression that will control the particles before the first frame of the dynamics simulation begins.
+
+
+
+In the Expression Editor paste in the following RadiusPP expression:
+
+//Galaxy Edge Fade Effect
+//Uses the radiusPP Control
+
+//Size of the Galaxy
+float $galaxyRadius = 23.0;
+
+//Size of the cloud particle
+float $galaxyParticleRadius = 0.6;
+
+//Thicken Galaxy Center Ratio (Range 0.1-0.75)
+float $galaxyParticleRatio = 0.2;
+
+
+//Calculate the particle's distance from the galaxy origin
+vector $pos = particleShape2.position;
+vector $galaxyOrigin = <<0,0,0>>;
+vector $dist = <<($galaxyOrigin.x-$pos.x), ($galaxyOrigin.y-$pos.y), ($galaxyOrigin.z-$pos.z)>>;
+float $magDist = mag($dist);
+
+//Calculate the final particle size
+float $galaxyPercent = 1-($magDist / $galaxyRadius);
+float $galaxyBaseParticle = ($galaxyParticleRadius*$galaxyParticleRatio);
+float $galaxyParticleSize = ($galaxyParticleRadius*$galaxyPercent);
+
+//Set the per particle size
+particleShape2.radiusPP = $galaxyParticleSize + $galaxyBaseParticle;
+
+//End
+
+
+The value $galaxyRadius lets the expression know the size of the galaxy.
+
+The galaxyOrigin attribute lets you enter an offset for the X,Y,Z position of the galaxy if it is moved away from the world origin.
+
+By changing the $galaxyParticleRadius value you can control the overall side of the cloud particles.
+
+The $galaxyParticleRatio value controls how thick the center of the particle shape is compared to the edges.
+
+Change the text "particleShape2" near the top and bottom of the script to the name of the current particle object and click the "Create Button".

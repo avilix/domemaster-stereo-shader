@@ -7,8 +7,8 @@ global proc shelf_Domemaster3D () {
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
@@ -24,13 +24,14 @@ global proc shelf_Domemaster3D () {
         -marginHeight 1
         -command "print(\"Creating the AutoMagic Fulldome 3D DomeGrid Scene\")\nimport fulldomeStereoRig as domerig\ndomerig.createFulldomeStereoRig()\ndomerig.createDomeGrid()\ndomerig.createTestShapes()\ndomerig.setRenderRes()" 
         -sourceType "python" 
+        -actionIsSubstitute 0
         -commandRepeatable 1
     ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
@@ -46,13 +47,14 @@ global proc shelf_Domemaster3D () {
         -marginHeight 1
         -command "print(\"Create a Domemaster3D Stereo Rig\")\nimport fulldomeStereoRig as domerig\ndomerig.createFulldomeStereoRig()" 
         -sourceType "python" 
+        -actionIsSubstitute 0
         -commandRepeatable 1
     ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
@@ -68,13 +70,14 @@ global proc shelf_Domemaster3D () {
         -marginHeight 1
         -command "print(\"Creating a Domemaster3D screen space texture\")\nimport fulldomeStereoRig as domerig\ndomerig.createRobLookup()" 
         -sourceType "python" 
+        -actionIsSubstitute 0
         -commandRepeatable 1
     ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
@@ -90,13 +93,14 @@ global proc shelf_Domemaster3D () {
         -marginHeight 1
         -command "print('Creating a screen space ramp texture')\nimport fulldomeStereoRig as domerig\ndomerig.createDomeRampTexture()" 
         -sourceType "python" 
+        -actionIsSubstitute 0
         -commandRepeatable 1
     ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
@@ -112,13 +116,14 @@ global proc shelf_Domemaster3D () {
         -marginHeight 1
         -command "print(\"Creating a domeAFL_FOV camera\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createDomeAFL_FOV_Camera()" 
         -sourceType "python" 
+        -actionIsSubstitute 0
         -commandRepeatable 1
     ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
@@ -134,13 +139,14 @@ global proc shelf_Domemaster3D () {
         -marginHeight 1
         -command "print(\"Creating a domeAFL_WxH camera\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createDomeAFL_WxH_Camera()" 
         -sourceType "python" 
+        -actionIsSubstitute 0
         -commandRepeatable 1
     ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
@@ -156,13 +162,14 @@ global proc shelf_Domemaster3D () {
         -marginHeight 1
         -command "#color material\nprint(\"Creating a DomeAFL compatible Color MIA Material\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorMiaMaterial()\n" 
         -sourceType "python" 
+        -actionIsSubstitute 0
         -commandRepeatable 1
     ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
-        -width 35
-        -height 35
+        -width 34
+        -height 34
         -manage 1
         -visible 1
         -preventOverride 0
@@ -178,6 +185,29 @@ global proc shelf_Domemaster3D () {
         -marginHeight 1
         -command "#color bump material\nprint(\"Creating a DomeAFL compatible Color and Bump MIA Material\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorBumpMiaMaterial()\n" 
         -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -align "center" 
+        -label "Galaxy" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -image "render_galaxy.xpm" 
+        -image1 "render_galaxy.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Galaxy Creator\");\r\nsource \"galaxyCreator.mel\";\r\ngalaxyCreator();" 
+        -sourceType "mel" 
+        -actionIsSubstitute 0
         -commandRepeatable 1
     ;
 

@@ -20,14 +20,15 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_magicDome.xpm" 
-        -image1 "render_magicDome.xpm" 
+        -image "render_magicDome.png" 
+        -image1 "render_magicDome.png" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
         -command "print(\"Creating the AutoMagic Fulldome 3D DomeGrid Scene\")\nimport fulldomeStereoRig as domerig\ndomerig.createFulldomeStereoRig()\ndomerig.createDomeGrid()\ndomerig.createTestShapes()\ndomerig.setRenderRes()" 
         -sourceType "python" 
         -commandRepeatable 1
+        -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -45,14 +46,15 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.792793 0.792793 0.792793 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_domeAFL_FOV_Stereo.xpm" 
-        -image1 "render_domeAFL_FOV_Stereo.xpm" 
+        -image "render_domeAFL_FOV_Stereo.png" 
+        -image1 "render_domeAFL_FOV_Stereo.png" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
         -command "print(\"Create a Domemaster3D Stereo Rig\")\nimport fulldomeStereoRig as domerig\ndomerig.createFulldomeStereoRig()" 
         -sourceType "python" 
         -commandRepeatable 1
+        -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -70,14 +72,15 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_rob_lookup_background.xpm" 
-        -image1 "render_rob_lookup_background.xpm" 
+        -image "render_rob_lookup_background.png" 
+        -image1 "render_rob_lookup_background.png" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
         -command "print(\"Creating a Domemaster3D screen space texture\")\nimport fulldomeStereoRig as domerig\ndomerig.createRobLookup()" 
         -sourceType "python" 
         -commandRepeatable 1
+        -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -95,14 +98,15 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_domeRamp.xpm" 
-        -image1 "render_domeRamp.xpm" 
+        -image "render_domeRamp.png" 
+        -image1 "render_domeRamp.png" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
         -command "print('Creating a screen space ramp texture')\nimport fulldomeStereoRig as domerig\ndomerig.createDomeRampTexture()" 
         -sourceType "python" 
         -commandRepeatable 1
+        -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -120,14 +124,15 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_domeAFL_FOV.xpm" 
-        -image1 "render_domeAFL_FOV.xpm" 
+        -image "render_domeAFL_FOV.png" 
+        -image1 "render_domeAFL_FOV.png" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
         -command "print(\"Creating a domeAFL_FOV camera\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createDomeAFL_FOV_Camera()" 
         -sourceType "python" 
         -commandRepeatable 1
+        -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -145,14 +150,15 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "render_domeAFL_WxH.xpm" 
-        -image1 "render_domeAFL_WxH.xpm" 
+        -image "render_domeAFL_WxH.png" 
+        -image1 "render_domeAFL_WxH.png" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
         -command "print(\"Creating a domeAFL_WxH camera\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createDomeAFL_WxH_Camera()" 
         -sourceType "python" 
         -commandRepeatable 1
+        -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -170,14 +176,15 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "colorMaterial.xpm" 
-        -image1 "colorMaterial.xpm" 
+        -image "colorMaterial.png" 
+        -image1 "colorMaterial.png" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
         -command "#color material\nprint(\"Creating a DomeAFL compatible Color MIA Material\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorMiaMaterial()\n" 
         -sourceType "python" 
         -commandRepeatable 1
+        -flat 1
     ;
     shelfButton
         -enableCommandRepeat 1
@@ -195,14 +202,41 @@ global proc shelf_Domemaster3D () {
         -font "plainLabelFont" 
         -overlayLabelColor 0.8 0.8 0.8 
         -overlayLabelBackColor 0 0 0 0.2 
-        -image "bumpMaterial.xpm" 
-        -image1 "bumpMaterial.xpm" 
+        -image "bumpMaterial.png" 
+        -image1 "bumpMaterial.png" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
         -command "#color bump material\nprint(\"Creating a DomeAFL compatible Color and Bump MIA Material\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorBumpMiaMaterial()\n" 
         -sourceType "python" 
         -commandRepeatable 1
+        -flat 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Galaxy Creator" 
+        -enableBackground 0
+        -align "center" 
+        -label "Galaxy" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_galaxy.png" 
+        -image1 "render_galaxy.png" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Galaxy Creator\");\nsource \"galaxyCreator.mel\";\ngalaxyCreator();" 
+        -sourceType "mel" 
+        -commandRepeatable 1
+        -flat 1
     ;
 
 } 
