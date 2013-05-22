@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader
-Version 1.3.2 - April 16, 2013
+Version 1.3.3 - May  22, 2013
 
 Domemaster3D Maya Port by Andrew Hazelden
 andrew@andrewhazelden.com      
@@ -32,11 +32,21 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
+-The "Galaxy" tool runs the Galaxy Creator tool that creates dynamic particle based galaxies.
 
 -----------------------------------------------------------------------
 
 Version History
 ---------------
+
+Version 1.3.3
+Released May  22, 2013
+
+Created the new Galaxies Creator user interface for Martin Watt's classic galaxies.mel script.
+
+Updated the DomeRamp tool so the default ramp style is applied if the tool is run multiple times
+
+
 
 Version 1.3.2
 Released  April 16, 2013

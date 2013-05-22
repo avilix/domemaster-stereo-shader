@@ -259,9 +259,45 @@ def createFulldomeStereoRig():
   #[u'stereoCamera1', u'stereoCamera1Left', u'stereoCamera1Right'] #
   
   # Scale the stereo camera rig locator larger 
-  cmds.setAttr(rig[0]+'CenterCamShape.locatorScale', 10) #Center Camera
-  cmds.setAttr(rig[1]+'Shape.locatorScale', 10) #Left Camera
-  cmds.setAttr(rig[2]+'Shape.locatorScale', 10) #Right Camera
+  #cmds.setAttr(rig[0]+'CenterCamShape.locatorScale', 10) #Center Camera
+  #cmds.setAttr(rig[1]+'Shape.locatorScale', 10) #Left Camera
+  #cmds.setAttr(rig[2]+'Shape.locatorScale', 10) #Right Camera
+  
+  
+  
+  """""
+  
+import maya.cmds as cmds
+from maya.app.stereo import stereoCameraRig
+rig = stereoCameraRig.createStereoCameraRig('StereoCamera')
+cmds.addAttr(longName='LocatorScale', attributeType='double', softMinValue=0.000001, softMaxValue=100000, defaultValue=1) 
+
+cmds.expression( s="stereoCameraCenterCamShape.locatorScale = stereoCamera.LocatorScale;", o='stereoCameraCenterCamShape', ae=1, uc='all')
+cmds.expression( s="stereoCameraLeftShape.locatorScale = stereoCamera.LocatorScale;", o='stereoCameraLeftShape', ae=1, uc='all')
+cmds.expression( s="stereoCameraRightShape.locatorScale = stereoCamera.LocatorScale;", o='stereoCameraRightShape', ae=1, uc='all')
+
+
+ """""
+  
+ 
+  
+  
+  
+  #Add a locator Scale Attribute to the Center Camera
+  #cmds.addAttr(longName='LocatorScale', attributeType='double', SoftMinValue=0.000001, softMaxValue=100000, defaultValue=10, parent=rig[0]) 
+  
+  #left Camera
+  cmds.expression( s="rig[1]+'Shape.locatorScale' = rig[0]+'.LocatorScale';", o=rig[1]+'Shape', ae=1, uc=all)
+
+  
+  #expression -s " stereoCameraLeftShape.locatorScale = stereoCamera.LocatorScale;"  -o stereoCameraLeftShape -ae 1 -uc all ;
+  #cmds.expression( s=" stereoCameraLeftShape.locatorScale = stereoCamera.LocatorScale;", o=stereoCameraLeftShape, ae=1, uc=all)
+  
+  #addAttr -ln "LocatorScale"  -at double  -min 0 -max 10000 -dv 10 |stereoCamera;
+  #expression -s "stereoCameraCenterCamShape.locatorScale = stereoCamera.LocatorScale;"  -o stereoCameraCenterCamShape -ae 1 -uc all ;
+  #expression -s "stereoCameraLeftShape.locatorScale = stereoCamera.LocatorScale;"  -o stereoCameraLeftShape -ae 1 -uc all ;
+  #expression -s "stereoCameraRightShape.locatorScale = stereoCamera.LocatorScale;"  -o stereoCameraRightShape -ae 1 -uc all ;
+
   
   
   cmds.setAttr( rig[0]+'.rotateX', 90)
@@ -658,11 +694,11 @@ def createDomeRampTexture():
   
   # Create the Ramp node
   dome_ramp = cmds.shadingNode( 'ramp', n='domeRamp', asTexture=True) 
-  cmds.setAttr( 'domeRamp.colorEntryList', s=2 )
-  cmds.setAttr( 'domeRamp.colorEntryList[0].ep', 0.5)
-  cmds.setAttr( 'domeRamp.colorEntryList[0].ec', 1, 1, 1, type="float3")
-  cmds.setAttr( 'domeRamp.colorEntryList[2].ep', 0.44999998807907104)
-  cmds.setAttr( 'domeRamp.colorEntryList[2].ec',  0, 0, 0, type="float3")
+  cmds.setAttr( dome_ramp+'.colorEntryList', s=2 )
+  cmds.setAttr(dome_ramp+'.colorEntryList[0].ep', 0.5)
+  cmds.setAttr( dome_ramp+'.colorEntryList[0].ec', 1, 1, 1, type="float3")
+  cmds.setAttr(dome_ramp+'.colorEntryList[2].ep', 0.44999998807907104)
+  cmds.setAttr( dome_ramp+'.colorEntryList[2].ec',  0, 0, 0, type="float3")
   
   # Create the texture space conversion node
   rob_tex_vector = cmds.shadingNode( 'mib_texture_vector', n='rob_mib_texture_vector1', asUtility=True )

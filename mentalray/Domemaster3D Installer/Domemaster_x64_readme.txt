@@ -11,11 +11,8 @@ The Domemaster Stereo lens shader is a custom mental ray shader that creates a s
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "Center" camera option in the DomeAFL_FOV_Stereo shader.
 
 Updated:
-Version 1.3.2 has the following changes & improvements:
 
--Added Maya 2014 support
-
--The Maya camera connections for the lens shaders have been updated
+-The new "Galaxy" shelf icon runs the Galaxy Creator tool that creates dynamic particle based galaxies. The Galaxies Creator tool uses Martin Watt's classic galaxies.mel script.
 
 -The location of the default domemaster control map textures is now in the C:\Program Files\Domemaster3D\sourceimages folder on Windows or the /Applications/Domemaster3D/sourceimages folder on Mac OS X. The Domemaster3D shelf tools have been updated to automatically link to the new sourceimages folder.
 
@@ -34,6 +31,7 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
+-The "Galaxy" tool runs the Galaxy Creator tool that creates dynamic particle based galaxies.
 
 
 3DS Max Tools
