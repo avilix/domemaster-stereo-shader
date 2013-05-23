@@ -4,6 +4,7 @@ syntax: glob
 *.mayaSwatches
 *Thumbs.db
 *.AppleDouble*
+*.AppleDouble
 *.swatch
 *.Parent
 *.o

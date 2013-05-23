@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Galaxy Creator Tool.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+body{
+    margin: 0 auto;
+    font-family: Georgia, Palatino, serif;
+    color: #444444;
+    line-height: 1;
+    max-width: 960px;
+    padding: 5px;
+}
+h1, h2, h3, h4 {
+    color: #111111;
+    font-weight: 400;
+}
+h1, h2, h3, h4, h5, p {
+    margin-bottom: 16px;
+    padding: 0;
+}
+h1 {
+    font-size: 28px;
+}
+h2 {
+    font-size: 22px;
+    margin: 20px 0 6px;
+}
+h3 {
+    font-size: 21px;
+}
+h4 {
+    font-size: 18px;
+}
+h5 {
+    font-size: 16px;
+}
+a {
+    color: #0099ff;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+a:hover {
+    text-decoration: none;
+    color: #ff6600;
+}
+a:visited {
+    color: purple;
+}
+ul, ol {
+    padding: 0;
+    margin: 0;
+}
+li {
+    line-height: 24px;
+    margin-left: 44px;
+}
+li ul, li ul {
+    margin-left: 24px;
+}
+p, ul, ol {
+    font-size: 14px;
+    line-height: 20px;
+    max-width: 540px;
+}
+pre {
+    padding: 0px 24px;
+    max-width: 800px;
+    white-space: pre-wrap;
+}
+code {
+    font-family: Consolas, Monaco, Andale Mono, monospace;
+    line-height: 1.5;
+    font-size: 13px;
+}
+aside {
+    display: block;
+    float: right;
+    width: 390px;
+}
+blockquote {
+    border-left:.5em solid #eee;
+    padding: 0 2em;
+    margin-left:0;
+    max-width: 476px;
+}
+blockquote  cite {
+    font-size:14px;
+    line-height:20px;
+    color:#bfbfbf;
+}
+blockquote cite:before {
+    content: '\2014 \00A0';
+}
+
+blockquote p {  
+    color: #666;
+    max-width: 460px;
+}
+hr {
+    width: 540px;
+    text-align: left;
+    margin: 0 auto 0 0;
+    color: #999;
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  *vertical-align: middle;
+}
+button, input {
+  line-height: normal;
+  *overflow: visible;
+}
+button::-moz-focus-inner, input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+input[type=checkbox], input[type=radio] {
+  cursor: pointer;
+}
+/* override default chrome & firefox settings */
+input:not([type="image"]), textarea {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+label,
+input,
+select,
+textarea {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: normal;
+  margin-bottom: 18px;
+}
+input[type=checkbox], input[type=radio] {
+  cursor: pointer;
+  margin-bottom: 0;
+}
+input[type=text],
+input[type=password],
+textarea,
+select {
+  display: inline-block;
+  width: 210px;
+  padding: 4px;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  height: 18px;
+  color: #808080;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+select, input[type=file] {
+  height: 27px;
+  line-height: 27px;
+}
+textarea {
+  height: auto;
+}
+
+/* grey out placeholders */
+:-moz-placeholder {
+  color: #bfbfbf;
+}
+::-webkit-input-placeholder {
+  color: #bfbfbf;
+}
+
+input[type=text],
+input[type=password],
+select,
+textarea {
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+
+/* buttons */
+button {
+  display: inline-block;
+  padding: 4px 14px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: #0064cd;
+  background-repeat: repeat-x;
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#049cdb), to(#0064cd));
+  background-image: -moz-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -ms-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #049cdb), color-stop(100%, #0064cd));
+  background-image: -webkit-linear-gradient(top, #049cdb, #0064cd);
+  background-image: -o-linear-gradient(top, #049cdb, #0064cd);
+  background-image: linear-gradient(top, #049cdb, #0064cd);
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  border: 1px solid #004b9a;
+  border-bottom-color: #003f81;
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+  border-color: #0064cd #0064cd #003f81;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+}
+button:hover {
+  color: #fff;
+  background-position: 0 -15px;
+  text-decoration: none;
+}
+button:active {
+  -webkit-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+/* CSS stylesheet is based on Kevin Burke's Markdown.css project (http://kevinburke.bitbucket.org/markdowncss) */
+</style>
+</head>
+<body>
+<h1>Create Instant Galaxies in Maya</h1>
+
+<h2>Introduction</h2>
+
+<p><img src="screenshots/mixed_galaxy_with_stars.jpg" alt="" /></p>
+
+<p>The <em>Galaxy Creator</em> tool is an add-on for the Domemaster3D Toolset that creates dynamic galaxies using Maya's particle system and a newton field. The Galaxy Creator tool is a MEL based user interface for Martin Watt's classic galaxies.mel script.</p>
+
+<p>The Galaxy Creator tool can be used to create animations of evolving or colliding galaxies that can be played back in the Maya timeline or rendered using Mental Ray or the Maya Software Renderer.</p>
+
+<h2>Getting Started</h2>
+
+<p>The Galaxy Creator tool launched by clicking on the yellow spiral galaxy shaped icon in the Domemaster3D shelf.</p>
+
+<p><img src="screenshots/galaxy_creater_user_interface.png" alt="" /></p>
+
+<p><img src="screenshots/galaxy_creator_in_maya_2014.png" alt="" />
+Here are a few galaxy values you can try out:</p>
+
+<h3>Ring Galaxy #1</h3>
+
+<ul>
+<li>Stars: 2000   </li>
+<li>Radius: 20   </li>
+<li>Spiral Arms: 400   </li>
+<li>Galaxy Turns: 5  </li>
+<li>Nucleus Color: (HSV) H: 35.22 /  S: 0.247 / V: 1.0  </li>
+<li>Galaxy Particle Color: (HSV) H:249 / S:0.451 / V: 0.51  </li>
+</ul>
+
+<p><img src="screenshots/ring_galaxy_2.jpg" alt="" /></p>
+
+<h3>Ring Galaxy #2</h3>
+
+<ul>
+<li>Stars: 3000  </li>
+<li>Radius: 20  </li>
+<li>Spiral Arms: 400  </li>
+<li>Galaxy Turns: 10   </li>
+<li>Nucleus Color: (HSV) H: 35.22 /  S: 0.247 / V: 1.0  </li>
+<li>Galaxy Particle Color: (HSV) H:2.959 / S:0.646 / V:0.556  </li>
+</ul>
+
+<p><img src="screenshots/circular_galaxy_3.jpg" alt="" /></p>
+
+<h2>Galaxy Creator Controls</h2>
+
+<p><em>Galaxy Orientation</em> (integer value from 0-2)</p>
+
+<p>The <em>Galaxy Orientation</em> pop-up menu lets you choose what view direction will be used when a new galaxy is created. </p>
+
+<ul>
+<li><p>The <em>Side View</em> option aligns the galaxy on the ZY plane.</p></li>
+<li><p>The <em>Top View</em> option aligns the galaxy on the ZX plane.</p></li>
+<li><p>The <em>Front View</em> option aligns the galaxy on the on the XY plane.</p></li>
+</ul>
+
+<p><em>Number of Stars</em> (integer value)
+This is the total number of stars added to the galaxy</p>
+
+<p><em>Galaxy Radius</em> (integer value)
+The size of the star galaxy defined by a radius value in the current Maya scene units.</p>
+
+<p><em>Spiral Arms</em> (integer value)
+This is the total number of spiral branches that come out from the center of the spiral galaxy. The minimum number of Spiral Arms value is 2 arms.</p>
+
+<p><em>Galaxy Turns</em> (float value)
+This is the number of spiral turns that each arm of the galaxy makes starting at the center of the galaxy and ending at the outer edge of the galaxy.</p>
+
+<p><em>Galaxy Origin</em> {X,Y,Z}
+An XYZ value that defines the starting position of the galaxy.
+A value of {0,0,0} would create the galaxy at the origin.</p>
+
+<p><em>Galaxy Velocity</em> {X,Y,Z}
+An XYZ value that defines the initial velocity speed for each axis. A value of {0,20,0} would cause the galaxy to move upwards on the Y axis.</p>
+
+<p>The <em>Nucleus Color</em> swatch defines the look of the center of the galaxy.</p>
+
+<p>The <em>Nucleus Particle Radius</em> sets the size of the central core of the galaxy. Increasing this value will create a large glowing central region.</p>
+
+<p>The <em>Galaxy Color</em> swatch defines the look of the outer galaxy particles.</p>
+
+<p>The <em>Galaxy Particle Radius</em> sets the size of the outer galaxy arms. Increasing this value will create a thicker galaxy disc.</p>
+
+<p>The <em>Add Cloud Material</em> checkbox sets the particle to use a cloud particle display mode and adds a nucleus surface material and a galaxy surface material to the scene. If the Add Cloud Material checkbox is disabled the particles will be left as simple point based particles. This will skip the process of adding the custom surface materials.</p>
+
+<p>The <em>Connect All newtonFields</em> checkbox links all of the galaxy newton fields to all of the particles in the scene. You can manually control these fields in the Dynamic Relationship Editor window.</p>
+
+<h2>Galaxy Animation</h2>
+
+<p>The spiral galaxy animation was created with a large central glowing nucleus and 10 gaseous spiral arms.</p>
+
+<p><a href="http://www.youtube.com/watch?v=S3SdbesRQME">http://www.youtube.com/watch?v=S3SdbesRQME</a></p>
+
+<hr />
+
+<p>This is a simulation of three colorful galaxies colliding.  </p>
+
+<p><a href="http://www.youtube.com/watch?v=b8zg2NReHbo">http://www.youtube.com/watch?v=b8zg2NReHbo</a></p>
+
+<hr />
+
+<h2>Galaxy Creation Tips</h2>
+
+<p>You can run the Galaxy Creator script multiple times and mix-and-match the different galaxy elements in your scene.</p>
+
+<p>If you delete a spiral galaxy, don't forget to remove the unwanted nucleus particle shape too.</p>
+
+<p>You can stack multiple gaseous spiral galaxies in the scene and change their colors and particle radius values to get interesting shading effects.</p>
+
+<p>When multiple galaxies are added to a scene, Maya will simulate complex galaxies collisions that create intricate patterns from the intermixing of particle colors. In the next example, three galaxies were arranged in a triangle style formation around the grid origin.</p>
+
+<p><a href="http://www.youtube.com/watch?v=ZEmDLYamV2Q">http://www.youtube.com/watch?v=ZEmDLYamV2Q</a></p>
+
+<p>The galaxies were created using the Galaxy Creator "right view" setting and moved / rotated around to point towards the origin. I found it easier to move the camera around in Maya when I used the "right view" galaxy mode vs animating the galaxies with a "top view" created galaxy collision layout.</p>
+
+<p>I added lots of motion blur to cause the cloudy particle render type to create a streaky particle blur effect. I did this by setting the motion blur to blur each frame by a value larger than the normal "one frame" increment to get longer trails on the particles.</p>
+
+<p>I used the radiusPP particle expression described below to soften the edge (shrink the radius) of the edge particles in the galaxies.</p>
+
+<p>If you want to be able to rewind/play your scene in the Maya timebar you can use the "particle disk caching" option found under the "Solvers" menu in the in the Dynamics menu set.</p>
+
+<p><img src="screenshots/colored_galaxy_particles.jpg" alt="" /></p>
+
+<p><img src="screenshots/b.maya_triple_galaxy_rendered.png" alt="" /></p>
+
+<p><img src="screenshots/c.colored_galaxy_particles_2.jpg" alt="" /></p>
+
+<p><img src="screenshots/d.maya_triple_galaxy_merged.png" alt="" /></p>
+
+<h2>Galaxy Shading</h2>
+
+<p>The galaxy shader uses a combined shading group with a particleCloud and surfaceShader to represent the galaxy particle colors. </p>
+
+<p>The surfaceShader is used for the real-time viewport shading and the particleCloud is used for shading the cloud effect in the render view.</p>
+
+<p><img src="screenshots/galaxy_creator_in_maya_2010.png" alt="" /></p>
+
+<p><img src="screenshots/simple_galaxy.jpg" alt="" /></p>
+
+<h2>Using Expressions to Fade the Galaxy Edge Particles</h2>
+
+<p>If you want more control over a particle based galaxy in Maya, a radiusPP particle expression can  adjust the particle fade off between the center and edges of the galaxy shape. RadiusPP stands for Radius Per Particle.</p>
+
+<p>A RadiusPP attribute is created automatically by the Galaxy Creator script. If you use the MEL script editor to run the old galaxies.mel script you need to add the RadiusPP value manually. </p>
+
+<p>Select the particleShape node. In the attribute editor use the "Add a Dynamic attribute" section to add a per particle attribute. Click on the <em>General</em> button. </p>
+
+<p>In the "Add Attribute" window click on the <em>Particle</em> tab and select <em>RadiusPP</em>. Click the <em>OK</em> button to close the window. The RadiusPP value gives you control over the width of each particle in the particleShape node.</p>
+
+<p>If the new attribute was added correctly, a RadiusPP entry should be listed in the Per Particle (Array) attribute section. If RadiusPP doesn't show up, try selecting and then deselecting the particle shape in the Viewport to force Maya to redraw the Attribute Editor window.</p>
+
+<p><img src="screenshots/a.dual_spiral_galaxies.jpg" alt="" /></p>
+
+<h2>Let's Add a Particle Creation Expression</h2>
+
+<p>Particle creation expressions are helpful because they allow you to define a custom setting for each of the particles in a particleShape node before a simulation is run.</p>
+
+<p>Right click on the field to the right of the <em>RadiusPP</em> attribute and select "Creation Expression...". This will add a new particle creation expression that will control the particles before the first frame of the dynamics simulation begins.</p>
+
+<p>In the Expression Editor paste in the following RadiusPP expression:</p>
+
+<pre><code>
+//Galaxy Edge Fade Effect
+//Uses the radiusPP Control
+
+//Size of the Galaxy
+float $galaxyRadius = 23.0;
+
+//Size of the cloud particle
+float $galaxyParticleRadius = 0.6;
+
+//Thicken Galaxy Center Ratio (Range 0.1-0.75)
+float $galaxyParticleRatio = 0.2;
+
+
+//Calculate the particle's distance from the galaxy origin
+vector $pos = particleShape2.position;
+vector $galaxyOrigin = <<0,0,0>>;
+vector $dist = <<($galaxyOrigin.x-$pos.x), ($galaxyOrigin.y-$pos.y), ($galaxyOrigin.z-$pos.z)>>;
+float $magDist = mag($dist);
+
+//Calculate the final particle size
+float $galaxyPercent = 1-($magDist / $galaxyRadius);
+float $galaxyBaseParticle = ($galaxyParticleRadius*$galaxyParticleRatio);
+float $galaxyParticleSize = ($galaxyParticleRadius*$galaxyPercent);
+
+//Set the per particle size
+particleShape2.radiusPP = $galaxyParticleSize + $galaxyBaseParticle;
+
+//End
+</code></pre>
+
+<p>The value <code>$galaxyRadius</code> lets you manually enter the size of the galaxy.</p>
+
+<p>The <code>$galaxyOrigin</code> attribute lets you enter an offset for the X,Y,Z position of the galaxy if it is moved away from the world origin.</p>
+
+<p>By changing the <code>$galaxyParticleRadius</code> value you can control the overall side of the cloud particles.</p>
+
+<p>The <code>$galaxyParticleRatio</code> value controls how thick the center of the particle shape is compared to the edges. A value between 0.1-0.75 is usually appropriate.</p>
+
+<p>In order to use the particle creation expression you need to change the text "particleShape2" near the top and bottom of the script by entering the name of your current particle object. </p>
+
+<p>Once you have pasted the sample particle expression text in the Expression Editor window, you can click the "Create Button" to save the new expression.</p>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

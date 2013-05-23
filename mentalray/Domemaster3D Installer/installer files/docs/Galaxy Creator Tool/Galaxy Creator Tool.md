@@ -1,53 +1,43 @@
-Galaxy Creator Tool
-Version 1.0 - May 22, 2013
+# Create Instant Galaxies in Maya #
 
-= Introduction =
+## Introduction ##
+
+![](screenshots/mixed_galaxy_with_stars.jpg)
 
 The *Galaxy Creator* tool is an add-on for the Domemaster3D Toolset that creates dynamic galaxies using Maya's particle system and a newton field. The Galaxy Creator tool is a MEL based user interface for Martin Watt's classic galaxies.mel script.
 
 The Galaxy Creator tool can be used to create animations of evolving or colliding galaxies that can be played back in the Maya timeline or rendered using Mental Ray or the Maya Software Renderer.
 
-http://www.andrewhazelden.com/projects/domemaster3D/wiki/galaxy_creator/galaxy_creator_in_maya_2014.png
 
-
-= Getting Started =
+## Getting Started ##
 The Galaxy Creator tool launched by clicking on the yellow spiral galaxy shaped icon in the Domemaster3D shelf.
 
-http://www.andrewhazelden.com/projects/domemaster3D/wiki/galaxy_creator/galaxy_creater_user_interface.png
+![](screenshots/galaxy_creater_user_interface.png)
 
+![](screenshots/galaxy_creator_in_maya_2014.png)
 Here are a few galaxy values you can try out:
 
-== Spiral Galaxy #1  ==
-  * Stars: 2000  
-  * Radius: 20  
-  * Spiral Arms: 5   
-  * Galaxy Turns: 1  
-  * Nucleus Color: (HSV) H: 35.22 /  S: 0.247 / V: 1.0
-  * Galaxy Particle Color: (HSV) H:282 / S:0.243 / V: 0.502
- 
-http://www.andrewhazelden.com/projects/domemaster3D/wiki/galaxy_creator/spiral_galaxy_1.jpg 
-
-== Ring Galaxy #2 ==   
-  * Stars: 2000  
-  * Radius: 20  
+### Ring Galaxy #1   ###
+  * Stars: 2000   
+  * Radius: 20   
   * Spiral Arms: 400   
-  * Galaxy Turns: 5
-  * Nucleus Color: (HSV) H: 35.22 /  S: 0.247 / V: 1.0
-  * Galaxy Particle Color: (HSV) H:249 / S:0.451 / V: 0.51
+  * Galaxy Turns: 5  
+  * Nucleus Color: (HSV) H: 35.22 /  S: 0.247 / V: 1.0  
+  * Galaxy Particle Color: (HSV) H:249 / S:0.451 / V: 0.51  
 
-http://www.andrewhazelden.com/projects/domemaster3D/wiki/galaxy_creator/ring_galaxy_2.jpg
+![](screenshots/ring_galaxy_2.jpg)
 
-== Circular Galaxy #3 ==  
+### Ring Galaxy #2  ###
   * Stars: 3000  
   * Radius: 20  
-  * Spiral Arms: 400   
-  * Galaxy Turns: 10  
-  * Nucleus Color: (HSV) H: 35.22 /  S: 0.247 / V: 1.0
-  * Galaxy Particle Color: (HSV) H:2.959 / S:0.646 / V:0.556 
+  * Spiral Arms: 400  
+  * Galaxy Turns: 10   
+  * Nucleus Color: (HSV) H: 35.22 /  S: 0.247 / V: 1.0  
+  * Galaxy Particle Color: (HSV) H:2.959 / S:0.646 / V:0.556  
  
-http://www.andrewhazelden.com/projects/domemaster3D/wiki/galaxy_creator/circular_galaxy_3.jpg
+![](screenshots/circular_galaxy_3.jpg)
 
-= Galaxy Creator Controls =
+## Galaxy Creator Controls ##
 
 *Galaxy Orientation* (integer value from 0-2)
 
@@ -92,13 +82,23 @@ The *Add Cloud Material* checkbox sets the particle to use a cloud particle disp
 The *Connect All newtonFields* checkbox links all of the galaxy newton fields to all of the particles in the scene. You can manually control these fields in the Dynamic Relationship Editor window.
 
 
-= Galaxy Animation = 
+## Galaxy Animation ##
 
-This video clip shows a spiral galaxy animation that was created with a large glowing nucleus and 10 gaseous spiral arms.
+The spiral galaxy animation was created with a large central glowing nucleus and 10 gaseous spiral arms.
 
-<wiki:video url="http://www.youtube.com/watch?v=S3SdbesRQME"/>
+[http://www.youtube.com/watch?v=S3SdbesRQME](http://www.youtube.com/watch?v=S3SdbesRQME)
 
-= Galaxy Creation Tips =
+----------
+
+
+This is a simulation of three colorful galaxies colliding.  
+
+[http://www.youtube.com/watch?v=b8zg2NReHbo](http://www.youtube.com/watch?v=b8zg2NReHbo)
+
+----------
+
+
+## Galaxy Creation Tips ##
 
 You can run the Galaxy Creator script multiple times and mix-and-match the different galaxy elements in your scene.
 
@@ -106,18 +106,37 @@ If you delete a spiral galaxy, don't forget to remove the unwanted nucleus parti
 
 You can stack multiple gaseous spiral galaxies in the scene and change their colors and particle radius values to get interesting shading effects.
 
-http://www.andrewhazelden.com/projects/domemaster3D/wiki/galaxy_creator/galaxy_creator_in_maya_2010.png
+When multiple galaxies are added to a scene, Maya will simulate complex galaxies collisions that create intricate patterns from the intermixing of particle colors. In the next example, three galaxies were arranged in a triangle style formation around the grid origin.
 
-== Galaxy Shading ==
+[http://www.youtube.com/watch?v=ZEmDLYamV2Q](http://www.youtube.com/watch?v=ZEmDLYamV2Q)
+
+The galaxies were created using the Galaxy Creator "right view" setting and moved / rotated around to point towards the origin. I found it easier to move the camera around in Maya when I used the "right view" galaxy mode vs animating the galaxies with a "top view" created galaxy collision layout.
+
+I added lots of motion blur to cause the cloudy particle render type to create a streaky particle blur effect. I did this by setting the motion blur to blur each frame by a value larger than the normal "one frame" increment to get longer trails on the particles.
+
+I used the radiusPP particle expression described below to soften the edge (shrink the radius) of the edge particles in the galaxies.
+
+If you want to be able to rewind/play your scene in the Maya timebar you can use the "particle disk caching" option found under the "Solvers" menu in the in the Dynamics menu set.
+
+![](screenshots/colored_galaxy_particles.jpg)
+
+![](screenshots/b.maya_triple_galaxy_rendered.png)
+
+![](screenshots/c.colored_galaxy_particles_2.jpg)
+
+![](screenshots/d.maya_triple_galaxy_merged.png)
+
+## Galaxy Shading ##
 
 The galaxy shader uses a combined shading group with a particleCloud and surfaceShader to represent the galaxy particle colors. 
 
 The surfaceShader is used for the real-time viewport shading and the particleCloud is used for shading the cloud effect in the render view.
 
+![](screenshots/galaxy_creator_in_maya_2010.png)
 
-= Using Expressions to Fade the Galaxy Edge Particles = 
+![](screenshots/simple_galaxy.jpg)
 
-http://www.andrewhazelden.com/projects/domemaster3D/wiki/galaxy_creator/simple_galaxy.jpg
+## Using Expressions to Fade the Galaxy Edge Particles  ##
 
 If you want more control over a particle based galaxy in Maya, a radiusPP particle expression can  adjust the particle fade off between the center and edges of the galaxy shape. RadiusPP stands for Radius Per Particle.
 
@@ -129,8 +148,9 @@ In the "Add Attribute" window click on the *Particle* tab and select *RadiusPP*.
 
 If the new attribute was added correctly, a RadiusPP entry should be listed in the Per Particle (Array) attribute section. If RadiusPP doesn't show up, try selecting and then deselecting the particle shape in the Viewport to force Maya to redraw the Attribute Editor window.
 
+![](screenshots/a.dual_spiral_galaxies.jpg)
 
-== Let's Add a Particle Creation Expression ==
+## Let's Add a Particle Creation Expression ##
 
 Particle creation expressions are helpful because they allow you to define a custom setting for each of the particles in a particleShape node before a simulation is run.
 
@@ -138,7 +158,7 @@ Right click on the field to the right of the *RadiusPP* attribute and select "Cr
 
 In the Expression Editor paste in the following RadiusPP expression:
 
-
+<pre><code>
 //Galaxy Edge Fade Effect
 //Uses the radiusPP Control
 
@@ -167,6 +187,7 @@ float $galaxyParticleSize = ($galaxyParticleRadius*$galaxyPercent);
 particleShape2.radiusPP = $galaxyParticleSize + $galaxyBaseParticle;
 
 //End
+</code></pre>
 
 
 The value `$galaxyRadius` lets you manually enter the size of the galaxy.
