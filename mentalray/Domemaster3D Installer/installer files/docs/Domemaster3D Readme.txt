@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader
-Version 1.3.3 - May  22, 2013
+Version 1.3.3 - May  29, 2013
 
 Domemaster3D Maya Port by Andrew Hazelden
 andrew@andrewhazelden.com      

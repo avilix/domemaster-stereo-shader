@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.3.3
+Version 1.3.3 - May 29, 2013
 
 Maintained by Andrew Hazelden
 andrew@andrewhazelden.com
@@ -15,18 +15,8 @@ Version 1.3.3 Changes
 
 -The new "Galaxy" shelf icon runs the Galaxy Creator tool that creates dynamic particle based galaxies. The Galaxies Creator tool uses Martin Watt's classic galaxies.mel script.
 
--The location of the default domemaster control map textures is now:
-Windows:
-C:\Program Files\Domemaster3D\sourceimages\
+-Updated the DomeRamp tool so the default ramp style is applied if the tool is run multiple times
 
-Mac OS X:
-/Applications/Domemaster3D/sourceimages/
-
--The Domemaster3D shelf tools have been updated to automatically link to the new sourceimages folder.
-
--There is a fix for the issue where the mental ray physical sky & sun system will overwrite existing connections to the .miLensShader port. The physical sky & sun system will now use the miLensShaderList[0] connection on a camera.
-
--Fixed the dome ramp shelf item so the default ramp presets are applied when the tool is run multiple times
 
 Maya Tools
 ---------------
@@ -41,6 +31,15 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
 -The "Galaxy" tool runs the Galaxy Creator tool that creates dynamic particle based galaxies.
+
+Note: The location of the default domemaster control map textures is now:
+Windows:
+C:\Program Files\Domemaster3D\sourceimages\
+
+Mac OS X:
+/Applications/Domemaster3D/sourceimages/
+
+The Domemaster3D shelf tools have been updated to automatically link to the new sourceimages folder.
 
 
 3DS Max Tools
