@@ -1,5 +1,5 @@
 """
-Domemaster3D Fulldome Stereo Rig V1.3.2
+Domemaster3D Fulldome Stereo Rig V1.3.3
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
 This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
@@ -7,6 +7,14 @@ This script makes it easy to start creating fulldome stereoscopic content in Aut
 
 Version History
 ----------------
+
+Version 1.3.3
+Released May 29, 2013
+Updated the default locator scale.
+
+Fixed the dome ramp shelf tool item so the default ramp texture preset is applied when the tool is run multiple times.
+
+
 Version 1.3.2 - Build 1
 Released April 16, 2013
 Edited the default camera connections for the lens shaders to work with the modified versions of the maya createMentalRayIndirectLightingTab.mel & AEmia_physicalskyTemplate.mel scripts. This fixes the problem of the Physical Sky & Sum system overwriting the first .miLensShader input on cameras in the scene.
@@ -259,45 +267,9 @@ def createFulldomeStereoRig():
   #[u'stereoCamera1', u'stereoCamera1Left', u'stereoCamera1Right'] #
   
   # Scale the stereo camera rig locator larger 
-  #cmds.setAttr(rig[0]+'CenterCamShape.locatorScale', 10) #Center Camera
-  #cmds.setAttr(rig[1]+'Shape.locatorScale', 10) #Left Camera
-  #cmds.setAttr(rig[2]+'Shape.locatorScale', 10) #Right Camera
-  
-  
-  
-  """""
-  
-import maya.cmds as cmds
-from maya.app.stereo import stereoCameraRig
-rig = stereoCameraRig.createStereoCameraRig('StereoCamera')
-cmds.addAttr(longName='LocatorScale', attributeType='double', softMinValue=0.000001, softMaxValue=100000, defaultValue=1) 
-
-cmds.expression( s="stereoCameraCenterCamShape.locatorScale = stereoCamera.LocatorScale;", o='stereoCameraCenterCamShape', ae=1, uc='all')
-cmds.expression( s="stereoCameraLeftShape.locatorScale = stereoCamera.LocatorScale;", o='stereoCameraLeftShape', ae=1, uc='all')
-cmds.expression( s="stereoCameraRightShape.locatorScale = stereoCamera.LocatorScale;", o='stereoCameraRightShape', ae=1, uc='all')
-
-
- """""
-  
- 
-  
-  
-  
-  #Add a locator Scale Attribute to the Center Camera
-  #cmds.addAttr(longName='LocatorScale', attributeType='double', SoftMinValue=0.000001, softMaxValue=100000, defaultValue=10, parent=rig[0]) 
-  
-  #left Camera
-  cmds.expression( s="rig[1]+'Shape.locatorScale' = rig[0]+'.LocatorScale';", o=rig[1]+'Shape', ae=1, uc=all)
-
-  
-  #expression -s " stereoCameraLeftShape.locatorScale = stereoCamera.LocatorScale;"  -o stereoCameraLeftShape -ae 1 -uc all ;
-  #cmds.expression( s=" stereoCameraLeftShape.locatorScale = stereoCamera.LocatorScale;", o=stereoCameraLeftShape, ae=1, uc=all)
-  
-  #addAttr -ln "LocatorScale"  -at double  -min 0 -max 10000 -dv 10 |stereoCamera;
-  #expression -s "stereoCameraCenterCamShape.locatorScale = stereoCamera.LocatorScale;"  -o stereoCameraCenterCamShape -ae 1 -uc all ;
-  #expression -s "stereoCameraLeftShape.locatorScale = stereoCamera.LocatorScale;"  -o stereoCameraLeftShape -ae 1 -uc all ;
-  #expression -s "stereoCameraRightShape.locatorScale = stereoCamera.LocatorScale;"  -o stereoCameraRightShape -ae 1 -uc all ;
-
+  cmds.setAttr(rig[0]+'CenterCamShape.locatorScale', 1) #Center Camera
+  cmds.setAttr(rig[1]+'Shape.locatorScale', 1) #Left Camera
+  cmds.setAttr(rig[2]+'Shape.locatorScale', 1) #Right Camera
   
   
   cmds.setAttr( rig[0]+'.rotateX', 90)
@@ -609,7 +581,7 @@ def  createTestShapes():
   cmds.setAttr( 'domeTestLight.rotateY', 47)
   cmds.setAttr( 'domeTestLight.rotateZ', -62)
   # Scale the stereo camera rig locator larger 
-  cmds.setAttr( 'domeTestLightShape.locatorScale', 15) #Scale light icon
+  cmds.setAttr( 'domeTestLightShape.locatorScale', 1) #Scale light icon
 
 
 """
@@ -693,6 +665,7 @@ def createDomeRampTexture():
   # ---------------------------------------------------------------------
   
   # Create the Ramp node
+ # Create the Ramp node
   dome_ramp = cmds.shadingNode( 'ramp', n='domeRamp', asTexture=True) 
   cmds.setAttr( dome_ramp+'.colorEntryList', s=2 )
   cmds.setAttr(dome_ramp+'.colorEntryList[0].ep', 0.5)

@@ -1,7 +1,7 @@
 /*
- Galaxy Creator GUI V1.0
+ Galaxy Creator GUI V1.1
  
- Version 1.0 - May 14, 2013
+ Version 1.1 - May 29, 2013
  by Andrew Hazelden
  
  This is a Maya GUI wrapper for Martin Watt's galaxy script
@@ -128,7 +128,7 @@ global proc galaxyCreator(){
     floatSliderGrp -label "Nucleus Particle Radius" -field true
       -minValue -0.01 -maxValue 20
       -fieldMinValue -0.01 -fieldMaxValue 20
-      -value 3 sliderNucleusRadius;     
+      -value 6 sliderNucleusRadius;     
     
     //==============
     // Galaxy Color 
@@ -139,6 +139,7 @@ global proc galaxyCreator(){
     // RGB Violet = 0.467 0.380 0.502
     // RGB Peachy Orange = 1.0 0.898 0.753
     // RGB Dark Blue gas = 0.039 0.035 0.110
+    // RGB light Blue gas = 0.242 0.339 0.502
     //============== 
     
     //==============
@@ -151,7 +152,7 @@ global proc galaxyCreator(){
       
     
     colorSliderGrp -label "Galaxy Color" 
-      -rgb 0.467 0.380 0.502 sliderGalaxyColor;
+      -rgb 0.242 0.339 0.502 sliderGalaxyColor;
       
     floatSliderGrp -label "Galaxy Particle Radius" -field true
       -minValue -0.01 -maxValue 20
@@ -412,10 +413,10 @@ global proc doGalaxy(){
     //===========================================
     
     //Set the particle shader glow setting
-    setAttr ($galaxyCloudMaterialName + ".glowIntensity") 0.4;
+    setAttr ($galaxyCloudMaterialName + ".glowIntensity") 0.5;
 
     //Set shader density
-    setAttr ($galaxyCloudMaterialName + ".blobMap") -type double3 0.075 0.075 0.075 ;
+    setAttr ($galaxyCloudMaterialName + ".blobMap") -type double3 0.225 0.225 0.225 ;
     
     //Set the cloud to be partially transparent
     setAttr ($galaxyCloudMaterialName + ".transparency") -type double3 0.08 0.08 0.08 ;
@@ -423,10 +424,10 @@ global proc doGalaxy(){
     
     
     //Set the particle shader glow setting
-    setAttr ($nucleusCloudMaterialName + ".glowIntensity") 0.4;
+    setAttr ($nucleusCloudMaterialName + ".glowIntensity") 0.06;
 
     //Set shader density
-    setAttr ($nucleusCloudMaterialName + ".blobMap") -type double3 0.075 0.075 0.075 ;
+    setAttr ($nucleusCloudMaterialName + ".blobMap") -type double3 0.04 0.04 0.04 ;
     
     //Set the cloud to be partially transparent
     setAttr ($nucleusCloudMaterialName + ".transparency") -type double3 0.08 0.08 0.08 ;
@@ -473,6 +474,10 @@ global proc doGalaxy(){
       
     }
     print("\n");
+
+
+  //Adding a radiusPP expression to the galaxy:
+  //dynExpression -s "//Galaxy Edge Fade Effect\n//Uses the radiusPP Control\n\n//Size of the Galaxy\nfloat $galaxyRadius = 23.0;\n\n//Size of the cloud particle\nfloat $galaxyParticleRadius = 0.6;\n\n//Thicken Galaxy Center Ratio (Range 0.1-0.75)\nfloat $galaxyParticleRatio = 0.2;\n\n\n//Calculate the particle's distance from the galaxy origin\nvector $pos = particleShape2.position;\nvector $galaxyOrigin = <<0,0,0>>;\nvector $dist = <<($galaxyOrigin.x-$pos.x), ($galaxyOrigin.y-$pos.y), ($galaxyOrigin.z-$pos.z)>>;\nfloat $magDist = mag($dist);\n\n//Calculate the final particle size\nfloat $galaxyPercent = 1-($magDist / $galaxyRadius);\nfloat $galaxyBaseParticle = ($galaxyParticleRadius*$galaxyParticleRatio);\nfloat $galaxyParticleSize = ($galaxyParticleRadius*$galaxyPercent);\n\n//Set the per particle size\nparticleShape2.radiusPP = $galaxyParticleSize + $galaxyBaseParticle;\n\n//End" -c ($activeStarShape);
     
   }
   

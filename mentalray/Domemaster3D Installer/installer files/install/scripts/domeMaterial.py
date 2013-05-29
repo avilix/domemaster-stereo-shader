@@ -1,10 +1,16 @@
 """
-DomeAFL Mental Ray MIA Material  V1.3.2
+DomeAFL Mental Ray MIA Material  V1.3.3
 --------------------------------
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
 Version History
 ----------------
+Version 1.3.3
+Released May 29, 2013
+
+Updated the default locator scale
+
+
 Version 1.3.2 - Build 1
 Released April 16, 2013
 Edited the default camera connections for the lens shaders to work with the modified versions of the maya createMentalRayIndirectLightingTab.mel & AEmia_physicalskyTemplate.mel scripts. This fixes the problem of the Physical Sky & Sum system overwriting the first .miLensShader input on cameras in the scene.
@@ -432,7 +438,7 @@ def createDomeAFL_FOV_Camera():
 	cmds.connectAttr( domeAFL_lens_node+'.message', cameraShape+'.miLensShader' )
 	
 	# Scale the stereo camera rig locator larger 
-	cmds.setAttr(cameraShape+'.locatorScale', 10) #Scale Camera icon
+	cmds.setAttr(cameraShape+'.locatorScale', 1) #Scale Camera icon
 	
 	cmds.setAttr( cameraName[0]+'.rotateX', 90)
 	cmds.setAttr( cameraName[0]+'.rotateY', 0)
@@ -487,7 +493,7 @@ def createDomeAFL_WxH_Camera():
 	cmds.connectAttr( domeAFL_WxH_lens_node+'.message', cameraShape+'.miLensShader' )
 	
 	# Scale the stereo camera rig locator larger 
-	cmds.setAttr(cameraShape+'.locatorScale', 10) #Scale Camera icon
+	cmds.setAttr(cameraShape+'.locatorScale', 1) #Scale Camera icon
 	
 	cmds.setAttr( cameraName[0]+'.rotateX', 90)
 	cmds.setAttr( cameraName[0]+'.rotateY', 0)

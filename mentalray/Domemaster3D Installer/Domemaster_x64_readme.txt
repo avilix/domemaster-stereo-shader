@@ -10,14 +10,23 @@ The Domemaster Stereo lens shader is a custom mental ray shader that creates a s
 
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "Center" camera option in the DomeAFL_FOV_Stereo shader.
 
-Updated:
+Version 1.3.3 Changes
+---------------------------
 
 -The new "Galaxy" shelf icon runs the Galaxy Creator tool that creates dynamic particle based galaxies. The Galaxies Creator tool uses Martin Watt's classic galaxies.mel script.
 
--The location of the default domemaster control map textures is now in the C:\Program Files\Domemaster3D\sourceimages folder on Windows or the /Applications/Domemaster3D/sourceimages folder on Mac OS X. The Domemaster3D shelf tools have been updated to automatically link to the new sourceimages folder.
+-The location of the default domemaster control map textures is now:
+Windows:
+C:\Program Files\Domemaster3D\sourceimages\
+
+Mac OS X:
+/Applications/Domemaster3D/sourceimages/
+
+-The Domemaster3D shelf tools have been updated to automatically link to the new sourceimages folder.
 
 -There is a fix for the issue where the mental ray physical sky & sun system will overwrite existing connections to the .miLensShader port. The physical sky & sun system will now use the miLensShaderList[0] connection on a camera.
 
+-Fixed the dome ramp shelf item so the default ramp presets are applied when the tool is run multiple times
 
 Maya Tools
 ---------------
@@ -69,6 +78,11 @@ Based upon Daniel Ott's DomeAFL Angular Fisheye Lens Shader
 http://www.thedott.net/shaders/domeAFL/
 
 Special Thanks
-I would like to thank Aaron Bradbury for the installer imagery from his Vortex fulldome movie.
+-----------------
+I would like to thank the following people for their contributions:
+
+Aaron Bradbury for the installer imagery from his Vortex fulldome short film.
 http://www.luniere.com/project/vortex/
+
+Martin Watt for writing the original galaxies.mel script.
 

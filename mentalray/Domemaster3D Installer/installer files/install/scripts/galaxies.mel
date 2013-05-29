@@ -13,7 +13,7 @@
 ''  be changed automatically on any updates.
 */
 
-//ake spiral or elliptical galaxies and connect gravitational fields
+//Make spiral or elliptical galaxies and connect gravitational fields
 
 // make spiral galaxy using user-defined arguments
 global proc string[] spiralGalaxy(int $numStars, 
