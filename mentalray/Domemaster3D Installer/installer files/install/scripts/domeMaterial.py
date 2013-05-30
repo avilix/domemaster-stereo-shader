@@ -10,6 +10,8 @@ Released May 29, 2013
 
 Updated the default locator scale
 
+Updated source image paths for Maya 2010 compatibility
+
 
 Version 1.3.2 - Build 1
 Released April 16, 2013
@@ -129,10 +131,10 @@ def getSourceImagesPath(imageFileName):
 
   if platform.system()=='Windows':
     #Check if the program is running on Windows 
-    baseImagesFolder = "C:\\Program Files\\Domemaster3D\\sourceimages\\"
+    baseImagesFolder = "C:/Program Files/Domemaster3D/sourceimages/"
   elif platform.system()== 'win32':
     #Check if the program is running on Windows 32
-    baseImagesFolder = "C:\\Program Files (x86)\\Domemaster3D\\sourceimages\\"
+    baseImagesFolder = "C:/Program Files (x86)/Domemaster3D/sourceimages/"
   elif platform.system()== 'Darwin':
     #Check if the program is running on Mac OS X
     baseImagesFolder = "/Applications/Domemaster3D/sourceimages/"

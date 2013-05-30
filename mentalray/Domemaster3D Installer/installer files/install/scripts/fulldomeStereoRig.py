@@ -14,6 +14,7 @@ Updated the default locator scale.
 
 Fixed the dome ramp shelf tool item so the default ramp texture preset is applied when the tool is run multiple times.
 
+Updated source image paths for Maya 2010 compatibility
 
 Version 1.3.2 - Build 1
 Released April 16, 2013
@@ -161,10 +162,10 @@ def getSourceImagesPath(imageFileName):
 
   if platform.system()=='Windows':
     #Check if the program is running on Windows 
-    baseImagesFolder = "C:\\Program Files\\Domemaster3D\\sourceimages\\"
+    baseImagesFolder = "C:/Program Files/Domemaster3D/sourceimages/"
   elif platform.system()== 'win32':
     #Check if the program is running on Windows 32
-    baseImagesFolder = "C:\\Program Files (x86)\\Domemaster3D\\sourceimages\\"
+    baseImagesFolder = "C:/Program Files (x86)/Domemaster3D/sourceimages/"
   elif platform.system()== 'Darwin':
     #Check if the program is running on Mac OS X
     baseImagesFolder = "/Applications/Domemaster3D/sourceimages/"

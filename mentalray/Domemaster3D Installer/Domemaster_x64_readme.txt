@@ -17,6 +17,7 @@ Version 1.3.3 Changes
 
 -Updated the DomeRamp tool so the default ramp style is applied if the tool is run multiple times
 
+-Updated source image paths for Maya 2010 compatibility
 
 Maya Tools
 ---------------

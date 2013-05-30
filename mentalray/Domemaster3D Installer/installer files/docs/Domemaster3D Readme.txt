@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader
-Version 1.3.3 - May  29, 2013
+Version 1.3.3 - May 29, 2013
 
 Domemaster3D Maya Port by Andrew Hazelden
 andrew@andrewhazelden.com      
@@ -40,12 +40,13 @@ Version History
 ---------------
 
 Version 1.3.3
-Released May  22, 2013
+Released May 29, 2013
 
 Created the new Galaxies Creator user interface for Martin Watt's classic galaxies.mel script.
 
 Updated the DomeRamp tool so the default ramp style is applied if the tool is run multiple times
 
+Updated source image paths for Maya 2010 compatibility
 
 
 Version 1.3.2
