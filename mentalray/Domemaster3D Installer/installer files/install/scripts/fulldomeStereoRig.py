@@ -258,19 +258,34 @@ def createFulldomeStereoRig():
   # Create the stereo rig
   # ---------------------------------------------------------------------
   
-  
-  
-  #print(rig[0]+'CenterCamShape')
-  #stereoCamera2CenterCamShape
-  
   from maya.app.stereo import stereoCameraRig
   rig = stereoCameraRig.createStereoCameraRig('StereoCamera')
   #[u'stereoCamera1', u'stereoCamera1Left', u'stereoCamera1Right'] #
+
+  #Get the stereo camera rig shape nodes for the center/right/left cameras
+  rig_center_shape_name =  getObjectShapeNode(rig[0])
+  #[u'stereoCameraCenterCamShape', u'stereoCameraFrustum'] #
+
+  rig_left_shape_name =  getObjectShapeNode(rig[1])
+  # Result: [u'stereoCameraLeftShape'] #
+
+  rig_right_shape_name =  getObjectShapeNode(rig[2])
+  # Result: [u'stereoCameraRightShape'] #
   
   # Scale the stereo camera rig locator larger 
-  cmds.setAttr(rig[0]+'CenterCamShape.locatorScale', 1) #Center Camera
-  cmds.setAttr(rig[1]+'Shape.locatorScale', 1) #Left Camera
-  cmds.setAttr(rig[2]+'Shape.locatorScale', 1) #Right Camera
+  #cmds.setAttr(rig_center_shape_name[0]+'.locatorScale', 1) #Center Camera
+  #cmds.setAttr(rig_left_shape_name[0]+'.locatorScale', 1) #Left Camera
+  #cmds.setAttr(rig_right_shape_name[0]+'.locatorScale', 1) #Right Camera
+  
+  # Link the new attribute 'Cam Locator Scale' to the dome camera's locator size control
+  cmds.addAttr( rig[0], longName='Cam_Locator_Scale', niceName='Cam Locator Scale', attributeType='double', defaultValue=1.0, minValue=0.001)
+  cmds.setAttr( rig[0]+'.Cam_Locator_Scale', keyable=False, channelBox=True)
+  
+
+  #/ Result: Connected stereoCamera.Cam_Locator_Scale to stereoCameraLeftShape.locatorScale. // 
+  cmds.connectAttr ( rig[0]+'.Cam_Locator_Scale', rig_center_shape_name[0]+'.locatorScale', force=True)
+  cmds.connectAttr ( rig[0]+'.Cam_Locator_Scale', rig_left_shape_name[0]+'.locatorScale', force=True)
+  cmds.connectAttr ( rig[0]+'.Cam_Locator_Scale', rig_right_shape_name[0]+'.locatorScale', force=True)
   
   
   cmds.setAttr( rig[0]+'.rotateX', 90)
@@ -278,10 +293,8 @@ def createFulldomeStereoRig():
   cmds.setAttr( rig[0]+'.rotateZ', 0)
   
   # Changes the render settings to set the stereo camera to be a renderable camera
-  #cmds.setAttr( 'stereoCameraLeftShape.renderable', 1)
-  #cmds.setAttr( 'stereoCameraRightShape.renderable', 1)
-  cmds.setAttr( rig[1]+'Shape.renderable', 1) #stereoCameraLeftShape
-  cmds.setAttr( rig[2]+'Shape.renderable', 1) #stereoCameraRightShape
+  cmds.setAttr( rig_left_shape_name[0]+'.renderable', 1) #stereoCameraLeftShape
+  cmds.setAttr( rig_right_shape_name[0]+'.renderable', 1) #stereoCameraRightShape
   cmds.setAttr( 'topShape.renderable', 0)
   cmds.setAttr( 'sideShape.renderable', 0)
   cmds.setAttr( 'frontShape.renderable', 0)
@@ -290,10 +303,10 @@ def createFulldomeStereoRig():
   # ---------------------------------------------------------------------
   # Setup the stereo rig camera attributes
   # ---------------------------------------------------------------------
-  cmds.setAttr( rig[0]+'CenterCamShape.interaxialSeparation', 0 )
-  cmds.setAttr( rig[0]+'CenterCamShape.zeroParallax', 0.001 )
-  cmds.setAttr( rig[0]+'CenterCamShape.stereo', 0 )
-  cmds.setAttr( rig[0]+'CenterCamShape.focalLength', 4 )
+  cmds.setAttr( rig_center_shape_name[0]+'.interaxialSeparation', 0 )
+  cmds.setAttr( rig_center_shape_name[0]+'.zeroParallax', 0.001 )
+  cmds.setAttr( rig_center_shape_name[0]+'.stereo', 0 )
+  cmds.setAttr( rig_center_shape_name[0]+'.focalLength', 4 )
   
   # ---------------------------------------------------------------------
   # Create the fulldome nodes for the rig
@@ -320,9 +333,9 @@ def createFulldomeStereoRig():
   # Alternate lens shader connection:
   # Connect directly to the first .miLensShader input on the camera
   # Note: This first lens shader connection is overwritten by the mental ray Sun & Sky system
-  cmds.connectAttr( dome_lens_center_cam+'.message', rig[0]+'CenterCamShape.miLensShader' )
-  cmds.connectAttr( dome_lens_left_cam+'.message', rig[1]+'Shape.miLensShader' ) #stereoCameraLeftShape.miLensShader
-  cmds.connectAttr( dome_lens_right_cam+'.message', rig[2]+'Shape.miLensShader' ) #stereoCameraRightShape.miLensShader
+  cmds.connectAttr( dome_lens_center_cam+'.message', rig_center_shape_name[0]+'.miLensShader' )
+  cmds.connectAttr( dome_lens_left_cam+'.message', rig_left_shape_name[0]+'.miLensShader' ) #stereoCameraLeftShape.miLensShader
+  cmds.connectAttr( dome_lens_right_cam+'.message', rig_right_shape_name[0]+'.miLensShader' ) #stereoCameraRightShape.miLensShader
   
   
   
@@ -474,8 +487,10 @@ def createDomeGrid():
   #cmds.select( dome_name, replace=True);
   
   #Chop the polysphere into a hemispherical dome
+
+  dome_shape_name = getObjectShapeNode(dome_name[0])
   
-  cmds.select( dome_name[0]+'Shape.f[0:323]', dome_name[0]+'Shape.f[648:683]', replace=True)
+  cmds.select( dome_shape_name[0]+'.f[0:323]', dome_shape_name[0]+'.f[648:683]', replace=True)
   cmds.delete()
   
   #Scale the dome to its final size
@@ -685,4 +700,16 @@ def createDomeRampTexture():
   cmds.connectAttr( rob_tex_vector+'.outValue.outValueX', dome_ramp+'.uvCoord.uCoord' )
   cmds.connectAttr( rob_tex_vector+'.outValue.outValueY', dome_ramp+'.uvCoord.vCoord' )
 
+
+"""
+A python function to get the current object's shape node
+
+getObjectShapeNode("stereoCamera")
+# Result: [u'stereoCameraCenterCamShape', u'stereoCameraFrustum'] # 
+
+"""
+
+def getObjectShapeNode ( object ) :
+    import maya.cmds as cmds
+    return cmds.listRelatives( object, children=True , shapes=True)
 

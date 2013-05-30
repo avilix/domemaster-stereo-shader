@@ -128,7 +128,7 @@ global proc galaxyCreator(){
     floatSliderGrp -label "Nucleus Particle Radius" -field true
       -minValue -0.01 -maxValue 20
       -fieldMinValue -0.01 -fieldMaxValue 20
-      -value 6 sliderNucleusRadius;     
+      -value 3 sliderNucleusRadius;     
     
     //==============
     // Galaxy Color 
@@ -351,9 +351,14 @@ global proc doGalaxy(){
                                           $vel, 
                                           $planarDir);
   
+  //Just the shape node
+  //string $activeNucleusShape = getObjectShapeNode($galaxy_particles[1]);
+  //string $activeStarShape = getObjectShapeNode($galaxy_particles[2]);
+
+  //Add the transform node + shape node
+  string $activeNucleusShape = $galaxy_particles[1] + "|" + getObjectShapeNode($galaxy_particles[1]);
+  string $activeStarShape = $galaxy_particles[2] + "|" +  getObjectShapeNode($galaxy_particles[2]);
   
-  string $activeNucleusShape = getObjectShapeNode($galaxy_particles[1]);
-  string $activeStarShape = getObjectShapeNode($galaxy_particles[2]);
   
   print ( "\n\n[Objects created] ");
   print ( $galaxy_particles);
@@ -482,21 +487,15 @@ global proc doGalaxy(){
   }
   
   
-  
   //Toggle particle count HUD
   //getParticleCount();
   //ToggleParticleCount;
-  
-  
-  
-  
   
   
   // Set 2000 frames of playback
   int $theEndTime = `intFieldGrp -query -value1 fieldPaybackEnd`; 
   playbackOptions -e -min 1 -max $theEndTime;
   
-
 }
 
 

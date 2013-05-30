@@ -1,16 +1,12 @@
-/*  This file downloaded from Highend3d.com
-''  
-''  Highend3d.com File Information:
-''  
-''    Script Name: galaxies.mel v1.0
-''    Author: Martin Watt
-''    Last Updated: July 23, 2004
-''    Update/Change this file at:
-''    http://www.highend3d.com/maya/mel/?section=dynamics#3039
-''  
-''  Please do not alter any information above this line
-''  it is generated dynamically by Highend3d.com and will
-''  be changed automatically on any updates.
+/* 
+
+Script Name: galaxies.mel v1.1
+Created by: Martin Watt
+http://www.highend3d.com/maya/mel/?section=dynamics#3039
+
+Galaxies 1.1 update by: Andrew Hazelden
+New Features: Added custom particle names "galaxyParticle" and "nucleusParticle"
+
 */
 
 //Make spiral or elliptical galaxies and connect gravitational fields
@@ -26,7 +22,7 @@ global proc string[] spiralGalaxy(int $numStars,
 {
     string $nucleus; // name of nucleus particle component to be created
     string $field;   // name of field to be created
-    string $stars;   // name of stars particle compoment to be created
+    string $stars;   // name of stars particle component to be created
 
     // check requested values are reasonable
     if($numSpiralArms < 2) {
@@ -39,8 +35,8 @@ global proc string[] spiralGalaxy(int $numStars,
     }
 
     // make core particle about which all others will revolve
-    string $str1[] = eval("particle -p " + $centre[0] + " " + $centre[1] + " " + $centre[2] + "\n");
-    $nucleus = $str1[0];
+    string $str1[] = eval("particle  -p " + $centre[0] + " " + $centre[1] + " " + $centre[2] + "\n");
+    $nucleus = eval("rename " + $str1[0] +  "\"nucleusParticle\"" + "\n");
 
     // set velocity
     eval("select -r " + $nucleus + ".pt[0]\n");
@@ -53,8 +49,7 @@ global proc string[] spiralGalaxy(int $numStars,
     // now make the stars - use the particle grid tool to create the right number
     float $spacing = 1.0/ float($numStars-1);
     string $str2[] = `particle -ll 0.0 0.0 0.0 -ur 0.0 0.0 1.0 -grs $spacing -c 1` ;
-    $stars = $str2[0];
-
+    $stars = eval("rename " + $str2[0] +  "\"galaxyParticle\"" + "\n");
 
     float $twoPi = 6.283185307;
     float $G = 6.67e-1;  // G as defined in Maya
