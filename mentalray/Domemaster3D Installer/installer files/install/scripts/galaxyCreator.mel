@@ -250,7 +250,7 @@ global proc doGalaxy(){
   //Read the color from the swatch
   float $galaxyRGBcolor[] = `colorSliderGrp -query -rgb sliderGalaxyColor`;
   
-  print ("RGB Color");
+  print ("[RGB Color] \n");
   print ($galaxyRGBcolor);
   print ("\n");
   
@@ -276,7 +276,7 @@ global proc doGalaxy(){
   //Read the color from the swatch
   float $nucleusRGBcolor[] = `colorSliderGrp -query -rgb sliderNucleusColor`;
   
-  print ("RGB Color");
+  print ("[RGB Color] \n");
   print ($nucleusRGBcolor);
   print ("\n");
   
@@ -360,12 +360,12 @@ global proc doGalaxy(){
   string $activeStarShape = $galaxy_particles[2] + "|" +  getObjectShapeNode($galaxy_particles[2]);
   
   
-  print ( "\n\n[Objects created] ");
+  print ( "\n\n[Objects Created]\n");
   print ( $galaxy_particles);
   print ( "\n\n");
   
-  print ("[nucleus] " +  $activeNucleusShape + "\n");
-  print ("[stars] " +  $activeStarShape + "\n");
+  print ("[Nucleus] " +  $activeNucleusShape + "\n");
+  print ("[Stars] " +  $activeStarShape + "\n");
   
   //Debug test value
   //string $activeStarShape = "particleShape2.particleRenderType";
@@ -421,7 +421,7 @@ global proc doGalaxy(){
     setAttr ($galaxyCloudMaterialName + ".glowIntensity") 0.5;
 
     //Set shader density
-    setAttr ($galaxyCloudMaterialName + ".blobMap") -type double3 0.225 0.225 0.225 ;
+    setAttr ($galaxyCloudMaterialName + ".blobMap") -type double3 0.04 0.04 0.04 ;
     
     //Set the cloud to be partially transparent
     setAttr ($galaxyCloudMaterialName + ".transparency") -type double3 0.08 0.08 0.08 ;

@@ -9,14 +9,14 @@ Version History
 ----------------
 
 Version 1.3.3
-Released May 29, 2013
+Released May 30, 2013
 Updated the default locator scale.
 
 Fixed the dome ramp shelf tool item so the default ramp texture preset is applied when the tool is run multiple times.
 
 Updated source image paths for Maya 2010 compatibility
 
-Version 1.3.2 - Build 1
+Version 1.3.2
 Released April 16, 2013
 Edited the default camera connections for the lens shaders to work with the modified versions of the maya createMentalRayIndirectLightingTab.mel & AEmia_physicalskyTemplate.mel scripts. This fixes the problem of the Physical Sky & Sum system overwriting the first .miLensShader input on cameras in the scene.
 
@@ -506,7 +506,7 @@ def createDomeGrid():
   
   cmds.select( dome_name[0], replace=True);
   
-  #assign Toon outlines
+  #Assign Toon outlines
   mm.eval("assignNewPfxToon;")
   cmds.setAttr('pfxToonShape1.profileLines', 0)
   cmds.setAttr('pfxToonShape1.borderLines', 0)
@@ -560,44 +560,43 @@ A python function to create a test sphere and cube in Maya.
 
 def  createTestShapes():
   import maya.cmds as cmds
-  
-  
+
   if cmds.objExists('domeTestLight'): 
     print('Removing existing Domemaster3D object: domeTestLight')
     cmds.select( 'domeTestLight', replace=True)
     cmds.delete()
-  
+
   if cmds.objExists('polyTestSphere'): 
     print('Removing existing Domemaster3D object: polyTestSphere')
     cmds.select( 'polyTestSphere', replace=True)
     cmds.delete()
-  
+
   if cmds.objExists('polyTestCube'): 
     print('Removing existing Domemaster3D object: polyTestCube')
     cmds.select( 'polyTestCube', replace=True)
     cmds.delete()
-  
-  
-  cmds.polySphere( name='polyTestSphere', radius=24, subdivisionsX=20, subdivisionsY=20, axis=(0, 1, 0),  createUVs=2, constructionHistory=True)
-  cmds.setAttr('polyTestSphere.translateX', 80)
-  cmds.setAttr('polyTestSphere.translateY', 75)
-  
-  cmds.polyCube( name='polyTestCube', width=40, height=40, depth=40, subdivisionsX=1, subdivisionsY=1, subdivisionsZ=1, axis=(0, 1, 0),  createUVs=4, constructionHistory=True)
-  cmds.setAttr('polyTestCube.translateX', 0)
-  cmds.setAttr('polyTestCube.translateY', 75)
-  cmds.setAttr('polyTestCube.translateZ', -80)
-  cmds.setAttr('polyTestCube.rotateX', 88)
-  cmds.setAttr('polyTestCube.rotateY', 0)
-  cmds.setAttr('polyTestCube.rotateZ', 0)
-  
-  
-  dome_light = cmds.directionalLight(name='domeTestLight')
-  cmds.setAttr( 'domeTestLight.translateX', -32)
-  cmds.setAttr( 'domeTestLight.rotateX', 38)
-  cmds.setAttr( 'domeTestLight.rotateY', 47)
-  cmds.setAttr( 'domeTestLight.rotateZ', -62)
-  # Scale the stereo camera rig locator larger 
-  cmds.setAttr( 'domeTestLightShape.locatorScale', 1) #Scale light icon
+
+  test_sphere_name = cmds.polySphere( name='polyTestSphere', radius=24, subdivisionsX=20, subdivisionsY=20, axis=(0, 1, 0),  createUVs=2, constructionHistory=True)
+  cmds.setAttr(test_sphere_name[0]+'.translateX', 80)
+  cmds.setAttr(test_sphere_name[0]+'.translateY', 75)
+
+  test_cube_name = cmds.polyCube( name='polyTestCube', width=40, height=40, depth=40, subdivisionsX=1, subdivisionsY=1, subdivisionsZ=1, axis=(0, 1, 0),  createUVs=4, constructionHistory=True)
+  cmds.setAttr(test_cube_name[0]+'.translateX', 0)
+  cmds.setAttr(test_cube_name[0]+'.translateY', 75)
+  cmds.setAttr(test_cube_name[0]+'.translateZ', -80)
+  cmds.setAttr(test_cube_name[0]+'.rotateX', 88)
+  cmds.setAttr(test_cube_name[0]+'.rotateY', 0)
+  cmds.setAttr(test_cube_name[0]+'.rotateZ', 0)
+
+  dome_light_shape_name = cmds.directionalLight()
+  dome_light_name = getObjectParentNode( dome_light_shape_name )
+  dome_light_name = cmds.rename (dome_light_name, "domeTestLight")
+
+  cmds.setAttr( (dome_light_name+'.translateX'), -32)
+  cmds.setAttr( (dome_light_name+'.rotateX'), 38)
+  cmds.setAttr( (dome_light_name+'.rotateY'), 47)
+  cmds.setAttr( (dome_light_name+'.rotateZ'), -62)
+
 
 
 """
@@ -713,3 +712,15 @@ def getObjectShapeNode ( object ) :
     import maya.cmds as cmds
     return cmds.listRelatives( object, children=True , shapes=True)
 
+
+"""
+A python function to get the current object's parent node
+
+getObjectParentNode("nurbsSphereShape1")
+# Result:  [u'nurbsSphere1'] #
+
+"""
+
+def getObjectParentNode ( object ) :
+    import maya.cmds as cmds
+    return cmds.listRelatives( object, parent=True)

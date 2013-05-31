@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.3.3 - May 29, 2013
+Version 1.3.3 - May 30, 2013
 
 Maintained by Andrew Hazelden
 andrew@andrewhazelden.com
@@ -8,7 +8,7 @@ About This Shader
 ------------------
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
 
-The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "Center" camera option in the DomeAFL_FOV_Stereo shader.
+The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader.
 
 Version 1.3.3 Changes
 ---------------------------
@@ -18,6 +18,8 @@ Version 1.3.3 Changes
 -Updated the DomeRamp tool so the default ramp style is applied if the tool is run multiple times
 
 -Updated source image paths for Maya 2010 compatibility
+
+-Added a Maya Camera Locator Scale attribute to the dome cameras created using the shelf tools.
 
 Maya Tools
 ---------------

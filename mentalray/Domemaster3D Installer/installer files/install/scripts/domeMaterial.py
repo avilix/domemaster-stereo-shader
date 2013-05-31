@@ -524,6 +524,7 @@ def createDomeAFL_WxH_Camera():
   cmds.setAttr( cameraShape+'.focalLength', 4 )
 
 
+
 """
 A python function to get the current object's shape node
 
@@ -537,3 +538,14 @@ def getObjectShapeNode ( object ) :
     return cmds.listRelatives( object, children=True , shapes=True)
 
 
+"""
+A python function to get the current object's parent node
+
+getObjectParentNode("nurbsSphereShape1")
+# Result:  [u'nurbsSphere1'] #
+
+"""
+
+def getObjectParentNode ( object ) :
+    import maya.cmds as cmds
+    return cmds.listRelatives( object, parent=True)
