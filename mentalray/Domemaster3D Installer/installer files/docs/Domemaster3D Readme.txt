@@ -1,20 +1,6 @@
 Domemaster3D Stereo Lens Shader
 Version 1.3.3 - May 30, 2013
 
-Domemaster3D Maya Port by Andrew Hazelden
-andrew@andrewhazelden.com      
-http://www.andrewhazelden.com/blog
-
-Domemaster Stereo shader for 3DS Max Created by Roberto Ziche
-http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images
-
-Source Code:
-http://code.google.com/p/domemaster-stereo-shader/
-
-Based upon Daniel Ott's "DomeAFL" Angular fisheye lens shader
-http://www.thedott.net/shaders/domeAFL/
-
-
 About This Shader
 ------------------
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
@@ -34,6 +20,57 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
 -The "Galaxy" tool runs the Galaxy Creator tool that creates dynamic particle based galaxies.
 
+
+3DS Max Tools
+---------------
+After installing the Domemaster3D shader for 3DS Max, you will find 4 new Lens shaders in the Material/Map Browser Window:
+-The "Domemaster Stereo Shader" is used for fulldome stereo rendering. The center option in the domemaster stereo shader can also be used to 2D fulldome rendering.
+-The "domeAFL_FOV" shader is used for 2D angular fisheye fulldome rendering.
+-The "domeAFL_WxH"shader is used for 2D WxH fulldome rendering.
+-The "rob_lookup_background" is used to preview screen space texture maps before attaching them to the Domemaster Stereo Shader. Screen space coordinates are required when preparing turn maps, separation maps, and tilt maps.
+
+
+Softimage Notes
+----------------
+Softimage provides an easy to use shader package installer format called an .xsiaddon. If you want to use the Domemaster3D shader with Softimage you can download the latest installer from the Domemaster Stereo Shader Google Code page:
+http://code.google.com/p/domemaster-stereo-shader/
+
+
+Documentation and Resources
+----------------------------
+
+Domemaster Stereo Shader Wiki
+http://code.google.com/p/domemaster-stereo-shader/w/list
+
+Join the discussion on the Domemaster Stereo Shader NING Group
+http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images
+
+Source Code:
+http://code.google.com/p/domemaster-stereo-shader/
+
+
+Project Developers
+-------------------
+
+Domemaster Stereo Shader for 3DS Max Created by Roberto Ziche
+
+Domemaster3D shader for Maya and Softimage by Andrew Hazelden
+andrew@andrewhazelden.com      
+http://www.andrewhazelden.com/blog
+
+Based upon Daniel Ott's DomeAFL Angular Fisheye Lens Shader
+http://www.thedott.net/shaders/domeAFL/
+
+Special Thanks
+-----------------
+I would like to thank the following people for their contributions:
+
+Aaron Bradbury for the installer imagery from his Vortex fulldome short film.
+http://www.luniere.com/project/vortex/
+
+Martin Watt for writing the original galaxies.mel script.
+
+
 -----------------------------------------------------------------------
 
 Version History
@@ -49,6 +86,8 @@ Updated the DomeRamp tool so the default ramp style is applied if the tool is ru
 Updated source image paths for Maya 2010 compatibility
 
 Added a Maya Camera Locator Scale attribute to the dome cameras created using the shelf tools.
+
+Updated the Domemaster Installer to support custom path selection for the 3DS Max mental ray shader and include folders.
 
 Version 1.3.2
 Released  April 16, 2013
@@ -125,7 +164,7 @@ or
 My Documents\maya\2012\prefs\scripts
 
 
-5. Copy the python scripts "__init__.py", "domeMaterial.py", and "fulldomeStereoRig.py" from the "scripts" folder to your user account's Maya script folder:
+5. Copy the python and MEL scripts to your user account's Maya script folder:
 My Documents\maya\2012\prefs\scripts
 
 6. Copy the "shelf_Domemaster3D.mel" file from the "shelves" folder to your user account's Maya shelves folder:
@@ -174,7 +213,7 @@ On Maya 2013:
 or
 ~/Library/Preferences/Autodesk/maya/2012-x64/prefs/scripts
 
-5. Copy the python scripts "__init__.py", "domeMaterial.py", and "fulldomeStereoRig.py" from the "scripts" folder to your user account's Maya script folder:
+5. Copy the python and MEL scripts to your user account's Maya script folder:
 ~/Library/Preferences/Autodesk/maya/2012-x64/prefs/scripts
 
 6. Copy the "shelf_Domemaster3D.mel" file from the "shelves" folder to your user account's Maya shelves folder:
@@ -225,10 +264,11 @@ or
 AEdomeAFL_FOV_StereoTemplate.mel
 
 
-5. Copy the python scripts "__init__.py", "domeMaterial.py", and "fulldomeStereoRig.py" from the "scripts" folder to the Maya script folder:
+5. Copy the python and MEL scripts to the Maya script folder:
 /usr/autodesk/maya2012-x64/scripts
 or
 ~/maya/2012-x64/prefs/scripts
+
 
 
 6. Copy the "shelf_Domemaster3D.mel" file from the "shelves" folder to your user account's Maya shelves folder:

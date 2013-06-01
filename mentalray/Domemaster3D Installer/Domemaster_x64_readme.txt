@@ -8,7 +8,7 @@ About This Shader
 ------------------
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
 
-The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader.
+The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "center" camera option in the DomeAFL_FOV_Stereo shader.
 
 Version 1.3.3 Changes
 ---------------------------
@@ -20,6 +20,8 @@ Version 1.3.3 Changes
 -Updated source image paths for Maya 2010 compatibility
 
 -Added a Maya Camera Locator Scale attribute to the dome cameras created using the shelf tools.
+
+-Updated the Domemaster Installer to support custom path selection for the 3DS Max mental ray shader and include folders.
 
 Maya Tools
 ---------------
@@ -56,25 +58,31 @@ After installing the Domemaster3D shader for 3DS Max, you will find 4 new Lens s
 
 Softimage Notes
 ----------------
-Softimage provides an easy to use shader package installer format called a .xsiaddon. If you want to use the Domemaster3D shader with Softimage you can download the latest installer from the Domemaster Stereo Shader Google Code page:
+Softimage provides an easy to use shader package installer format called an .xsiaddon. If you want to use the Domemaster3D shader with Softimage you can download the latest installer from the Domemaster Stereo Shader Google Code page:
 http://code.google.com/p/domemaster-stereo-shader/
 
+
+Documentation and Resources
+----------------------------
+
+Domemaster Stereo Shader Wiki
+http://code.google.com/p/domemaster-stereo-shader/w/list
+
+Join the discussion on the Domemaster Stereo Shader NING Group
+http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images
+
+Source Code:
+http://code.google.com/p/domemaster-stereo-shader/
 
 
 Project Developers
 -------------------
+
 Domemaster Stereo Shader for 3DS Max Created by Roberto Ziche
-http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images
 
 Domemaster3D shader for Maya and Softimage by Andrew Hazelden
 andrew@andrewhazelden.com      
 http://www.andrewhazelden.com/blog
-
-Domemaster3D for Maya Blog Link:
-http://bit.ly/Dome3D
-
-Source Code:
-http://code.google.com/p/domemaster-stereo-shader/
 
 Based upon Daniel Ott's DomeAFL Angular Fisheye Lens Shader
 http://www.thedott.net/shaders/domeAFL/
