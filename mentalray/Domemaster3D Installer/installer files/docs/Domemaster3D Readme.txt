@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader
-Version 1.3.3 - May 30, 2013
+Version 1.3.4 - June 27, 2013
 
 About This Shader
 ------------------
@@ -16,10 +16,10 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "DomeRamp" tool creates a screen space ramp texture
 -The "DomeAFL_FOV" tool creates a standard 2D domeAFL_FOV node + camera
 -The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
+-The "Galaxy" tool runs the Galaxy Creator tool that creates dynamic particle based galaxies.
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
--The "Galaxy" tool runs the Galaxy Creator tool that creates dynamic particle based galaxies.
-
+-The "HELP" tool loads the Domemaster Stereo Shader Wiki page in your web browser.
 
 3DS Max Tools
 ---------------
@@ -75,6 +75,15 @@ Martin Watt for writing the original galaxies.mel script.
 
 Version History
 ---------------
+
+
+Version 1.3.4
+Released June 27, 2013
+
+Updated the the Automagic tool's dome grid color to a brighter yellow value. This makes the grid more visible in a Physical Sun & Sky scene.
+
+Added a new HELP icon to the Maya Shelf toolset. This shelf item loads the domemaster stereo shader wiki page.
+
 
 Version 1.3.3
 Released May 30, 2013

@@ -150,6 +150,28 @@ global proc shelf_Domemaster3D () {
         -manage 1
         -visible 1
         -preventOverride 0
+        -align "center" 
+        -label "Galaxy" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -image "render_galaxy.xpm" 
+        -image1 "render_galaxy.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Galaxy Creator\");\r\nsource \"galaxyCreator.mel\";\r\ngalaxyCreator();" 
+        -sourceType "mel" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
         -annotation "Color Material" 
         -align "center" 
         -label "Color" 
@@ -196,17 +218,18 @@ global proc shelf_Domemaster3D () {
         -manage 1
         -visible 1
         -preventOverride 0
+        -annotation "Help" 
         -align "center" 
-        -label "Galaxy" 
+        -label "Help" 
         -labelOffset 0
         -font "tinyBoldLabelFont" 
-        -image "render_galaxy.xpm" 
-        -image1 "render_galaxy.xpm" 
+        -image "domemasterHelp.xpm" 
+        -image1 "domemasterHelp.xpm" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "print(\"Galaxy Creator\");\r\nsource \"galaxyCreator.mel\";\r\ngalaxyCreator();" 
-        -sourceType "mel" 
+        -command "print(\"Open the Domemaster Wiki Page\")\r\nimport fulldomeStereoRig as domerig\r\ndomerig.openDomemasterWiki()\r\n" 
+        -sourceType "python" 
         -actionIsSubstitute 0
         -commandRepeatable 1
     ;

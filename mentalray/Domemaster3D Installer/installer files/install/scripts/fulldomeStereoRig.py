@@ -1,5 +1,5 @@
 """
-Domemaster3D Fulldome Stereo Rig V1.3.3
+Domemaster3D Fulldome Stereo Rig V1.3.4
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
 This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
@@ -7,6 +7,13 @@ This script makes it easy to start creating fulldome stereoscopic content in Aut
 
 Version History
 ----------------
+
+Version 1.3.4
+Released June 27, 2013
+Updated the the Automagic tool's dome grid color to a brighter yellow value. This makes the grid more visible in a Physical Sun & Sky scene.
+
+Added a new HELP icon to the Maya Shelf toolset. This shelf item loads the domemaster stereo shader wiki page.
+
 
 Version 1.3.3
 Released May 30, 2013
@@ -18,7 +25,7 @@ Updated source image paths for Maya 2010 compatibility
 
 Version 1.3.2
 Released April 16, 2013
-Edited the default camera connections for the lens shaders to work with the modified versions of the maya createMentalRayIndirectLightingTab.mel & AEmia_physicalskyTemplate.mel scripts. This fixes the problem of the Physical Sky & Sum system overwriting the first .miLensShader input on cameras in the scene.
+Edited the default camera connections for the lens shaders to work with the modified versions of the maya createMentalRayIndirectLightingTab.mel & AEmia_physicalskyTemplate.mel scripts. This fixes the problem of the Physical Sky & Sun system overwriting the first .miLensShader input on cameras in the scene.
 
 The location of the default domemaster control map textures is now in the Program Files\Domemaster3D\sourceimages folder on Windows or the /Applications/Domemaster3D/sourceimages folder on Mac OS X. The Domemaster3D shelf tools have been updated to link to the new sourceimages folder.
 
@@ -140,6 +147,57 @@ domerig.setRenderRes()
 
 """
 
+
+"""
+Show the Domemaster Wiki
+--------------------------------
+Loads the wiki page in your default web browser
+
+Run using the command:
+print("Open the Domemaster Wiki Page")
+import fulldomeStereoRig as domerig
+domerig.openDomemasterWiki()
+
+print("Open the Domemaster NING Group")
+import fulldomeStereoRig as domerig
+domerig.openDomemasterNing()
+
+print("Open the Domemaster Downloads Page")
+import fulldomeStereoRig as domerig
+domerig.openDomemasterDownloads()
+
+
+"""
+
+def openDomemasterWiki():
+	import webbrowser
+	
+	# Domemaster Stereo Shader - Wiki Page
+	url = 'https://code.google.com/p/domemaster-stereo-shader/w/list'
+	
+	# Open URL in new window, raising the window if possible.
+	webbrowser.open_new(url)
+	
+	
+def openDomemasterNing():
+	import webbrowser
+	
+	# Domemaster NING Group
+	url = 'http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images'
+	
+	# Open URL in new window, raising the window if possible.
+	webbrowser.open_new(url)
+
+
+def openDomemasterDownloads():
+	import webbrowser
+	
+	# Domemaster Stereo Shader - Download Page
+	url = 'https://code.google.com/p/domemaster-stereo-shader/downloads/list'
+	
+	# Open URL in new window, raising the window if possible.
+	webbrowser.open_new(url)
+	
 
 
 """
@@ -525,7 +583,12 @@ def createDomeGrid():
   cmds.select( 'pfxToon1', replace=True);
   mm.eval("doPaintEffectsToPoly( 1,1,1,1,100000);")
   cmds.sets('surfaceShader1SG')
-  cmds.setAttr( 'surfaceShader1.outColor', 1, 1, 0, type="double3")
+  
+  # Standard Yellow Color
+  # cmds.setAttr( 'surfaceShader1.outColor', 1, 1, 0, type="double3")
+  
+  # Super Bright Yellow Color for Physical Sky Comparability
+  cmds.setAttr( 'surfaceShader1.outColor', 15, 15, 0, type="double3")
   
   cmds.rename( 'surfaceShader1', 'domeGridLinesSurfaceShader' )
   cmds.rename( 'surfaceShader1SG', 'domeGridLinesSurfaceShaderSG' )

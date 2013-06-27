@@ -1,5 +1,5 @@
 """
-DomeAFL Mental Ray MIA Material  V1.3.3
+DomeAFL Mental Ray MIA Material  V1.3.4
 --------------------------------
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
