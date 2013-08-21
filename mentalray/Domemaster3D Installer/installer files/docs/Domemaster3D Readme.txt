@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader
-Version 1.3.4 - June 27, 2013
+Version 1.3.5 - August 20, 2013
 
 About This Shader
 ------------------
@@ -16,6 +16,7 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "DomeRamp" tool creates a screen space ramp texture
 -The "DomeAFL_FOV" tool creates a standard 2D domeAFL_FOV node + camera
 -The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
+-The "Starglobe" tool creates a mia_material_x_passes based starry background for your fulldome scenes.
 -The "Galaxy" tool runs the Galaxy Creator tool that creates dynamic particle based galaxies.
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
@@ -68,6 +69,9 @@ I would like to thank the following people for their contributions:
 Aaron Bradbury for the installer imagery from his Vortex fulldome short film.
 http://www.luniere.com/project/vortex/
 
+Jason Fletcher for creating a high quality equirectangular starglobe texture.
+http://thefulldomeblog.com/2013/06/22/stars-to-surround-the-scene/
+
 Martin Watt for writing the original galaxies.mel script.
 
 
@@ -76,8 +80,20 @@ Martin Watt for writing the original galaxies.mel script.
 Version History
 ---------------
 
+Version 1.3.5 Changes
+---------------------------
+
+Included an .obj mesh and a starglobe texture map for 3DS Max users.
+
+Added a starglobe tool to the Maya shelf to create a night sky backdrop. The starglobe textures are stored in the Domemaster3D/sourceimages folder and the starglobe spherical model is stored in the Domemaster3D/models folder.
+
+Upgraded the Maya dome shaders to use the mia_material_x_passes shader
+
+Added Glow Intensity attributes to the Galaxy Creator GUI
+
 
 Version 1.3.4
+---------------------------
 Released June 27, 2013
 
 Updated the the Automagic tool's dome grid color to a brighter yellow value. This makes the grid more visible in a Physical Sun & Sky scene.
@@ -86,6 +102,7 @@ Added a new HELP icon to the Maya Shelf toolset. This shelf item loads the domem
 
 
 Version 1.3.3
+---------------------------
 Released May 30, 2013
 
 Created the new Galaxies Creator user interface for Martin Watt's classic galaxies.mel script.
@@ -99,6 +116,7 @@ Added a Maya Camera Locator Scale attribute to the dome cameras created using th
 Updated the Domemaster Installer to support custom path selection for the 3DS Max mental ray shader and include folders.
 
 Version 1.3.2
+---------------------------
 Released  April 16, 2013
 Updated domemaster mental ray include file for improved 3DS Max GUI layout.
 
@@ -112,6 +130,7 @@ There is a fix for the issue where the mental ray physical sky & sun system will
 
 
 Version 1.3
+---------------------------
 Released Nov 4, 2012
 Changed the DomeAFL_FOV and DomeADL_WxH source code to match the view orientation of the camera and the domemaster stereo lens shader. Recompiled the Domemaster3D Mac / Windows mental ray shaders.
 
@@ -121,21 +140,25 @@ Changed the default lens shader connections in the python scripts to support the
 
 
 Version 1.2.1
+---------------------------
 Released Aug 14, 2012
 Added a Maya 2010 shelf and improved the python script. Created XPM formatted icons for the Domemaster3D shelf, create bar, and Hypershade nodes for Maya 2010 backwards compatibility.
 
 
 Version 1.2
+---------------------------
 Released Aug 8, 2012
 Added a Domemaster3D shelf, enabled domeAFL_FOV_Stereo FlipX/FlipY options, created a python stereo rig setup script, added an automatic screen space file texture and ramp texture script
 
 
 Version 1.1
+---------------------------
 Released July 28, 2012
 Added Maya stereo camera rig example, Linux Build + Makefile, new shader icons
 
 
 Version 1.0
+---------------------------
 Released April 18, 2012
 
 Initial version of the Domemaster3D shader for Maya

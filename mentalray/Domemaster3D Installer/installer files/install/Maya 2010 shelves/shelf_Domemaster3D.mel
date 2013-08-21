@@ -151,6 +151,28 @@ global proc shelf_Domemaster3D () {
         -visible 1
         -preventOverride 0
         -align "center" 
+        -label "Starglobe" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -image "render_starglobe.xpm" 
+        -image1 "render_starglobe.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Creating a starglobe\")\nimport domeMaterial as domeMaterial\r\ndomeMaterial.createStarglobe()" 
+        -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -align "center" 
         -label "Galaxy" 
         -labelOffset 0
         -font "tinyBoldLabelFont" 

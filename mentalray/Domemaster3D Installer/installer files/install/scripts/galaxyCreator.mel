@@ -1,11 +1,22 @@
 /*
- Galaxy Creator GUI V1.1
- 
- Version 1.1 - May 29, 2013
+ Galaxy Creator GUI V1.2
  by Andrew Hazelden
  
  This is a Maya GUI wrapper for Martin Watt's galaxy script
  
+
+  Version History
+  ----------------
+
+  Version 1.2 Build 2 - Aug 15, 2013 8.23pm  
+  ------------------------------
+  Added Glow Intensity control to GUI
+
+
+  Version 1.1 - May 29, 2013
+  ------------------------------
+  Initial GUI release
+
 
  To use the Galaxies Creator MEL script run the following MEL commands:
  print("Galaxy Creator");
@@ -42,7 +53,7 @@ global proc galaxyCreator(){
       windowPref -remove galaxyWin;
     }
 
-    string $galaxyWindow = `window -title "Galaxy Creator v1.1" -widthHeight 455 450 galaxyWin`;  
+    string $galaxyWindow = `window -title "Galaxy Creator v1.2" -widthHeight 455 511 galaxyWin`;  
     columnLayout -adjustableColumn true;
     
     // Spiral vs Elliptical galaxies option
@@ -129,7 +140,15 @@ global proc galaxyCreator(){
       -minValue -0.01 -maxValue 20
       -fieldMinValue -0.01 -fieldMaxValue 20
       -value 3 sliderNucleusRadius;     
+
+
+    floatSliderGrp -label "Nucleus Glow Intensity" -field true
+      -minValue -0.00 -maxValue 3.0
+      -fieldMinValue -0.00 -fieldMaxValue 20
+      -value 0.06 sliderNucleusGlowIntensity;    
     
+    separator -height 20 -style "in";
+
     //==============
     // Galaxy Color 
     //==============   
@@ -158,12 +177,21 @@ global proc galaxyCreator(){
       -minValue -0.01 -maxValue 20
       -fieldMinValue -0.01 -fieldMaxValue 20
       -value 0.5 sliderParticleRadius;
+
+  
+    floatSliderGrp -label "Galaxy Glow Intensity" -field true
+      -minValue -0.00 -maxValue 3.0
+      -fieldMinValue -0.00 -fieldMaxValue 20
+      -value 0.5 sliderGalaxyGlowIntensity;    
     
+    separator -height 20 -style "in";
     
     // Add a Galaxy particleCloud Shader
-    checkBox -label "Add Cloud Material"  
+    checkBox -label "Add a cloud material to the particles"  
       -value 1
       changeGalaxyMaterial;
+
+
     
     separator -height 20 -style "in";
     
@@ -262,8 +290,8 @@ global proc doGalaxy(){
   connectAttr -f ($galaxyCloudMaterialName+".outColor") ($galaxyMaterialSG+".volumeShader");
   connectAttr -f ($galaxyMaterialName+".outColor") ($galaxyMaterialSG+".surfaceShader");
 
-  
-  
+
+
   //===========================
   //Set up the Nucleus material
   //===========================
@@ -327,7 +355,7 @@ global proc doGalaxy(){
     
     default:
       break;
-    }
+  }
   
   
   
@@ -418,7 +446,11 @@ global proc doGalaxy(){
     //===========================================
     
     //Set the particle shader glow setting
-    setAttr ($galaxyCloudMaterialName + ".glowIntensity") 0.5;
+    //setAttr ($galaxyCloudMaterialName + ".glowIntensity") 0.5;
+
+    //Update the shader's glow intensity value
+    float $galaxyGlowIntensity =`floatSliderGrp -query -value sliderGalaxyGlowIntensity`;
+    setAttr ($galaxyCloudMaterialName+".glowIntensity") $galaxyGlowIntensity;
 
     //Set shader density
     setAttr ($galaxyCloudMaterialName + ".blobMap") -type double3 0.04 0.04 0.04 ;
@@ -429,7 +461,12 @@ global proc doGalaxy(){
     
     
     //Set the particle shader glow setting
-    setAttr ($nucleusCloudMaterialName + ".glowIntensity") 0.06;
+    //setAttr ($nucleusCloudMaterialName + ".glowIntensity") 0.06;
+
+    //Update the shader's glow intensity value
+    float $nucleusGlowIntensity =`floatSliderGrp -query -value sliderNucleusGlowIntensity`;
+    setAttr ($nucleusCloudMaterialName+".glowIntensity") $nucleusGlowIntensity;
+
 
     //Set shader density
     setAttr ($nucleusCloudMaterialName + ".blobMap") -type double3 0.04 0.04 0.04 ;
@@ -485,7 +522,7 @@ global proc doGalaxy(){
   //dynExpression -s "//Galaxy Edge Fade Effect\n//Uses the radiusPP Control\n\n//Size of the Galaxy\nfloat $galaxyRadius = 23.0;\n\n//Size of the cloud particle\nfloat $galaxyParticleRadius = 0.6;\n\n//Thicken Galaxy Center Ratio (Range 0.1-0.75)\nfloat $galaxyParticleRatio = 0.2;\n\n\n//Calculate the particle's distance from the galaxy origin\nvector $pos = particleShape2.position;\nvector $galaxyOrigin = <<0,0,0>>;\nvector $dist = <<($galaxyOrigin.x-$pos.x), ($galaxyOrigin.y-$pos.y), ($galaxyOrigin.z-$pos.z)>>;\nfloat $magDist = mag($dist);\n\n//Calculate the final particle size\nfloat $galaxyPercent = 1-($magDist / $galaxyRadius);\nfloat $galaxyBaseParticle = ($galaxyParticleRadius*$galaxyParticleRatio);\nfloat $galaxyParticleSize = ($galaxyParticleRadius*$galaxyPercent);\n\n//Set the per particle size\nparticleShape2.radiusPP = $galaxyParticleSize + $galaxyBaseParticle;\n\n//End" -c ($activeStarShape);
     
   }
-  
+
   
   //Toggle particle count HUD
   //getParticleCount();
