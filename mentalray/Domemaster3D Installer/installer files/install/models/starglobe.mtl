@@ -1,7 +1,0 @@
-newmtl starglobeMat
-Kd 1 1 1
-Ka 1 1 1
-Ks 0.2 0.2 0.2
-Ns 0
-Tr 0
-map_Kd ../sourceimages/starglobe_quadsphere_8k.jpg
