@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader
-Version 1.3.5 - August 20, 2013
+Version 1.4 - Oct 6, 2013
 
 About This Shader
 ------------------
@@ -16,11 +16,14 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "DomeRamp" tool creates a screen space ramp texture
 -The "DomeAFL_FOV" tool creates a standard 2D domeAFL_FOV node + camera
 -The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
+-The "DomeText" tool created raster titles and scrolling credits using the Dome Text GUI and ImageMagick.
+-The "DomeGrid" tool creates a hemispherical yellow wireframe reference grid.
+-The "Galaxy Creator" tool creates dynamic particle based galaxies.
 -The "Starglobe" tool creates a mia_material_x_passes based starry background for your fulldome scenes.
--The "Galaxy" tool runs the Galaxy Creator tool that creates dynamic particle based galaxies.
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
--The "HELP" tool loads the Domemaster Stereo Shader Wiki page in your web browser.
+-The "Wiki Help" tool loads the Domemaster Stereo Shader Wiki page in your web browser.
+-The "Version Info" tool shows the current version number for the Domemaster Stereo Shader and provides links to the download page, and the NING group.
 
 3DS Max Tools
 ---------------
@@ -80,6 +83,59 @@ Martin Watt for writing the original galaxies.mel script.
 Version History
 ---------------
 
+
+Version 1.4 Changes
+---------------------------
+
+3DS Max Changes
+--------------------
+
+Starglobe Update
+I've created a few different format starglobe models to make it easier for 3DS MAX users. The files are stored in the C:\Program Files\Domemaster3D\sourceimages folder.
+
+There is a set of 2K and 8K texture resolution 3DS Max scene files: starglobe_mesh_2K.max, and starglobe_mesh_8K.max
+There is a set of 2K and 8K texture resolution FBX scene files: starglobe_mesh_2K.fbx, and starglobe_mesh_8K.fbx (You may have to flip the surface normals on the mesh for proper Max based rendering)
+There is a set of 2K and 8K texture resolution OBJ scene files: starglobe_mesh_2K.obj, and starglobe_mesh_8K.obj 
+
+
+Maya Changes
+----------------
+
+Updated Domemaster3D Shelf icons to a unified golden orange color palette
+
+Added a Domemaster3D Menu to the rendering menu set
+
+Added the DomeText GUI tool for creating fulldome titles in Maya. This tool is powered by the ImageMagick convert.exe utility which is stored in the Domemaster3D/bin folder. The tool uses the active fonts installed in the system's font folder. Note: When the "Transparent background" checkbox is enabled the rendered text has crisp anti-aliased edges in the alpha channel but the text color channels are rendered with hard edges to avoid black fringing due to alpha channel pre-multiplication.
+
+The Galaxy Creator and DomeText user interfaces are dockable windows when used with Maya 2011 and higher.
+
+Added a starglobe tool to the Maya shelf and Domemaster3D menu. The starglobe tool creates a night sky backdrop. The tool has a new GUI that lets you point constrain the starglobe mesh to any camera in your scene. The starglobe textures and the starglobe spherical model are stored in the Domemaster3D/sourceimages folder.
+
+Added an in-scene DomeAFL and DomeAFL_FOV_Stereo preview geometry shape. The preview shape displays the camera's field of view and can be displayed as a wireframe, shaded, or wireframe on shaded surface. In the DomeAFL_FOV_Stereo shader the shape's size is linked to the Dome Radius control to preview the stereoscopic zero parallax zone setting. The double sided shading controls let you choose how the surface is displayed with either both sides shaded, or only the inside or outside visible.
+
+Added scene scale detection for setting the default domeAFL_FOV_Stereo dome radius and camera separation values based upon your current Maya scene scale [cm / meter / km / inch / foot / mile].
+
+Added a custom fulldome stereo rig preset to the Maya StereoRigEditor. This allows a new fulldome 3D rig to be created by going to the Menu Create  > Cameras > Stereo Camera (DomeStereoCamera)
+
+Added a userSetup.py script to handle the installation of the Domemaster3D menu and the addition of the camera rig to the StereoRigEditor list.
+
+The default stereo rig can now be changed between the normal Maya stereo rig and the Domemaster3D rig by switching to the Rendering Menu set. From the Domemaster3D menu, select Dome Cameras > Choose a Default Stereo Rig > ... 
+
+Renamed several of the MEL and python scripts for improved clarity
+
+Updated the Galaxy Creator GUI
+  Added elliptical galaxy support with radial and transverse orbits
+  Added Galaxy Rotation attribute
+  Added MultiPoint and MultiStreak particle rendering controls
+  Added popup help captions for each of the attributes.
+  Added a copy node settings option to reuse existing galaxy creation settings
+  Added a "Open the Hardware Render Buffer window" button and hardware rendering presets
+
+Added customized AE Template files for the domeAFL_FOV, domeAFL_WxH, and rob_lookup_background shaders.
+  
+Added the panotools based mpremap.exe application to the Domemaster3D/bin folder so textures could be remapped to different panoramic formats.
+
+
 Version 1.3.5 Changes
 ---------------------------
 
@@ -89,7 +145,7 @@ Added a starglobe tool to the Maya shelf to create a night sky backdrop. The sta
 
 Upgraded the Maya dome shaders to use the mia_material_x_passes shader
 
-Added Glow Intensity attributes to the Galaxy Creator GUI
+Added Glow Intensity attributes to the Galaxy Creator GUI 
 
 
 Version 1.3.4
@@ -109,11 +165,11 @@ Created the new Galaxies Creator user interface for Martin Watt's classic galaxi
 
 Updated the DomeRamp tool so the default ramp style is applied if the tool is run multiple times
 
-Updated source image paths for Maya 2010 compatibility
+Updated sourceimages path variables for Maya 2010 compatibility
 
 Added a Maya Camera Locator Scale attribute to the dome cameras created using the shelf tools.
 
-Updated the Domemaster Installer to support custom path selection for the 3DS Max mental ray shader and include folders.
+Updated the Domemaster3D Installer to support custom path selection for the 3DS Max mental ray shader and include folders.
 
 Version 1.3.2
 ---------------------------

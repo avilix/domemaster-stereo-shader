@@ -3,99 +3,99 @@ global proc shelf_Domemaster3D () {
     global string $gBuffStr0;
     global string $gBuffStr1;
 
-
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 34
-        -height 34
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "AutoMagic Fulldome 3D Scene" 
-        -align "center" 
-        -label "AutoMagic" 
-        -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -image "render_magicDome.xpm" 
-        -image1 "render_magicDome.xpm" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "print(\"Creating the AutoMagic Fulldome 3D DomeGrid Scene\")\nimport fulldomeStereoRig as domerig\ndomerig.createFulldomeStereoRig()\ndomerig.createDomeGrid()\ndomerig.createTestShapes()\ndomerig.setRenderRes()" 
-        -sourceType "python" 
-        -actionIsSubstitute 0
-        -commandRepeatable 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 34
-        -height 34
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "Fulldome Stereo Rig" 
-        -align "center" 
-        -label "Stereo Rig" 
-        -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -image "render_domeAFL_FOV_Stereo.xpm" 
-        -image1 "render_domeAFL_FOV_Stereo.xpm" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "print(\"Create a Domemaster3D Stereo Rig\")\nimport fulldomeStereoRig as domerig\ndomerig.createFulldomeStereoRig()" 
-        -sourceType "python" 
-        -actionIsSubstitute 0
-        -commandRepeatable 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 34
-        -height 34
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "Screen Space Texture" 
-        -align "center" 
-        -label "DomeTexture" 
-        -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -image "render_rob_lookup_background.xpm" 
-        -image1 "render_rob_lookup_background.xpm" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "print(\"Creating a Domemaster3D screen space texture\")\nimport fulldomeStereoRig as domerig\ndomerig.createRobLookup()" 
-        -sourceType "python" 
-        -actionIsSubstitute 0
-        -commandRepeatable 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 34
-        -height 34
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -annotation "Screen Space Ramp" 
-        -align "center" 
-        -label "DomeRamp" 
-        -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -image "render_domeRamp.xpm" 
-        -image1 "render_domeRamp.xpm" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "print('Creating a screen space ramp texture')\nimport fulldomeStereoRig as domerig\ndomerig.createDomeRampTexture()" 
-        -sourceType "python" 
-        -actionIsSubstitute 0
-        -commandRepeatable 1
-    ;
+  
+    // shelfButton
+        // -enableCommandRepeat 1
+        // -enable 1
+        // -width 34
+        // -height 34
+        // -manage 1
+        // -visible 1
+        // -preventOverride 0
+        // -annotation "AutoMagic Fulldome 3D Scene" 
+        // -align "center" 
+        // -label "AutoMagic" 
+        // -labelOffset 0
+        // -font "tinyBoldLabelFont" 
+        // -image "render_magicDome.xpm" 
+        // -image1 "render_magicDome.xpm" 
+        // -style "iconOnly" 
+        // -marginWidth 1
+        // -marginHeight 1
+        // -command "print(\"Creating the AutoMagic Fulldome 3D DomeGrid Scene\\n\")\nimport domeCamera as domeCamera\ndomeCamera.createFulldomeStereoRig()\ndomeCamera.createDomeGrid()\ndomeCamera.createTestShapes()\ndomeCamera.setRenderRes()" 
+        // -sourceType "python" 
+        // -actionIsSubstitute 0
+        // -commandRepeatable 1
+    // ;
+    // shelfButton
+        // -enableCommandRepeat 1
+        // -enable 1
+        // -width 34
+        // -height 34
+        // -manage 1
+        // -visible 1
+        // -preventOverride 0
+        // -annotation "Fulldome Stereo Rig" 
+        // -align "center" 
+        // -label "Stereo Rig" 
+        // -labelOffset 0
+        // -font "tinyBoldLabelFont" 
+        // -image "render_domeAFL_FOV_Stereo.xpm" 
+        // -image1 "render_domeAFL_FOV_Stereo.xpm" 
+        // -style "iconOnly" 
+        // -marginWidth 1
+        // -marginHeight 1
+        // -command "print(\"Create a Domemaster3D Stereo Rig\\n\")\nimport domeCamera as domeCamera\ndomeCamera.createFulldomeStereoRig()" 
+        // -sourceType "python" 
+        // -actionIsSubstitute 0
+        // -commandRepeatable 1
+    // ;
+    // shelfButton
+        // -enableCommandRepeat 1
+        // -enable 1
+        // -width 34
+        // -height 34
+        // -manage 1
+        // -visible 1
+        // -preventOverride 0
+        // -annotation "Screen Space Texture" 
+        // -align "center" 
+        // -label "DomeTexture" 
+        // -labelOffset 0
+        // -font "tinyBoldLabelFont" 
+        // -image "render_rob_lookup_background.xpm" 
+        // -image1 "render_rob_lookup_background.xpm" 
+        // -style "iconOnly" 
+        // -marginWidth 1
+        // -marginHeight 1
+        // -command "print(\"Creating a Domemaster3D screen space texture\\n\")\nimport domeCamera as domeCamera\ndomeCamera.createRobLookup()" 
+        // -sourceType "python" 
+        // -actionIsSubstitute 0
+        // -commandRepeatable 1
+    // ;
+    // shelfButton
+        // -enableCommandRepeat 1
+        // -enable 1
+        // -width 34
+        // -height 34
+        // -manage 1
+        // -visible 1
+        // -preventOverride 0
+        // -annotation "Screen Space Ramp" 
+        // -align "center" 
+        // -label "DomeRamp" 
+        // -labelOffset 0
+        // -font "tinyBoldLabelFont" 
+        // -image "render_domeRamp.xpm" 
+        // -image1 "render_domeRamp.xpm" 
+        // -style "iconOnly" 
+        // -marginWidth 1
+        // -marginHeight 1
+        // -command "print('Creating a screen space ramp texture\\n')\nimport domeCamera as domeCamera\ndomeCamera.createDomeRampTexture()" 
+        // -sourceType "python" 
+        // -actionIsSubstitute 0
+        // -commandRepeatable 1
+    // ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -114,7 +114,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "print(\"Creating a domeAFL_FOV camera\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createDomeAFL_FOV_Camera()" 
+        -command "print(\"Creating a domeAFL_FOV camera\\n\")\nimport domeCamera as domeCamera\ndomeCamera.createDomeAFL_FOV_Camera()" 
         -sourceType "python" 
         -actionIsSubstitute 0
         -commandRepeatable 1
@@ -137,11 +137,78 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "print(\"Creating a domeAFL_WxH camera\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createDomeAFL_WxH_Camera()" 
+        -command "print(\"Creating a domeAFL_WxH camera\\n\")\nimport domeCamera as domeCamera\ndomeCamera.createDomeAFL_WxH_Camera()" 
         -sourceType "python" 
         -actionIsSubstitute 0
         -commandRepeatable 1
     ;
+        // shelfButton
+        // -enableCommandRepeat 1
+        // -enable 1
+        // -width 34
+        // -height 34
+        // -manage 1
+        // -visible 1
+        // -preventOverride 0
+        // -annotation "Text" 
+        // -align "center" 
+        // -label "Text" 
+        // -labelOffset 0
+        // -font "tinyBoldLabelFont" 
+        // -image "domeText.xpm" 
+        // -image1 "domeText.xpm" 
+        // -style "iconOnly" 
+        // -marginWidth 1
+        // -command "print(\"Dome Text\\n\");\nsource \"domeText.mel\";\ndomeText();" 
+        // -marginHeight 1
+        // -sourceType "mel" 
+        // -actionIsSubstitute 0
+        // -commandRepeatable 1
+    // ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -align "center" 
+        -label "DomeGrid" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -image "domeGrid.xpm" 
+        -image1 "domeGrid.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Creating the DomeGrid\\n\")\nimport domeCamera as domeCamera\ndomeCamera.createDomeGrid()" 
+        -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    // shelfButton
+        // -enableCommandRepeat 1
+        // -enable 1
+        // -width 34
+        // -height 34
+        // -manage 1
+        // -visible 1
+        // -preventOverride 0
+        // -align "center" 
+        // -label "Galaxy" 
+        // -labelOffset 0
+        // -font "tinyBoldLabelFont" 
+        // -image "render_galaxy.xpm" 
+        // -image1 "render_galaxy.xpm" 
+        // -style "iconOnly" 
+        // -marginWidth 1
+        // -marginHeight 1
+        // -command "print(\"Galaxy Creator\\n\");\r\nsource \"galaxyCreator.mel\";\r\ngalaxyCreator();" 
+        // -sourceType "mel" 
+        // -actionIsSubstitute 0
+        // -commandRepeatable 1
+    // ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -159,30 +226,8 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "print(\"Creating a starglobe\")\nimport domeMaterial as domeMaterial\r\ndomeMaterial.createStarglobe()" 
-        -sourceType "python" 
-        -actionIsSubstitute 0
-        -commandRepeatable 1
-    ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 34
-        -height 34
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -align "center" 
-        -label "Galaxy" 
-        -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -image "render_galaxy.xpm" 
-        -image1 "render_galaxy.xpm" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "print(\"Galaxy Creator\");\r\nsource \"galaxyCreator.mel\";\r\ngalaxyCreator();" 
-        -sourceType "mel" 
+        -command "print(\"Creating a starglobe\\n\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createStarglobe()\n" 
+        -sourceType "python"
         -actionIsSubstitute 0
         -commandRepeatable 1
     ;
@@ -204,7 +249,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "#color material\nprint(\"Creating a DomeAFL compatible Color MIA Material\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorMiaMaterial()\n" 
+        -command "#color material\nprint(\"Creating a DomeAFL compatible Color MIA Material\\n\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorMiaMaterial()\n" 
         -sourceType "python" 
         -actionIsSubstitute 0
         -commandRepeatable 1
@@ -227,7 +272,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "#color bump material\nprint(\"Creating a DomeAFL compatible Color and Bump MIA Material\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorBumpMiaMaterial()\n" 
+        -command "#color bump material\nprint(\"Creating a DomeAFL compatible Color and Bump MIA Material\\n\")\nimport domeMaterial as domeMaterial\ndomeMaterial.createColorBumpMiaMaterial()\n" 
         -sourceType "python" 
         -actionIsSubstitute 0
         -commandRepeatable 1
@@ -240,20 +285,42 @@ global proc shelf_Domemaster3D () {
         -manage 1
         -visible 1
         -preventOverride 0
-        -annotation "Help" 
+        -annotation "Wiki Help" 
         -align "center" 
-        -label "Help" 
+        -label "Wiki Help" 
         -labelOffset 0
         -font "tinyBoldLabelFont" 
-        -image "domemasterHelp.xpm" 
-        -image1 "domemasterHelp.xpm" 
+        -image "domeHelp.xpm" 
+        -image1 "domeHelp.xpm" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "print(\"Open the Domemaster Wiki Page\")\r\nimport fulldomeStereoRig as domerig\r\ndomerig.openDomemasterWiki()\r\n" 
+        -command "print(\"Open the Domemaster Wiki Page\\n\")\r\nimport domeCamera as domeCamera\r\ndomeCamera.openDomemasterWiki()\r\n" 
         -sourceType "python" 
         -actionIsSubstitute 0
         -commandRepeatable 1
     ;
-
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Version Info" 
+        -align "center" 
+        -label "Version Info" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -image "domeInfo.xpm" 
+        -image1 "domeInfo.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "print(\"Dome Version Checker\\n\");\nsource \"domeVersion.mel\";\ndomeVersion();" 
+        -sourceType "mel" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
 } 

@@ -1,18 +1,21 @@
 # Domemaster Stereoscopic Lens Shader Mental Ray Include File
-# Version 1.3.4 Updated: June 27, 2013
-
-# domeAFL_FOV_Stereo created by Roberto Ziche
-# Date: November 29, 2010
+# -------------------------------------------------------------------
+# Simulate a Virtual Angular Fisheye Lens (AFL) for 
+#     the Production of Full-Dome Animations
+# -------------------------------------------------------------------
+#
+# domeAFL_FOV and domeAFL_WxH shaders by Daniel F. Ott (dott@thedott.net)
+#
+# domeAFL_FOV_Stereo by Roberto Ziche
 # http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images
-
-# Maya Support by Andrew Hazelden (andrewhazelden@gmail.com)
+#
+# domeAFL_FOV_Stereo Maya Support by Andrew Hazelden (andrew@andrewhazelden.com)
 # http://www.andrewhazelden.com
-
-#   TITLE: Angular Fisheye Lenses (AFL) Declaration File
-#  AUTHOR: Daniel F. Ott (dott@thedott.net)
-#    DATE: 06.16.2004
-# PURPOSE: To simulate a Virtual Angular Fisheye Lens (AFL) for 
-#          the Production of Full-Dome Animations
+#
+# Version 1.4 Updated: Oct 6, 2013
+# ========================
+# The DomeAFL_FOV_Stereo shader was updated to limit the minimum FOV to 0.1 degrees
+# 
 
 # domeAFL_FOV
 # Required Inputs:	FOV (field-of-view) 
@@ -24,7 +27,7 @@ declare shader
 	color "domeAFL_FOV" (
 		scalar	"FOV_Angle",	
 				#: default 180.0
-				#: min 0.0
+				#: min 0.1
 				#: max 360.0
 
 		vector	"View_Offset",
@@ -49,7 +52,8 @@ end declare
 # REQUIRED Inputs:	Diameter, Height (dimensionless) 
 # OPTIONAL Inputs:	View_offset (Off-axis offset)
 #			Flip_Ray_X (Flips Ray.x direction about y-axis)
-#			Flip_Ray_Y (Flips Ray.y direction about x-axis)
+
+#		Flip_Ray_Y (Flips Ray.y direction about x-axis)
 
 declare shader
 	color "domeAFL_WxH" (
@@ -90,7 +94,7 @@ declare shader
 	color "domeAFL_FOV_Stereo" (
 		scalar	"FOV_Angle", 		
 				#: default 180.0 
-				#: min 0 
+				#: min 0.1
 				#: max 360.0
 				#: shortname "fov"
 		
@@ -163,7 +167,7 @@ declare shader
 			"uiName" "Domemaster Stereo Shader"	#, "hidden"
 		)
 		control	"FOV_Angle" "scalar" (
-			"uiName" "Field of View", "value" 180.0, "range" 0.0 360.0,
+			"uiName" "Field of View", "value" 180.0, "range" 0.1 360.0,
 			"nonConnectable"
 		)
 		control	"View_Offset" "vector" (

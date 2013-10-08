@@ -1,7 +1,7 @@
 <project>
     <shortName>Domemaster3D</shortName>
     <fullName>Domemaster3D Shader</fullName>
-    <version>1.3.5</version>
+    <version>1.4-Beta2</version>
     <readmeFile>Domemaster_x64_readme.txt</readmeFile>
     <leftImage>vortex_sidebar.png</leftImage>
     <splashImage>splash_screen.png</splashImage>
@@ -62,6 +62,26 @@
                         <distributionDirectory>
                             <origin>installer files/sources</origin>
                         </distributionDirectory>
+                    </distributionFileList>
+                </folder>
+                <folder>
+                    <description>Utilities</description>
+                    <destination>${installdir}/bin</destination>
+                    <name>bin</name>
+                    <platforms>windows</platforms>
+                    <actionList>
+                        <addDirectoryToPath>
+                            <insertAt>end</insertAt>
+                            <path>${installdir}/bin</path>
+                        </addDirectoryToPath>
+                    </actionList>
+                    <distributionFileList>
+                        <distributionFile>
+                            <origin>installer files/install/bin tools/Windows 32-bit bin/domeconvert.exe</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/bin tools/Windows 32-bit bin/mpremap.exe</origin>
+                        </distributionFile>
                     </distributionFileList>
                 </folder>
                 <folder>
@@ -145,28 +165,26 @@
                         <distributionFile>
                             <origin>installer files/install/sourceimages/moon_color_quadsphere_4k.jpg</origin>
                         </distributionFile>
-                    </distributionFileList>
-                </folder>
-                <folder>
-                    <description>Domemaster3D Models</description>
-                    <destination>${installdir}/models</destination>
-                    <name>models</name>
-                    <platforms>all</platforms>
-                    <actionList>
-                        <addDirectoryToPath>
-                            <insertAt>end</insertAt>
-                            <path>${installdir}/models</path>
-                        </addDirectoryToPath>
-                    </actionList>
-                    <distributionFileList>
                         <distributionFile>
-                            <origin>installer files/install/models/starglobe_mesh.ma</origin>
+                            <origin>installer files/install/sourceimages/starglobe_mesh.ma</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>installer files/install/models/starglobe.obj</origin>
+                            <origin>installer files/install/sourceimages/starglobe_mesh_2K.fbx</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>installer files/install/models/starglobe.mtl</origin>
+                            <origin>installer files/install/sourceimages/starglobe_mesh_8K.fbx</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/starglobe_mesh_2K.max</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/starglobe_mesh_8K.max</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/starglobe_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/starglobe_mesh.mtl</origin>
                         </distributionFile>
                     </distributionFileList>
                 </folder>
@@ -299,7 +317,19 @@
                                             <origin>installer files/install/icons/bumpMaterial.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -316,43 +346,13 @@
                                     </actionList>
                                     <distributionFileList>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
+                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/colorMaterial.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeRamp.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_galaxy.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/magicDome.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
+                                            <origin>installer files/install/icons/render_starglobe.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
@@ -361,10 +361,58 @@
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/colorMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -393,16 +441,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2014 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -428,16 +497,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2014 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -576,6 +666,15 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -592,6 +691,15 @@
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -656,6 +764,12 @@
                                             <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -677,7 +791,19 @@
                                             <origin>installer files/install/icons/bumpMaterial.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -694,40 +820,10 @@
                                     </actionList>
                                     <distributionFileList>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/colorMaterial.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeRamp.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/magicDome.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
+                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_starglobe.png</origin>
@@ -739,10 +835,58 @@
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/colorMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -771,16 +915,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2014 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -806,10 +971,28 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -818,10 +1001,13 @@
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/Maya 2014 physical sky/createMentalRayIndirectLightingTab.mel</origin>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2014 physical sky/AEmia_physicalskyTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2014 physical sky/createMentalRayIndirectLightingTab.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -954,6 +1140,15 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -970,6 +1165,15 @@
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1034,6 +1238,12 @@
                                             <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1055,7 +1265,19 @@
                                             <origin>installer files/install/icons/bumpMaterial.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1072,40 +1294,10 @@
                                     </actionList>
                                     <distributionFileList>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/colorMaterial.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeRamp.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/magicDome.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
+                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_starglobe.png</origin>
@@ -1117,10 +1309,58 @@
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/colorMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1149,16 +1389,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2013 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -1184,16 +1445,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2013 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -1502,6 +1784,15 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -1518,6 +1809,15 @@
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1582,6 +1882,12 @@
                                             <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1603,7 +1909,19 @@
                                             <origin>installer files/install/icons/bumpMaterial.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1620,40 +1938,10 @@
                                     </actionList>
                                     <distributionFileList>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/colorMaterial.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeRamp.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/magicDome.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
+                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_starglobe.png</origin>
@@ -1665,10 +1953,58 @@
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/colorMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1697,16 +2033,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2012 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -1732,16 +2089,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2012 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -1880,6 +2258,15 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -1896,6 +2283,15 @@
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1939,6 +2335,12 @@
                                             <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_starglobe.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1952,6 +2354,12 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/magicDome.png</origin>
@@ -1975,7 +2383,19 @@
                                             <origin>installer files/install/icons/bumpMaterial.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1992,40 +2412,10 @@
                                     </actionList>
                                     <distributionFileList>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/domemasterHelp.png</origin>
+                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/colorMaterial.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/domeRamp.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/magicDome.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
+                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_starglobe.png</origin>
@@ -2037,10 +2427,58 @@
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
+                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/colorMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2069,16 +2507,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2011 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -2104,16 +2563,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2011 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -2252,6 +2732,15 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -2268,6 +2757,15 @@
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2311,6 +2809,9 @@
                                             <origin>installer files/install/Maya 2010 icons/render_rob_lookup_background.xpm</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/Maya 2010 icons/render_starglobe.xpm</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/Maya 2010 icons/render_magicDome.xpm</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2324,9 +2825,6 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2010 icons/render_domeAFL_FOV_Stereo.xpm</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/Maya 2010 icons/render_starglobe.xpm</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2010 icons/render_galaxy.xpm</origin>
@@ -2353,7 +2851,19 @@
                                             <origin>installer files/install/Maya 2010 icons/bumpMaterial.xpm</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/Maya 2010 icons/domemasterHelp.xpm</origin>
+                                            <origin>installer files/install/Maya 2010 icons/domeHelp.xpm</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2010 icons/domeText.xpm</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2010 icons/domeInfo.xpm</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2010 icons/domeGrid.xpm</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2010 icons/imagemagick.xpm</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2382,16 +2892,37 @@
                                             <origin>installer files/install/scripts/__init__.py</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/fulldomeStereoRig.py</origin>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2010 physical sky/AEmia_physicalskyTemplate.mel</origin>
@@ -2490,6 +3021,15 @@
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>

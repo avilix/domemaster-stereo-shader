@@ -1,12 +1,13 @@
 /* 
-
-Script Name: galaxies.mel v1.1
+Script Name: galaxies.mel v1.3
 Created by: Martin Watt
 http://www.highend3d.com/maya/mel/?section=dynamics#3039
 
-Galaxies 1.1 update by: Andrew Hazelden
-New Features: Added custom particle names "galaxyParticle" and "nucleusParticle"
+Galaxies 1.2 update by: Andrew Hazelden
+New Features: Added custom particle names "galaxyParticle" and "nucleusParticle" to the spiral and elliptical galaxies
 
+Galaxies 1.3 update by Andrew Hazelden
+New Features: Added a custom control $speedUp that runs the simulation faster by changing the gravitational field magnitude 
 */
 
 //Make spiral or elliptical galaxies and connect gravitational fields
@@ -18,7 +19,8 @@ global proc string[] spiralGalaxy(int $numStars,
                                   float $numTurns, // number of turns each arm makes about centre
                                   float $centre[], 
                                   float $vel[], 
-                                  int $planarDir)
+                                  int $planarDir,
+                                  int $speedUp)
 {
     string $nucleus; // name of nucleus particle component to be created
     string $field;   // name of field to be created
@@ -61,7 +63,14 @@ global proc string[] spiralGalaxy(int $numStars,
     print ("Number of particles " + $numParticles + " arms " + $numSpiralArms + " particles per arm " + $numParticlesPerArm + "\n");
 
     // gravitational field magnitude
-    float $mag = float($numParticles) / 1000.0;
+    //original speed
+    //float $mag = float($numParticles) / 1000.0; 
+    
+    //boosted speed
+    float $mag = float($numParticles) / (1000.0 / $speedUp);
+      
+    // boosted gravitational field magnitude
+    //float $mag = float($numParticles) / 10.0;
 
     // create gravitational field attached to nucleus of appropriate strength
     // use attenuation of 1 since not all the mass is at the centre
@@ -180,7 +189,8 @@ global proc string[] spiralGalaxy(int $numStars,
 global proc string[] ellipticalGalaxy(int $numStars, 
                                       float $centre[], 
                                       float $vel[], 
-                                      int $radial) // radial or transverse orbits
+                                      int $radial,
+                                      int $speedUp) // radial or transverse orbits
 //
 // make elliptical galaxy using user-defined arguments
 //
@@ -188,7 +198,7 @@ global proc string[] ellipticalGalaxy(int $numStars,
 
     string $nucleus; // name of nucleus particle component to be created
     string $field;   // name of field to be created
-    string $stars;   // name of stars particle compoment to be created
+    string $stars;   // name of stars particle component to be created
 
     // check input values are reasonable
     if($numStars < 10) {
@@ -198,7 +208,8 @@ global proc string[] ellipticalGalaxy(int $numStars,
 
     // make core particle about which all others will revolve
     string $str1[] = eval("particle -p " + $centre[0] + " " + $centre[1] + " " + $centre[2] + "\n");
-    $nucleus = $str1[0];
+    $nucleus = eval("rename " + $str1[0] +  "\"nucleusParticle\"" + "\n");
+    //$nucleus = $str1[0];
 
     // set velocity
     eval("select -r " + $nucleus + ".pt[0]\n");
@@ -219,7 +230,8 @@ global proc string[] ellipticalGalaxy(int $numStars,
 
     float $spacing = ($max - $min)/ float($numPerDim-1);
     string $str2[] = `particle -ll $min $min $min -ur $max $max $max -grs $spacing -c 1` ;
-    $stars = $str2[0];
+    $stars = eval("rename " + $str2[0] +  "\"galaxyParticle\"" + "\n");
+    //$stars = $str2[0];
 
     float $pi = 3.14159265;
     float $twoPi = 2*$pi;
@@ -229,7 +241,11 @@ global proc string[] ellipticalGalaxy(int $numStars,
     int $numParticles = eval("particle -q -ct " + $stars);
 
     // gravitational field magnitude
-    float $mag = float($numParticles) / 1000.0;
+    //float $mag = float($numParticles) / 1000.0;
+    
+    //boosted speed
+    float $mag = float($numParticles) / (1000.0 / $speedUp);
+     
 
     // create gravitational field attached to nucleus of appropriate strength
     // use attenuation of 1 since not all the mass is at the centre
@@ -306,6 +322,7 @@ global proc galaxies()
     float $pos[3];
     float $vel[3];
     int $planarDir = 0; // normal to plane of disk
+    int $speedUp = 1; //speed boost factor
 
      // make a spiral galaxy
     $galaxy++;
@@ -316,7 +333,7 @@ global proc galaxies()
     $pos = { 10.0,  0.0,  0.0 };
     $vel = { 0.0,  0.0,  0.0 };
     $planarDir = 0;
-    $newObjects = spiralGalaxy($numStars, $numSpiralArms, $radius, $numTurns, $pos, $vel, $planarDir);
+    $newObjects = spiralGalaxy($numStars, $numSpiralArms, $radius, $numTurns, $pos, $vel, $planarDir, $speedUp);
     $field[$galaxy] = $newObjects[0];
     $nucleus[$galaxy] = $newObjects[1];
     $stars[$galaxy] = $newObjects[2];
@@ -339,7 +356,7 @@ global proc galaxies()
     $pos = { 20.0, -20.0,  0.0};
     $vel = { -2.0,   0.0,  0.0};
     $planarDir = 1;
-    $newObjects = spiralGalaxy($numStars, $numSpiralArms, $radius, $numTurns, $pos, $vel, $planarDir);
+    $newObjects = spiralGalaxy($numStars, $numSpiralArms, $radius, $numTurns, $pos, $vel, $planarDir, $speedUp);
     $field[$galaxy] = $newObjects[0];
     $nucleus[$galaxy] = $newObjects[1];
     $stars[$galaxy] = $newObjects[2];
@@ -350,7 +367,7 @@ global proc galaxies()
     //     int $radial = 1;
     //     $pos = { -10.0, -20.0, 0.0};
     //     $vel = {   1.0,   0.8, 0.0};
-    //     $newObjects = ellipticalGalaxy($numStars, $pos, $vel, $radial);
+    //     $newObjects = ellipticalGalaxy($numStars, $pos, $vel, $radial, $speedUp);
     //     $field[$galaxy] = $newObjects[0];
     //     $nucleus[$galaxy] = $newObjects[1];
     //     $stars[$galaxy] = $newObjects[2];
@@ -361,7 +378,7 @@ global proc galaxies()
     //     $radial = 1;
     //     $pos = {  10.0, -20.0, 0.0};
     //     $vel = {  -1.0,   1.0, 0.0};
-    //     $newObjects = ellipticalGalaxy($numStars, $pos, $vel, $radial);
+    //     $newObjects = ellipticalGalaxy($numStars, $pos, $vel, $radial, $speedUp);
     //     $field[$galaxy] = $newObjects[0];
     //     $nucleus[$galaxy] = $newObjects[1];
     //     $stars[$galaxy] = $newObjects[2];
