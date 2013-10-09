@@ -1,5 +1,5 @@
 /*
-  Dome Text V1.1
+  Dome Text V1.2
   by Andrew Hazelden
 
   The DomeText script is a title generator that creates raster title graphics in the png, tif, tga, bmp, and psd formats.
@@ -10,6 +10,12 @@
 
   Version History
   ----------------
+  
+  Version 1.2
+  --------------------
+  Oct 8, 2013
+  Added UTF8 international character set support
+  Added Lambert material support
 
   Version 1.1 Build 1
   ---------------------
@@ -68,6 +74,7 @@ global proc string getMayaPlatform(){
 
 //Add the selected font to the nodes' extra attribute fields
 global proc addNodeFontAttrs(string $nodeName){
+
   //Add font name
   string $attrName ="font";
   string $fontName =`optionMenuGrp -query -value menuFontNameSelect`;
@@ -75,6 +82,16 @@ global proc addNodeFontAttrs(string $nodeName){
     addAttr -ln $attrName -dt "string" $nodeName;
     setAttr -e-channelBox true ($nodeName+"."+$attrName);
     setAttr -type "string" ($nodeName+"."+$attrName) $fontName;
+    print("Adding custom attribute " + $nodeName +"." +$attrName + "\n");
+  }
+  
+  //Add encoding name
+  string $attrName ="textEncoding";
+  string $encodingName =`optionMenuGrp -query -value menuTextEncodingSelect`;
+  if (!`attributeExists $attrName $nodeName`) {
+    addAttr -ln $attrName -dt "string" $nodeName;
+    setAttr -e-channelBox true ($nodeName+"."+$attrName);
+    setAttr -type "string" ($nodeName+"."+$attrName) $encodingName;
     print("Adding custom attribute " + $nodeName +"." +$attrName + "\n");
   }
   
@@ -248,7 +265,7 @@ global proc addNodeImageAttrs(string $nodeName){
   string $attrName ="textureFormat";
   int $textureFormat =`optionMenuGrp -query -select menuTextureFormat`-1;
   if (!`attributeExists $attrName $nodeName`) {
-    addAttr -ln $attrName -at "enum" -en "Maya File Texture:Mental Ray Texture:Skip Node Creation:Update Existing Node:" $nodeName;
+    addAttr -ln $attrName -at "enum" -en "Lambert:SurfaceShader:mia_material_x_passes:Skip Node Creation:Update Existing Node" $nodeName;
     setAttr -e-channelBox true ($nodeName+"."+$attrName);
     setAttr ($nodeName+"."+$attrName) $textureFormat;
     print("Adding custom attribute " + $nodeName +"." +$attrName + "\n");
@@ -288,10 +305,10 @@ global proc addNodeImageAttrs(string $nodeName){
 }
 
 
-//Create a dome text Maya file node with a specified image name and default background color
+//Create a dome text Maya SurfaceShader + a Maya file node with a specified image name and default background color
 //example:
-//createDomeFileNode("sourceimages/bob.png", {0.0, 1.0, 0.0});
-global proc string createDomeFileNode(string $imagePath, float $bgColor[] ){
+//createSurfaceShaderDomeFileNode("sourceimages/bob.png", {0.0, 1.0, 0.0});
+global proc string createSurfaceShaderDomeFileNode(string $imagePath, float $bgColor[] ){
   print("Image Path: " + $imagePath + "\n");
   print("Background color: [" + $bgColor[0] + ", " + $bgColor[1] + ", "+ $bgColor[2]+ "]\n");
 
@@ -358,7 +375,97 @@ global proc string createDomeFileNode(string $imagePath, float $bgColor[] ){
   connectAttr -f ($domeTextMatNode+".outColor") ($domeTextSGNode+".surfaceShader");
   
   // Connect the Maya file texture to the lambert incandescent material 
-  //connectAttr -force ($domeTextFileNode+".outColor") (domeTextMatNode+".incandescence");
+  //connectAttr -force ($domeTextFileNode+".outColor") ($domeTextMatNode+".incandescence");
+  
+  //Create the supporting geometry
+  string $domeGeometry = chooseDomeGeometry();
+  
+  int $domeShapeFormat = `optionMenuGrp -query -select menuShapeFormat`;
+  
+  //Check if a supporting shape was created
+  if( ($domeShapeFormat > 1 ) && (`objExists $domeGeometry` )  ){
+    //Apply the shading group to the selected geometry
+    select $domeGeometry;
+    hyperShade -assign $domeTextSGNode;
+  }else {
+    print("Shading group assignment skipped\n");
+  }
+   
+  return $domeTextFileNode;
+}
+
+
+//Create a dome text Maya Lambert + a Maya file node with a specified image name and default background color
+//example:
+//createLambertDomeFileNode("sourceimages/bob.png", {0.0, 1.0, 0.0});
+global proc string createLambertDomeFileNode(string $imagePath, float $bgColor[] ){
+  print("Image Path: " + $imagePath + "\n");
+  print("Background color: [" + $bgColor[0] + ", " + $bgColor[1] + ", "+ $bgColor[2]+ "]\n");
+
+  //string $domePlace2dNode = "place2dTexture1";
+  //string $domeTextFileNode = "file1";
+
+  string $domeTextFileNode = `shadingNode -asTexture file -name "domeTextFileNode"`;
+  string $domePlace2dNode = `shadingNode -asUtility place2dTexture -name "domeTextPlace2dTexture"`;
+
+  //float $bgColor[3] = {0.0, 1.0, 0.0};
+  //string $imagePath = "sourceimages/bob.png";
+
+  //Connect the place2D texture node to the Maya Dome Text file texture node
+  connectAttr -f ($domePlace2dNode+".coverage") ($domeTextFileNode+".coverage");
+  connectAttr -f ($domePlace2dNode+".translateFrame") ($domeTextFileNode+".translateFrame");
+  connectAttr -f ($domePlace2dNode+".rotateFrame") ($domeTextFileNode+".rotateFrame");
+  connectAttr -f ($domePlace2dNode+".mirrorU") ($domeTextFileNode+".mirrorU");
+  connectAttr -f ($domePlace2dNode+".mirrorV") ($domeTextFileNode+".mirrorV");
+  connectAttr -f ($domePlace2dNode+".stagger") ($domeTextFileNode+".stagger");
+  connectAttr -f ($domePlace2dNode+".wrapU") ($domeTextFileNode+".wrapU");
+  connectAttr -f ($domePlace2dNode+".wrapV") ($domeTextFileNode+".wrapV");
+  connectAttr -f ($domePlace2dNode+".repeatUV") ($domeTextFileNode+".repeatUV");
+  connectAttr -f ($domePlace2dNode+".offset") ($domeTextFileNode+".offset");
+  connectAttr -f ($domePlace2dNode+".rotateUV") ($domeTextFileNode+".rotateUV");
+  connectAttr -f ($domePlace2dNode+".noiseUV") ($domeTextFileNode+".noiseUV");
+  connectAttr -f ($domePlace2dNode+".vertexUvOne") ($domeTextFileNode+".vertexUvOne");
+  connectAttr -f ($domePlace2dNode+".vertexUvTwo") ($domeTextFileNode+".vertexUvTwo");
+  connectAttr -f ($domePlace2dNode+".vertexUvThree") ($domeTextFileNode+".vertexUvThree");
+  connectAttr -f ($domePlace2dNode+".vertexCameraOne") ($domeTextFileNode+".vertexCameraOne");
+  connectAttr -f ($domePlace2dNode+".outUV") ($domeTextFileNode+".uvCoord");
+  connectAttr -f ($domePlace2dNode+".outUvFilterSize") ($domeTextFileNode+".uvFilterSize");
+
+  //Set the default background color
+  //setAttr ($domeTextFileNode+".defaultColor") -type double3 0.0 1.0 0.0 ;
+  setAttr ($domeTextFileNode+".defaultColor") -type double3 $bgColor[0] $bgColor[1] $bgColor[2] ;
+
+  //Attach the PNG file texture to the file node
+  //setAttr -type "string" ($domeTextFileNode+".fileTextureName") "sourceimages/bob.png";
+  setAttr -type "string" ($domeTextFileNode+".fileTextureName") $imagePath;
+
+  //Add the Dome Text version to the node
+  addDomeTextVersionAttrs($domeTextFileNode);
+  
+  //Add fg and bg color swatches to the node
+  addNodeColorAttrs($domeTextFileNode);
+  
+  //Add the font name to the file node
+  addNodeFontAttrs($domeTextFileNode);
+  
+  //Add the image attributes to the file node
+  addNodeImageAttrs($domeTextFileNode);
+  
+  //Create a default surfaceShader material
+  string $domeTextMatNode = `shadingNode  -name "dometext_material" -asShader lambert`;
+  
+  // Connect the Maya file texture to the lambert shader preview material 
+  connectAttr -force ($domeTextFileNode+".outColor") ($domeTextMatNode+".color");
+  
+  //Connect the Maya file texture transparency to the lambert shader
+  connectAttr -f ($domeTextFileNode+".outTransparency") ($domeTextMatNode+".transparency");
+  
+  //Create the shading group node and connect it to the lambert shader
+  string $domeTextSGNode = `sets -renderable true -noSurfaceShader true -empty -name ($domeTextMatNode+"SG")`;
+  connectAttr -f ($domeTextMatNode+".outColor") ($domeTextSGNode+".surfaceShader");
+  
+  // Connect the Maya file texture to the lambert incandescent material 
+  connectAttr -force ($domeTextFileNode+".outColor") ($domeTextMatNode+".incandescence");
   
   //Create the supporting geometry
   string $domeGeometry = chooseDomeGeometry();
@@ -710,6 +817,15 @@ global proc buildTextPresetMenu(){
       print "The font name attribute does not exist.\n";
     } //end check if font name attr exists
     
+     //Restore the encoding name
+     if (`attributeExists "textEncoding" $nodeName`){
+      print "The text encoding attribute exists.\n";
+      string $fontName = getAttr ($nodeName+".textEncoding");
+      optionMenuGrp -edit -value $fontName menuTextEncodingSelect;
+    } else {
+      print "The text encoding attribute does not exist.\n";
+    } //end check if the text encoding name attr exists
+    
      //Restore the font style
      if (`attributeExists "fontStyle" $nodeName`){
       print "The font style attribute exists.\n";
@@ -999,6 +1115,27 @@ global proc domeText(){
         print("The default font " + $fontFilenameString + " does not exist.\n");
       } 
       
+
+      // Create the Text Encoding Pop-up Menu  
+      // Font Style options: "English ascii", "Chinese big5", "Hong Kong Supplementary Character Set big5hkscs"
+      optionMenuGrp
+        -label "Text Encoding"
+        -columnAlign 1 "right"
+        -annotation "The \"Text Encoding\" controls the conversion of international character sets to UTF8 text."
+        menuTextEncodingSelect;
+
+      menuItem -label "English ascii";
+      menuItem -label "Western Europe cp1252";
+      menuItem -label "Chinese Traditional big5";
+      menuItem -label "Chinese Simplified gb2312";
+      menuItem -label "Hong Kong Supplementary Character Set big5hkscs";
+      menuItem -label "All Languages utf8";
+      //Preselect the first pop-up menu option
+      optionMenuGrp 
+        -edit
+        -select 1
+        menuTextEncodingSelect;
+      
       // Create the Font Style Selector Pop-up Menu  
       // Font Style options: ALL, Bold, Bolder, Lighter, Normal
       optionMenuGrp
@@ -1215,17 +1352,18 @@ global proc domeText(){
     optionMenuGrp
       -label "Texture Node" 
       // "Maya File Texture" "mentalrayTexture" "Skip Node Creation" "Update Existing Node"
-     -annotation "The \"Texture Node\" options allows you to choose between a classic \nMaya Software style file texture node, a native Mental Ray Texture node, \nskip the creation of a new texture node, or update an existing node."
+     -annotation "The \"Texture Node\" options allows you to choose between a classic \nMaya Software style file texture nodes, a native Mental Ray Texture format, \nskip the creation of a new texture node, or update an existing node."
       //Toggle the surface node, and shape node option menus
       -changeCommand "disableSurfaceAndShape();"
       menuTextureFormat;
       
-    menuItem -label "Maya File Texture";
-    menuItem -label "Mental Ray Texture";
+    menuItem -label "Lambert";  
+    menuItem -label "SurfaceShader";
+    menuItem -label "mia_material_x_passes";
     menuItem -label "Skip Node Creation";
     menuItem -label "Update Existing Node" -enable false;
       
-     //Preselect the "Maya File Texture" option menu
+     //Preselect the "Maya Lambert" option menu
     optionMenuGrp 
       -edit
       -select 1
@@ -1478,6 +1616,7 @@ global proc createDomeText(){
   //Font Controls
   int $fontId = `optionMenuGrp -query -select menuFontNameSelect`;
   string $fontName =`optionMenuGrp -query -value menuFontNameSelect`;
+  string $textEncoding = `optionMenuGrp -query -value menuTextEncodingSelect`;
   int $fontSize = `intSliderGrp -query -value sliderPointSize`;
   float $kerningSize = `floatSliderGrp -query -value sliderKerningSize`;
   string $fontAlign = `optionMenuGrp -query -value menuFontAlignSelect`;
@@ -1515,6 +1654,7 @@ global proc createDomeText(){
   print("Output Geometry: " + $domeShapeType + "\n");
   print("File texture node format: " + $textureFormat + "\n");
   print("Font: " + $fontName + " Font ID: " + $fontId + "\n");
+  print("Text Encoding: " + $textEncoding + "\n");
   print("Font Style: " + $fontStyle + "\n");
   print("Point Size: " + $fontSize + "\n");
   print("Kerning Size: " + $kerningSize + "\n");
@@ -1549,9 +1689,39 @@ global proc createDomeText(){
   fprint $fileId ($domeTextString + "\n");
   fclose $fileId;
   
-
-  print ("Created: " + $textFilenameString + "\n");
-    
+  //Convert the file to UTF8
+  string $utfTextFilenameString = ( `internalVar -userTmpDir` + "dometext_utf8.txt" );
+  //$textFilenameString = $filenameString + "utf8.txt";
+  
+  //Choose the text encoding format
+  string $textEncodingFormat = "";
+  if ($textEncoding == "English ascii" ){
+    $textEncodingFormat = "ascii";
+  } else if ( $textEncoding == "Western Europe cp1252" ){
+    $textEncodingFormat = "cp1252";
+  }else if ( $textEncoding == "Chinese Traditional big5" ){
+    $textEncodingFormat = "big5";
+  } else if ( $textEncoding == "Chinese Simplified gb2312" ){
+    $textEncodingFormat = "gb2312";
+  } else if ( $textEncoding == "Hong Kong Supplementary Character Set big5hkscs" ){
+    $textEncodingFormat = "big5hkscs";
+  } else if ( $textEncoding == "All Languages utf8" ) {
+    $textEncodingFormat = "utf_8";
+  }else{
+    $textEncodingFormat = "ascii";
+  }
+  
+  // Actual command:
+  // import domeTextUTF as domeTextUTF
+  // domeTextUTF.convertTextToUTF("C:/dometext.txt", "C:/dometext_utf8.txt", 'big5')
+  string $utfPythonConvertString  = "";
+  $utfPythonConvertString += "import domeTextUTF as domeTextUTF\n";
+  $utfPythonConvertString += "domeTextUTF.convertTextToUTF(";
+  $utfPythonConvertString += "'" + $textFilenameString + "', '" + $utfTextFilenameString + "', '" + $textEncodingFormat + "')";
+  
+  //Convert the text formats to UTF8
+  python($utfPythonConvertString);
+  
   //Send the text commands to ImageMagick
   //Check the platform to come up with the correct syntax
   string $changeWorkingDir = "";
@@ -1624,13 +1794,17 @@ global proc createDomeText(){
   //Select the platform
   if ($mayaPlatform  == "windows"){
     //Windows 32/x64 - Use @file for text contents
-    $captionString = " caption:@" + $textFilenameString;
+    //$captionString = " caption:@" + $textFilenameString;
+    $captionString = " caption:@" + $utfTextFilenameString;
+    
   }else if ($mayaPlatform  == "darwin"){
     //Mac OS X - Use @file for text contents
-    $captionString =  " caption:@" + $textFilenameString;
+    //$captionString =  " caption:@" + $textFilenameString;
+    $captionString = " caption:@" + $utfTextFilenameString;
   }else{  
     //Linux - Use @file for text contents
-    $captionString = " caption:@" + $textFilenameString;
+    //$captionString = " caption:@" + $textFilenameString;
+    $captionString = " caption:@" + $utfTextFilenameString;
   }
 
   //Checks for transparency and writes the background color to a string
@@ -1735,14 +1909,22 @@ global proc createDomeText(){
   
   //Generate the correct file texture node
   if($textureFormat == 1){
-    //Create a new Maya file texture node
+    //Create a new Maya Lambert + Maya file texture node
     //createDomeFileNode("sourceimages/bob2.png", {0.0, 1.0, 0.0});
     if ($isbackgroundTransparent){
-      $texNodeName = createDomeFileNode( $filenameString, {0.0, 0.0, 0.0});
+      $texNodeName = createLambertDomeFileNode( $filenameString, {0.0, 0.0, 0.0});
     }else{
-      $texNodeName = createDomeFileNode( $filenameString, {$backgroundRGBcolor[0], $backgroundRGBcolor[1], $backgroundRGBcolor[2]});  
+      $texNodeName = createLambertDomeFileNode( $filenameString, {$backgroundRGBcolor[0], $backgroundRGBcolor[1], $backgroundRGBcolor[2]});  
+     }
+  } else if($textureFormat == 2){
+    //Create a new Maya SurfaceShader + Maya file texture node
+    //createDomeFileNode("sourceimages/bob2.png", {0.0, 1.0, 0.0});
+    if ($isbackgroundTransparent){
+      $texNodeName = createSurfaceShaderDomeFileNode( $filenameString, {0.0, 0.0, 0.0});
+    }else{
+      $texNodeName = createSurfaceShaderDomeFileNode( $filenameString, {$backgroundRGBcolor[0], $backgroundRGBcolor[1], $backgroundRGBcolor[2]});  
     } 
-  }else if ($textureFormat == 2){
+  }else if ($textureFormat == 3){
     //Create a new mental ray file texture node
     //createDomeMrFileNode("sourceimages/bob2.png", {0.0, 1.0, 0.0});
     if ($isbackgroundTransparent){
@@ -1750,12 +1932,12 @@ global proc createDomeText(){
     }else{
       $texNodeName = createDomeMrFileNode( $filenameString, {$backgroundRGBcolor[0], $backgroundRGBcolor[1], $backgroundRGBcolor[2]});
     }
-  }else if ($textureFormat == 3){
+  }else if ($textureFormat == 4){
     print("Skipping file texture node creation.\n");
   } //End of file texture node generation
     
   //Create the note message if generating a Maya or Mental Ray node 
-  if ( ($textureFormat == 1) || ($textureFormat == 2)) {
+  if ( ($textureFormat == 1) || ($textureFormat == 2) || ($textureFormat == 3)) {
     //Write the Dome Text message to the domeText Note fields:
     print("Adding note to " + $texNodeName + " file node\n");
     string $domeTextNoteString = "";

@@ -1,7 +1,7 @@
 <project>
     <shortName>Domemaster3D</shortName>
     <fullName>Domemaster3D Shader</fullName>
-    <version>1.4-Beta3</version>
+    <version>1.4-Beta2</version>
     <readmeFile>Domemaster_x64_readme.txt</readmeFile>
     <leftImage>vortex_sidebar.png</leftImage>
     <splashImage>splash_screen.png</splashImage>
@@ -462,9 +462,6 @@
                                             <origin>installer files/install/scripts/domeText.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
-                                        </distributionFile>
-                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -519,9 +516,6 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeText.mel</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
@@ -942,9 +936,6 @@
                                             <origin>installer files/install/scripts/domeText.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
-                                        </distributionFile>
-                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -999,9 +990,6 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeText.mel</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
@@ -1422,9 +1410,6 @@
                                             <origin>installer files/install/scripts/domeText.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
-                                        </distributionFile>
-                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1479,9 +1464,6 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeText.mel</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
@@ -2072,9 +2054,6 @@
                                             <origin>installer files/install/scripts/domeText.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
-                                        </distributionFile>
-                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2129,9 +2108,6 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeText.mel</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
@@ -2552,9 +2528,6 @@
                                             <origin>installer files/install/scripts/domeText.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
-                                        </distributionFile>
-                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2609,9 +2582,6 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeText.mel</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
@@ -2941,9 +2911,6 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeText.mel</origin>
-                                        </distributionFile>
-                                        <distributionFile>
-                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>

@@ -36,7 +36,7 @@ global proc miUpdateSkyCameras(string $skyShader)
 			{
 
       			// Old connection to the first lens shader input
-				//$cmd = ("connectAttr -force " + $exposureControl + ".message " + $camera + ".miLensShader");
+            //$cmd = ("connectAttr -force " + $exposureControl + ".message " + $camera + ".miLensShader");
 
         		// New connection to the first input on the lens shader list (AH)  
        			$cmd = ("connectAttr -force " + $exposureControl + ".message " + $camera + ".miLensShaderList[0]");

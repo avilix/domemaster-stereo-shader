@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.4 - Oct 6, 2013
+Version 1.4 - Oct 8, 2013
 
 Maintained by Andrew Hazelden
 andrew@andrewhazelden.com
@@ -11,8 +11,19 @@ The Domemaster Stereo lens shader is a custom mental ray shader that creates a s
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "center" camera option in the DomeAFL_FOV_Stereo shader.
 
 
-Version 1.4 Changes
----------------------------
+
+Version 1.4 Beta 2 Changes
+--------------------------------
+
+Maya Changes
+----------------
+Added DomeText Lambert shading options with incandescent texture mapping
+
+Added DomeText text encoding support for English ASCII, Western Europe cp1252, all languages utf_8, Chinese Traditional Big5, Chinese Simplified gb2312, and Hong Kong Supplementary Character Set big5hkscs to UTF8 text conversion support.
+
+
+Version 1.4 Beta 2 Changes
+-------------------------------
 
 3DS Max Changes
 --------------------
@@ -23,7 +34,6 @@ I've created a few different format starglobe models to make it easier for 3DS M
 There is a set of 2K and 8K texture resolution 3DS Max scene files: starglobe_mesh_2K.max, and starglobe_mesh_8K.max
 There is a set of 2K and 8K texture resolution FBX scene files: starglobe_mesh_2K.fbx, and starglobe_mesh_8K.fbx (You may have to flip the surface normals on the mesh for proper Max based rendering)
 There is a set of 2K and 8K texture resolution OBJ scene files: starglobe_mesh_2K.obj, and starglobe_mesh_8K.obj 
-
 
 Maya Changes
 ----------------
@@ -94,7 +104,7 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
 -The "DomeText" tool created raster titles and scrolling credits using the Dome Text GUI and ImageMagick.
 -The "DomeGrid" tool creates a hemispherical yellow wireframe reference grid.
--The "Galaxy" tool runs the Galaxy Creator tool that creates dynamic particle based galaxies.
+-The "Galaxy Creator" tool creates dynamic particle based galaxies.
 -The "Starglobe" tool creates a mia_material_x_passes based starry background for your fulldome scenes.
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.

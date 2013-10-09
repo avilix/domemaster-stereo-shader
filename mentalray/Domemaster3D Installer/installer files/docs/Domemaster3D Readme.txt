@@ -81,11 +81,22 @@ Martin Watt for writing the original galaxies.mel script.
 -----------------------------------------------------------------------
 
 Version History
----------------
+-----------------
 
 
-Version 1.4 Changes
----------------------------
+Version 1.4 Beta 2 Changes
+--------------------------------
+
+Maya Changes
+----------------
+Added DomeText Lambert shading options with incandescent texture mapping
+
+Added DomeText text encoding support for English ASCII, Western Europe cp1252, all languages utf_8, Chinese Traditional Big5, Chinese Simplified gb2312, and Hong Kong Supplementary Character Set big5hkscs to UTF8 text conversion support.
+
+
+
+Version 1.4 Beta 2 Changes
+-------------------------------
 
 3DS Max Changes
 --------------------

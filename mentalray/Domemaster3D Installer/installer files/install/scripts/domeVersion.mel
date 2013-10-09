@@ -8,6 +8,12 @@
 	Version History
 	----------------
   
+  
+  Version 1.0 Build 4
+	---------------------------------------
+  Oct 8, 2013
+	Updated version info
+  
   Version 1.0 Build 3
 	---------------------------------------
   Oct 6, 2013
@@ -73,8 +79,8 @@ global proc string getMayaPlatform(){
 global proc domeVersion(){
 
   string $dialogueButtonSelected = "";
-  string $domemaster3D_version = "1.4 B2";
-  string $release_date = "Oct 6, 2013";
+  string $domemaster3D_version = "1.4 B3";
+  string $release_date = "Oct 8, 2013";
 
   string $domeDialgueString = "";
   $domeDialgueString += "Domemaster3D Shader for Maya" + " - Version " + $domemaster3D_version + "\n";
@@ -97,6 +103,7 @@ global proc domeVersion(){
       -icon "information"
       -button "Check for Update"
       -button "Read the User Forum"
+      -button "Report a Bug"
       -button "Close"
       -defaultButton "Close"`;
   } else {
@@ -107,6 +114,7 @@ global proc domeVersion(){
       -message $domeDialgueString
       -button "Check for Update"
       -button "Read the User Forum"
+      -button "Report a Bug"
       -button "Close"
       -defaultButton "Close"`;
   }
@@ -115,6 +123,8 @@ global proc domeVersion(){
     python("import domeCamera as domeCamera\ndomeCamera.openDomemasterDownloads()"); 
   }else if($dialogueButtonSelected == "Read the User Forum"){
     python("import domeCamera as domeCamera\ndomeCamera.openDomemasterNing()"); 
+  }else if($dialogueButtonSelected == "Report a Bug"){
+    python("import domeCamera as domeCamera\ndomeCamera.openDomemasterBugReport()"); 
   }
 
 }

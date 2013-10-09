@@ -51,7 +51,7 @@ global proc miUpdateSkyCameras(string $skyShader)
 			
 			if(size($exposureControl))
 			{
-				$cmd = ("connectAttr -force " + $exposureControl + ".message " + $camera + ".miLensShader");
+				$cmd = ("connectAttr -force " + $exposureControl + ".message " + $camera + ".miLensShaderList[0]");
 				catchQuiet(`eval $cmd`);
 			}
 		}

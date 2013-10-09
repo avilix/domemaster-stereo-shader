@@ -188,6 +188,10 @@ print("Open the Domemaster Downloads Page")
 import domeCamera as domeCamera
 domeCamera.openDomemasterDownloads()
 
+print("Open the Domemaster Bug Reporter")
+import domeCamera as domeCamera
+domeCamera.openDomemasterBugReport()
+
 
 """
 
@@ -220,7 +224,15 @@ def openDomemasterDownloads():
 	# Open URL in new window, raising the window if possible.
 	webbrowser.open_new(url)
 	
-
+def openDomemasterBugReport():
+	import webbrowser
+	
+	# Domemaster Stereo Shader - Bug Report Page
+	url = 'https://code.google.com/p/domemaster-stereo-shader/issues/entry'
+	
+	# Open URL in new window, raising the window if possible.
+	webbrowser.open_new(url)
+	
 
 """
 Find out the path to the sourceimages folder
