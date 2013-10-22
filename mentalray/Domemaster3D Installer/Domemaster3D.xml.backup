@@ -1,7 +1,7 @@
 <project>
     <shortName>Domemaster3D</shortName>
     <fullName>Domemaster3D Shader</fullName>
-    <version>1.4-Beta3</version>
+    <version>1.4-Beta4</version>
     <readmeFile>Domemaster_x64_readme.txt</readmeFile>
     <leftImage>vortex_sidebar.png</leftImage>
     <splashImage>splash_screen.png</splashImage>
@@ -186,6 +186,78 @@
                         <distributionFile>
                             <origin>installer files/install/sourceimages/starglobe_mesh.mtl</origin>
                         </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/fulldomeAlignmentGrid_4k.png</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/fulldome_2K.jpg</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/fulldome_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/fulldome_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/fulldomeGrid_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/fulldomeGrid_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/cube3x2_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/cube3x2_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/horizontalCrossCube_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/horizontalCrossCube_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/horizontalStripCube_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/horizontalStripCube_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/horizontalTeeCube_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/horizontalTeeCube_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/latlongSphere_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/latlongSphere_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/mentalRayCube1_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/mentalRayCube1_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/verticalCrossCube_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/verticalCrossCube_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/verticalStripCube_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/verticalStripCube_mesh.obj</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/verticalTeeCube_mesh.ma</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/verticalTeeCube_mesh.obj</origin>
+                        </distributionFile>
                     </distributionFileList>
                 </folder>
             </folderList>
@@ -329,7 +401,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -412,7 +523,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -456,6 +606,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -466,6 +619,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -515,6 +671,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -525,6 +684,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -809,7 +971,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -892,7 +1093,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -936,6 +1176,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -946,6 +1189,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -995,6 +1241,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1005,6 +1254,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -1289,7 +1541,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1372,7 +1663,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1416,6 +1746,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1426,6 +1759,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -1475,6 +1811,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1485,6 +1824,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -1939,7 +2281,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2022,7 +2403,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2066,6 +2486,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2076,6 +2499,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -2125,6 +2551,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2135,6 +2564,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -2419,7 +2851,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2502,7 +2973,46 @@
                                             <origin>installer files/install/icons/domeGrid.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2546,6 +3056,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2556,6 +3069,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -2605,6 +3121,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2615,6 +3134,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>
@@ -2893,6 +3415,9 @@
                                             <origin>installer files/install/Maya 2010 icons/domeGrid.xpm</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/Maya 2010 icons/domeViewer.xpm</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/Maya 2010 icons/imagemagick.xpm</origin>
                                         </distributionFile>
                                     </distributionFileList>
@@ -2937,6 +3462,9 @@
                                             <origin>installer files/install/scripts/domeStarglobe.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/scripts/domeStereoRig.py</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2947,6 +3475,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/scripts/galaxies.mel</origin>

@@ -87,10 +87,10 @@ if (mayaVersion >= 2011):
 cmds.evalDeferred("addNewDomeMenu()")
 
 # Make sure the mental ray plugin was loaded
-if not (cmds.pluginInfo("Mayatomr",q=True,loaded=True)):
-    cmds.loadPlugin("Mayatomr")
-else:
-    pass
+#if not (cmds.pluginInfo("Mayatomr",q=True,loaded=True)):
+#    cmds.loadPlugin("Mayatomr")
+#else:
+#    pass
 
 # ---------------------------------------------------------------------
 # End Domemaster3D Startup Code

@@ -15,6 +15,12 @@ You can set the file textures to an empty path if you don't want a default textu
 Version History
 ----------------
 
+Version 1.4 B4 - build 4
+Oct 20, 2013
+
+Added the Dome Viewer feature for exploring rendered domemaster formatted imagery
+
+
 Version 1.3.5 build 7 - 7am
 August 20, 2013
 
@@ -65,6 +71,8 @@ import domeMaterial as domeMaterial
 
 Step 4.
 Test your current domeAFL python script installation using the python command:
+import domeMaterial as domeMaterial
+reload(domeMaterial)
 domeMaterial.createColorBumpMiaMaterial()
 
 ------------------------------------------------------------------------------
@@ -74,6 +82,7 @@ A python function to create a mia_material with a shading network for color + bu
 
 Run using the command:
 import domeMaterial as domeMaterial
+reload(domeMaterial)
 domeMaterial.createColorBumpMiaMaterial()
 
 -------------------------------------------------------------------------------
@@ -83,6 +92,7 @@ A python function to create a mia_material with a shading network for color + bu
 
 Run using the command:
 import domeMaterial as domeMaterial
+reload(domeMaterial)
 domeMaterial.createColorMiaMaterial()
 
 ------------------------------------------------------------------------------
@@ -94,7 +104,21 @@ The starglobe meshes are stored in the /Program Files/Domemaster3D/sourceimages 
 
 Run using the command:
 import domeMaterial as domeMaterial
+reload(domeMaterial)
 domeMaterial.createStarglobe()
+
+------------------------------------------------------------------------------
+
+Create a Dome Viewer
+A python function to create a fulldome image viewer with an incandescent lambert based shading network.
+
+The domeViewer mesh is stored in the /Program Files/Domemaster3D/sourceimages folder.
+
+Run using the command:
+import domeMaterial as domeMaterial
+reload(domeMaterial)
+domeMaterial.createDomeViewer()
+
 """
 
 
@@ -184,6 +208,474 @@ def getModelsPath(modelFileName):
   print "[Requesting the model file]: " + combinedFileAndModelPath
 
   return combinedFileAndModelPath
+
+  
+#Syntax: createDomeViewerTexture('domeViewer', True )
+def createDomeViewerTexture( meshName, isGrid ):
+  import os
+  import maya.cmds as cmds
+  import maya.mel as mel
+  
+  # ---------------------------------------------------------------------
+  #Set up the base folder path for the Domemaster3D textures
+  # ---------------------------------------------------------------------
+
+  #Set the file texture variables to "" if you don't want a file to be specified
+  domeViewerMapFileTexture = ""
+ 
+  #Read the texture from the Domemaster3D Folder
+  #domeViewerMapFileTexture = getSourceImagesPath("fulldome_1K.jpg")
+
+  materialNamePrefix = ""
+  
+  #Check if this is a pano or an alignment grid
+  if(isGrid == True):
+    #Image is a alignment grid
+    materialNamePrefix = 'domeViewerGrid_'
+    #Load the Aaron Bradbury fulldome alignment grid
+    domeViewerMapFileTexture = getSourceImagesPath("fulldomeAlignmentGrid_4k.png")
+    
+    domeViewer_maya_tex = cmds.shadingNode( 'file', n=materialNamePrefix+'FileTexture', asTexture=True) 
+  else:
+    #Image is a regular pano
+    materialNamePrefix = 'domeViewer_'
+    
+    #Read the texture from the Image Name field in the GUI
+    domeViewerMapFileTexture = cmds.textFieldGrp("textDomeViewerImageOutputName", query=True, text=True)
+  
+    #Check if the media type is a movie or an image
+    if cmds.optionMenuGrp("menuDomeViewerMediaType", query=True, select=True) == 3:
+      #Create a Movie Node
+      domeViewer_maya_tex = cmds.shadingNode( 'movie', n=materialNamePrefix+'MovieTexture', asTexture=True) 
+    else:
+      #File Texture Node
+      domeViewer_maya_tex = cmds.shadingNode( 'file', n=materialNamePrefix+'FileTexture', asTexture=True) 
+
+  #Create the shading group
+  domeViewer_shader_group_name = cmds.sets( renderable=True, noSurfaceShader=True, empty=True, name=materialNamePrefix+'materialSG' )
+
+  #Create the Lambert in-scene preview material
+  domeViewer_preview_shader_name = cmds.shadingNode( 'lambert', n=materialNamePrefix+'preview_material', asShader=True)	
+  
+  domeViewer_maya_placement = cmds.shadingNode( 'place2dTexture', n=materialNamePrefix+'place2dTexture', asUtility=True) 
+
+  #Connect the place2D texture to the Maya domeViewer file texture
+  cmds.connectAttr(domeViewer_maya_placement+'.coverage', domeViewer_maya_tex+'.coverage', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.translateFrame', domeViewer_maya_tex+'.translateFrame', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.rotateFrame', domeViewer_maya_tex+'.rotateFrame', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.mirrorU', domeViewer_maya_tex+'.mirrorU', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.mirrorV', domeViewer_maya_tex+'.mirrorV', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.stagger', domeViewer_maya_tex+'.stagger', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.wrapU', domeViewer_maya_tex+'.wrapU', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.wrapV', domeViewer_maya_tex+'.wrapV', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.repeatUV', domeViewer_maya_tex+'.repeatUV', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.offset', domeViewer_maya_tex+'.offset', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.rotateUV', domeViewer_maya_tex+'.rotateUV', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.noiseUV', domeViewer_maya_tex+'.noiseUV', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.vertexUvOne', domeViewer_maya_tex+'.vertexUvOne', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.vertexUvTwo', domeViewer_maya_tex+'.vertexUvTwo', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.vertexUvThree', domeViewer_maya_tex+'.vertexUvThree', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.vertexCameraOne', domeViewer_maya_tex+'.vertexCameraOne', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.outUV', domeViewer_maya_tex+'.uvCoord', f=True)
+  cmds.connectAttr(domeViewer_maya_placement+'.outUvFilterSize', domeViewer_maya_tex+'.uvFilterSize', f=True)
+  
+  #Connect the Lambert preview shader
+
+  # Connect the Maya domeViewer file texture to the lambert preview material color and incandescent shader inputs
+  cmds.connectAttr(domeViewer_maya_tex+'.outColor', domeViewer_preview_shader_name+'.color', f=True)
+  cmds.connectAttr(domeViewer_maya_tex+'.outColor', domeViewer_preview_shader_name+'.incandescence', f=True)
+
+  # Connect the Lambert in-scene preview shader to the shading group
+  cmds.connectAttr(domeViewer_preview_shader_name+'.outColor', domeViewer_shader_group_name+'.surfaceShader', f=True)
+  
+  #Set the image exposure settings
+  imageExposure = cmds.floatSliderGrp("sliderDomeViewerImageExposure", query=True, value=True)
+  cmds.setAttr( domeViewer_maya_tex+'.colorGain', imageExposure, imageExposure, imageExposure, type="double3")
+  
+  checkFileName = "filetest -f \"" + domeViewerMapFileTexture + "\";"
+  if mel.eval(checkFileName):
+    # Set the filename for the maya file texture node
+    cmds.setAttr( domeViewer_maya_tex+'.fileTextureName', domeViewerMapFileTexture , type="string")
+    print("Loading the File texture: " + domeViewerMapFileTexture)
+  else:
+    print("Texture Not Found: " + domeViewerMapFileTexture)
+  
+  #Check if this is a panorama - then enable image sequence caching
+  if(isGrid == False):
+    #Check what Media Type was selected
+    if cmds.optionMenuGrp("menuDomeViewerMediaType", query=True, select=True) == 1:
+      print("Loading a still image.")
+    elif cmds.optionMenuGrp("menuDomeViewerMediaType", query=True, select=True) == 2:
+      print("Loading an image sequence.")
+      #Enable Image Sequence Support
+      cmds.setAttr( domeViewer_maya_tex+'.useFrameExtension',  1)
+       
+      if cmds.checkBoxGrp("checkGrpDomeViewerPreviewCache", query=True, value1=True) == True:
+        #Enable RAM caching
+        cmds.setAttr( domeViewer_maya_tex+'.useHardwareTextureCycling', 1)
+      
+      #Set start and end frames for RAM caching
+      startFrame = cmds.intFieldGrp("intDomeViewerImageStartFrame", query=True, value1=True)
+      endFrame = cmds.intFieldGrp("intDomeViewerImageEndFrame", query=True, value1=True)
+      
+      cmds.setAttr( domeViewer_maya_tex+'.startCycleExtension', startFrame)
+      cmds.setAttr( domeViewer_maya_tex+'.endCycleExtension', endFrame)
+    elif cmds.optionMenuGrp("menuDomeViewerMediaType", query=True, select=True) == 3:
+      print("Loading a Movie File.")
+      #Enable Image Sequence Support
+      cmds.setAttr( domeViewer_maya_tex+'.useFrameExtension',  1)
+      
+      if cmds.checkBoxGrp("checkGrpDomeViewerPreviewCache", query=True, value1=True) == True:
+        #Enable RAM caching
+        cmds.setAttr( domeViewer_maya_tex+'.useHardwareTextureCycling', 1)
+      
+      #Set start and end frames for RAM caching
+      startFrame = cmds.intFieldGrp("intDomeViewerImageStartFrame", query=True, value1=True)
+      endFrame = cmds.intFieldGrp("intDomeViewerImageEndFrame", query=True, value1=True)
+      
+      cmds.setAttr( domeViewer_maya_tex+'.startCycleExtension', startFrame)
+      cmds.setAttr( domeViewer_maya_tex+'.endCycleExtension', endFrame)
+  
+  
+  #Apply the shading group to the selected geometry
+  #cmds.select("domeViewer")
+  cmds.select(meshName)
+  cmds.hyperShade(assign=domeViewer_shader_group_name)
+    
+  #---------------------------------------------------------------------------
+  # Add Extra Attrs to the meshName shape
+  #---------------------------------------------------------------------------
+  baseNodeName = meshName
+
+  #---------------------------------------------------------------------------
+  #Add a Display Mode control to the domeGrid's transform node
+  #---------------------------------------------------------------------------
+  
+  attrName = 'displayMode'
+  #if(mel.attributeExists(attrName, baseNodeName) == 0):
+  cmds.addAttr(baseNodeName, longName=attrName, attributeType="enum", en="Off:Wireframe:Shaded:Wireframe on Shaded", defaultValue=2, keyable=True)
+  print('Adding custom Attributes ' + baseNodeName + '.' + attrName)
+
+  
+  #Setup the domeViewer & domeViewerGrid transparency
+  baseTransparency = 0
+  if (isGrid == True):
+    baseTransparency = 0.75
+    
+  #---------------------------------------------------------------------------
+  #Add a Grid Surface Transparency control to the domeGrid's transform node - Default value 0.25
+  #---------------------------------------------------------------------------
+  attrName = 'gridSurfaceTransparency'
+  cmds.addAttr(baseNodeName, longName=attrName, attributeType="double", keyable=True, defaultValue=baseTransparency, min=0, max=1)
+
+  #Connect the Grid Surface transparency swatch to the surface shader
+  cmds.connectAttr( (baseNodeName+'.'+attrName), domeViewer_preview_shader_name+'.transparencyR', force=True)
+  cmds.connectAttr( (baseNodeName+'.'+attrName), domeViewer_preview_shader_name+'.transparencyG', force=True)
+  cmds.connectAttr( (baseNodeName+'.'+attrName), domeViewer_preview_shader_name+'.transparencyB', force=True)   
+
+  #---------------------------------------------------------------------------  
+  #Add a display mode expression to the domeGrid's transform node
+  #---------------------------------------------------------------------------
+
+  domeRadiusTransform =  meshName
+  domeSurfaceShape = meshName
+  domeSurfaceShapeNode = getObjectShapeNode(domeSurfaceShape)
+
+  exprName = ""
+  previewAttrName = "displayMode"
+  #The expression name is domeGrid_displayModeExpr
+  exprName = domeRadiusTransform + "_" + previewAttrName + "Expr"
+
+  PreviewShapeExpr = ""
+
+  PreviewShapeExpr += "// Custom " + previewAttrName + " Preview Shape Expressions\n\n"
+  PreviewShapeExpr += "if (  " + domeRadiusTransform + "." + previewAttrName + " == 0){\n"
+  PreviewShapeExpr += "  //Off Mode\n"
+  PreviewShapeExpr += "  " + domeSurfaceShape + ".overrideDisplayType = 2;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".overrideEnabled = 1;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".overrideShading = 0;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".visibility = 0;\n"
+  PreviewShapeExpr += "} else if (" + domeRadiusTransform + "." + previewAttrName + " == 1 ){\n"
+  PreviewShapeExpr += "  //Wireframe Mode\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".overrideEnabled = 1;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".overrideShading = 0;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".visibility = 1;\n"
+  PreviewShapeExpr += "} else if (" + domeRadiusTransform + "." + previewAttrName + " == 2 ){\n"
+  PreviewShapeExpr += "  //Shaded Mode\n"
+  PreviewShapeExpr += "  string $currentPanel = \"modelPanel4\";\n"
+  PreviewShapeExpr += "  if ( `modelEditor -exists currentPanel` )\n"
+  PreviewShapeExpr += "  modelEditor -edit -wireframeOnShaded 0 currentPanel;\n"
+  PreviewShapeExpr += "  string $currentPanel = \"StereoPanel\";\n"
+  PreviewShapeExpr += "  if ( `modelEditor -exists currentPanel` )\n"
+  PreviewShapeExpr += "  modelEditor -edit -wireframeOnShaded 0 currentPanel;\n"
+  PreviewShapeExpr += "  " + domeSurfaceShape + ".overrideDisplayType = 2;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".overrideEnabled = 1;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".overrideShading = 1;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".visibility = 1;\n"
+  PreviewShapeExpr += "} else if (" + domeRadiusTransform + "." + previewAttrName + " == 3 ){\n"
+  PreviewShapeExpr += "  //Wireframe on Shaded Mode\n"
+  PreviewShapeExpr += "  string $currentPanel = \"modelPanel4\";\n"
+  PreviewShapeExpr += "  if ( `modelEditor -exists currentPanel` )\n"
+  PreviewShapeExpr += "  modelEditor -edit -wireframeOnShaded 1 currentPanel;\n"
+  PreviewShapeExpr += "  string $currentPanel = \"StereoPanel\";\n"
+  PreviewShapeExpr += "  if ( `modelEditor -exists currentPanel` )\n"
+  PreviewShapeExpr += "  modelEditor -edit -wireframeOnShaded 1 currentPanel;\n"
+  PreviewShapeExpr += "  " + domeSurfaceShape + ".overrideDisplayType = 2;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".overrideEnabled = 1;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".overrideShading = 1;\n"
+  PreviewShapeExpr += "  " + domeRadiusTransform + ".visibility = 1;\n"
+  PreviewShapeExpr += "}\n"
+  PreviewShapeExpr += "\n"
+  PreviewShapeExpr += "\n"
+
+
+  print "DomeGrid Extra Attribute Expressions:"
+  print PreviewShapeExpr
+
+  cmds.expression( name=exprName, string=PreviewShapeExpr, object='domeGrid', alwaysEvaluate=True, unitConversion=all)
+  
+  #output the name of the new fileTexture node
+  return domeViewer_maya_tex
+  
+
+#Syntax: createDomeViewerCamera( 'viewerCamera', 'domeViewer', 'domeViewerGrid' )
+def createDomeViewerCamera( viewerCameraName, meshName, gridMeshName ):
+  import os
+  import math
+  import maya.cmds as cmds
+  import maya.mel as mel
+  
+  currentPanoFormat = cmds.optionMenuGrp('menuDomeViewerPanoramaFormat', query=True, select=True)
+  
+  
+  #viewerCameraName = 'viewerCamera'
+  
+  #Remove the old camera
+  if cmds.objExists(viewerCameraName + '1'): 
+    cmds.select( viewerCameraName + '1', replace=True)
+    cmds.delete()
+  
+  #Calculate the focal length from the field of view
+  domeViewerFOV = cmds.floatSliderGrp("sliderDomeViewerFOV", query=True, value=True)
+  horizontalFilmAperture = 1.417
+  focal = math.tan (0.00872665 * domeViewerFOV)
+  focal = (0.5 * horizontalFilmAperture) / (focal * 0.03937)
+  
+  #import maya.cmds as cmds
+  cameraName = cmds.camera(name=viewerCameraName, focalLength=focal, filmFit='Vertical', nearClipPlane=1, farClipPlane=1000, cameraScale=1)
+  
+  #Unselect the geometry in the scene
+  cmds.select(clear=True)
+  
+  #Change the icon size
+  cmds.setAttr(cameraName[0]+".locatorScale", 15)
+  
+  #Reset the camera position
+  cmds.setAttr(cameraName[0]+".rx", 0)
+  cmds.setAttr(cameraName[0]+".ry", 0)
+  cmds.setAttr(cameraName[0]+".rz", 0)
+  cmds.setAttr(cameraName[0]+".tx", 0)
+  cmds.setAttr(cameraName[0]+".ty", 0)
+  cmds.setAttr(cameraName[0]+".tz", 0)
+  
+  #Setup the default perspective camera view
+  regularSceneCamera = 'persp'
+  
+  #Tipped View
+  cmds.setAttr(regularSceneCamera+".rx", 20)
+  cmds.setAttr(regularSceneCamera+".ry", -80)
+  
+  #Level View
+  #cmds.setAttr(regularSceneCamera+".rx", 0)
+  #cmds.setAttr(regularSceneCamera+".ry", -60)
+  cmds.setAttr(regularSceneCamera+".rz", 0)
+  cmds.setAttr(regularSceneCamera+".tx", -800)
+  cmds.setAttr(regularSceneCamera+".ty", 79)
+  cmds.setAttr(regularSceneCamera+".tz", 450)
+  
+  cmds.viewFit('persp')
+  
+  #Turn off the grid
+  cmds.modelEditor('modelPanel4', edit=True, grid=False)
+  
+  #Turn on hardware texturing and shading
+  cmds.modelEditor('modelPanel1', edit=True, displayAppearance='smoothShaded', wireframeOnShaded=False, displayTextures=True, displayLights="none")
+  cmds.modelEditor('modelPanel4', edit=True, displayAppearance='smoothShaded', wireframeOnShaded=False, displayTextures=True, displayLights="none")
+  
+  gridModeEnabled = cmds.checkBoxGrp('checkGrpDomeViewerGridlinesOverlay', query=True, value1=True)
+  
+  #Point constrain the mesh to the camera
+  if cmds.checkBoxGrp("checkGrpDomeViewerPointConstrain", query=True, value1=True):
+    cmds.pointConstraint(cameraName[0], meshName, weight=1 )
+
+    #Add the point constraint for the fulldome grid too
+    if( currentPanoFormat == 1 ):
+      if( gridModeEnabled == 1 ):
+        cmds.pointConstraint(cameraName[0], gridMeshName, weight=1 )
+      
+  #Switch the viewport to look through a new fulldome viewing camera
+  cmds.lookThru(cameraName)
+
+
+#Load a new domeViewer polygon mesh into the scene
+#Syntax: createDomeViewerMesh('pCube1', 'mentalRayCube1_mesh', '45', 300)
+def createDomeViewerMesh(meshName, meshFileName, domeTiltAngle, scale):
+  import os  
+  import maya.cmds as cmds
+  import maya.mel as mel
+  
+  #Viewer Mesh Object Details
+  #meshName = 'pCube1'
+  #meshFileName = 'mentalRayCube1_mesh'
+  meshFileExtension = '.ma'
+  meshFileType = 'mayaAscii'
+  
+  #Get the selected geometry
+  #object_selection = cmds.ls(sl=True)
+
+  if cmds.objExists(meshName): 
+    print('Removing existing Domemaster3D object: ' + meshName)
+    cmds.select( meshName, replace=True)
+    cmds.delete()
+    
+  if cmds.objExists(meshFileName + '_sceneConfigurationScriptNode'): 
+    cmds.select( meshFileName + '_sceneConfigurationScriptNode', replace=True)
+    cmds.delete()
+  
+  if cmds.objExists(meshFileName + '_uiConfigurationScriptNode'): 
+    cmds.select( meshFileName + '_uiConfigurationScriptNode', replace=True)
+    cmds.delete()
+    
+  #Load the viewer model from the Domemaster3D source images directory
+  domeViewerModelFile = getModelsPath(meshFileName + meshFileExtension)
+  
+  #Load the Maya .ma format viewer model into the scene
+  domeViewer_mesh_file = cmds.file (domeViewerModelFile, i=True, type=meshFileType)
+
+  #scale = 300
+  
+  #Set the default size (scale) of the viewer backdrop
+  cmds.setAttr( meshName + ".scaleZ", scale)
+  cmds.setAttr( meshName +".scaleX", scale)
+  cmds.setAttr( meshName +".scaleY", scale)
+  
+  #Tilt the fulldome screen
+  cmds.setAttr ( meshName + ".rotateX", (-1*domeTiltAngle));
+
+  
+  
+  
+"""
+Create a DomeViewer mesh
+---------------------------
+A python function to create a fulldome image viewer with an incandescent lambert based shading network.
+"""
+def createDomeViewer():
+  import os  
+  import maya.cmds as cmds
+  import maya.mel as mel
+  
+  #Setup the tilt angle on the fulldome screen
+  domeTiltAngle = cmds.floatSliderGrp('sliderDomeViewerDomeTiltAngle', query=True, value=True)
+  #domeTiltAngle = -35
+  
+  #Preview Camera Name
+  viewerCameraName = 'ViewerCamera'
+  
+  #---------------------------------------------------------------------------
+  # Find out what type of panorama to add
+  #---------------------------------------------------------------------------
+  
+  #Get the selected panoramic image format
+  currentPanoFormat = cmds.optionMenuGrp('menuDomeViewerPanoramaFormat', query=True, select=True)
+
+  gridMeshName = ""
+  gridMeshFileName = ""
+  
+  if( currentPanoFormat == 1 ):
+    #180 Degree Fulldome
+    meshName = 'domeViewer'
+    meshFileName = 'fulldome_mesh'
+
+    gridMeshName = 'domeViewerGrid'
+    gridMeshFileName = 'fulldomeGrid_mesh'
+  elif ( currentPanoFormat == 2 ):
+    #360 Degree Angular Fisheye
+    meshName = 'domeViewer'
+    meshFileName = 'fulldome_mesh'
+  elif ( currentPanoFormat == 3 ):
+    #Mirror Ball
+    meshName = 'domeViewer'
+    meshFileName = 'fulldome_mesh'
+  elif ( currentPanoFormat == 4 ):
+    #Equirectangular (LatLong)
+    meshName = 'latlong'
+    meshFileName = 'latlongSphere_mesh'
+  elif ( currentPanoFormat == 5 ):
+    #Cube Map 3x2
+    meshName = 'cube3x2'
+    meshFileName = 'cube3x2_mesh'
+  elif ( currentPanoFormat == 6 ):
+    #Vertical Cross Cube
+    meshName = 'verticalCross'
+    meshFileName = 'verticalCrossCube_mesh'
+  elif ( currentPanoFormat == 7 ):
+    #Horizontal Cross Cube
+    meshName = 'horizontalCross'
+    meshFileName = 'horizontalCrossCube_mesh'
+  elif ( currentPanoFormat == 8 ):
+    #Vertical Tee Cube
+    meshName = 'verticalTee'
+    meshFileName = 'verticalTeeCube_mesh'
+  elif ( currentPanoFormat == 9 ):
+    #Horizontal Tee Cube
+    meshName = 'horizontalTee'
+    meshFileName = 'horizontalTeeCube_mesh'
+  elif ( currentPanoFormat == 10 ):
+    #Vertical Strip Cube
+    meshName = 'verticalStrip'
+    meshFileName = 'verticalStripCube_mesh'
+  elif ( currentPanoFormat == 11 ):
+    #Horizontal Strip Cube
+    meshName = 'horizontalStrip'
+    meshFileName = 'horizontalStripCube_mesh'
+  elif ( currentPanoFormat == 12 ):
+    #Mental Ray Horizontal Strip Cube
+    meshName = 'pCube1'
+    meshFileName = 'mentalRayCube1_mesh'
+
+  #---------------------------------------------------------------------------
+  # Create the panoramic elements in Maya
+  #---------------------------------------------------------------------------
+  
+  #Create the viewer mesh
+  createDomeViewerMesh( meshName, meshFileName, domeTiltAngle, 300 )
+  #Create the surface material
+  viewerTextureNode = createDomeViewerTexture( meshName, False )
+  
+  gridModeEnabled = cmds.checkBoxGrp('checkGrpDomeViewerGridlinesOverlay', query=True, value1=True)
+  
+  #Create the fulldome alignment grid
+  if(currentPanoFormat == 1):
+    if(gridModeEnabled == 1):
+      print("Creating a Bradbury fulldome reference grid.")
+      #Create the dome alignment grid mesh
+      createDomeViewerMesh( gridMeshName, gridMeshFileName, domeTiltAngle, 296 )
+      #Create the  dome alignment grid surface material
+      viewerTextureNode = createDomeViewerTexture( gridMeshName, True )
+      
+      
+  #Add the camera to the scene
+  createDomeViewerCamera( viewerCameraName, meshName, gridMeshName )
+  
+  #Select the File Texture node in the attribute editor so the image sequence loader will start working
+  mel.eval ( ' showEditorExact("' + viewerTextureNode + '") ' )
+  
+  
+
+  
+  #return the name of the domeViewer mesh
+  return meshName
 
 
 """

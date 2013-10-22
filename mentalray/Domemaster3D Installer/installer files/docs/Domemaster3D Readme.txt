@@ -1,12 +1,11 @@
 Domemaster3D Stereo Lens Shader
-Version 1.4 - Oct 6, 2013
+Version 1.4 B4 - Oct 21, 2013
 
 About This Shader
 ------------------
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
 
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "Center" camera option in the DomeAFL_FOV_Stereo shader.
-
 
 The Maya Domemaster3D shelf has buttons for the following features:
 
@@ -16,12 +15,13 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "DomeRamp" tool creates a screen space ramp texture
 -The "DomeAFL_FOV" tool creates a standard 2D domeAFL_FOV node + camera
 -The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
--The "DomeText" tool created raster titles and scrolling credits using the Dome Text GUI and ImageMagick.
--The "DomeGrid" tool creates a hemispherical yellow wireframe reference grid.
--The "Galaxy Creator" tool creates dynamic particle based galaxies.
--The "Starglobe" tool creates a mia_material_x_passes based starry background for your fulldome scenes.
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
+-The "Starglobe" tool creates a mia_material_x_passes based starry background for your fulldome scenes.
+-The "DomeGrid" tool creates a hemispherical yellow wireframe reference grid.
+-The "Galaxy Creator" tool creates dynamic particle based galaxies.
+-The "DomeText" tool created raster titles and scrolling credits using the Dome Text GUI and ImageMagick.
+-The "Viewer" tool creates an immersive fulldome and panoramic image+movie viewer.
 -The "Wiki Help" tool loads the Domemaster Stereo Shader Wiki page in your web browser.
 -The "Version Info" tool shows the current version number for the Domemaster Stereo Shader and provides links to the download page, and the NING group.
 
@@ -57,6 +57,7 @@ Project Developers
 -------------------
 
 Domemaster Stereo Shader for 3DS Max Created by Roberto Ziche
+http://www.robertoziche.com/
 
 Domemaster3D shader for Maya and Softimage by Andrew Hazelden
 andrew@andrewhazelden.com      
@@ -72,6 +73,9 @@ I would like to thank the following people for their contributions:
 Aaron Bradbury for the installer imagery from his Vortex fulldome short film.
 http://www.luniere.com/project/vortex/
 
+Aaron Bradbury for the inclusion of the fulldome alignment grid:
+http://www.luniere.com/2013/03/07/hi-res-fulldome-alignment-grid/
+
 Jason Fletcher for creating a high quality equirectangular starglobe texture.
 http://thefulldomeblog.com/2013/06/22/stars-to-surround-the-scene/
 
@@ -83,23 +87,68 @@ Martin Watt for writing the original galaxies.mel script.
 Version History
 -----------------
 
-
-Version 1.4 Beta 2 Changes
---------------------------------
+Version 1.4 Beta 4 Changes
+---------------------------------
+Oct 21, 2013
 
 Maya Changes
-----------------
-Added DomeText Lambert shading options with incandescent texture mapping
+-----------------
 
-Added DomeText text encoding support for English ASCII, Western Europe cp1252, all languages utf_8, Chinese Traditional Big5, Chinese Simplified gb2312, and Hong Kong Supplementary Character Set big5hkscs to UTF8 text conversion support.
+DomeAFL_FOV_Stereo - Now with a real-time OpenGL Stereo3D preview viewport using 4mm wide angle (non-fisheye) hardware rendering
+  Added a custom preRender and postRender mel script called domeRender.mel
+  The domeRender.mel script allows the Maya stereo camera rig + domeAFL_FOV_Stereo shader to display a realtime anaglyph 3D preview in the viewport. The openGL display mode shows a stereo3D version of the scene with the current camera separation, and dome radius (zero parallax values) and a 4 mm wide angle (non-fisheye) field of view.
+  The domeRender.mel script also adjusts the domemaster3D camera rig's internal "shape node" focal length to solve the blurry line artifact with a toggle between 4mm FOV in the viewport and 500mm FOV at render time.
+  
+Dome Viewer
+  Added a fulldome and panoramic image+movie viewer. The viewer supports all image and movie formats that can be opened using the Maya File Texture and Movie Nodes. You can display immersive images, image sequences, and movie files with accelerated RAM playback. Tilted fulldome theater screens can be simulated with the "Dome Tilt" attribute.
+    
+  A Bradbury alignment grid has been included for previewing calibrated fulldome scenes.
 
+  The following panoramic viewing modes are supported:
+    180 Degree Fulldome
+    360 Degree Angular Fisheye
+    Mirror Ball
+    Equirectangular (LatLong)
+    Cube Map 3x2
+    Vertical Cross Cube
+    Horizontal Cross Cube
+    Vertical Tee Cube
+    Horizontal Tee Cube
+    Vertical Strip Cube
+    Horizontal Strip Cube
+    Mental Ray Horizontal Strip Cube
 
+Starglobe Updates
+  Updated the Starglobe tool so the "Attach to Camera" menu uses the base camera name like 'persp' instead of the camera's shape node name like 'perspShape1'.
+
+Dome Text Upgrades
+  Added 93 international character encoding formats
+	Added controls for converting characters to:
+    Upper Case
+    Lower Case
+    Hex Words
+    Hex Single Column
+    Binary Words
+    Binary Single Column
+	Added DomeText aim constraints
+  Added Cylinder geometry support
+  Added Lambert material support
+  Added text animation features for automatic left/right/up/down scrolling text
+  Changed the caption for the Copy Node Settings menu to "Copy Text Settings From"
+  Added folder icon to Save Image As field
+  Added Flip Text Direction control for horizontal text mirroring on a plane or cylinder surface
+
+Galaxy Creator
+ Changed the caption for the Copy Node Settings menu to "Copy Particle Settings From"
+ 
+Updated userSetup.py script for better compatibility with mentalCore. The code to auto-reload the mental ray plugin "Mayatomr" at startup has been commented out.
 
 Version 1.4 Beta 2 Changes
--------------------------------
+---------------------------------
+Oct 6, 2013
 
 3DS Max Changes
---------------------
+---------------------
 
 Starglobe Update
 I've created a few different format starglobe models to make it easier for 3DS MAX users. The files are stored in the C:\Program Files\Domemaster3D\sourceimages folder.
@@ -108,9 +157,8 @@ There is a set of 2K and 8K texture resolution 3DS Max scene files: starglobe_me
 There is a set of 2K and 8K texture resolution FBX scene files: starglobe_mesh_2K.fbx, and starglobe_mesh_8K.fbx (You may have to flip the surface normals on the mesh for proper Max based rendering)
 There is a set of 2K and 8K texture resolution OBJ scene files: starglobe_mesh_2K.obj, and starglobe_mesh_8K.obj 
 
-
 Maya Changes
-----------------
+-----------------
 
 Updated Domemaster3D Shelf icons to a unified golden orange color palette
 
@@ -146,7 +194,6 @@ Added customized AE Template files for the domeAFL_FOV, domeAFL_WxH, and rob_loo
   
 Added the panotools based mpremap.exe application to the Domemaster3D/bin folder so textures could be remapped to different panoramic formats.
 
-
 Version 1.3.5 Changes
 ---------------------------
 
@@ -157,7 +204,6 @@ Added a starglobe tool to the Maya shelf to create a night sky backdrop. The sta
 Upgraded the Maya dome shaders to use the mia_material_x_passes shader
 
 Added Glow Intensity attributes to the Galaxy Creator GUI 
-
 
 Version 1.3.4
 ---------------------------

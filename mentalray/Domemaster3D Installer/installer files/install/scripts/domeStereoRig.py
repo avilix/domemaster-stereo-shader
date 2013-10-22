@@ -1,7 +1,10 @@
-#Domemaster3D Fulldome Stereo Rig V1.4
+#Domemaster3D Fulldome Stereo Rig V1.4 B4
 #Created by Andrew Hazelden  andrew@andrewhazelden.com
+#-----------------------------------------------------------------------
+#Updated Oct 21, 2013
 #
 #This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
+#
 
 #Setup the stereo rig libraries
 import maya.cmds as cmds
@@ -227,6 +230,17 @@ def createLensShaders(centerCam, leftCam, rightCam):
 
   #mel.eval ( ' showEditorExact(" ' + centerCamLens + ' ") ' )
   
+  # ---------------------------------------------------------------------
+  # Link the center camera lens shader to the Maya camera rig stereo3d settings
+  # This enables real-time 3D previews in the viewport
+  # ---------------------------------------------------------------------
+  cmds.connectAttr( centerCamLens+'.Dome_Radius', centerCam+'.zeroParallax', force=True )
+  cmds.connectAttr( centerCamLens+'.Cameras_Separation', centerCam+'.interaxialSeparation', force=True )
+
+  #Turn on Stereo 3D support for the Domemaster3D Maya camera rig
+  cmds.setAttr( centerCam+'.stereo',  1)
+
+  
 """
 This module defines a Stereo Camera rig.
 
@@ -379,11 +393,11 @@ def createRig(basename='DomeStereoCamera'):
   #---------------------------------------------------------------------------
   # Custom Domemaster3D Setup code
   #---------------------------------------------------------------------------
-  
-  cmds.setAttr( centerCam + '.stereo', 0 )
-  cmds.setAttr( centerCam + '.zeroParallax', 0.1 )
   cmds.setAttr( centerCam + '.focalLength', 4 )
-  cmds.setAttr( centerCam + '.interaxialSeparation', 0 )
+  
+  #cmds.setAttr( centerCam + '.stereo', 0 )
+  #cmds.setAttr( centerCam + '.zeroParallax', 0.1 )
+  #cmds.setAttr( centerCam + '.interaxialSeparation', 0 )
   
   # Create the fulldome stereo lens shaders
   createLensShaders(centerCam, leftCam, rightCam)
@@ -426,3 +440,29 @@ def registerThisRig():
                              'domeStereoRig.createRig'])
   cmds.stereoRigManager(cameraSetFunc=[rigTypeName,
                                        'domeStereoRig.attachToCameraSet'])
+
+
+"""
+A python function to get the current object's shape node
+
+getObjectShapeNode("stereoCamera")
+# Result: [u'stereoCameraCenterCamShape', u'stereoCameraFrustum'] # 
+
+"""
+
+def getObjectShapeNode ( object ) :
+    import maya.cmds as cmds
+    return cmds.listRelatives( object, children=True , shapes=True)
+
+
+"""
+A python function to get the current object's parent node
+
+getObjectParentNode("nurbsSphereShape1")
+# Result:  [u'nurbsSphere1'] #
+
+"""
+
+def getObjectParentNode ( object ) :
+    import maya.cmds as cmds
+    return cmds.listRelatives( object, parent=True)

@@ -11,15 +11,14 @@
   Version History
   ----------------
 
-  ------------------------------
   Version 1 -  Oct 6, 2013
   ------------------------------
   Initial Creation
 
   To use the domeRadius MEL script run the following MEL commands:
-  print("Dome Radius");
   source "domeRadius.mel";
   domeRadius("domeAFL_FOV");
+  
 */
 
 
@@ -117,13 +116,13 @@ global proc addDomePreviewRig (string $cameraName, string $lensShaderName){
     string $domeSurfaceShape = getObjectShapeNode($domeRadiusSurfaceName[0]);
     //DomeStereoCameraPreviewCurve1Shape
     
-    print "\nDome Preview elements:\n";
-    print $domeSurfaceShape;
-    print "\n";
+    //print "\nDome Preview elements:\n";
+    //print $domeRadiusSurfaceName;
+    //print "\n";
     
-    print "\nDome Preview shape node:\n";
-    print $domeSurfaceShape;
-    print "\n";
+    //print "\nDome Preview shape node:\n";
+    //print $domeSurfaceShape;
+    //print "\n";
     
     //Find out the preview curve's makeNurbCircle node name
     string $makeCurveShapeName = $domeCurveShape;

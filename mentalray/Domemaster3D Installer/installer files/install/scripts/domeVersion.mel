@@ -4,30 +4,14 @@
 
 	This tool displays the version number and lets you download an update.
 
-
 	Version History
 	----------------
   
-  
-  Version 1.0 Build 4
-	---------------------------------------
-  Oct 8, 2013
-	Updated version info
-  
-  Version 1.0 Build 3
-	---------------------------------------
-  Oct 6, 2013
-	Updated version info
-  
-  Improved Maya 2010 compatibility
-  
-  
-	Version 1.0 Build 1
-	---------------------------------------
-  Sept 23, 2013
-	Initial release
+  Domemaster3D V1.4 B4 - Oct 21, 2013
+  Domemaster3D V1.4 B3 - Oct 8, 2013
+  Domemaster3D V1.4 B2 - Oct 6, 2013
 
-	To use the Dome Text MEL script run the following MEL commands:
+	To use the Dome Version Checker script run the following MEL commands:
 	print("Dome Version Checker");
 	source "domeVersion.mel";
 	domeVersion();
@@ -76,11 +60,11 @@ global proc string getMayaPlatform(){
 }
 
 
+//Show the version info window
 global proc domeVersion(){
-
   string $dialogueButtonSelected = "";
-  string $domemaster3D_version = "1.4 B3";
-  string $release_date = "Oct 8, 2013";
+  string $domemaster3D_version = "1.4 B4";
+  string $release_date = "Oct 21, 2013";
 
   string $domeDialgueString = "";
   $domeDialgueString += "Domemaster3D Shader for Maya" + " - Version " + $domemaster3D_version + "\n";

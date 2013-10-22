@@ -95,7 +95,9 @@ global proc buildCamerasMenu(){
      // Look for the last item <done> in the array
      if ( $cameraNodeItems != "<done>" ){
        //print ( "camera [" + $i + "] " + $cameraNodeItems + "\n");
-       menuItem -label $cameraNodeItems;
+       //menuItem -label $cameraNodeItems;
+       //List the camera's using the base transform node name
+       menuItem -label `getObjectParentNode($cameraNodeItems)`;
      }
      $i = $i+1;
   }
@@ -148,7 +150,7 @@ global proc createStarglobe(){
     string $starglobeWindow = `window 
       -title "Starglobe" 
       -widthHeight $starglobeWindowWidth $starglobeWindowHeight 
-      starglobeWin`;  
+      starglobeWin`;
 
     string $starglobeScrollableLayout = `scrollLayout 
       -horizontalScrollBarThickness 18
@@ -273,16 +275,17 @@ global proc doStarglobe(){
   string $CameraName = `optionMenuGrp -query -value menuCameraSelect`;
   
   //Create the starglobe and get the starglobe object name
-  python("import domeMaterial as domeMaterial\n");
-  //$starglobeName = python("domeMaterial.createStarglobe()\n");
-  python("domeMaterial.createStarglobe()\n");
+  python("import domeMaterial as domeMaterial");
+  //$starglobeName = python("domeMaterial.createStarglobe()");
+  python("domeMaterial.createStarglobe()");
   
     if ( $CameraName  != "Select a Camera..." ){
       //Check if the constraint object exists
       if( `objExists $starglobeName` ) {
         print ("Starglobe: " + $starglobeName + " created. The " + $CameraName + " was selected as the starglobe camera constraint.\n");
         //pointConstraint parentName childName;
-        pointConstraint -offset 0 0 0 -weight 1 `getObjectParentNode($CameraName)` $starglobeName;
+        //pointConstraint -offset 0 0 0 -weight 1 `getObjectParentNode($CameraName)` $starglobeName;
+        pointConstraint -offset 0 0 0 -weight 1 $CameraName $starglobeName;
       } else { print("Warning: The starglobe couldn't be found.\n"); }
     } else { print ("Starglobe: " + $starglobeName + " created. No camera was selected for the starglobe constraint.\n"); }
 
