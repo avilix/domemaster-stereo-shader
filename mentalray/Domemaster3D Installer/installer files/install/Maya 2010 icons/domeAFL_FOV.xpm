@@ -1,5 +1,5 @@
 /* XPM */
-static char * image_name[]={
+static char image_name[]={
 "128 128 114 2",
 "  	c #C4C4C4",
 ". 	c #D8BFD8",

@@ -9,6 +9,13 @@
   
   Note: You can change the default focal length values from 500mm and 4mm on the first two lines of the domeScanLensShaders() function.
   
+
+  Version 1.4 B5
+  -----------------
+  Oct 24, 2013
+
+  Updated PreRenderMel and PostRenderMel code for the DomeAFL_FOV_Stereo shader.
+
   Version 1.0 Build 3
   --------------------
   Oct 21, 2013
@@ -232,11 +239,4 @@ global proc string getObjectParentNode ( string $object ) {
   return $shapes[0];
 }
 
-
 //----------------------------------------------------------------------------
-
-//PreRender MEL:
-setAttr -type "string" defaultRenderGlobals.preMel "domemaster3DPreRenderMEL();";
-
-//PostRender MEL:
-setAttr -type "string" defaultRenderGlobals.postMel "domemaster3DPostRenderMEL();";

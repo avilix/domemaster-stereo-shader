@@ -1,7 +1,7 @@
 <project>
     <shortName>Domemaster3D</shortName>
     <fullName>Domemaster3D Shader</fullName>
-    <version>1.4-Beta4</version>
+    <version>1.4-Beta5</version>
     <readmeFile>Domemaster_x64_readme.txt</readmeFile>
     <leftImage>vortex_sidebar.png</leftImage>
     <splashImage>splash_screen.png</splashImage>
@@ -91,14 +91,14 @@
                     <platforms>all</platforms>
                     <distributionFileList>
                         <distributionFile>
-                            <origin>installer files/docs/Maya Example Scene.zip</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>installer files/docs/Domemaster3D Readme.txt</origin>
                         </distributionFile>
                         <distributionDirectory>
                             <origin>installer files/docs/Galaxy Creator Tool</origin>
                         </distributionDirectory>
+                        <distributionFile>
+                            <origin>installer files/docs/domeAFL_FOV_Stereo_maya_project.zip</origin>
+                        </distributionFile>
                     </distributionFileList>
                     <shortcutList>
                         <linkShortcut>

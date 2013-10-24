@@ -8,6 +8,13 @@ This script makes it easy to start creating fulldome stereoscopic content in Aut
 
 Version History
 
+
+Version 1.4 B5
+-----------------
+Oct 24, 2013
+
+Updated PreRenderMel and PostRenderMel code for the DomeAFL_FOV_Stereo shader.
+
 Version 1.4 B4
 ---------------
 Oct 21, 2013
@@ -575,9 +582,9 @@ def createDomeGrid():
   #---------------------------------------------------------------------------
   
   #Reference Grid Meshes
-  #DomeGridSurface = 'DomeGridSurface'
-  DomeGridSurface = 'DomeGridSurface'
-  DomeGridlineSurface = 'DomeGridlineSurface'
+  #domeGridSurface = 'domeGridSurface'
+  domeGridSurface = 'domeGridSurface'
+  domeGridlineSurface = 'domeGridlineSurface'
   
   #Set the diameter of the dome shape
   startingDomeDiameter = 180
@@ -600,9 +607,9 @@ def createDomeGrid():
     cmds.select( 'MeshGroup', replace=True)
     cmds.delete() 
   
-  if cmds.objExists(DomeGridSurface): 
-    print('Removing existing Domemaster3D object: ' + DomeGridSurface)
-    cmds.select( DomeGridSurface, replace=True)
+  if cmds.objExists(domeGridSurface): 
+    print('Removing existing Domemaster3D object: ' + domeGridSurface)
+    cmds.select( domeGridSurface, replace=True)
     cmds.delete()
   
   if cmds.objExists('domeGridToon'): 
@@ -684,7 +691,7 @@ def createDomeGrid():
   """
 
   #Revolve the base 90 degree arc curve into a NURBS dome shape
-  domeRadiusSurfaceName = cmds.revolve(domeCurveShape, name='DomeGridSurface', ch=1, po=0, rn=0, ssw=0, esw=360, ut=0, tol=0.01, degree=3, s=40, ulp=1, ax=(0, 1, 0), polygon=1)
+  domeRadiusSurfaceName = cmds.revolve(domeCurveShape, name='domeGridSurface', ch=1, po=0, rn=0, ssw=0, esw=360, ut=0, tol=0.01, degree=3, s=40, ulp=1, ax=(0, 1, 0), polygon=1)
 
   domeSurfaceShape = getObjectShapeNode(domeRadiusSurfaceName[0]);
 
@@ -724,7 +731,7 @@ def createDomeGrid():
   #cmds.parent(domeRadiusCurveName[0], domeRadiusTransform)
   
   #Create the base sphere with a 1 unit scale
-  #domeGridName = cmds.polySphere( name=DomeGridSurface, radius = 1, subdivisionsX=36, subdivisionsY=20, axis=(0, 1, 0),  createUVs=2, constructionHistory=True )
+  #domeGridName = cmds.polySphere( name=domeGridSurface, radius = 1, subdivisionsX=36, subdivisionsY=20, axis=(0, 1, 0),  createUVs=2, constructionHistory=True )
   
   #Chop the polysphere into a hemispherical dome
   #domeGridTransform = domeGridName[0]
@@ -815,13 +822,13 @@ def createDomeGrid():
   
   #Connect the surface shader to the shading group and the polygon surface
   cmds.connectAttr(domeGridMaterial+'.outColor', domeGridShadingGroup+'.surfaceShader')
-  cmds.select(DomeGridSurface)
+  cmds.select(domeGridSurface)
   cmds.hyperShade(assign=domeGridShadingGroup)
 
   #---------------------------------------------------------------------------
   #Group the domeGrid surfaces under a node called "domeGrid"
   #---------------------------------------------------------------------------
-  #cmds.group( 'DomeGridSurface', 'domeGridToon', 'MeshGroup', name='domeGrid' )
+  #cmds.group( 'domeGridSurface', 'domeGridToon', 'MeshGroup', name='domeGrid' )
   cmds.group( domeRadiusCurveName[0], domeRadiusSurfaceName[0], 'domeGridToon', 'MeshGroup', name='domeGrid' )
   #        
   #---------------------------------------------------------------------------
@@ -957,7 +964,7 @@ def createDomeGrid():
   #---------------------------------------------------------------------------
   
   domeRadiusTransform =  "domeGrid"
-  domeSurfaceShape = "DomeGridSurface"
+  domeSurfaceShape = "domeGridSurface"
   domeSurfaceShapeNode = getObjectShapeNode(domeSurfaceShape)
   
   

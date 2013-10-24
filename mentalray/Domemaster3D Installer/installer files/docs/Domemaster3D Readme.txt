@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader
-Version 1.4 B4 - Oct 21, 2013
+Version 1.4 B5 - Oct 24, 2013
 
 About This Shader
 ------------------
@@ -87,6 +87,16 @@ Martin Watt for writing the original galaxies.mel script.
 Version History
 -----------------
 
+Version 1.4 Beta 5 Change
+---------------------------------
+Oct 24, 2013
+
+Maya Changes
+-----------------
+
+Updated the domeAFL_FOV_Stereo camera preview code to fix a bug that stopped batch rendering from completing with the new domeRender.mel script.
+
+
 Version 1.4 Beta 4 Changes
 ---------------------------------
 Oct 21, 2013
@@ -94,7 +104,8 @@ Oct 21, 2013
 Maya Changes
 -----------------
 
-DomeAFL_FOV_Stereo - Now with a real-time OpenGL Stereo3D preview viewport using 4mm wide angle (non-fisheye) hardware rendering
+DomeAFL_FOV_Stereo 
+  Now with a real-time OpenGL Stereo3D preview viewport using 4mm wide angle (non-fisheye) hardware rendering
   Added a custom preRender and postRender mel script called domeRender.mel
   The domeRender.mel script allows the Maya stereo camera rig + domeAFL_FOV_Stereo shader to display a realtime anaglyph 3D preview in the viewport. The openGL display mode shows a stereo3D version of the scene with the current camera separation, and dome radius (zero parallax values) and a 4 mm wide angle (non-fisheye) field of view.
   The domeRender.mel script also adjusts the domemaster3D camera rig's internal "shape node" focal length to solve the blurry line artifact with a toggle between 4mm FOV in the viewport and 500mm FOV at render time.
@@ -106,8 +117,8 @@ Dome Viewer
 
   The following panoramic viewing modes are supported:
     180 Degree Fulldome
-    360 Degree Angular Fisheye
-    Mirror Ball
+    360 Degree Angular Fisheye*
+    Mirror Ball*
     Equirectangular (LatLong)
     Cube Map 3x2
     Vertical Cross Cube
@@ -118,25 +129,27 @@ Dome Viewer
     Horizontal Strip Cube
     Mental Ray Horizontal Strip Cube
 
+  Note: *The 360 Degree Angular Fisheye and Mirror Ball panorama modes still need some work.
+
 Starglobe Updates
   Updated the Starglobe tool so the "Attach to Camera" menu uses the base camera name like 'persp' instead of the camera's shape node name like 'perspShape1'.
 
 Dome Text Upgrades
   Added 93 international character encoding formats
-	Added controls for converting characters to:
-    Upper Case
-    Lower Case
-    Hex Words
-    Hex Single Column
-    Binary Words
-    Binary Single Column
-	Added DomeText aim constraints
+  Added DomeText aim constraints
   Added Cylinder geometry support
   Added Lambert material support
   Added text animation features for automatic left/right/up/down scrolling text
   Changed the caption for the Copy Node Settings menu to "Copy Text Settings From"
   Added folder icon to Save Image As field
   Added Flip Text Direction control for horizontal text mirroring on a plane or cylinder surface
+  Added controls for converting characters to:
+    Upper Case
+    Lower Case
+    Hex Words
+    Hex Single Column
+    Binary Words
+    Binary Single Column
 
 Galaxy Creator
  Changed the caption for the Copy Node Settings menu to "Copy Particle Settings From"
