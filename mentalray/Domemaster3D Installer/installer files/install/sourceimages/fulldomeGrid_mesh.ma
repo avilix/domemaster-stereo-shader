@@ -3,7 +3,6 @@
 //Last modified: Mon, Oct 21, 2013 11:10:40 PM
 //Codeset: 1252
 requires maya "2011";
-requires "maxwell" "2.7.18";
 requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";

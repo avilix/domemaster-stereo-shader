@@ -25,7 +25,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeCamera as domeCamera\ndomeCamera.createFulldomeStereoRig()\ndomeCamera.createDomeGrid()\ndomeCamera.createTestShapes()\ndomeCamera.setRenderRes()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createFulldomeStereoRig()\ndomeCamera.createDomeGrid()\ndomeCamera.createTestShapes()\ndomeCamera.setRenderRes()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -50,7 +50,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeCamera as domeCamera\ndomeCamera.createFulldomeStereoRig()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createFulldomeStereoRig()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -75,7 +75,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeCamera as domeCamera\ndomeCamera.createRobLookup()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createRobLookup()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -100,7 +100,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeCamera as domeCamera\ndomeCamera.createDomeRampTexture()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createDomeRampTexture()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -125,7 +125,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeCamera as domeCamera\ndomeCamera.createDomeAFL_FOV_Camera()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createDomeAFL_FOV_Camera()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -150,7 +150,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeCamera as domeCamera\ndomeCamera.createDomeAFL_WxH_Camera()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createDomeAFL_WxH_Camera()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -175,7 +175,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeMaterial as domeMaterial\ndomeMaterial.createColorMiaMaterial()" 
+        -command "import domeMaterial\nreload(domeMaterial)\ndomeMaterial.createColorMiaMaterial()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -200,7 +200,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeMaterial as domeMaterial\ndomeMaterial.createColorBumpMiaMaterial()" 
+        -command "import domeMaterial\nreload(domeMaterial)\ndomeMaterial.createColorBumpMiaMaterial()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -250,7 +250,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeCamera as domeCamera\ndomeCamera.createDomeGrid()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createDomeGrid()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;
@@ -350,7 +350,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeCamera as domeCamera\ndomeCamera.openDomemasterWiki()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.openDomemasterWiki()" 
         -sourceType "python" 
         -commandRepeatable 1
     ;

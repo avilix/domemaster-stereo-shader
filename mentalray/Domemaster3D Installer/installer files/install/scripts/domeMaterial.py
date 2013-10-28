@@ -15,13 +15,24 @@ You can set the file textures to an empty path if you don't want a default textu
 Version History
 ----------------
 
-Version 1.4 B4 - build 4
+Version 1.4 Beta 6 Build 4
+-------------------------------
+Oct 27, 2013
+
+Added cylindrical panorama support
+Added focal length HUD controls in the domeViewer window
+Added Maya 2010 support to the starglobe GUI window
+
+
+Version 1.4 Beta 4 - Build 4
+-------------------------------
 Oct 20, 2013
 
 Added the Dome Viewer feature for exploring rendered domemaster formatted imagery
 
 
-Version 1.3.5 build 7 - 7am
+Version 1.3.5 Build 7
+--------------------------
 August 20, 2013
 
 Upgraded the Maya dome material shaders to use the mia_material_x_passes shader
@@ -32,7 +43,8 @@ The starglobe textures and meshes are stored in the Domemaster3D/sourceimages fo
 
 
 Version 1.3.3
-Released May 29, 2013
+---------------
+May 29, 2013
 
 Updated the default locator scale
 
@@ -40,17 +52,20 @@ Updated source image paths for Maya 2010 compatibility
 
 
 Version 1.3.2 - Build 1
-Released April 16, 2013
+-------------------------
+April 16, 2013
 Edited the default camera connections for the lens shaders to work with the modified versions of the maya createMentalRayIndirectLightingTab.mel & AEmia_physicalskyTemplate.mel scripts. This fixes the problem of the Physical Sky & Sum system overwriting the first .miLensShader input on cameras in the scene.
 
 The location of the default domemaster control map textures is now in the C:\Program Files\Domemaster3D\sourceimages folder on Windows or the /Applications/Domemaster3D/sourceimages folder on Mac OS X. The Domemaster3D shelf tools have been updated to link to the new sourceimages folder.
 
 Version 1.3 - Build 27
+------------------------
 Released Nov 4, 2012
 Edited default presets for bump map shading network, added WxH and FOV camera tools, changed the default lens shader connections to support the mental ray sky and sun system.
 
 Version 1.0
-Beta Release Oct 31, 2012
+-------------
+Oct 31, 2012
 Created first python script to create a domeAFL mental ray shading network
 
 ------------------------------------------------------------------------------
@@ -336,7 +351,17 @@ def createDomeViewerTexture( meshName, isGrid ):
       cmds.setAttr( domeViewer_maya_tex+'.startCycleExtension', startFrame)
       cmds.setAttr( domeViewer_maya_tex+'.endCycleExtension', endFrame)
   
-  
+  if cmds.checkBoxGrp("checkGrpDomeViewerFocalLength", query=True, value1=True) == True:
+    #Display the focal length in the heads up display
+    mel.eval("setFocalLengthVisibility(1)")
+  else:
+    #Hide the focal length in the heads up display
+    mel.eval("setFocalLengthVisibility(0)")
+
+  #Rotate the Cylinder texture 90 degrees to an "Upright" orientation
+  if(meshName == 'cylinder'):
+    cmds.setAttr( domeViewer_maya_placement+'.rotateFrame', 90)
+
   #Apply the shading group to the selected geometry
   #cmds.select("domeViewer")
   cmds.select(meshName)
@@ -356,22 +381,57 @@ def createDomeViewerTexture( meshName, isGrid ):
   cmds.addAttr(baseNodeName, longName=attrName, attributeType="enum", en="Off:Wireframe:Shaded:Wireframe on Shaded", defaultValue=2, keyable=True)
   print('Adding custom Attributes ' + baseNodeName + '.' + attrName)
 
+  #---------------------------------------------------------------------------
+  #Add an Exposure control to the domeGrid's transform node - Default value 0.25
+  #---------------------------------------------------------------------------
+  #Have the code switch the input value based upon an isGrid check
+  imageExposure = cmds.floatSliderGrp("sliderDomeViewerImageExposure", query=True, value=True)
+
+  attrName = 'exposure';
+  cmds.addAttr(baseNodeName, longName=attrName, attributeType="double", keyable=True, defaultValue=imageExposure, min=0, max=100, softMinValue=0.0001, softMaxValue=10)
+
+  #---------------------------------------------------------------------------
+  #Add a Color Tint control to the domeGrid's transform node - Default color 0,0,0 = Black
+  #---------------------------------------------------------------------------
+
+  #Have the code switch the input value based upon an isGrid check
+  colorTintRGBcolor = cmds.colorSliderGrp("sliderDomeViewerColorTint", query=True, rgb=True)
+
+  attrName = 'colorTint'
+  attrRName = "colorTintColorR"
+  attrGName = "colorTintColorG"
+  attrBName = "colorTintColorB"
+
+  #if(mel.attributeExists(attrName, baseNodeName) == 0):
+  cmds.addAttr(baseNodeName, longName=attrName, attributeType="float3", usedAsColor=True, keyable=True)
+  cmds.addAttr(baseNodeName, parent=attrName, longName=attrRName, attributeType="float", keyable=True, defaultValue=colorTintRGBcolor[0])
+  cmds.addAttr(baseNodeName, parent=attrName, longName=attrGName, attributeType="float", keyable=True, defaultValue=colorTintRGBcolor[1])
+  cmds.addAttr(baseNodeName, parent=attrName, longName=attrBName, attributeType="float", keyable=True, defaultValue=colorTintRGBcolor[2])
+  print('Adding custom Attributes ' + baseNodeName + '.' + attrName)
   
+  #Connect the Grid Surface Color swatch to the surface shader
+  #cmds.connectAttr( (baseNodeName+'.'+attrName), domeViewer_maya_tex+'.colorGain', force=True)
+
   #Setup the domeViewer & domeViewerGrid transparency
   baseTransparency = 0
+
   if (isGrid == True):
+    #The grid background is 75% transparent
     baseTransparency = 0.75
-    
+  else:
+    #The viewer background is solid
+    baseTransparency = 0
+
   #---------------------------------------------------------------------------
   #Add a Grid Surface Transparency control to the domeGrid's transform node - Default value 0.25
   #---------------------------------------------------------------------------
-  attrName = 'gridSurfaceTransparency'
+  attrName = 'transparency'
   cmds.addAttr(baseNodeName, longName=attrName, attributeType="double", keyable=True, defaultValue=baseTransparency, min=0, max=1)
 
   #Connect the Grid Surface transparency swatch to the surface shader
   cmds.connectAttr( (baseNodeName+'.'+attrName), domeViewer_preview_shader_name+'.transparencyR', force=True)
   cmds.connectAttr( (baseNodeName+'.'+attrName), domeViewer_preview_shader_name+'.transparencyG', force=True)
-  cmds.connectAttr( (baseNodeName+'.'+attrName), domeViewer_preview_shader_name+'.transparencyB', force=True)   
+  cmds.connectAttr( (baseNodeName+'.'+attrName), domeViewer_preview_shader_name+'.transparencyB', force=True)
 
   #---------------------------------------------------------------------------  
   #Add a display mode expression to the domeGrid's transform node
@@ -389,6 +449,13 @@ def createDomeViewerTexture( meshName, isGrid ):
   PreviewShapeExpr = ""
 
   PreviewShapeExpr += "// Custom " + previewAttrName + " Preview Shape Expressions\n\n"
+
+  #Color controls - colorGain is the result of multiplying the exposure by the color tint
+  PreviewShapeExpr += domeViewer_maya_tex + ".colorGainR = " + domeRadiusTransform+ ".colorTintColorR" + " * " + domeRadiusTransform+ ".exposure;"+ "\n\n"
+  PreviewShapeExpr += domeViewer_maya_tex + ".colorGainG = " + domeRadiusTransform+ ".colorTintColorG" + " * " + domeRadiusTransform+ ".exposure;"+ "\n\n"
+  PreviewShapeExpr += domeViewer_maya_tex + ".colorGainB = " + domeRadiusTransform+ ".colorTintColorB" + " * " + domeRadiusTransform+ ".exposure;"+ "\n\n"
+
+  #Visibility Controls
   PreviewShapeExpr += "if (  " + domeRadiusTransform + "." + previewAttrName + " == 0){\n"
   PreviewShapeExpr += "  //Off Mode\n"
   PreviewShapeExpr += "  " + domeSurfaceShape + ".overrideDisplayType = 2;\n"
@@ -432,8 +499,8 @@ def createDomeViewerTexture( meshName, isGrid ):
   print "DomeGrid Extra Attribute Expressions:"
   print PreviewShapeExpr
 
-  cmds.expression( name=exprName, string=PreviewShapeExpr, object='domeGrid', alwaysEvaluate=True, unitConversion=all)
-  
+  cmds.expression( name=exprName, string=PreviewShapeExpr, object=domeRadiusTransform, alwaysEvaluate=True, unitConversion=all)
+
   #output the name of the new fileTexture node
   return domeViewer_maya_tex
   
@@ -538,13 +605,13 @@ def createDomeViewerMesh(meshName, meshFileName, domeTiltAngle, scale):
     cmds.select( meshName, replace=True)
     cmds.delete()
     
-  if cmds.objExists(meshFileName + '_sceneConfigurationScriptNode'): 
-    cmds.select( meshFileName + '_sceneConfigurationScriptNode', replace=True)
-    cmds.delete()
+  #if cmds.objExists(meshFileName + '_sceneConfigurationScriptNode'): 
+  #  cmds.select( meshFileName + '_sceneConfigurationScriptNode', replace=True)
+  #  cmds.delete()
   
-  if cmds.objExists(meshFileName + '_uiConfigurationScriptNode'): 
-    cmds.select( meshFileName + '_uiConfigurationScriptNode', replace=True)
-    cmds.delete()
+  #if cmds.objExists(meshFileName + '_uiConfigurationScriptNode'): 
+  #  cmds.select( meshFileName + '_uiConfigurationScriptNode', replace=True)
+  #  cmds.delete()
     
   #Load the viewer model from the Domemaster3D source images directory
   domeViewerModelFile = getModelsPath(meshFileName + meshFileExtension)
@@ -562,8 +629,6 @@ def createDomeViewerMesh(meshName, meshFileName, domeTiltAngle, scale):
   #Tilt the fulldome screen
   cmds.setAttr ( meshName + ".rotateX", (-1*domeTiltAngle));
 
-  
-  
   
 """
 Create a DomeViewer mesh
@@ -601,49 +666,53 @@ def createDomeViewer():
     gridMeshFileName = 'fulldomeGrid_mesh'
   elif ( currentPanoFormat == 2 ):
     #360 Degree Angular Fisheye
-    meshName = 'domeViewer'
-    meshFileName = 'fulldome_mesh'
+    meshName = 'angular360'
+    meshFileName = 'angular360_mesh'
   elif ( currentPanoFormat == 3 ):
     #Mirror Ball
-    meshName = 'domeViewer'
-    meshFileName = 'fulldome_mesh'
+    meshName = 'mirrorball'
+    meshFileName = 'mirrorball_mesh'
   elif ( currentPanoFormat == 4 ):
     #Equirectangular (LatLong)
     meshName = 'latlong'
     meshFileName = 'latlongSphere_mesh'
   elif ( currentPanoFormat == 5 ):
+    #Cylindrical
+    meshName = 'cylinder'
+    meshFileName = 'cylinder_mesh'
+  elif ( currentPanoFormat == 6 ):
     #Cube Map 3x2
     meshName = 'cube3x2'
     meshFileName = 'cube3x2_mesh'
-  elif ( currentPanoFormat == 6 ):
+  elif ( currentPanoFormat == 7 ):
     #Vertical Cross Cube
     meshName = 'verticalCross'
     meshFileName = 'verticalCrossCube_mesh'
-  elif ( currentPanoFormat == 7 ):
+  elif ( currentPanoFormat == 8 ):
     #Horizontal Cross Cube
     meshName = 'horizontalCross'
     meshFileName = 'horizontalCrossCube_mesh'
-  elif ( currentPanoFormat == 8 ):
+  elif ( currentPanoFormat == 9 ):
     #Vertical Tee Cube
     meshName = 'verticalTee'
     meshFileName = 'verticalTeeCube_mesh'
-  elif ( currentPanoFormat == 9 ):
+  elif ( currentPanoFormat == 10 ):
     #Horizontal Tee Cube
     meshName = 'horizontalTee'
     meshFileName = 'horizontalTeeCube_mesh'
-  elif ( currentPanoFormat == 10 ):
+  elif ( currentPanoFormat == 11 ):
     #Vertical Strip Cube
     meshName = 'verticalStrip'
     meshFileName = 'verticalStripCube_mesh'
-  elif ( currentPanoFormat == 11 ):
+  elif ( currentPanoFormat == 12 ):
     #Horizontal Strip Cube
     meshName = 'horizontalStrip'
     meshFileName = 'horizontalStripCube_mesh'
-  elif ( currentPanoFormat == 12 ):
+  elif ( currentPanoFormat == 13 ):
     #Mental Ray Horizontal Strip Cube
     meshName = 'pCube1'
     meshFileName = 'mentalRayCube1_mesh'
-
+  
   #---------------------------------------------------------------------------
   # Create the panoramic elements in Maya
   #---------------------------------------------------------------------------
@@ -660,19 +729,15 @@ def createDomeViewer():
     if(gridModeEnabled == 1):
       print("Creating a Bradbury fulldome reference grid.")
       #Create the dome alignment grid mesh
-      createDomeViewerMesh( gridMeshName, gridMeshFileName, domeTiltAngle, 296 )
+      createDomeViewerMesh( gridMeshName, gridMeshFileName, domeTiltAngle, 294 )
       #Create the  dome alignment grid surface material
       viewerTextureNode = createDomeViewerTexture( gridMeshName, True )
-      
       
   #Add the camera to the scene
   createDomeViewerCamera( viewerCameraName, meshName, gridMeshName )
   
   #Select the File Texture node in the attribute editor so the image sequence loader will start working
   mel.eval ( ' showEditorExact("' + viewerTextureNode + '") ' )
-  
-  
-
   
   #return the name of the domeViewer mesh
   return meshName
@@ -705,6 +770,16 @@ def createStarglobe():
     print('Removing existing Domemaster3D object: polyStarglobe')
     cmds.select( 'polyStarglobe', replace=True)
     cmds.delete()
+
+  meshFileName= 'starglobe_mesh'
+
+  if cmds.objExists(meshFileName + '_sceneConfigurationScriptNode'): 
+   cmds.select( meshFileName + '_sceneConfigurationScriptNode', replace=True)
+   cmds.delete()
+  
+  if cmds.objExists(meshFileName + '_uiConfigurationScriptNode'): 
+   cmds.select( meshFileName + '_uiConfigurationScriptNode', replace=True)
+   cmds.delete()
 
   #Load the quads based starglobe sphere model
   StarglobeModelFile = getModelsPath("starglobe_mesh.ma")
@@ -1091,8 +1166,7 @@ def createColorMiaMaterial():
     #print "No objects selected"
     #Select the surface material
     cmds.select(dome_mia_shader_name, r=True)
-        
-
+  
 """
 A python function to get the current object's shape node
 
@@ -1103,7 +1177,6 @@ getObjectShapeNode("stereoCamera")
 def getObjectShapeNode ( object ) :
     import maya.cmds as cmds
     return cmds.listRelatives( object, children=True , shapes=True)
-
 
 """
 A python function to get the current object's parent node

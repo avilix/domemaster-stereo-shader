@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.4 B5 - Oct 24, 2013
+Version 1.4 B6 - Oct 27, 2013
 
 Maintained by Andrew Hazelden
 andrew@andrewhazelden.com
@@ -11,8 +11,36 @@ The Domemaster Stereo lens shader is a custom mental ray shader that creates a s
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "center" camera option in the DomeAFL_FOV_Stereo shader.
 
 
+Version 1.4 Beta 6 Changes
+-------------------------------
+Oct 27, 2013
+
+Maya Changes
+----------------
+
+DomeViewer
+  Added cylindrical panorama support to the domeViewer
+  Added a new 360 angular fisheye, and mirrorball mesh
+  Improved transparency support on the grid overlay
+  Added image exposure and color tint controls
+
+DomeText
+  Added wrapU and wrapV attributes to the GUI. (It is now easier to create scrolling credits by setting the auto scroll direction to "scroll up" and un-checking the WrapV checkbox.)
+  Updated the text mirror controls
+
+Updated the DomeGrid default settings.
+
+Added code to detect if the Domemaster3D shader is running in GUI mode or batch mode. This will skip running the userSetup.py code for adding a custom menu when running in batch mode. 
+
+Improved Maya 2010 support
+  Updated the domeStereoRig.py camera rig file for Maya 2010 support.
+  Improved the dome_AFL_FOV_Stereo GUI code for Maya 2010 support .
+  Updated the Domemaster3D menu system for stereo rig support in Maya 2010.
+  Updated the starglobe GUI window for Maya 2010 support.
+  Updated the Maya Shelf files.
+
 Version 1.4 Beta 5 Change
----------------------------------
+-----------------------------
 Oct 24, 2013
 
 Maya Changes
@@ -22,7 +50,7 @@ Updated the domeAFL_FOV_Stereo camera preview code to fix a bug that stopped bat
 
 
 Version 1.4 Beta 4 Changes
----------------------------------
+-------------------------------
 Oct 21, 2013
 
 Maya Changes
@@ -81,7 +109,7 @@ Galaxy Creator
 Updated userSetup.py script for better compatibility with mentalCore. The code to auto-reload the mental ray plugin "Mayatomr" at startup has been commented out.
 
 Version 1.4 Beta 2 Changes
----------------------------------
+------------------------------
 Oct 6, 2013
 
 Maya Changes

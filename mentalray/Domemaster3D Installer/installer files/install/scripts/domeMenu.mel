@@ -1,32 +1,28 @@
 /*
-
-------------------------------------------------------------------------------
 Create the Domemaster3D Main Menu in the Rendering menu set
-Oct 6, 2013 v1.0 Build 2
+Oct 26, 2013 v1.1 Build 2
 ------------------------------------------------------------------------------
 
-//Notes:
-//gMainRenderMenu
-//gMainCreateMenu
-//Create->Cameras
+Notes:
+gMainRenderMenu
+gMainCreateMenu
+Create->Cameras
 
 //Find a menu bar command
-//findMenuItem;
+findMenuItem;
 
 //List menu sets:
-//string $menuSets[] = `menuSet -allMenuSets`;
-//Result: commonMenuSet animationMenuSet polygonsMenuSet surfacesMenuSet dynamicsMenuSet renderingMenuSet nDynamicsMenuSet // 
+string $menuSets[] = `menuSet -allMenuSets`;
+//Result: commonMenuSet animationMenuSet polygonsMenuSet surfacesMenuSet dynamicsMenuSet renderingMenuSet nDynamicsMenuSet 
  
 //Remove old menu
-//deleteUI mainDomemaster3DMenu;
+deleteUI mainDomemaster3DMenu;
 
 //Load the menus using:
 source "domeMenu.mel";
 createDomemaster3DMenu();
 
 */
-
-
 
 
 //Check what Maya version is active
@@ -187,33 +183,33 @@ global proc createDomemaster3DMenu() {
     -tearOff true 
     -label "Dome Cameras" 
     DomeCamerasMenu;
+
       menuItem 
         -label "Domemaster WxH Camera" 
-        -command "python(\"import domeCamera as domeCamera\");python(\"domeCamera.createDomeAFL_WxH_Camera()\");";
+        -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.createDomeAFL_WxH_Camera()\")";
       menuItem 
         -label "Domemaster FOV Camera" 
-        -command "python(\"import domeCamera as domeCamera\");python(\"domeCamera.createDomeAFL_FOV_Camera()\");";
-        
+        -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.createDomeAFL_FOV_Camera()\")";
+
+      menuItem -divider true;
       
+      menuItem 
+        -label "Domemaster3D FOV Camera" 
+        -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.createFulldomeStereoRig()\")";
+               
+      menuItem 
+        -label "Dome Texture" 
+        -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.createRobLookup()\")";
+      menuItem 
+        -label "Dome Ramp" 
+        -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.createDomeRampTexture()\")";
+
+      menuItem -divider true;
+
       // Check if we are running Maya 2011 or higher
       float $mayaVersion = getMayaVersion();
       if ($mayaVersion >=2011){
-        menuItem -divider true;
-        
         menuItem 
-          -label "Domemaster3D FOV Camera" 
-          -command "python(\"import domeCamera as domeCamera\");python(\"domeCamera.createFulldomeStereoRig()\");";
-                 
-        menuItem 
-          -label "Dome Texture" 
-          -command "python(\"import domeCamera as domeCamera\");python(\"domeCamera.createRobLookup()\");";
-        menuItem 
-          -label "Dome Ramp" 
-          -command "python(\"import domeCamera as domeCamera\");python(\"domeCamera.createDomeRampTexture()\");";
-
-         menuItem -divider true;
-         
-         menuItem 
           -subMenu true 
           -tearOff true 
           -label "Choose a Default Stereo Rig"
@@ -229,12 +225,11 @@ global proc createDomemaster3DMenu() {
   
   menuItem 
     -label "Create Reference Grid" 
-    -command "python(\"import domeCamera as domeCamera\");python(\"domeCamera.createDomeGrid()\");";
+    -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.createDomeGrid()\")";
   menuItem 
     -label "Create Starglobe" 
-    //-command "python(\"import domeMaterial as domeMaterial\");python(\"domeMaterial.createStarglobe()\");";
+    //-command "python(\"import domeMaterial\nreload(domeMaterial)\ndomeMaterial.createStarglobe()\")";
     -command "source \"domeStarglobe.mel\";\ncreateStarglobe();";
-    
   menuItem 
     -label "Create Galaxy" 
     -command "source \"galaxyCreator.mel\";galaxyCreator();";
@@ -246,10 +241,10 @@ global proc createDomemaster3DMenu() {
   
   menuItem 
     -label "Create Color Material" 
-    -command "python(\"import domeMaterial as domeMaterial\");python(\"domeMaterial.createColorMiaMaterial()\");";
+    -command "python(\"import domeMaterial\\nreload(domeMaterial)\\ndomeMaterial.createColorMiaMaterial()\");";
   menuItem 
     -label "Create Color + Bump Material" 
-    -command "python(\"import domeMaterial as domeMaterial\");python(\"domeMaterial.createColorBumpMiaMaterial()\");";
+    -command "python(\"import domeMaterial\\nreload(domeMaterial)\\ndomeMaterial.createColorBumpMiaMaterial()\")";
 
   menuItem -divider true;
   
@@ -259,7 +254,7 @@ global proc createDomemaster3DMenu() {
 
   menuItem 
     -label "Domemaster3D Wiki Help" 
-    -command "python(\"import domeCamera as domeCamera\");python(\"domeCamera.openDomemasterWiki()\");";
+    -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.openDomemasterWiki()\");";
 }
 
 //Create the menu

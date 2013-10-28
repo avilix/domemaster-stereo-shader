@@ -1,18 +1,24 @@
 /*
-  Dome Viewer V1.0
+  Dome Viewer V1.1
   by Andrew Hazelden
   
   A fulldome and panoramic image+movie viewer. The viewer supports all image and movie formats that can be opened using the Maya File Texture and Movie Nodes. You can display immersive images, image sequences, and movie files with accelerated RAM playback. Tilted fulldome theater screens can be simulated with the "Dome Tilt" attribute.
   
   A Bradbury alignment grid is included for viewing calibrated fulldome imagery.
   
+  Version 1.1 Build 4
+  --------------------
+  Oct 27, 2013
+
+  Added cylindrical, angular 360 degree, and mirrorball panorama meshes
+  Added Focal length HUD checkbox
+
   Version 1.0 Build 5
   --------------------
   Oct 21, 2013
   
   Initial Release
 
-  
   Note:
   The default image for the fulldome viewer is loaded from:
   
@@ -192,39 +198,43 @@ global proc setPanoramaPreview(){
     break;
   case 4:
     //Equirectangular (LatLong)
-    picture -edit -image "latlong_120px.png" -width 180 -height 120 picturePanoramaPreview;
+    picture -edit -image "latlong_120px.png" -width 240 -height 120 picturePanoramaPreview;
     break;
   case 5:
+    //Cylindrical
+    picture -edit -image "cylindrical_120px.png" -width 240 -height 120 picturePanoramaPreview;
+    break;
+  case 6:
     //Cube Map 3x2
     picture -edit -image "cubemap3x2_120px.png" -width 180 -height 120 picturePanoramaPreview;
     break;
-  case 6:
+  case 7:
     //Vertical Cross Cube
     picture -edit -image "verticalCross_120px.png" -width 90 -height 120 picturePanoramaPreview;
     break;
-  case 7:
+  case 8:
     //Horizontal Cross Cube
     picture -edit -image "horizontalCross_120px.png" -width 160 -height 120 picturePanoramaPreview;
     break;
-  case 8:
+  case 9:
     //Vertical Tee Cube
     picture -edit -image "verticalTee_120px.png" -width 90 -height 120 picturePanoramaPreview;
     break;
-  case 9:
+  case 10:
     //Horizontal Tee Cube
     picture -edit -image "horizontalTee_120px.png" -width 160 -height 120 picturePanoramaPreview;
     break;
-  case 10:
+  case 11:
     //Vertical Strip Cube
     picture -edit -image "verticalStrip_120px.png" -width 20 -height 120 picturePanoramaPreview;
     break;
-  case 11:
+  case 12:
     //Horizontal Strip Cube
     picture -edit -image "horizontalStrip_38px.png" -width 228 -height 38 picturePanoramaPreview;
     break;
-  case 12:
+  case 13:
     //Mental Ray Horizontal Strip Cube
-    picture -edit -image "mentalRayCube1_38px.png" -width 228-height 38 picturePanoramaPreview;
+    picture -edit -image "mentalRayCube1_38px.png" -width 228 -height 38 picturePanoramaPreview;
     break;
   }
 }
@@ -232,7 +242,9 @@ global proc setPanoramaPreview(){
 
 global proc domeViewer(){
   global int $domeViewerWindowHeight = 625;
-  global int $domeViewerWindowWidth = 584;
+  global int $domeViewerWindowWidth = 595;
+
+  //old width 584
 
   //-------------------------------------------------
   //Get the current Maya Platform using python
@@ -250,22 +262,24 @@ global proc domeViewer(){
   print("Maya " + $mayaVersion + " on " + $mayaPlatform  + " detected.\n");
 
   if ($mayaVersion >=2011){
-  // Remove an existing docked control window when running the DomeViewer tool for a 2nd time.
+    // Remove an existing docked control window when running the DomeViewer tool for a 2nd time.
     if (`dockControl -exists domeViewerDockControl`){ 
       deleteUI -control domeViewerDockControl; 
       print( "Removing an existing docked Dome Viewer Window\n");}
 
-  if (`window -exists domeViewerWin`){
+    if (`window -exists domeViewerWin`){
       deleteUI domeViewerWin;
       windowPref -remove domeViewerWin;
-      print("Reloading the Dome Viewer window elements\n");}
+      print("Reloading the Dome Viewer window elements\n");
+    }
   }else{
     // You are running Maya 2010 or lower - skip the dockcontrols
     // Remove an existing window when running the DomeViewer tool for a 2nd time.
     if (`window -exists domeViewerWin`){
       deleteUI domeViewerWin;
       windowPref -remove domeViewerWin;
-      print("Reloading the Dome Viewer window elements\n");}
+      print("Reloading the Dome Viewer window elements\n");
+    }
   }
 
   string $domeViewerWindow = `window 
@@ -285,26 +299,34 @@ global proc domeViewer(){
       -numberOfColumns 2
       -adjustableColumn 1
       -columnWidth2 340 50
-      -columnAlign2 "left" "right";
-      
+      -columnAlign2 "left" "right"
+      ;
+
+    if ($mayaVersion >=2011){  
       text 
         -width 338
         //Note wordwrap is a Maya 2011+ feature
         -wordWrap true
         -label "The Dome Viewer tool creates an immersive fulldome viewer that can be used to inspect and playback fulldome images in a virtual dome theater.";
+    } else {
+      //Maya 2010 compatibility - no wordwrap available
+      text 
+        -width 338
+        -label "The Dome Viewer tool creates an immersive fulldome media player.";
+    }
 
-     picture 
-     -width 48
-     -height 48
-     -image "domeViewer.xpm";
+      picture 
+        -width 48
+        -height 48
+        -image "domeViewer.xpm";
 
-    setParent ..;   
+     setParent ..;   
     
     frameLayout 
-    -label "Panorama Options"
-    -collapsable true
-    -collapse false
-    -borderStyle "etchedIn";
+      -label "Panorama Options"
+      -collapsable true
+      -collapse false
+      -borderStyle "etchedIn";
       
       rowLayout 
         -numberOfColumns 2
@@ -319,9 +341,10 @@ global proc domeViewer(){
           menuDomeViewerPanoramaFormat;
           
         menuItem -label "180 Degree Fulldome";
-        menuItem -label "360 Degree Angular Fisheye" -enable false;
-        menuItem -label "Mirror Ball" -enable false;
+        menuItem -label "360 Degree Angular Fisheye";
+        menuItem -label "Mirror Ball";
         menuItem -label "Equirectangular (LatLong)";
+        menuItem -label "Cylindrical";
         menuItem -label "Cube Map 3x2";
         menuItem -label "Vertical Cross Cube";
         menuItem -label "Horizontal Cross Cube";
@@ -462,7 +485,13 @@ global proc domeViewer(){
         -value 1
         -annotation 
         "Control the brightness of the image in the viewer."
-        sliderDomeViewerImageExposure;  
+        sliderDomeViewerImageExposure;
+
+      colorSliderGrp 
+      -label "Color Tint" 
+      -rgb 1.0 1.0 1.0 
+      -annotation "Add a color tint / color gain to the panoramic image."
+      sliderDomeViewerColorTint;
            
       setParent ..;
     setParent ..;
@@ -522,7 +551,15 @@ global proc domeViewer(){
       columnLayout 
         //-width $domeWindowWidth
         -adjustableColumn true;  
-        
+
+        checkBoxGrp
+          -numberOfCheckBoxes 1
+          -label "Bradbury Alignment Grid"
+          -value1 0
+          -annotation 
+          "Add a transparent dome grid overlay to the dome viewer. You can control the visibility and \ntransparency of the grid by selecting the domeViewerGrid object's transform node in the \noutliner and editing the values in the Attribute Editor's Extra Attributes section."
+          checkGrpDomeViewerGridlinesOverlay;
+
         checkBoxGrp
           -numberOfCheckBoxes 1
           -label "Link Panorama to Camera"  
@@ -541,11 +578,11 @@ global proc domeViewer(){
         
         checkBoxGrp
           -numberOfCheckBoxes 1
-          -label "Bradbury Alignment Grid"
-          -value1 0
+          -label "Show Focal Length in HUD"
+          -value1 1
           -annotation 
-          "Add a transparent dome grid overlay to the dome viewer. You can control the visibility and \ntransparency of the grid by selecting the domeViewerGrid object's transform node in the \noutliner and editing the values in the Attribute Editor's Extra Attributes section."
-          checkGrpDomeViewerGridlinesOverlay;
+          "Display the current focal length in the HUD (Heads Up Display)."
+          checkGrpDomeViewerFocalLength;
         
       setParent ..;
     setParent ..;
@@ -705,6 +742,10 @@ global proc createDomeViewer(){
   
   //Set the view to display with No lights mode
   //modelEditor -e -dl none modelPanel4;
+
+  //Display the focal length in the heads up display
+  //setFocalLengthVisibility(1);
+
 }
 
 

@@ -223,12 +223,6 @@
                             <origin>installer files/install/sourceimages/cylinder_mesh.obj</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>installer files/install/sourceimages/mirrorball_mesh.ma</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>installer files/install/sourceimages/mirrorball_mesh.obj</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>installer files/install/sourceimages/horizontalCrossCube_mesh.ma</origin>
                         </distributionFile>
                         <distributionFile>

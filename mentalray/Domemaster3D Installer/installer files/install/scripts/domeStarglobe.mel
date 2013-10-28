@@ -1,11 +1,15 @@
 /*
-  Dome Starglobe GUI V1 Build 1
+  Dome Starglobe GUI V1.1 Build 1
   by Andrew Hazelden
 
   This is a Maya GUI for the starglobe tool.
 
   Version History
   ----------------
+
+  Version 1.1 - Oct 27, 2013 Build 2
+  ------------------------------
+  Updated the GUI for Maya 2010 compatibility
 
   Version 1 - Oct 6, 2013 5.23pm
   ------------------------------
@@ -143,61 +147,70 @@ global proc createStarglobe(){
     // Remove an existing window when running the Starglobe for a 2nd time.
     if (`window -exists starglobeWin`){
       deleteUI starglobeWin;
-      windowPref -remove starglobeWin;
+      //windowPref -remove starglobeWin;
       print("Reloading the Starglobe window elements\n");}
   }
 
-    string $starglobeWindow = `window 
-      -title "Starglobe" 
-      -widthHeight $starglobeWindowWidth $starglobeWindowHeight 
-      starglobeWin`;
+  string $starglobeWindow = `window 
+    -title "Starglobe" 
+    -widthHeight $starglobeWindowWidth $starglobeWindowHeight 
+    starglobeWin`;
 
-    string $starglobeScrollableLayout = `scrollLayout 
-      -horizontalScrollBarThickness 18
-      -verticalScrollBarThickness   18
-      -childResizable 1`;
-      
+    // string $starglobeScrollableLayout = `scrollLayout 
+      // -horizontalScrollBarThickness 18
+       // -verticalScrollBarThickness   18
+       // -childResizable 1`;
+     
     columnLayout
-      -adjustableColumn true
-      starglobeCameraLayout;
-      
-      //Create the Camera option menu
-      buildCamerasMenu();
-    setParent ..;  
-    
-  columnLayout 
-    -adjustableColumn true;
-    
-   separator -style "none"; 
-    
-   rowLayout 
+      -adjustableColumn true;
+
+      columnLayout
+       -adjustableColumn true
+       starglobeCameraLayout;
+        
+        //Create the Camera option menu
+        buildCamerasMenu();
+
+      setParent ..; 
+
+   columnLayout 
+     -adjustableColumn true;
+     
+       rowLayout 
         -numberOfColumns 2
         -adjustableColumn 1
-        -columnWidth2 340 50
+        -columnWidth2 450 50
         -columnAlign2 "left" "right";
         
-        text 
-          -width 338
-          //Note wordwrap is a Maya 2011+ feature
-          -wordWrap true
-          -label "The Starglobe tool creates a spherical night sky backdrop that surrounds the camera.\n\n The \"Attach to Camera\" popup menu allows you to point constrain the starglobe to a camera so the night sky feels infinite when the camera is animated in the scene.";
+       if ($mayaVersion >=2011){  
+          text 
+            -width 440
+            //Note wordwrap is a Maya 2011+ feature
+            -wordWrap true
+            -label "The Starglobe tool creates a spherical night sky backdrop that surrounds the camera.\n\n The \"Attach to Camera\" popup menu allows you to point constrain the starglobe to a camera so the night sky feels infinite when the camera is animated in the scene.";
+        } else {
+          //Maya 2010 compatibility - no wordwrap available
+          text 
+            -width 440
+            -label "The Starglobe tool creates a spherical night sky backdrop that surrounds the camera. \n\nThe \"Attach to Camera\" popup menu allows you to point constrain the starglobe to a \ncamera so the night sky feels infinite when the camera is animated in the scene.";
+        }
 
-       picture 
-       -width 48
-       -height 48
-       -image "render_starglobe.xpm";
+        picture 
+         -width 32
+         -height 32
+         -image "render_starglobe.xpm";
       
-     setParent ..; 
-       
-     separator -style "none";  
-       
-     button 
-     -label "Create Starglobe" 
-     -annotation "Create a new starglobe object."
-     -command "doStarglobe()"; 
- 
-   setParent ..;
-   
+      setParent ..; 
+
+    separator -style "none";  
+
+    button 
+      -label "Create Starglobe" 
+      -annotation "Create a new starglobe object."
+      -command "doStarglobe()"; 
+
+      setParent ..;
+  //setParent ..;
   //----------------------------------------------------------------------
   //Show the window
   //On Maya 2011 and higher provide access to the dockable UI 
@@ -275,9 +288,7 @@ global proc doStarglobe(){
   string $CameraName = `optionMenuGrp -query -value menuCameraSelect`;
   
   //Create the starglobe and get the starglobe object name
-  python("import domeMaterial as domeMaterial");
-  //$starglobeName = python("domeMaterial.createStarglobe()");
-  python("domeMaterial.createStarglobe()");
+  python("import domeMaterial\nreload(domeMaterial)\ndomeMaterial.createStarglobe()");
   
     if ( $CameraName  != "Select a Camera..." ){
       //Check if the constraint object exists
@@ -311,4 +322,4 @@ global proc string getObjectParentNode ( string $object ) {
 
 
 //run the tool
-createStarglobe();
+//createStarglobe();

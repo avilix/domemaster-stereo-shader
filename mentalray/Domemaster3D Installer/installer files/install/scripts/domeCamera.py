@@ -1,5 +1,5 @@
 """
-Domemaster3D Camera Setup Script V1.4 B4
+Domemaster3D Camera Setup Script V1.4 B6
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
 This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
@@ -8,6 +8,11 @@ This script makes it easy to start creating fulldome stereoscopic content in Aut
 
 Version History
 
+Version 1.4 B6 Build 1
+-----------------
+Oct 27, 2013
+
+Updated Grid defaults and worked on Maya 2010 support.
 
 Version 1.4 B5
 -----------------
@@ -587,7 +592,7 @@ def createDomeGrid():
   domeGridlineSurface = 'domeGridlineSurface'
   
   #Set the diameter of the dome shape
-  startingDomeDiameter = 180
+  startingDomeDiameter = 360
   
   #---------------------------------------------------------------------------
   # Remove any existing domeGrid elements
@@ -800,7 +805,6 @@ def createDomeGrid():
   cmds.rename( 'surfaceShader1', domeGridlineMaterial )
   cmds.rename( 'surfaceShader1SG', domeGridlineShadingGroup )
   
-  
   #Standard Yellow Color
   #cmds.setAttr( 'surfaceShader1.outColor', 1, 1, 0, type='double3')
   
@@ -897,9 +901,13 @@ def createDomeGrid():
   #---------------------------------------------------------------------------
   attrName = 'gridLineThickness'
 
+  #This is the default starting value for the grid line strokes
+  initialGridLineThickness = 0.05
+  #previous setting 0.035
+
   #Check if the attribute exists on the domeGrid node
   #if(mel.attributeExists(attrName, baseNodeName) == 0):
-  cmds.addAttr(baseNodeName, longName=attrName, attributeType="double", min=0.001, max=50, hasSoftMaxValue=True, softMaxValue=2, defaultValue=0.035, keyable=True)
+  cmds.addAttr(baseNodeName, longName=attrName, attributeType="double", min=0.001, max=50, hasSoftMaxValue=True, softMaxValue=2, defaultValue=initialGridLineThickness, keyable=True)
   print('Adding custom Attributes ' + baseNodeName + '.' + attrName)
   
   #Connect the domeGrid Grid Line Thickness to the toon shader line width attribute:

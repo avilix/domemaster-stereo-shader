@@ -1,14 +1,45 @@
-#Domemaster3D Fulldome Stereo Rig V1.4 B4
-#Created by Andrew Hazelden  andrew@andrewhazelden.com
-#-----------------------------------------------------------------------
-#Updated Oct 21, 2013
-#
-#This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
-#
+"""
+ Domemaster3D Fulldome Stereo Rig V1.4 B6
+ Updated Oct 26, 2013
+ by Andrew Hazelden  andrew@andrewhazelden.com
+ -----------------------------------------------------------------------
+ 
+ This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
+ 
+ This rig is based upon the example file: stereoCameraDefaultRig.py
+ 
+ The original file can be located at:
+ C:\Program Files\Autodesk\Maya2014\Python\Lib\site-packages\maya\app\stereo\stereoCameraDefaultRig.py
+ -----------------------------------------------------------------------
+"""
+def getMayaVersion():
+  import maya.mel as mel
+  import maya.cmds as cmds
+
+  #Check what Maya version is active
+
+  #Check if we are running Maya 2011 or higher
+  mayaVersion = mel.eval("getApplicationVersionAsFloat;")
+
+  #Test this GUI using the Maya 2010 - non-docked GUI mode
+  #mayaVersion = 2010;
+
+  #Write out the current Maya version number
+  print("Maya " + str(mayaVersion) + " detected.\n")
+  
+  return mayaVersion
+
+#-----------------------------------------------------------------------------
 
 #Setup the stereo rig libraries
 import maya.cmds as cmds
-from maya.app.stereo import stereoCameraSets
+
+#Check if we are running Maya 2011+ and then add the stereoCameraSets module
+mayaVersion = getMayaVersion()
+if (mayaVersion >= 2011):
+  from maya.app.stereo import stereoCameraSets
+
+#-----------------------------------------------------------------------------
 
 """
 Find out the path to the sourceimages folder
@@ -56,9 +87,6 @@ def getSourceImagesPath(imageFileName):
 
   return combinedFileAndImagePath
 
-  
-  
-  
 def createLensShaders(centerCam, leftCam, rightCam):
   import maya.mel as mel
   import maya.cmds as cmds
@@ -435,32 +463,31 @@ def registerThisRig():
   """
   Registers the rig in Maya's database
   """
-  global rigTypeName 
-  cmds.stereoRigManager(add=[rigTypeName, 'Python',
-                             'domeStereoRig.createRig'])
-  cmds.stereoRigManager(cameraSetFunc=[rigTypeName,
-                                       'domeStereoRig.attachToCameraSet'])
 
+  mayaVersion = getMayaVersion()
+  if (mayaVersion >= 2011):
+    global rigTypeName 
+    cmds.stereoRigManager( add=[rigTypeName, 'Python', 'domeStereoRig.createRig'] )
+    cmds.stereoRigManager( cameraSetFunc=[rigTypeName, 'domeStereoRig.attachToCameraSet'] )
+  else:
+    cmds.stereoRigManager(add=['StereoCamera', 'Python', 'maya.app.stereo.stereoCameraDefaultRig.createRig'])
 
 """
 A python function to get the current object's shape node
 
 getObjectShapeNode("stereoCamera")
 # Result: [u'stereoCameraCenterCamShape', u'stereoCameraFrustum'] # 
-
 """
 
 def getObjectShapeNode ( object ) :
     import maya.cmds as cmds
     return cmds.listRelatives( object, children=True , shapes=True)
 
-
 """
 A python function to get the current object's parent node
 
 getObjectParentNode("nurbsSphereShape1")
 # Result:  [u'nurbsSphere1'] #
-
 """
 
 def getObjectParentNode ( object ) :

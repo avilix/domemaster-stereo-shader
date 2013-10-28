@@ -1,8 +1,8 @@
 Domemaster3D Stereo Lens Shader
-Version 1.4 B5 - Oct 24, 2013
+Version 1.4 Beta 6 - Oct 27, 2013
 
 About This Shader
-------------------
+---------------------
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
 
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "Center" camera option in the DomeAFL_FOV_Stereo shader.
@@ -87,8 +87,36 @@ Martin Watt for writing the original galaxies.mel script.
 Version History
 -----------------
 
-Version 1.4 Beta 5 Change
----------------------------------
+Version 1.4 Beta 6 Changes
+-------------------------------
+Oct 27, 2013
+
+Maya Changes
+----------------
+
+DomeViewer
+  Added cylindrical panorama support to the domeViewer
+  Added a new 360 angular fisheye, and mirrorball mesh
+  Improved transparency support on the grid overlay
+  Added image exposure and color tint controls
+
+DomeText
+  Added wrapU and wrapV attributes to the GUI. (It is now easier to create scrolling credits by setting the auto scroll direction to "scroll up" and un-checking the WrapV checkbox.)
+  Updated the text mirror controls
+
+Updated the DomeGrid default settings.
+
+Added code to detect if the Domemaster3D shader is running in GUI mode or batch mode. This will skip running the userSetup.py code for adding a custom menu when running in batch mode. 
+
+Improved Maya 2010 support
+  Updated the domeStereoRig.py camera rig file for Maya 2010 support.
+  Improved the dome_AFL_FOV_Stereo GUI code for Maya 2010 support .
+  Updated the Domemaster3D menu system for stereo rig support in Maya 2010.
+  Updated the starglobe GUI window for Maya 2010 support.
+  Updated the Maya Shelf files.
+
+Version 1.4 Beta 5 Changes
+------------------------------
 Oct 24, 2013
 
 Maya Changes
@@ -98,7 +126,8 @@ Updated the domeAFL_FOV_Stereo camera preview code to fix a bug that stopped bat
 
 
 Version 1.4 Beta 4 Changes
----------------------------------
+------------------------------
+
 Oct 21, 2013
 
 Maya Changes
@@ -411,15 +440,10 @@ On Maya 2012:
 On Maya 2013:
 /usr/autodesk/maya2013-x64/mentalray/shaders/include
 
-4. Copy the Maya AE Template file "AEdomeAFL_FOV_StereoTemplate.mel" to either the Maya AETemplates folder or to your user account's Maya script folder:
+4. Copy the Maya AE Template files to either the Maya AETemplates folder or to your user account's Maya script folder:
 /usr/autodesk/maya2012-x64/scripts/AETemplates/
 or
 ~/maya/2012-x64/prefs/scripts
-
-
-
-** If you are running a copy of Maya prior to Maya 2010 you don't need to install the AETemplate file:
-AEdomeAFL_FOV_StereoTemplate.mel
 
 
 5. Copy the python and MEL scripts to the Maya script folder:

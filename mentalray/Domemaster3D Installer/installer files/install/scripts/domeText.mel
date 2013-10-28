@@ -1,5 +1,5 @@
 /*
-  Dome Text V1.3
+  Dome Text V1.4
   by Andrew Hazelden
 
   The DomeText script is a title generator that creates raster title graphics in the png, tif, tga, bmp, and psd formats.
@@ -10,7 +10,15 @@
 
   Version History
   ----------------
-  
+
+  Version 1.4 beta 6 Build 2
+  ----------------------
+  Oct 27, 2013
+
+  Added wrapU and wrapV attributes to the GUI. It is now easier to create scrolling credits by setting the auto scroll direction to "scroll up" and un-checking the WrapV checkbox.
+
+  Updated the text mirror controls
+
   Version 1.3 Build 2
   ----------------------
   Oct 21, 2013
@@ -447,6 +455,38 @@ global proc createScrollingMayaTexExpr(string $domePlace2dNode, string $domeText
     print("Adding custom attribute " + $nodeName +"." +$attrName + "\n");
   }
   
+
+
+  //Add mirrorText checkBoxGrp
+  int $isMirroredText = `checkBoxGrp -query -value1 checkGrpMirrorText`;
+  string $attrName ="mirrorText";
+  if (!`attributeExists $attrName $nodeName`) {
+    addAttr -ln $attrName -at bool $nodeName;
+    setAttr ($nodeName+"."+$attrName) $isMirroredText;
+    setAttr -edit -channelBox true ($nodeName+"."+$attrName);
+    print("Adding custom attribute " + $nodeName +"." +$attrName + "\n");
+  }
+
+  //Add wrapU checkBoxGrp
+  int $textWrapU = `checkBoxGrp -query -value1 checkGrpWrapText`;
+  string $attrName ="textWrapU";
+  if (!`attributeExists $attrName $nodeName`) {
+    addAttr -ln $attrName -at bool $nodeName;
+    setAttr ($nodeName+"."+$attrName) $textWrapU;
+    setAttr -edit -channelBox true ($nodeName+"."+$attrName);
+    print("Adding custom attribute " + $nodeName +"." +$attrName + "\n");
+  }
+
+  //Add wrapV checkBoxGrp
+  int $textWrapV = `checkBoxGrp -query -value2 checkGrpWrapText`;
+  string $attrName ="textWrapV";
+  if (!`attributeExists $attrName $nodeName`) {
+    addAttr -ln $attrName -at bool $nodeName;
+    setAttr ($nodeName+"."+$attrName) $textWrapV;
+    setAttr -edit -channelBox true ($nodeName+"."+$attrName);
+    print("Adding custom attribute " + $nodeName +"." +$attrName + "\n");
+  }
+
   string $scrollDirection =`optionMenuGrp -query -value menuAutoScrollDirectionSelect`;
   
   int $animationFrameRange = $animationEndFrame - $animationStartFrame;
@@ -458,7 +498,11 @@ global proc createScrollingMayaTexExpr(string $domePlace2dNode, string $domeText
     
     //Go to frame 1
     currentTime $animationStartFrame ;
-    setAttr $horizontalTranslateName 0;
+    if($textWrapU){
+      setAttr $horizontalTranslateName 0; //0 for wrapping
+    } else {
+      setAttr $horizontalTranslateName 1; //1 for non wrapping
+    }
     setKeyframe $horizontalTranslateName;
     
     //Go to the duration set the the "scroll speed" setting
@@ -470,7 +514,11 @@ global proc createScrollingMayaTexExpr(string $domePlace2dNode, string $domeText
     
     //Go to frame 1
     currentTime $animationStartFrame ;
-    setAttr $horizontalTranslateName 0;
+    if($textWrapU){
+      setAttr $horizontalTranslateName 0; //0 for wrapping
+    } else {
+      setAttr $horizontalTranslateName -1; //1 for non wrapping
+    }
     setKeyframe $horizontalTranslateName;
     
     //Go to the end of the animation
@@ -482,7 +530,11 @@ global proc createScrollingMayaTexExpr(string $domePlace2dNode, string $domeText
 
     //Go to frame 1
     currentTime $animationStartFrame ;
-    setAttr $verticalTranslateName 0;
+    if($textWrapV){
+      setAttr $verticalTranslateName 0; //0 for wrapping
+    } else {
+      setAttr $verticalTranslateName -1; //1 for non wrapping
+    }
     setKeyframe $verticalTranslateName;
     
     //Go to the end of the animation
@@ -494,7 +546,11 @@ global proc createScrollingMayaTexExpr(string $domePlace2dNode, string $domeText
     
     //Go to frame 1
     currentTime $animationStartFrame ;
-    setAttr $verticalTranslateName 0;
+    if($textWrapV){
+      setAttr $verticalTranslateName 0; //0 for wrapping
+    } else {
+      setAttr $verticalTranslateName 1; //1 for non wrapping
+    }
     setKeyframe $verticalTranslateName;
     
     //Go to the end of the animation
@@ -707,7 +763,13 @@ global proc string createLambertDomeFileNode(string $imagePath, float $bgColor[]
   
   //Check which direction is 'front' for the text
   int $isMirroredText = `checkBoxGrp -query -value1 checkGrpMirrorText`;
-  
+
+  //Check if the texture wrapping is enabled
+  int $textWrapU = `checkBoxGrp -query -value1 checkGrpWrapText`;
+  int $textWrapV = `checkBoxGrp -query -value2 checkGrpWrapText`;
+  setAttr ($domePlace2dNode+".wrapU") $textWrapU;
+  setAttr ($domePlace2dNode+".wrapV") $textWrapV;
+
   //Check if a supporting shape was created
   if( ($domeShapeFormat > 1 ) && (`objExists $domeGeometry` )  ){
     //Apply the shading group to the selected geometry
@@ -1246,6 +1308,33 @@ global proc buildTextPresetMenu(){
       print "The loopAnimation attribute does not exist.\n";
     } //end check if LoopAnimation attr exists
    
+    //Restore the mirrorText checkBoxGrp
+    if (`attributeExists "mirrorText" $nodeName`){
+      print "mirrorText attribute exists.\n";
+      int $isMirroredText = getAttr ($nodeName+".mirrorText");
+      checkBoxGrp -edit -value1 $isMirroredText checkGrpMirrorText;
+    } else {
+      print "The mirrorText attribute does not exist.\n";
+    } //end check if mirrorText attr exists
+   
+    //Restore the textWrapU checkBoxGrp
+    if (`attributeExists "textWrapU" $nodeName`){
+      print "textWrapU attribute exists.\n";
+      int $wrapU = getAttr ($nodeName+".textWrapU");
+      checkBoxGrp -edit -value1 $wrapU checkGrpWrapText;
+    } else {
+      print "The textWrapU attribute does not exist.\n";
+    } //end check if textWrapU attr exists
+   
+    //Restore the textWrapV checkBoxGrp
+    if (`attributeExists "textWrapV" $nodeName`){
+      print "textWrapV attribute exists.\n";
+      int $wrapV = getAttr ($nodeName+".textWrapV");
+      checkBoxGrp -edit -value2 $wrapV checkGrpWrapText;
+    } else {
+      print "The textWrapV attribute does not exist.\n";
+    } //end check if textWrapV attr exists
+
     //Restore the font size
     if (`attributeExists "fontSize" $nodeName`){
       print "The font size attribute exists.\n";
@@ -2071,7 +2160,7 @@ global proc domeText(){
   setParent ..; 
 
   frameLayout 
-      -label "Texture Nodes and Shape Controls"
+      -label "Shape Controls"
       -collapsable true
       -collapse true
       -borderStyle "etchedIn";
@@ -2163,15 +2252,37 @@ global proc domeText(){
         -value 10
         -annotation 
         "Control the height of the polygon plane, cylinder, or dome surface in scene units. Note: The width or radius value \nis automatically set based upon the image aspect ratio."
-        sliderShapeHeightSize;  
-        
-        
+        sliderShapeHeightSize; 
+ 
+    setParent ..;
+  setParent ..;
+
+   frameLayout 
+      -label "Texture Placement"
+      -collapsable true
+      -collapse true
+      -borderStyle "etchedIn";
+      
+    columnLayout
+      -adjustableColumn true
+      domeTextCameraLayout;       
+
     checkBoxGrp
       -numberOfCheckBoxes 1
       -label "Flip Text Direction"
       -value1 false
-      -annotation "This will flip the the text hoprzontally. This is useful for adjusting the readability of the dome text on the inside vs outside face of a cylindrical surface"
+      -annotation "This will flip the the text horizontally. This is useful for adjusting the readability of the dome text on the inside vs outside face of a cylindrical surface"
       checkGrpMirrorText;
+
+    checkBoxGrp
+      -numberOfCheckBoxes 2
+      -label "Text Wrapping"
+      -label1 "WrapU"
+      -label2 "WrapV"
+      -value1 true
+      -value2 true
+      -annotation "Wrap the texture map around the UV Border. This is useful when combined with animating the horizontal and vertical texture offset, and the domeText animation controls."
+      checkGrpWrapText;
       
     setParent ..;
   setParent ..;
