@@ -359,8 +359,8 @@ def createDomeViewerTexture( meshName, isGrid ):
     mel.eval("setFocalLengthVisibility(0)")
 
   #Rotate the Cylinder texture 90 degrees to an "Upright" orientation
-  if(meshName == 'cylinder'):
-    cmds.setAttr( domeViewer_maya_placement+'.rotateFrame', 90)
+  #if(meshName == 'cylinder'):
+  #  cmds.setAttr( domeViewer_maya_placement+'.rotateFrame', 90)
 
   #Apply the shading group to the selected geometry
   #cmds.select("domeViewer")

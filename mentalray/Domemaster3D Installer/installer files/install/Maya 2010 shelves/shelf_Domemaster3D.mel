@@ -287,6 +287,29 @@ global proc shelf_Domemaster3D () {
         -manage 1
         -visible 1
         -preventOverride 0
+        -annotation "Load the MentalRay Plugin" 
+        -align "center" 
+        -label "Reload MR" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -image "mentalray_load.xpm" 
+        -image1 "mentalray_load.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "# Make sure the mental ray plugin was loaded\nif not (cmds.pluginInfo(\"Mayatomr\",q=True,loaded=True)):\n  cmds.loadPlugin(\"Mayatomr\")\n  print(\"The Mental Ray plugin was loaded.\")\nelse:\n  print(\"The Mental Ray plugin is already active.\")" 
+        -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
         -annotation "Wiki Help" 
         -align "center" 
         -label "Wiki Help" 
@@ -297,7 +320,7 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeMaterial\nreload(domeMaterial)\ndomeCamera.openDomemasterWiki()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.openDomemasterWiki()" 
         -sourceType "python" 
         -actionIsSubstitute 0
         -commandRepeatable 1

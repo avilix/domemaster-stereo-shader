@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.4 B6 - Oct 27, 2013
+Version 1.4 B7 - Nov 8, 2013
 
 Maintained by Andrew Hazelden
 andrew@andrewhazelden.com
@@ -9,6 +9,20 @@ About This Shader
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
 
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "center" camera option in the DomeAFL_FOV_Stereo shader.
+
+Version 1.4 Beta 7 Changes
+-------------------------------
+Nov 8, 2013
+
+Maya Changes
+----------------
+Added Maya shelf tool to force the Mental Ray plugin to load. This is useful if Mental Ray didn't start-up automatically.
+
+Improved the DomeViewer cylindrical, mirrorball, and angular360 degree meshes.
+
+Maya + 3DS Max
+-------------------
+Updated the Starglobe texture maps. The previous version had the starglobe 2K and 8K quadsphere texture direction inverted.
 
 
 Version 1.4 Beta 6 Changes
@@ -206,6 +220,7 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "Galaxy Creator" tool creates dynamic particle based galaxies.
 -The "DomeText" tool created raster titles and scrolling credits using the Dome Text GUI and ImageMagick.
 -The "Viewer" tool creates an immersive fulldome and panoramic image+movie viewer.
+-The "Load MentalRay Plugin" tool forces mental ray to reload. This can fix issues if Maya didn't startup correctly.
 -The "Wiki Help" tool loads the Domemaster Stereo Shader Wiki page in your web browser.
 -The "Version Info" tool shows the current version number for the Domemaster Stereo Shader and provides links to the download page, and the NING group.
 

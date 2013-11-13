@@ -1,7 +1,7 @@
 <project>
     <shortName>Domemaster3D</shortName>
     <fullName>Domemaster3D Shader</fullName>
-    <version>1.4-Beta6</version>
+    <version>1.4-Beta7</version>
     <readmeFile>Domemaster_x64_readme.txt</readmeFile>
     <leftImage>vortex_sidebar.png</leftImage>
     <splashImage>splash_screen.png</splashImage>
@@ -389,6 +389,9 @@
                                             <origin>installer files/install/icons/magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -515,6 +518,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/domeRamp.png</origin>
@@ -968,6 +974,9 @@
                                             <origin>installer files/install/icons/magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1091,6 +1100,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/domeRamp.png</origin>
@@ -1544,6 +1556,9 @@
                                             <origin>installer files/install/icons/magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1667,6 +1682,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/domeRamp.png</origin>
@@ -2290,6 +2308,9 @@
                                             <origin>installer files/install/icons/magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2416,6 +2437,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/domeAFL_WxH.png</origin>
@@ -2869,6 +2893,9 @@
                                             <origin>installer files/install/icons/domeRamp.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/domeAFL_WxH.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2992,6 +3019,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/domeAFL_WxH.png</origin>
@@ -3434,6 +3464,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2010 icons/magicDome.xpm</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2010 icons/mentalray_load.xpm</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2010 icons/domeRamp.xpm</origin>

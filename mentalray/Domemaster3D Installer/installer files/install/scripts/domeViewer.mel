@@ -1,11 +1,17 @@
 /*
-  Dome Viewer V1.1
+  Dome Viewer V1.2
   by Andrew Hazelden
   
   A fulldome and panoramic image+movie viewer. The viewer supports all image and movie formats that can be opened using the Maya File Texture and Movie Nodes. You can display immersive images, image sequences, and movie files with accelerated RAM playback. Tilted fulldome theater screens can be simulated with the "Dome Tilt" attribute.
   
   A Bradbury alignment grid is included for viewing calibrated fulldome imagery.
   
+  Version 1.2 Build 1
+  --------------------
+  Oct 30, 2013
+
+  Updated the cylindrical texture placement
+
   Version 1.1 Build 4
   --------------------
   Oct 27, 2013
@@ -434,12 +440,12 @@ global proc domeViewer(){
           -text $imageFilePath
           -adjustableColumn 2
           -annotation 
-          "Choose an image in the PNG, TIFF, EXR, TGA, JPG, BMP or PSD image formats. \nYou can also choose a video file in either the .avi movie format on Windows, or \na Quicktime .mov, or .qt video on Mac OS X. By clicking on the folder \nicon you \ncan choose an existing file on your hard drive."
+          "Choose an image in the PNG, TIFF, EXR, TGA, JPG, BMP or PSD image formats. \nYou can also choose a video file in either the .avi movie format on Windows, or \na Quicktime .mov, or .qt video on Mac OS X. By clicking on the folder \nicon you can choose an existing file on your hard drive."
           textDomeViewerImageOutputName;
           
         symbolButton 
           -image "navButtonBrowse.png"
-          -annotation "Choose an image in the PNG, TIFF, EXR, TGA, JPG, BMP or PSD image formats. \nYou can also choose a video file in either the .avi movie format on Windows, or \na Quicktime .mov, or .qt video on Mac OS X. By clicking on the folder \nicon you \ncan choose an existing file on your hard drive."
+          -annotation "Choose an image in the PNG, TIFF, EXR, TGA, JPG, BMP or PSD image formats. \nYou can also choose a video file in either the .avi movie format on Windows, or \na Quicktime .mov, or .qt video on Mac OS X. By clicking on the folder \nicon you can choose an existing file on your hard drive."
           -command "string $tempPath = getViewerImagePath(); textFieldGrp -edit -text $tempPath textDomeViewerImageOutputName;"
           symbolDomeViewerImageLoadAsbrowser;
           
