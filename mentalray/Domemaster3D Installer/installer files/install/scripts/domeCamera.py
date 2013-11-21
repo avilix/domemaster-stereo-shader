@@ -1,5 +1,5 @@
 """
-Domemaster3D Camera Setup Script V1.4 B6
+Domemaster3D Camera Setup Script V1.4 B8
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
 This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
@@ -8,7 +8,14 @@ This script makes it easy to start creating fulldome stereoscopic content in Aut
 
 Version History
 
-Version 1.4 B6 Build 1
+
+Version 1.4 B8
+-----------------
+Nov 20, 2013
+
+Added flexible changeRenderRes(1024) render resolution tool to match 0.5k, 1k, 2k, 4k, 8k shelf items
+
+Version 1.4 B6
 -----------------
 Oct 27, 2013
 
@@ -111,6 +118,7 @@ A python function to create a fulldome stereo rig and test grid in Maya.
 
 Run using the command:
 import domeCamera as domeCamera
+reload(domeCamera)
 domeCamera.autosetup()
 
 ------------------------------------------------------------------------------
@@ -120,6 +128,7 @@ A python function to create a fulldome stereo rig in Maya.
 
 Run using the command:
 import domeCamera as domeCamera
+reload(domeCamera)
 domeCamera.createFulldomeStereoRig()
 
 ------------------------------------------------------------------------------
@@ -128,8 +137,9 @@ Domemaster3D createDomeAFL_WxH_Camera
 A python function to create a domeAFL_WxH lens shader and attach it to a camera.
 
 Run using the command:
-import domeMaterial as domeMaterial
-domeMaterial.createDomeAFL_WxH_Camera()
+import domeCamera as domeCamera
+reload(domeCamera)
+domeCamera.createDomeAFL_WxH_Camera()
 
 ------------------------------------------------------------------------------
 
@@ -137,8 +147,9 @@ Domemaster3D createDomeAFL_FOV_Camera
 A python function to create a domeAFL_FOV lens shader and attach it to a camera.
 
 Run using the command:
-import domeMaterial as domeMaterial
-domeMaterial.createDomeAFL_FOV_Camera()
+import domeCamera as domeCamera
+reload(domeCamera)
+domeCamera.createDomeAFL_FOV_Camera()
 
 ------------------------------------------------------------------------------
 
@@ -147,6 +158,7 @@ A python function to create a hemispherical yellow test grid in Maya.
 
 Run using the command:
 import domeCamera as domeCamera
+reload(domeCamera)
 domeCamera.createDomeGrid()
 
 ------------------------------------------------------------------------------
@@ -156,6 +168,7 @@ A python function to create a test sphere and cube in Maya.
 
 Run using the command:
 import domeCamera as domeCamera
+reload(domeCamera)
 domeCamera.createTestShapes()
 
 ------------------------------------------------------------------------------
@@ -166,6 +179,7 @@ and connect it to a robLookupBackground lens shader.
 
 Run using the command:
 import domeCamera as domeCamera
+reload(domeCamera)
 domeCamera.createRobLookup()
 ------------------------------------------------------------------------------
 
@@ -175,16 +189,28 @@ and connect it to a robLookupBackground lens shader.
 
 Run using the command:
 import domeCamera as domeCamera
+reload(domeCamera)
 domeCamera.createDomeRampTexture()
 
 ------------------------------------------------------------------------------
 
-Domemaster3D SetRenderRes
+Domemaster3D setRenderRes
 A python function to setup the basic mental ray 2K x 2K square render settings. 
 
 Run using the command:
 import domeCamera as domeCamera
+reload(domeCamera)
 domeCamera.setRenderRes()
+
+------------------------------------------------------------------------------
+
+Domemaster3D changeRenderRes
+A python function to change the basic mental ray resolution square render settings. 
+
+Run using the command:
+import domeCamera
+reload(domeCamera)
+domeCamera.changeRenderRes(1024)
 
 ------------------------------------------------------------------------------
 
@@ -339,8 +365,35 @@ def setRenderRes():
   cmds.setAttr( 'defaultResolution.deviceAspectRatio', 1)
   cmds.setAttr( 'defaultResolution.pixelAspect', 1)
   
+
+"""
+Domemaster3D changeRenderRes
+----------------------
+A python function to change the basic mental ray resolution square render settings. 
+
+"""
+
+def changeRenderRes( renderSizePx ):
+  import maya.mel as mel
+  import maya.cmds as cmds
   
+  fulldomeRenderWidth = renderSizePx
+  fulldomeRenderHeight = renderSizePx
   
+  #Set the active renderer to mental ray to avoid Hypershade red node errors 
+  mel.eval("setCurrentRenderer mentalRay")
+  
+  #---------------------------------------------------------------------
+  # Setup the default render settings for a square domemaster image output
+  # ---------------------------------------------------------------------
+  cmds.setAttr( 'defaultResolution.width', fulldomeRenderWidth )
+  cmds.setAttr( 'defaultResolution.height', fulldomeRenderHeight )
+  cmds.setAttr( 'defaultResolution.deviceAspectRatio', 1)
+  cmds.setAttr( 'defaultResolution.pixelAspect', 1)
+
+  print ("Changed the render settings to output a " + str(renderSizePx) + "x" + str(renderSizePx) + " image.")
+
+
 """
 Domemaster3D Fulldome Stereo Rig
 --------------------------------

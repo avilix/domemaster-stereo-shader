@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.4 B7 - Nov 8, 2013
+Version 1.4 B8 - Nov 20, 2013
 
 Maintained by Andrew Hazelden
 andrew@andrewhazelden.com
@@ -9,6 +9,23 @@ About This Shader
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
 
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "center" camera option in the DomeAFL_FOV_Stereo shader.
+
+
+Version 1.4 Beta 8 Changes
+-------------------------------
+Nov 20, 2013
+
+Maya Changes
+----------------
+Added Maya a set of shelf tools to change the render resolution.
+
+Added a 16x8k equirectangular starglobe texture "starglobe_equirect_reversed_16x8k.jpg" to the sourceimages folder. This texture has been reversed for the view "inside" the night sky environment.
+
+This release adds the DomeViewer tool, the DomeText tool, and a lot of other improvements to the Mac OS X release.
+
+If you are interested in using the DomeText tool on Mac OS X, the ImageMagick library has to be downloaded separately. This ImageMagick library is available from:
+http://www.imagemagick.org/script/binary-releases.php#macosx
+
 
 Version 1.4 Beta 7 Changes
 -------------------------------
@@ -223,6 +240,11 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "Load MentalRay Plugin" tool forces mental ray to reload. This can fix issues if Maya didn't startup correctly.
 -The "Wiki Help" tool loads the Domemaster Stereo Shader Wiki page in your web browser.
 -The "Version Info" tool shows the current version number for the Domemaster Stereo Shader and provides links to the download page, and the NING group.
+-The "0.5k" button sets the render resolution to 512x512 pixels.
+-The "1k" button sets the render resolution to 1024x1024 pixels.
+-The "2k" button sets the render resolution to 2048x2048 pixels.
+-The "4k" button sets the render resolution to 4096x4096 pixels.
+-The "8k" button sets the render resolution to 8192x8192 pixels.
 
 Note: The location of the default domemaster control map textures is now:
 Windows:

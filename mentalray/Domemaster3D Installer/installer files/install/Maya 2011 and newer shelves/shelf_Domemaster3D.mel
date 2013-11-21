@@ -404,4 +404,134 @@ global proc shelf_Domemaster3D () {
         -sourceType "mel" 
         -commandRepeatable 1
     ;
+ shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 0.5k" 
+        -enableBackground 0
+        -align "center" 
+        -label "Render 0.5k" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "0.5k"
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(512)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+ shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 1k" 
+        -enableBackground 0
+        -align "center" 
+        -label "Render 1k" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "1k"
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(1024)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+ shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 2k" 
+        -enableBackground 0
+        -align "center" 
+        -label "Render 2k" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "2k"
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(2048)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+ shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 4k" 
+        -enableBackground 0
+        -align "center" 
+        -label "Render 4k" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "4k"
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(4096)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
+ shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 35
+        -height 35
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 8k" 
+        -enableBackground 0
+        -align "center" 
+        -label "Render 8k" 
+        -labelOffset 0
+        -font "plainLabelFont" 
+        -imageOverlayLabel "8k"
+        -overlayLabelColor 0.8 0.8 0.8 
+        -overlayLabelBackColor 0 0 0 0.2 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(8192)" 
+        -sourceType "python" 
+        -commandRepeatable 1
+    ;
 } 

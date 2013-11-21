@@ -1,7 +1,7 @@
 <project>
     <shortName>Domemaster3D</shortName>
     <fullName>Domemaster3D Shader</fullName>
-    <version>1.4-Beta7</version>
+    <version>1.4-Beta8</version>
     <readmeFile>Domemaster_x64_readme.txt</readmeFile>
     <leftImage>vortex_sidebar.png</leftImage>
     <splashImage>splash_screen.png</splashImage>
@@ -158,6 +158,9 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>installer files/install/sourceimages/starglobe_equirect_8k.jpg</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/install/sourceimages/starglobe_equirect_reversed_16x8k.jpg</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>installer files/install/sourceimages/moon_displacement_4k.jpg</origin>
@@ -365,6 +368,9 @@
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -381,6 +387,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -494,6 +503,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -950,6 +962,9 @@
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -966,6 +981,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -1078,6 +1096,9 @@
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1094,6 +1115,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -1532,6 +1556,9 @@
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1548,6 +1575,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -1660,6 +1690,9 @@
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -1676,6 +1709,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -2284,6 +2320,12 @@
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2300,6 +2342,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -2412,6 +2457,9 @@
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2428,6 +2476,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -2866,6 +2917,9 @@
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -2882,6 +2936,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -2994,6 +3051,9 @@
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
                                         </distributionFile>
                                         <distributionFile>
@@ -3010,6 +3070,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/render_magicDome.png</origin>
@@ -3461,6 +3524,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2010 icons/render_galaxy.xpm</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2010 icons/render_resolution.xpm</origin>
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/Maya 2010 icons/magicDome.xpm</origin>
@@ -4253,6 +4319,8 @@
 
 	<!-- Shows the component selection page -->
 	<allowComponentSelection>1</allowComponentSelection>
+    <defaultUnixDirectoryPermissions>777</defaultUnixDirectoryPermissions>
+    <defaultUnixFilePermissions>777</defaultUnixFilePermissions>
     <description>Domemaster3D is a fulldome rendering shader for mental ray.</description>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>

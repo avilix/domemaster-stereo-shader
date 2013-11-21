@@ -3,7 +3,7 @@ global proc shelf_Domemaster3D () {
     global string $gBuffStr0;
     global string $gBuffStr1;
 
-  
+
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -142,29 +142,6 @@ global proc shelf_Domemaster3D () {
         -actionIsSubstitute 0
         -commandRepeatable 1
     ;
-        // shelfButton
-        // -enableCommandRepeat 1
-        // -enable 1
-        // -width 34
-        // -height 34
-        // -manage 1
-        // -visible 1
-        // -preventOverride 0
-        // -annotation "Text" 
-        // -align "center" 
-        // -label "Text" 
-        // -labelOffset 0
-        // -font "tinyBoldLabelFont" 
-        // -image "domeText.xpm" 
-        // -image1 "domeText.xpm" 
-        // -style "iconOnly" 
-        // -marginWidth 1
-        // -command "print(\"Dome Text\\n\");\nsource \"domeText.mel\";\ndomeText();" 
-        // -marginHeight 1
-        // -sourceType "mel" 
-        // -actionIsSubstitute 0
-        // -commandRepeatable 1
-    // ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -187,28 +164,6 @@ global proc shelf_Domemaster3D () {
         -actionIsSubstitute 0
         -commandRepeatable 1
     ;
-    // shelfButton
-        // -enableCommandRepeat 1
-        // -enable 1
-        // -width 34
-        // -height 34
-        // -manage 1
-        // -visible 1
-        // -preventOverride 0
-        // -align "center" 
-        // -label "Galaxy" 
-        // -labelOffset 0
-        // -font "tinyBoldLabelFont" 
-        // -image "render_galaxy.xpm" 
-        // -image1 "render_galaxy.xpm" 
-        // -style "iconOnly" 
-        // -marginWidth 1
-        // -marginHeight 1
-        // -command "print(\"Galaxy Creator\\n\");\r\nsource \"galaxyCreator.mel\";\r\ngalaxyCreator();" 
-        // -sourceType "mel" 
-        // -actionIsSubstitute 0
-        // -commandRepeatable 1
-    // ;
     shelfButton
         -enableCommandRepeat 1
         -enable 1
@@ -226,8 +181,6 @@ global proc shelf_Domemaster3D () {
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        //-command "import domeMaterial\nreload(domeMaterial)\ndomeMaterial.createStarglobe()" 
-        //-sourceType "python"
         -command "source \"domeStarglobe.mel\";\ncreateStarglobe();" 
         -sourceType "mel" 
         -actionIsSubstitute 0
@@ -348,4 +301,125 @@ global proc shelf_Domemaster3D () {
         -actionIsSubstitute 0
         -commandRepeatable 1
     ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 0.5k" 
+        -align "center" 
+        -label "Render 0.5k" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -imageOverlayLabel "0.5k" 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(512)" 
+        -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 1k" 
+        -align "center" 
+        -label "Render 1k" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -imageOverlayLabel "1k" 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(1024)" 
+        -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 2k" 
+        -align "center" 
+        -label "Render 2k" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -imageOverlayLabel "2k" 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(2048)" 
+        -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 4k" 
+        -align "center" 
+        -label "Render 4k" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -imageOverlayLabel "4k" 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(4096)" 
+        -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -annotation "Render 8k" 
+        -align "center" 
+        -label "Render 8k" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -imageOverlayLabel "8k" 
+        -image "render_resolution.xpm" 
+        -image1 "render_resolution.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.changeRenderRes(8192)" 
+        -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+
 } 
