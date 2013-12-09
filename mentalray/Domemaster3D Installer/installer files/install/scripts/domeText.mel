@@ -1,5 +1,5 @@
 /*
-  Dome Text V1.4
+  Dome Text V1.4 Beta 9
   by Andrew Hazelden
 
   The DomeText script is a title generator that creates raster title graphics in the png, tif, tga, bmp, and psd formats.
@@ -10,8 +10,17 @@
 
   Version History
   ----------------
+  
+  Version 1.4 Beta 9
+  ----------------------
+  Dec 9, 2013
+  
+  Improved Linux font support
+  Improved Mac font support
+  
+  Updated the window's dock controls so the docked vs floating, and docked left/right window settings are restored
 
-  Version 1.4 beta 6 Build 2
+  Version 1.4 Beta 6 Build 2
   ----------------------
   Oct 27, 2013
 
@@ -74,7 +83,7 @@
 */
 
 //Check what Maya version is active
-global proc int getMayaVersion(){
+global proc int getMayaVersionDome(){
   // Check if we are running Maya 2011 or higher
   float $mayaVersion = `getApplicationVersionAsFloat`;
 
@@ -111,6 +120,27 @@ global proc string getMayaPlatform(){
 
   //print("Running on " + $mayaPlatform + ".\n");
   return $mayaPlatform;
+}
+
+
+global proc SaveDockedDomeTextWindowPos(){
+  //Save the DomeViewer dockControl State
+
+  string $dockedArea = `dockControl -query -area domeTextDockControl`;
+  int $dockedFloating = `dockControl -query -floating domeTextDockControl`;
+
+  //Save the dockControl window state - options: left,right
+  optionVar -stringValue "domeTextDockControlArea" $dockedArea; 
+
+  //Save the dockControl floating state - options: 0, 1
+  optionVar -intValue "domeTextDockControlFloating" $dockedFloating;
+
+  //DockControl Debug Info
+  if($dockedFloating == 0){
+    print("The DomeText window is docked to the " + $dockedArea + " side.\n\n");
+  } else {
+    print("The DomeText window is floating.\n\n");
+  }
 }
 
 
@@ -1031,7 +1061,7 @@ global proc string getDomeImagePath(){
   string $defaultSourceImages;
   
   // Check if we are running Maya 2011 or higher
-  float $mayaVersion = getMayaVersion();
+  float $mayaVersion = getMayaVersionDome();
   
   //File dialog results path
   string $resultArray[];
@@ -1640,15 +1670,15 @@ global proc domeText(){
   string $mayaPlatform = getMayaPlatform();
 
   // Check if we are running Maya 2011 or higher
-  float $mayaVersion = getMayaVersion();
+  float $mayaVersion = getMayaVersionDome();
 
   // Write out the current Maya version number and detected operating system
   print("Maya " + $mayaVersion + " on " + $mayaPlatform  + " detected.\n");
 
   if ($mayaVersion >=2011){
   // Remove an existing docked control window when running the DomeText tool for a 2nd time.
-    if (`dockControl -exists domeDockControl`){ 
-      deleteUI -control domeDockControl; 
+    if (`dockControl -exists domeTextDockControl`){ 
+      deleteUI -control domeTextDockControl; 
       print( "Removing an existing docked Dome Text Window\n");}
 
   if (`window -exists domeTextWin`){
@@ -1733,11 +1763,6 @@ global proc domeText(){
         "Choose a font name to change the appearance of the generated text. The installed fonts \nare listed by scanning the operating system's font folder paths."
         menuFontNameSelect;
 
-      //menuItem -label "Arial";
-      //menuItem -label "Courier";
-      //menuItem -label "Helvetica";
-      //menuItem -label "Times";
-     
       //Scan the system for installed fonts
       string $fontFolderPath;
       string $installedFonts[];
@@ -1753,25 +1778,71 @@ global proc domeText(){
         //Mac OS X
         //Font Folders: /System/Library/Fonts/:/Library/Fonts/:~/Library/Fonts/";
 
-
         $fontFolderPath = "/Library/Fonts/";
         string $fontFolderPath2 = "/System/Library/Fonts/";
-        string $fontFolderPath3 = "~/Library/Fonts/";
-        
+
+        //Build the user fonts folder path
+        //string $fontFolderPath3 = "~/Library/Fonts/";
+        string $macHomePath = `getenv "HOME"`;
+				string $fontFolderPath3 = $macHomePath + "/Library/Fonts/";
+				
+        //Scan the three mac font locations for files
         string $fontTemp1[] = `getFileList -folder $fontFolderPath`;
         string $fontTemp2[] = `getFileList -folder $fontFolderPath2`;
         string $fontTemp3[] = `getFileList -folder $fontFolderPath3`;
         
-        $installedFonts = stringArrayCatenate($fontTemp1, $fontTemp2);
-        $installedFonts = stringArrayCatenate($installedFonts, $fontTemp3);
+        //Add the folder path as a prefix to each of the array items
+			  stringArrayAddPrefix( $fontTemp1, ($fontFolderPath) );
+        stringArrayAddPrefix( $fontTemp2, ($fontFolderPath2) );
+        stringArrayAddPrefix( $fontTemp3, ($fontFolderPath3) );
+        
+        //Merge the list of installed fonts
+        //$installedFonts = stringArrayCatenate($fontTemp1, $fontTemp2);
+        //$installedFonts = stringArrayCatenate($installedFonts, $fontTemp3);
+        
+        $installedFonts = stringArrayCatenate($fontTemp3, $fontTemp1 );
+        $installedFonts = stringArrayCatenate($installedFonts, $fontTemp2);
         
       }else {  
         //Linux
         //Font Folders: /usr/share/fonts/
-
-        $fontFolderPath = "/usr/share/fonts/";
-        $installedFonts = `getFileList -folder $fontFolderPath`;
+				//  
+        //$fontFolderPath = "/usr/share/fonts/";
+        //$fontFolderPath = "/usr/share/fonts/dejavu/";
+        //$installedFonts = `getFileList -folder $fontFolderPath`;
         
+        //Location of the Linux Font folders:
+        $fontFolderPath = "/usr/share/fonts/";
+
+				//Scan the first level of folders:
+        string $installedFontFolders[] = `getFileList -folder $fontFolderPath`; 
+        string $installedFontsSubFolders;
+        string $installedFontsSubSubFolders;
+
+        //List of all the fonts
+        string $fontTemp1[];
+
+				//Scan the second level of folders:	
+        for ( $installedFontsSubFolders in $installedFontFolders ) {
+          $fontTemp1 = `getFileList -folder ($fontFolderPath+$installedFontsSubFolders+"/") `;
+          //-filespec "*.ttf"
+					//Add the folder path as a prefix to each of the array items
+					stringArrayAddPrefix( $fontTemp1, ($fontFolderPath+$installedFontsSubFolders+"/") );
+          $installedFonts = stringArrayCatenate($installedFonts, $fontTemp1);
+        }
+
+				//Scan the third level of folders:	
+        for ( $installedFontsSubSubFolders in $installedFonts ) {
+          $fontTemp1 = `getFileList -folder ($installedFontsSubSubFolders+"/") `;
+          //-filespec "*.ttf"
+					//Add the folder path as a prefix to each of the array items
+					stringArrayAddPrefix( $fontTemp1, ($installedFontsSubSubFolders+"/") );
+          $installedFonts = stringArrayCatenate($installedFonts, $fontTemp1);
+        }
+ 
+				//Sort the list of fonts
+			  $installedFonts = sort($installedFonts);
+    
       }
       
       //print("Installed Fonts: \n");
@@ -1785,7 +1856,7 @@ global proc domeText(){
       for ( $installedFontsItems in $installedFonts )
       {
         menuItem -label $installedFontsItems;
-        $i_count = $i_count+1;  
+        $i_count = $i_count+1;
       }
       
       //optionMenuGrp -edit
@@ -1799,15 +1870,19 @@ global proc domeText(){
       if ($mayaPlatform  == "windows"){
         //Windows 32/x64
         $defaultfontName = "arial.ttf";
+        $fontFilenameString = $fontFolderPath + $defaultfontName;
       }else if ($mayaPlatform  == "darwin"){
         //Mac OS X
-        $defaultfontName = "Arial.ttf";
+        //$defaultfontName = "Arial.ttf";
+        $defaultfontName = "/Library/Fonts/Arial.ttf";
+        $fontFilenameString = $defaultfontName;
       }else {  
         //Linux
-        $defaultfontName = "arial.ttf";
+        $defaultfontName = "/usr/share/fonts/dejavu/DejaVuSans.ttf";
+        $fontFilenameString = $defaultfontName;
       }
         
-      $fontFilenameString = $fontFolderPath + $defaultfontName;
+       
       
       //Check if the font exists
       if (`filetest -f $fontFilenameString`){
@@ -2410,63 +2485,87 @@ global proc domeText(){
   setParent ..;
   
   //----------------------------------------------------------------------
-  //Show the Dome Text window
+  //Show the window
   //On Maya 2011 and higher provide access to the dockable UI 
   //----------------------------------------------------------------------
+  
+  string $dockedArea = "";
+  int $dockedFloating = 0;
 
+  //Load the dockControl Settings
+  if ($mayaVersion >= 2011) {
+    //Is the window docked to the left or right of the screen?
+    if(`optionVar -exists "domeTextDockControlArea"`){
+      $dockedArea = `optionVar -query "domeTextDockControlArea"`;
+    } else{
+      $dockedArea = "right";
+    }
+
+    //Is the window floating or not?
+    if(`optionVar -exists "domeTextDockControlFloating"`){
+      $dockedFloating = `optionVar -query "domeTextDockControlFloating"`;
+    } else {
+      $dockedFloating = 0;
+    }
+  }
+  
   if ( $mayaVersion == 2011 ){
   //Make the Maya 2011 or higher window dockable
-  string $domeDockControl = `dockControl 
+  string $domeTextDockControl = `dockControl 
         -label "Dome Text"
-        -area "right" //snap to the right side of the view next to the attribute editor
-        //-area "left"     //snap to the left side of the view next to the tool settings tab
+				-area $dockedArea 
+				// -area "right" //snap to the right side of the view next to the attribute editor
+				//-area "left"     //snap to the left side of the view next to the tool settings tab
         -content domeTextWin
-        //-floating 1
-        -floating 0 //docked
+				-floating $dockedFloating
+				//-floating 1 //floating window
+				//-floating 0 //docked window
 		    -height $domeWindowHeight
         -width $domeWindowWidth
         //-allowedArea "all"
         -allowedArea "left"
         -allowedArea "right"
         // Disabled for Maya 2011 compatibility testing
-        //-floatChangeCommand "evalDeferred(\"dockControl -e -width $domeWindowWidth domeDockControl;dockControl -e -height $domeWindowHeight domeDockControl;\")"
-        domeDockControl`;
+        //-floatChangeCommand "evalDeferred(\"dockControl -e -width $domeWindowWidth domeTextDockControl;dockControl -e -height $domeWindowHeight domeTextDockControl;SaveDockedDomeTextWindowPos();\")"
+        domeTextDockControl`;
   
   //Force the window back to the right size
-  evalDeferred("dockControl -e -width $domeWindowWidth domeDockControl;dockControl -e -height $domeWindowHeight domeDockControl;");
+  evalDeferred("dockControl -e -width $domeWindowWidth domeTextDockControl;dockControl -e -height $domeWindowHeight domeTextDockControl;SaveDockedDomeTextWindowPos();");
 
   //Get the current window size
   print ("\nDome Text Window Size: " 
-            + `dockControl -q -width domeDockControl` 
+            + `dockControl -q -width domeTextDockControl` 
             + " width " 
-            + `dockControl -q -height domeDockControl` 
+            + `dockControl -q -height domeTextDockControl` 
             + " height\n");
   }else if ( $mayaVersion >= 2012 ) {
   //Make the Maya 2011 or higher window dockable
-  string $domeDockControl = `dockControl 
+  string $domeTextDockControl = `dockControl 
         -label "Dome Text"
-        -area "right" //snap to the right side of the view next to the attribute editor
-        //-area "left"     //snap to the left side of the view next to the tool settings tab
+				-area $dockedArea 
+				// -area "right" //snap to the right side of the view next to the attribute editor
+				//-area "left"     //snap to the left side of the view next to the tool settings tab
         -content domeTextWin
-        //-floating 1
-        -floating 0 //docked
+				-floating $dockedFloating
+				//-floating 1 //floating window
+				//-floating 0 //docked window
 		    -height $domeWindowHeight
         -width $domeWindowWidth
         //-allowedArea "all"
         -allowedArea "left"
         -allowedArea "right"
         // Disabled for Maya 2011 compatibility testing
-        -floatChangeCommand "evalDeferred(\"dockControl -e -width $domeWindowWidth domeDockControl;dockControl -e -height $domeWindowHeight domeDockControl;\")"
-        domeDockControl`;
+        -floatChangeCommand "evalDeferred(\"dockControl -e -width $domeWindowWidth domeTextDockControl;dockControl -e -height $domeWindowHeight domeTextDockControl;SaveDockedDomeTextWindowPos();\")"
+        domeTextDockControl`;
   
   //Force the window back to the right size
-  evalDeferred("dockControl -e -width $domeWindowWidth domeDockControl;dockControl -e -height $domeWindowHeight domeDockControl;");
+  evalDeferred("dockControl -e -width $domeWindowWidth domeTextDockControl;dockControl -e -height $domeWindowHeight domeTextDockControl;SaveDockedDomeTextWindowPos();");
 
   //Get the current window size
   print ("\nDome Text Window Size: " 
-            + `dockControl -q -width domeDockControl` 
+            + `dockControl -q -width domeTextDockControl` 
             + " width " 
-            + `dockControl -q -height domeDockControl` 
+            + `dockControl -q -height domeTextDockControl` 
             + " height\n");
  
   } else{
@@ -2508,7 +2607,7 @@ global proc createDomeText(){
   string $mayaPlatform = getMayaPlatform();
   
   //Check if we are running Maya 2011 or higher
-  float $mayaVersion = getMayaVersion();
+  float $mayaVersion = getMayaVersionDome();
   print("Maya " + $mayaVersion + " on " + $mayaPlatform  + " detected.\n");
 
   //Get the camera name
@@ -2833,7 +2932,7 @@ global proc createDomeText(){
   }else {  
     //Linux
     //$imagemagickPath = "convert";
-    $imagemagickPath = "/opt/local/bin/convert";
+    $imagemagickPath = "/usr/bin/convert";
   }
  
   //Pick the correct font settings for the current platform
@@ -2850,13 +2949,11 @@ global proc createDomeText(){
   }else if ($mayaPlatform  == "darwin"){
     //Mac OS X
     //$fontString =  " -font \"" + "Courier" + "\"";
-    $fontFolderPath = "/Library/Fonts/";
-    $fontString =  " -font \"" + $fontFolderPath + $fontName + "\"";
+    $fontString =  " -font \"" + $fontName + "\"";
   }else{  
     //Linux
     //$fontString =  " -font \"" + "Courier" + "\"";
-    $fontFolderPath = "/usr/share/fonts/";
-    $fontString =  " -font \"" + $fontFolderPath + $fontName + "\"";
+    $fontString =  " -font \"" + $fontName + "\"";
   }
 
   //Set up the custom font styles

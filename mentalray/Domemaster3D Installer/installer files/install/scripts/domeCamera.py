@@ -9,6 +9,13 @@ This script makes it easy to start creating fulldome stereoscopic content in Aut
 Version History
 
 
+Version 1.4 B9
+-------------------------------
+Dec 7, 2013
+
+Updated Linux install path to:
+/opt/Domemaster3D
+
 Version 1.4 B8
 -----------------
 Nov 20, 2013
@@ -310,10 +317,10 @@ def getSourceImagesPath(imageFileName):
     baseImagesFolder = "/Applications/Domemaster3D/sourceimages/"
   elif platform.system()== 'Linux':
     #Check if the program is running on Linux
-    baseImagesFolder = "/usr/bin/Domemaster3D/sourceimages/"
+    baseImagesFolder = "/opt/Domemaster3D/sourceimages/"
   elif platform.system()== 'Linux2':
     #Check if the program is running on Linux
-    baseImagesFolder = "/usr/bin/Domemaster3D/sourceimages/"
+    baseImagesFolder = "/opt/Domemaster3D/sourceimages/"
   else:
     # Create the empty variable as a fallback mode
     baseImagesFolder = ""

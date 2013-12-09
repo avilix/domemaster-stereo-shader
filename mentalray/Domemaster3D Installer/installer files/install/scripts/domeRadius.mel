@@ -1,5 +1,5 @@
 /*
-  domeRadius V1 Build 5
+  domeRadius V1.4 Build 1
   by Andrew Hazelden
 
   This is a Maya MEL script for creating the preview shape for the DomeAFL_FOV
@@ -10,6 +10,10 @@
 
   Version History
   ----------------
+
+  Version 1.4 - Dec 6, 2013
+  ------------------------------
+  Updated the domeAFL_FOV_Stereo rig's preview shape to default to the wireframe display mode
 
   Version 1 -  Oct 6, 2013
   ------------------------------
@@ -337,7 +341,7 @@ global proc addDomePreviewRig (string $cameraName, string $lensShaderName){
         int $cameraView = `getAttr ($lensShaderName+".Camera")`;
         if ($cameraView == 0){
           //Set the center view to show the zero parallax shape
-          setAttr ($lensShaderName+".zeroParallaxDisplayMode") 3;
+          setAttr ($lensShaderName+".zeroParallaxDisplayMode") 1;
         } else { 
           //Set the left and right views to hide the zero parallax shape
           setAttr ($lensShaderName+".zeroParallaxDisplayMode") 0;

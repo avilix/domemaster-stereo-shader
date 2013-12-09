@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.4 B8 - Nov 20, 2013
+Version 1.4 B9 - Dec 9, 2013
 
 Maintained by Andrew Hazelden
 andrew@andrewhazelden.com
@@ -11,13 +11,56 @@ The Domemaster Stereo lens shader is a custom mental ray shader that creates a s
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "center" camera option in the DomeAFL_FOV_Stereo shader.
 
 
+Version 1.4 Beta 9 Changes
+-------------------------------
+Dec 9, 2013
+
+3DS Max Changes
+---------------------
+Updated the 3DS Max Starglobe files to fix rendering issues. The new 3DS Max scenes are stored in the folder:
+C:\Program Files\Domemaster3D\sourceimages
+
+Added install option for 3DS Max 2015 (beta) support
+
+Maya Changes
+-----------------
+Added an install option for Maya 2015 (beta) support
+
+Updated the Galaxy Creator, Starglobe, DomeText, and DomeViewer window's so the window settings are restored from the last setting. This allows the docked vs floating, and docked left/right window settings to be remembered.
+
+Changed the default for the domeAFL_FOV and domeAFL_FOV_Stereo node's preview shape to the wireframe rendering mode.
+
+Changed the default particle type setting for the Galaxy Creator GUI to MultiPoint particles.
+
+
+Improved Linux Compatibility
+The Domemaster3D shader files on Linux are installed to the folder: /opt/Domemaster3D/
+
+Updated the mental ray lens shader's linux x64 makefile
+
+Compiled a new linux x64 mental ray lens shader build of domeAFL_FOV_Stereo.so"
+
+Updated the DomeText tool to scan the linux font folders at: /usr/share/fonts/
+
+
+DomeViewer Update
+Added support for previewing textures in the quadsphere (starglobe) mesh projection to the DomeViewer.
+
+Added a "Flip the Panoramic Image" checkbox that causes a mirror effect on the panoramic image by flipping the panoramic texture so you are viewing the texture map as if it was an environmental reflection map viewed from the outside. This effect is done by scaling the domeViewer shape (scaleX * -1).
+
+DomeText Update
+Rewrote the Linux DomeText font scanning to scan through each of the font folders located in the linux font path: /usr/share/fonts/
+
+Improved the Mac OS X DomeText font scanning. Fonts that are installed in the /Library/Fonts, /System/Library/Fonts, and ~/Library/Fonts folders are now added to the font menu list. The font folder path is added so it is possible to know which version of a font is selected.
+
+
 Version 1.4 Beta 8 Changes
 -------------------------------
 Nov 20, 2013
 
 Maya Changes
 ----------------
-Added Maya a set of shelf tools to change the render resolution.
+Added a set of Maya shelf tools to change the render resolution.
 
 Added a 16x8k equirectangular starglobe texture "starglobe_equirect_reversed_16x8k.jpg" to the sourceimages folder. This texture has been reversed for the view "inside" the night sky environment.
 

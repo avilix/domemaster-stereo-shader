@@ -22,7 +22,7 @@ def findDomeRig():
       
   return 0
 
-def getMayaVersion():
+def getMayaVersionDome():
   import maya.mel as mel
   import maya.cmds as cmds
 
@@ -50,7 +50,7 @@ def addNewDomeRig():
     # Add the custom rig
     cmds.evalDeferred("cmds.stereoRigManager(add=['DomeStereoCamera', 'Python', 'domeStereoRig.createRig'])")
     # Add the custom callback set for Maya 2011+
-    mayaVersion = getMayaVersion()
+    mayaVersion = getMayaVersionDome()
     if (mayaVersion >= 2011):
       cmds.evalDeferred("cmds.stereoRigManager(cameraSetFunc=['DomeStereoCamera','domeStereoRig.attachToCameraSet'] )")
     

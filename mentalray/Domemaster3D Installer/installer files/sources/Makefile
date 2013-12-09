@@ -4,13 +4,14 @@
 
 CC = gcc
 
-MAYA_DIR=/usr/autodesk/maya8.5-x64
+#MAYA_DIR=/usr/autodesk/maya8.5-x64
 #MAYA_DIR=/usr/autodesk/maya2011-x64
 #MAYA_DIR=/usr/autodesk/maya2012-x64
 #MAYA_DIR=/usr/autodesk/maya2013-x64
+MAYA_DIR=/usr/autodesk/mentalrayForMaya2014
 
-
-INC = -I$(MAYA_DIR)/devkit/mentalray/include
+#INC = -I$(MAYA_DIR)/devkit/mentalray/include
+INC = -I$(MAYA_DIR)/devkit/include
 LIB = 
 LIB_STATIC = 
 CFLAGS = -c -O3 -fPIC -Bsymbolic -DBIT64
@@ -32,5 +33,7 @@ clean:
 	rm -f domeAFL_FOV_Stereo.so
 
 install:
-	cp domeAFL_FOV_Stereo.so $(MAYA_DIR)/mentalray/lib
-	cp domeAFL_FOV_Stereo.mi $(MAYA_DIR)/mentalray/include
+#	cp domeAFL_FOV_Stereo.so $(MAYA_DIR)/mentalray/lib
+#	cp domeAFL_FOV_Stereo.mi $(MAYA_DIR)/mentalray/include
+	cp domeAFL_FOV_Stereo.so $(MAYA_DIR)/shaders
+	cp domeAFL_FOV_Stereo.mi $(MAYA_DIR)/shaders/include

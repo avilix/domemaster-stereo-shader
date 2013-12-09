@@ -1,4 +1,4 @@
-//  Version 1.4 Build 2 -  Oct 6, 2013
+//  Version 1.4 Build 3 -  Dec 6, 2013
 //
 //  Procedure Name:
 //	AEdomeAFL_FOV_StereoTemplate
@@ -8,6 +8,12 @@
 //
 // Version History
 // -----------------
+//
+//	Version 1.4 - Build 4
+// -----------------------
+// Dec 6, 2013 
+//
+// Changed the default for the domeAFL_FOV_Stereo node's preview shape to wireframe.
 //
 //	Version 1.4 Build 2 
 // --------------------
@@ -290,7 +296,7 @@ global proc domeAFL_FOV_Stereo_AddDynamicAttrs( string $nodeName )
   //Zero Parallax Display Mode
   string $attrName ="zeroParallaxDisplayMode";
   if (!`attributeExists $attrName $baseNodeName`) {
-    addAttr -ln $attrName  -at "enum" -en "Off:Wireframe:Shaded:Wireframe on Shaded" -defaultValue 2 -keyable true $baseNodeName;
+    addAttr -ln $attrName  -at "enum" -en "Off:Wireframe:Shaded:Wireframe on Shaded" -defaultValue 1 -keyable true $baseNodeName;
     print("Adding custom Attributes " + $baseNodeName +"." +$attrName + "\n");
   }
   
@@ -312,7 +318,7 @@ global proc domeAFL_FOV_Stereo_AddDynamicAttrs( string $nodeName )
   //Zero Parallax Transparency
   $attrName ="zeroParallaxTransparency";
   if (!`attributeExists $attrName $baseNodeName`) {
-  addAttr -ln "zeroParallaxTransparency" -at double  -min 0 -max 1 -dv 0.25 -keyable true $baseNodeName;
+  addAttr -ln "zeroParallaxTransparency" -at double  -min 0 -max 1 -defaultValue 0.25 -keyable true $baseNodeName;
   print("Adding custom Attributes " + $baseNodeName +"." +$attrName + "\n");
   }
   

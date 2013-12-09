@@ -1,5 +1,5 @@
 """
- Domemaster3D Fulldome Stereo Rig V1.4 B6
+ Domemaster3D Fulldome Stereo Rig V1.4 B9
  Updated Oct 26, 2013
  by Andrew Hazelden  andrew@andrewhazelden.com
  -----------------------------------------------------------------------
@@ -12,7 +12,7 @@
  C:\Program Files\Autodesk\Maya2014\Python\Lib\site-packages\maya\app\stereo\stereoCameraDefaultRig.py
  -----------------------------------------------------------------------
 """
-def getMayaVersion():
+def getMayaVersionDome():
   import maya.mel as mel
   import maya.cmds as cmds
 
@@ -35,7 +35,7 @@ def getMayaVersion():
 import maya.cmds as cmds
 
 #Check if we are running Maya 2011+ and then add the stereoCameraSets module
-mayaVersion = getMayaVersion()
+mayaVersion = getMayaVersionDome()
 if (mayaVersion >= 2011):
   from maya.app.stereo import stereoCameraSets
 
@@ -72,10 +72,10 @@ def getSourceImagesPath(imageFileName):
     baseImagesFolder = "/Applications/Domemaster3D/sourceimages/"
   elif platform.system()== 'Linux':
     #Check if the program is running on Linux
-    baseImagesFolder = "/usr/bin/Domemaster3D/sourceimages/"
+    baseImagesFolder = "/opt/Domemaster3D/sourceimages/"
   elif platform.system()== 'Linux2':
     #Check if the program is running on Linux
-    baseImagesFolder = "/usr/bin/Domemaster3D/sourceimages/"
+    baseImagesFolder = "/opt/Domemaster3D/sourceimages/"
   else:
     # Create the empty variable as a fallback mode
     baseImagesFolder = ""
@@ -464,7 +464,7 @@ def registerThisRig():
   Registers the rig in Maya's database
   """
 
-  mayaVersion = getMayaVersion()
+  mayaVersion = getMayaVersionDome()
   if (mayaVersion >= 2011):
     global rigTypeName 
     cmds.stereoRigManager( add=[rigTypeName, 'Python', 'domeStereoRig.createRig'] )

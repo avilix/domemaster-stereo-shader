@@ -1,7 +1,7 @@
 <project>
     <shortName>Domemaster3D</shortName>
     <fullName>Domemaster3D Shader</fullName>
-    <version>1.4-Beta8</version>
+    <version>1.4-Beta9</version>
     <readmeFile>Domemaster_x64_readme.txt</readmeFile>
     <leftImage>vortex_sidebar.png</leftImage>
     <splashImage>splash_screen.png</splashImage>
@@ -40,6 +40,12 @@
                     <destination>${installdir}</destination>
                     <name>programfileslinux</name>
                     <platforms>linux</platforms>
+										<actionList>
+											<changePermissions>
+													<files>*</files>
+													<permissions>777</permissions>
+											</changePermissions>
+									  </actionList>
                 </folder>
                 <folder>
                     <description>Program Files</description>
@@ -51,13 +57,25 @@
                     <description>Program Files</description>
                     <destination>${installdir}</destination>
                     <name>programfilesosx</name>
-                    <platforms>osx</platforms>
+                      <platforms>osx</platforms>
+											<actionList>
+													<changePermissions>
+															<files>*</files>
+															<permissions>777</permissions>
+													</changePermissions>
+											</actionList>
                 </folder>
                 <folder>
                     <description>Source Code</description>
                     <destination>${installdir}/</destination>
                     <name>sourcecode</name>
                     <platforms>all</platforms>
+                    <actionList>
+                        <changePermissions>
+                            <files>*</files>
+                            <permissions>777</permissions>
+                        </changePermissions>
+                    </actionList>
                     <distributionFileList>
                         <distributionDirectory>
                             <origin>installer files/sources</origin>
@@ -93,11 +111,11 @@
                         <distributionFile>
                             <origin>installer files/docs/Domemaster3D Readme.txt</origin>
                         </distributionFile>
-                        <distributionDirectory>
-                            <origin>installer files/docs/Galaxy Creator Tool</origin>
-                        </distributionDirectory>
                         <distributionFile>
                             <origin>installer files/docs/domeAFL_FOV_Stereo_maya_project.zip</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>installer files/docs/galaxy_creator_maya_projects.zip</origin>
                         </distributionFile>
                     </distributionFileList>
                     <shortcutList>
@@ -133,6 +151,10 @@
                             <insertAt>end</insertAt>
                             <path>${installdir}/sourceimages</path>
                         </addDirectoryToPath>
+                        <changePermissions>
+                            <files>*</files>
+                            <permissions>777</permissions>
+                        </changePermissions>
                     </actionList>
                     <distributionFileList>
                         <distributionFile>
@@ -327,6 +349,615 @@
             <selected>1</selected>
             <show>1</show>
             <componentList>
+	<!-- Maya 2015 Install files -->
+	<componentGroup>
+                    <name>Maya2015</name>
+                    <description>Maya 2015 Support (Beta)</description>
+                    <canBeEdited>1</canBeEdited>
+                    <detailedDescription>This option will install the Domemaster3D mental ray lens shader in the Autodesk Maya 2015 folder.</detailedDescription>
+                    <selected>0</selected>
+                    <show>1</show>
+                    <componentList>
+                        <component>
+                            <name>Maya_2015_Icons</name>
+                            <description>Maya Icons</description>
+                            <canBeEdited>1</canBeEdited>
+                            <selected>1</selected>
+                            <show>0</show>
+                            <folderList>
+                                <folder>
+                                    <description>Maya Icons</description>
+                                    <destination>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/icons</destination>
+                                    <name>icons_mac</name>
+                                    <platforms>osx</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_starglobe.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/colorMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cylindrical_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>Maya Icons</description>
+                                    <destination>${windows_folder_personal}\maya\2015-x64\prefs\icons</destination>
+                                    <name>icons_win</name>
+                                    <platforms>windows</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_starglobe.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/colorMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cylindrical_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                            </folderList>
+                        </component>
+                        <component>
+                            <name>Maya_2015_Scripts</name>
+                            <description>Maya Scripts</description>
+                            <canBeEdited>1</canBeEdited>
+                            <selected>1</selected>
+                            <show>0</show>
+                            <folderList>
+                                <folder>
+                                    <description>Maya Scripts</description>
+                                    <destination>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/scripts</destination>
+                                    <name>scripts</name>
+                                    <platforms>osx</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/__init__.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/galaxies.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2014 physical sky/AEmia_physicalskyTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2014 physical sky/createMentalRayIndirectLightingTab.mel</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>Maya Scripts</description>
+                                    <destination>${windows_folder_personal}\maya\2015-x64\prefs\scripts</destination>
+                                    <name>scripts_win</name>
+                                    <platforms>windows</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/__init__.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/galaxies.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2014 physical sky/AEmia_physicalskyTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2014 physical sky/createMentalRayIndirectLightingTab.mel</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                            </folderList>
+                        </component>
+                        <component>
+                            <name>Maya_2015_shelves</name>
+                            <description>Maya Shelves</description>
+                            <canBeEdited>1</canBeEdited>
+                            <selected>1</selected>
+                            <show>0</show>
+                            <folderList>
+                                <folder>
+                                    <description>Maya Shelves</description>
+                                    <destination>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/shelves</destination>
+                                    <name>shelves_mac</name>
+                                    <platforms>osx</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2011 and newer shelves/shelf_Domemaster3D.mel</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>Maya Shelves</description>
+                                    <destination>${windows_folder_personal}\maya\2015-x64\prefs\shelves</destination>
+                                    <name>shelves_win</name>
+                                    <platforms>windows</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2011 and newer shelves/shelf_Domemaster3D.mel</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                            </folderList>
+                        </component>
+                        <component>
+                            <name>Maya_2015_Shaders</name>
+                            <description>Shaders</description>
+                            <canBeEdited>1</canBeEdited>
+                            <selected>1</selected>
+                            <show>0</show>
+                            <folderList>
+                                <folder>
+                                    <description>mental ray shaders</description>
+                                    <destination>/Applications/Autodesk/mentalrayForMaya2015/shaders</destination>
+                                    <name>shaders_mac</name>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/lib/Mac OS X 64-bit LIB/domeAFL_FOV_Stereo.dylib</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>mental ray shaders</description>
+                                    <destination>${windows_folder_program_files}\Autodesk\mentalrayForMaya2015\shaders</destination>
+                                    <name>shaders_win</name>
+                                    <platforms>windows</platforms>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/lib/Windows 64-bit LIB/domeAFL_FOV_Stereo.dll</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                            </folderList>
+                        </component>
+                        <component>
+                            <name>Maya_2015_Include</name>
+                            <description>Include</description>
+                            <canBeEdited>1</canBeEdited>
+                            <selected>1</selected>
+                            <show>0</show>
+                            <folderList>
+                                <folder>
+                                    <description>mental ray include</description>
+                                    <destination>/Applications/Autodesk/mentalrayForMaya2015/shaders/include</destination>
+                                    <name>include_mac</name>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/include/domeAFL_FOV_Stereo.mi</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>mental ray include</description>
+                                    <destination>${windows_folder_program_files}\Autodesk\mentalrayForMaya2015\shaders\include</destination>
+                                    <name>include_win</name>
+                                    <platforms>windows</platforms>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/include/domeAFL_FOV_Stereo.mi</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                            </folderList>
+                        </component>
+                        <component>
+                            <name>Maya_2015_AETemplate</name>
+                            <description>AETemplate</description>
+                            <canBeEdited>1</canBeEdited>
+                            <selected>1</selected>
+                            <show>0</show>
+                            <folderList>
+                                <folder>
+                                    <description>AETemplate</description>
+                                    <destination>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/scripts</destination>
+                                    <name>scripts_mac</name>
+                                    <platforms>osx</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>AETemplate</description>
+                                    <destination>${windows_folder_personal}\maya\2015-x64\prefs\scripts</destination>
+                                    <name>scripts_win</name>
+                                    <platforms>windows</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                            </folderList>
+                        </component>
+                    </componentList>
+                </componentGroup>
+
 	<!-- Maya 2014 Install files -->
 	<componentGroup>
                     <name>Maya2014</name>
@@ -476,7 +1107,144 @@
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
                                         </distributionFile>
                                         <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>Maya Icons</description>
+                                    <destination>${windows_folder_personal}/maya/2014-x64/prefs/icons</destination>
+                                    <name>icons_linux</name>
+                                    <platforms>linux</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/rob_lookup_background.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_rob_lookup_background.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_starglobe.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_galaxy.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_resolution.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/render_magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/magicDome.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalray_load.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeRamp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_WxH.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeAFL_FOV_Stereo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/colorMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/bumpMaterial.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeHelp.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeText.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeInfo.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeGrid.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/domeViewer.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/imagemagick.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mirrorball_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_180degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/latlong_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/mentalRayCube1_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalStrip_38px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalStrip_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalCross_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/verticalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/horizontalTee_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/cubemap3x2_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/fisheye_360_degree_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -609,6 +1377,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                             </folderList>
@@ -623,8 +1394,73 @@
                                 <folder>
                                     <description>Maya Scripts</description>
                                     <destination>~/Library/Preferences/Autodesk/maya/2014-x64/prefs/scripts</destination>
-                                    <name>scripts</name>
+                                    <name>scripts_mac</name>
                                     <platforms>osx</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/__init__.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeCamera.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMaterial.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeMenu.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRadius.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStarglobe.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeRender.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeStereoRig.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeText.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeTextUTF.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeVersion.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/domeViewer.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/galaxies.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/galaxyCreator.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/scripts/userSetup.py</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2014 physical sky/AEmia_physicalskyTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2014 physical sky/createMentalRayIndirectLightingTab.mel</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>Maya Scripts</description>
+                                    <destination>${windows_folder_personal}/maya/2014-x64/prefs/scripts</destination>
+                                    <name>scripts_linux</name>
+                                    <platforms>linux</platforms>
                                     <actionList>
                                         <changePermissions>
                                             <files>*</files>
@@ -778,6 +1614,23 @@
                                 </folder>
                                 <folder>
                                     <description>Maya Shelves</description>
+                                    <destination>${windows_folder_personal}/maya/2014-x64/prefs/shelves</destination>
+                                    <name>shelves_linux</name>
+                                    <platforms>linux</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/Maya 2011 and newer shelves/shelf_Domemaster3D.mel</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>Maya Shelves</description>
                                     <destination>${windows_folder_personal}\maya\2014-x64\prefs\shelves</destination>
                                     <name>shelves_win</name>
                                     <platforms>windows</platforms>
@@ -807,9 +1660,32 @@
                                     <destination>/Applications/Autodesk/mentalrayForMaya2014/shaders</destination>
                                     <name>shaders_mac</name>
                                     <platforms>osx</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/lib/Mac OS X 64-bit LIB/domeAFL_FOV_Stereo.dylib</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>mental ray shaders</description>
+                                    <destination>/usr/autodesk/mentalrayForMaya2014/shaders</destination>
+                                    <name>shaders_linux</name>
+                                    <platforms>linux</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/lib/Linux 64-bit LIB/domeAFL_FOV_Stereo.so</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -837,7 +1713,30 @@
                                     <description>mental ray include</description>
                                     <destination>/Applications/Autodesk/mentalrayForMaya2014/shaders/include</destination>
                                     <name>include_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																				<changePermissions>
+																				<files>*</files>
+																				<permissions>777</permissions>
+																				</changePermissions>
+																			</actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/include/domeAFL_FOV_Stereo.mi</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>mental ray include</description>
+                                    <destination>/usr/autodesk/mentalrayForMaya2014/shaders/include</destination>
+                                    <name>include_linux</name>
+                                    <platforms>linux</platforms>
+																		<actionList>
+																				<changePermissions>
+																						<files>*</files>
+																						<permissions>777</permissions>
+																				</changePermissions>
+																		</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/include/domeAFL_FOV_Stereo.mi</origin>
@@ -869,6 +1768,32 @@
                                     <destination>~/Library/Preferences/Autodesk/maya/2014-x64/prefs/scripts</destination>
                                     <name>scripts_mac</name>
                                     <platforms>osx</platforms>
+                                    <actionList>
+                                        <changePermissions>
+                                            <files>*</files>
+                                            <permissions>777</permissions>
+                                        </changePermissions>
+                                    </actionList>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_FOVTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AEdomeAFL_WxHTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                                <folder>
+                                    <description>AETemplate</description>
+                                    <destination>${windows_folder_personal}/maya/2014-x64/prefs/scripts</destination>
+                                    <name>scripts_linux</name>
+                                    <platforms>linux</platforms>
                                     <actionList>
                                         <changePermissions>
                                             <files>*</files>
@@ -1069,6 +1994,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -1202,6 +2130,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1400,7 +2331,13 @@
                                     <description>mental ray shaders</description>
                                     <destination>/Applications/Autodesk/maya2013.5/mentalray/shaders</destination>
                                     <name>shaders_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/lib/Mac OS X 64-bit LIB/domeAFL_FOV_Stereo.dylib</origin>
@@ -1431,7 +2368,13 @@
                                     <description>mental ray include</description>
                                     <destination>/Applications/Autodesk/maya2013.5/mentalray/shaders/include</destination>
                                     <name>include_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/include/domeAFL_FOV_Stereo.mi</origin>
@@ -1663,6 +2606,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -1796,6 +2742,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -1994,7 +2943,13 @@
                                     <description>mental ray shaders</description>
                                     <destination>/Applications/Autodesk/maya2013/mentalray/shaders</destination>
                                     <name>shaders_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/lib/Mac OS X 64-bit LIB/domeAFL_FOV_Stereo.dylib</origin>
@@ -2025,7 +2980,13 @@
                                     <description>mental ray include</description>
                                     <destination>/Applications/Autodesk/maya2013/mentalray/shaders/include</destination>
                                     <name>include_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/include/domeAFL_FOV_Stereo.mi</origin>
@@ -2226,13 +3187,13 @@
                                     <description>AETemplate</description>
                                     <destination>~/Library/Preferences/Autodesk/maya/2013-x64/prefs/scripts</destination>
                                     <name>scripts_mac</name>
-                                    <platforms>osx</platforms>
-                                    <actionList>
-                                        <changePermissions>
-                                            <files>*</files>
-                                            <permissions>777</permissions>
-                                        </changePermissions>
-                                    </actionList>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AEdomeAFL_FOV_StereoTemplate.mel</origin>
@@ -2299,7 +3260,7 @@
                                     <description>Maya Icons</description>
                                     <destination>~/Library/Preferences/Autodesk/maya/2012-x64/prefs/icons</destination>
                                     <name>icons_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
                                     <actionList>
                                         <changePermissions>
                                             <files>*</files>
@@ -2429,6 +3390,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2563,6 +3527,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2761,7 +3728,13 @@
                                     <description>mental ray shaders</description>
                                     <destination>/Applications/Autodesk/maya2012/Maya.app/Contents/mentalray/lib</destination>
                                     <name>shaders_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/lib/Mac OS X 64-bit LIB/domeAFL_FOV_Stereo.dylib</origin>
@@ -2792,7 +3765,13 @@
                                     <description>mental ray include</description>
                                     <destination>/Applications/Autodesk/maya2012/Maya.app/Contents/mentalray/include</destination>
                                     <name>include_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/include/domeAFL_FOV_Stereo.mi</origin>
@@ -3024,6 +4003,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -3157,6 +4139,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/icons/cylindrical_120px.png</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/icons/quadsphere_120px.png</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -3355,7 +4340,13 @@
                                     <description>mental ray shaders</description>
                                     <destination>/Applications/Autodesk/maya2011/Maya.app/Contents/mentalray/lib</destination>
                                     <name>shaders_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/lib/Mac OS X 64-bit LIB/domeAFL_FOV_Stereo.dylib</origin>
@@ -3386,7 +4377,13 @@
                                     <description>mental ray include</description>
                                     <destination>/Applications/Autodesk/maya2011/Maya.app/Contents/mentalray/include</destination>
                                     <name>include_mac</name>
-                                    <platforms>osx</platforms>
+                                      <platforms>osx</platforms>
+																			<actionList>
+																					<changePermissions>
+																							<files>*</files>
+																							<permissions>777</permissions>
+																					</changePermissions>
+																			</actionList>
                                     <distributionFileList>
                                         <distributionFile>
                                             <origin>installer files/install/include/domeAFL_FOV_Stereo.mi</origin>
@@ -3762,8 +4759,98 @@
             <show>1</show>
             <componentList>
                 <componentGroup>
+                    <name>max_2015</name>
+                    <description>3DS Max 2015 Support (Beta)</description>
+                    <canBeEdited>1</canBeEdited>
+                    <detailedDescription>This option will install the Domemaster3D mental ray lens shader in the Autodesk 3DS Max 2015 folder.</detailedDescription>
+                    <selected>0</selected>
+                    <show>1</show>
+                    <componentList>
+                        <component>
+                            <name>Max_2015_Shaders</name>
+                            <description>Shaders</description>
+                            <canBeEdited>1</canBeEdited>
+                            <selected>1</selected>
+                            <show>0</show>
+                            <folderList>
+                                <folder>
+                                    <description>mental ray shaders</description>
+                                    <destination>${Max_2015_Shaders_Dir}</destination>
+                                    <name>shaders</name>
+                                    <platforms>all</platforms>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/lib/Windows 64-bit LIB/domeAFL_FOV_Stereo.dll</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                            </folderList>
+                            <postInstallationActionList>
+                                <removeFilesFromUninstaller>
+                                    <files>${Max_2015_Shaders_Dir}</files>
+                                </removeFilesFromUninstaller>
+                            </postInstallationActionList>
+                        </component>
+                        <component>
+                            <name>Max_2015_Include</name>
+                            <description>Include</description>
+                            <canBeEdited>1</canBeEdited>
+                            <selected>1</selected>
+                            <show>0</show>
+                            <folderList>
+                                <folder>
+                                    <description>mental ray include</description>
+                                    <destination>${Max_2015_Include_Dir}</destination>
+                                    <name>include</name>
+                                    <platforms>windows</platforms>
+                                    <distributionFileList>
+                                        <distributionFile>
+                                            <origin>installer files/install/include/domeAFL_FOV_Stereo.mi</origin>
+                                        </distributionFile>
+                                    </distributionFileList>
+                                </folder>
+                            </folderList>
+                            <postInstallationActionList>
+                                <removeFilesFromUninstaller>
+                                    <files>${Max_2015_Include_Dir}</files>
+                                </removeFilesFromUninstaller>
+                            </postInstallationActionList>
+                        </component>
+                    </componentList>
+                    <parameterList>
+                        <directoryParameter>
+                            <name>Max_2015_Shaders_Dir</name>
+                            <title>3DS Max 2015 Mental Ray Shaders</title>
+                            <description>Mental Ray Shaders Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>${windows_folder_program_files}\Autodesk\3ds Max 2015\NVIDIA\shaders_autoload\mentalray\shaders</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>max2015_shaders</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Max_2015_Include_Dir</name>
+                            <title>3DS Max 2015 Mental Ray Include</title>
+                            <description>Mental Ray Include Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>${windows_folder_program_files}\Autodesk\3ds Max 2015\NVIDIA\shaders_autoload\mentalray\include</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>max2015_include</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                        </directoryParameter>
+                    </parameterList>
+                </componentGroup>
+                <componentGroup>
                     <name>max_2014</name>
-                    <description>3DS Max 2014 Support (Beta)</description>
+                    <description>3DS Max 2014 Support</description>
                     <canBeEdited>1</canBeEdited>
                     <detailedDescription>This option will install the Domemaster3D mental ray lens shader in the Autodesk 3DS Max 2014 folder.</detailedDescription>
                     <selected>0</selected>
@@ -4378,4 +5465,3 @@
         </slideShowImage>
     </slideShowImageList>
 </project>
-

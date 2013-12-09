@@ -26,7 +26,7 @@ createDomemaster3DMenu();
 
 
 //Check what Maya version is active
-global proc int getMayaVersion(){
+global proc int getMayaVersionDome(){
   // Check if we are running Maya 2011 or higher
   float $mayaVersion = `getApplicationVersionAsFloat`;
 
@@ -207,7 +207,7 @@ global proc createDomemaster3DMenu() {
       menuItem -divider true;
 
       // Check if we are running Maya 2011 or higher
-      float $mayaVersion = getMayaVersion();
+      float $mayaVersion = getMayaVersionDome();
       if ($mayaVersion >=2011){
         menuItem 
           -subMenu true 

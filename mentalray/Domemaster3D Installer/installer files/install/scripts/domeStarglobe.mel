@@ -1,11 +1,16 @@
 /*
-  Dome Starglobe GUI V1.1 Build 1
+  Dome Starglobe GUI V1.4 Beta 9
   by Andrew Hazelden
 
   This is a Maya GUI for the starglobe tool.
 
   Version History
   ----------------
+  
+  Version 1.4 Beta 9 - Dec 6, 2013
+  ---------------------------------
+  
+  Updated the window's dock controls so the docked vs floating, and docked left/right window settings are restored  
 
   Version 1.1 - Oct 27, 2013 Build 2
   ------------------------------
@@ -23,7 +28,7 @@
 */
 
 //Check what Maya version is active
-global proc int getMayaVersion(){
+global proc int getMayaVersionDome(){
   // Check if we are running Maya 2011 or higher
   float $mayaVersion = `getApplicationVersionAsFloat`;
 
@@ -114,6 +119,29 @@ global proc buildCamerasMenu(){
 
 
 
+
+global proc SaveDockedStarglobeWindowPos(){
+  //Save the Starglobe dockControl State
+
+  string $dockedArea = `dockControl -query -area starglobeDockControl`;
+  int $dockedFloating = `dockControl -query -floating starglobeDockControl`;
+
+  //Save the dockControl window state - options: left,right
+  optionVar -stringValue "starglobeDockControlArea" $dockedArea; 
+
+  //Save the dockControl floating state - options: 0, 1
+  optionVar -intValue "starglobeDockControlFloating" $dockedFloating;
+
+  //DockControl Debug Info
+  if($dockedFloating == 0){
+    print("The Starglobe window is docked to the " + $dockedArea + " side.\n\n");
+  } else {
+    print("The Starglobe window is floating.\n\n");
+  }
+}
+
+
+
 global proc createStarglobe(){
   global int $starglobeWindowWidth = 500;
   global int $starglobeWindowHeight = 300;
@@ -126,7 +154,7 @@ global proc createStarglobe(){
   string $mayaPlatform = getMayaPlatform();
 
   // Check if we are running Maya 2011 or higher
-  float $mayaVersion = getMayaVersion();
+  float $mayaVersion = getMayaVersionDome();
 
   // Write out the current Maya version number and detected operating system
   print("Maya " + $mayaVersion + " on " + $mayaPlatform  + " detected.\n");
@@ -216,25 +244,48 @@ global proc createStarglobe(){
   //On Maya 2011 and higher provide access to the dockable UI 
   //----------------------------------------------------------------------
 
+  string $dockedArea = "";
+  int $dockedFloating = 0;
+
+  //Load the dockControl Settings
+  if ($mayaVersion >= 2011) {
+    //Is the window docked to the left or right of the screen?
+    if(`optionVar -exists "starglobeDockControlArea"`){
+      $dockedArea = `optionVar -query "starglobeDockControlArea"`;
+    } else{
+      $dockedArea = "right";
+    }
+
+    //Is the window floating or not?
+    if(`optionVar -exists "starglobeDockControlFloating"`){
+      $dockedFloating = `optionVar -query "starglobeDockControlFloating"`;
+    } else {
+      $dockedFloating = 0;
+    }
+  }
+  
   if ($mayaVersion == 2011) {
     //Make the maya 2011 or higher window dockable
     string $starglobeDockControl = `dockControl 
       -label "Starglobe"
-      -area "right"      //snap to the right side of the view next to the attribute editor
-      //-area "left"     //snap to the left side of the view next to the tool settings tab
+			-area $dockedArea 
+			// -area "right" //snap to the right side of the view next to the attribute editor
+			//-area "left"     //snap to the left side of the view next to the tool settings tab
       -content starglobeWin
-      -floating 1        //floating = 0 means the Starglobe window is docked, floating = 1 means the window hovers over the Maya viewport.
+			-floating $dockedFloating
+			//-floating 1 //floating window
+			//-floating 0 //docked window
       -width $starglobeWindowWidth
       -height $starglobeWindowHeight
       //-allowedArea "all"
       -allowedArea "left"
       -allowedArea "right"
       // Disabled for Maya 2011 compatibility testing
-      //-floatChangeCommand "evalDeferred(\"dockControl -edit -width $starglobeWindowWidth starglobeDockControl;dockControl -edit -height $starglobeWindowHeight starglobeDockControl;\")"
+      //-floatChangeCommand "evalDeferred(\"dockControl -edit -width $starglobeWindowWidth starglobeDockControl;dockControl -edit -height $starglobeWindowHeight starglobeDockControl;SaveDockedStarglobeWindowPos();\")"
       starglobeDockControl`;
     
     //Force the window back to the right size
-    evalDeferred("dockControl -edit -width $starglobeWindowWidth starglobeDockControl;dockControl -edit -height $starglobeWindowHeight starglobeDockControl;");
+    evalDeferred("dockControl -edit -width $starglobeWindowWidth starglobeDockControl;dockControl -edit -height $starglobeWindowHeight starglobeDockControl;SaveDockedStarglobeWindowPos();");
 
     //Get the current window size
     print ("\nStarglobe Window Size: " 
@@ -247,21 +298,24 @@ global proc createStarglobe(){
     //Make the maya 2012 or higher window dockable and add the floatChangeCommand option
     string $starglobeDockControl = `dockControl 
       -label "Starglobe"
-      -area "right"      //snap to the right side of the view next to the attribute editor
-      //-area "left"     //snap to the left side of the view next to the tool settings tab
+			-area $dockedArea 
+			// -area "right" //snap to the right side of the view next to the attribute editor
+			//-area "left"     //snap to the left side of the view next to the tool settings tab
       -content starglobeWin
-      -floating 1        //floating = 0 means the Starglobe window is docked, floating = 1 means the window hovers over the Maya viewport.
+			-floating $dockedFloating
+			//-floating 1 //floating window
+			//-floating 0 //docked window
       -width $starglobeWindowWidth
       -height $starglobeWindowHeight
       //-allowedArea "all"
       -allowedArea "left"
       -allowedArea "right"
       // Disabled in Maya 2011 for compatibility
-      -floatChangeCommand "evalDeferred(\"dockControl -edit -width $starglobeWindowWidth starglobeDockControl;dockControl -edit -height $starglobeWindowHeight starglobeDockControl;\")"
+      -floatChangeCommand "evalDeferred(\"dockControl -edit -width $starglobeWindowWidth starglobeDockControl;dockControl -edit -height $starglobeWindowHeight starglobeDockControl;SaveDockedStarglobeWindowPos();\")"
       starglobeDockControl`;
   
     //Force the window back to the right size
-    evalDeferred("dockControl -edit -width $starglobeWindowWidth starglobeDockControl;dockControl -edit -height $starglobeWindowHeight starglobeDockControl;");
+    evalDeferred("dockControl -edit -width $starglobeWindowWidth starglobeDockControl;dockControl -edit -height $starglobeWindowHeight starglobeDockControl;SaveDockedStarglobeWindowPos();");
 
     //Get the current window size
     print ("\nStarglobe Window Size: " 

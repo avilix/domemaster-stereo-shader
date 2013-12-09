@@ -1,11 +1,18 @@
 /*
- Galaxy Creator GUI V1.4 Build 11
+ Galaxy Creator GUI V1.4 Beta 9
  by Andrew Hazelden
  
  This is a Maya GUI wrapper for Martin Watt's galaxy script.
 
   Version History
   ----------------
+
+  Version 1.4 Beta 9 - Dec 6, 2013
+  ------------------------------------------
+  Updated the window's dock controls so the docked vs floating, and docked left/right window settings are restored
+
+  Changed the default particle type setting for the Galaxy Creator GUI to MultiPoint particles
+
   
   Version 1.4 Build 10 - Oct 10, 2013
   ------------------------------------------
@@ -158,7 +165,7 @@ global proc showMultistreakShadingOptions(){
 
 
 //Check what Maya version is active
-global proc int getMayaVersion(){
+global proc int getMayaVersionDome(){
   // Check if we are running Maya 2011 or higher
   float $mayaVersion = `getApplicationVersionAsFloat`;
 
@@ -1024,6 +1031,27 @@ global proc buildGalaxyPresetMenu(){
     menuGalaxyPresetSelect;
 }
 
+
+global proc SaveDockedGalaxyWindowPos(){
+  //Save the Galaxy Creator dockControl State
+
+  string $dockedArea = `dockControl -query -area galaxyDockControl`;
+  int $dockedFloating = `dockControl -query -floating galaxyDockControl`;
+
+  //Save the dockControl window state - options: left,right
+  optionVar -stringValue "galaxyDockControlArea" $dockedArea; 
+
+  //Save the dockControl floating state - options: 0, 1
+  optionVar -intValue "galaxyDockControlFloating" $dockedFloating;
+
+  //DockControl Debug Info
+  if($dockedFloating == 0){
+    print("The Galaxy Creator is docked to the " + $dockedArea + " side.\n\n");
+  } else {
+    print("The Galaxy Creator window is floating.\n\n");
+  }
+}
+
   
 //Check the operating system
 global proc string getMayaPlatform(){
@@ -1061,7 +1089,7 @@ global proc galaxyCreator(){
   string $mayaPlatform = getMayaPlatform();
 
   // Check if we are running Maya 2011 or higher
-  float $mayaVersion = getMayaVersion();
+  float $mayaVersion = getMayaVersionDome();
 
   // Write out the current Maya version number and detected operating system
   print("Maya " + $mayaVersion + " on " + $mayaPlatform  + " detected.\n");
@@ -1265,10 +1293,10 @@ global proc galaxyCreator(){
       menuItem -label "MultiPoint";
       menuItem -label "MultiStreak";
       
-      //Preselect the "Cloud" pop-up menu option
+      //Preselect the "MultiPoint" pop-up menu option
       optionMenuGrp
         -edit
-        -select 1
+        -select 2
         menuParticleType;
       
       //===============
@@ -1421,7 +1449,7 @@ global proc galaxyCreator(){
       
         colorSliderGrp 
           -label "Galaxy Transparency"
-          -annotation "This color picker controls the transparency of the stars in the galaxy's spiral arms. Generally, the particle transparency should be increased if your are increasing the density of the particles in the sim."
+          -annotation "This color picker controls the transparency of the stars in the galaxy's spiral arms. Generally, the particle transparency should be increased if you are increasing the density of the particles in the sim."
           -rgb 0.9 0.9 0.9 sliderGalaxyMultistreakTransparency;
         
         intSliderGrp 
@@ -1532,7 +1560,7 @@ global proc galaxyCreator(){
      button 
      -label "Open the Hardware Render Buffer Window" 
      -annotation 
-     "Load the hardware rendering window for fast galaxy animation previews. Note: You can use the  \nstandard Maya pan/dolly/zoom controls in the Hardware Render Buffer window"
+     "Load the hardware rendering window for fast galaxy animation previews. Note: You can use the\n standard Maya pan/dolly/zoom controls in the Hardware Render Buffer window"
      -command "openHardwareRender()"; 
      
    setParent ..; 
@@ -1542,25 +1570,49 @@ global proc galaxyCreator(){
   //On Maya 2011 and higher provide access to the dockable UI 
   //----------------------------------------------------------------------
 
+  string $dockedArea = "";
+  int $dockedFloating = 0;
+
+  //Load the dockControl Settings
+  if ($mayaVersion >= 2011) {
+    //Is the window docked to the left or right of the screen?
+    if(`optionVar -exists "galaxyDockControlArea"`){
+      $dockedArea = `optionVar -query "galaxyDockControlArea"`;
+    } else{
+      $dockedArea = "right";
+    }
+
+    //Is the window floating or not?
+    if(`optionVar -exists "galaxyDockControlFloating"`){
+      $dockedFloating = `optionVar -query "galaxyDockControlFloating"`;
+    } else {
+      $dockedFloating = 0;
+    }
+  }
+
+
   if ($mayaVersion == 2011) {
     //Make the maya 2011 or higher window dockable
     string $galaxyDockControl = `dockControl 
           -label "Galaxy Creator"
-          -area "right"      //snap to the right side of the view next to the attribute editor
+          -area $dockedArea 
+          // -area "right" //snap to the right side of the view next to the attribute editor
           //-area "left"     //snap to the left side of the view next to the tool settings tab
           -content galaxyWin
-          -floating 0        //floating = 0 means the Galaxy Creator window is docked, floating = 1 means the window hovers over the Maya viewport.
+          -floating $dockedFloating
+          //-floating 1 //floating window
+          //-floating 0 //docked window
           -width $galaxyWindowWidth
           -height $galaxyWindowHeight
           //-allowedArea "all"
           -allowedArea "left"
           -allowedArea "right"
           // Disabled for Maya 2011 compatibility testing
-          //-floatChangeCommand "evalDeferred(\"dockControl -edit -width $galaxyWindowWidth galaxyDockControl;dockControl -edit -height $galaxyWindowHeight galaxyDockControl;\")"
+          //-floatChangeCommand "evalDeferred(\"dockControl -edit -width $galaxyWindowWidth galaxyDockControl;dockControl -edit -height $galaxyWindowHeight galaxyDockControl;SaveDockedGalaxyWindowPos();\")"
           galaxyDockControl`;
     
     //Force the window back to the right size
-    evalDeferred("dockControl -edit -width $galaxyWindowWidth galaxyDockControl;dockControl -edit -height $galaxyWindowHeight galaxyDockControl;");
+    evalDeferred("dockControl -edit -width $galaxyWindowWidth galaxyDockControl;dockControl -edit -height $galaxyWindowHeight galaxyDockControl;SaveDockedGalaxyWindowPos();");
 
     //Get the current window size
     print ("\nGalaxy Creator Window Size: " 
@@ -1573,21 +1625,24 @@ global proc galaxyCreator(){
     //Make the maya 2012 or higher window dockable and add the floatChangeCommand option
     string $galaxyDockControl = `dockControl 
         -label "Galaxy Creator"
-        -area "right"      //snap to the right side of the view next to the attribute editor
+        -area $dockedArea 
+        // -area "right" //snap to the right side of the view next to the attribute editor
         //-area "left"     //snap to the left side of the view next to the tool settings tab
         -content galaxyWin
-        -floating 0        //floating = 0 means the Galaxy Creator window is docked, floating = 1 means the window hovers over the Maya viewport.
+        -floating $dockedFloating
+        //-floating 1 //floating window
+        //-floating 0 //docked window
         -width $galaxyWindowWidth
         -height $galaxyWindowHeight
         //-allowedArea "all"
         -allowedArea "left"
         -allowedArea "right"
         // Disabled in Maya 2011 for compatibility
-        -floatChangeCommand "evalDeferred(\"dockControl -edit -width $galaxyWindowWidth galaxyDockControl;dockControl -edit -height $galaxyWindowHeight galaxyDockControl;\")"
+        -floatChangeCommand "evalDeferred(\"dockControl -edit -width $galaxyWindowWidth galaxyDockControl;dockControl -edit -height $galaxyWindowHeight galaxyDockControl;SaveDockedGalaxyWindowPos();\")"
         galaxyDockControl`;
   
     //Force the window back to the right size
-    evalDeferred("dockControl -edit -width $galaxyWindowWidth galaxyDockControl;dockControl -edit -height $galaxyWindowHeight galaxyDockControl;");
+    evalDeferred("dockControl -edit -width $galaxyWindowWidth galaxyDockControl;dockControl -edit -height $galaxyWindowHeight galaxyDockControl;SaveDockedGalaxyWindowPos();");
 
     //Get the current window size
     print ("\nGalaxy Creator Window Size: " 

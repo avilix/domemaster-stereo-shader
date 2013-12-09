@@ -1,11 +1,25 @@
 /*
-  Dome Viewer V1.2
+  Dome Viewer V1.4 Beta 9
   by Andrew Hazelden
   
   A fulldome and panoramic image+movie viewer. The viewer supports all image and movie formats that can be opened using the Maya File Texture and Movie Nodes. You can display immersive images, image sequences, and movie files with accelerated RAM playback. Tilted fulldome theater screens can be simulated with the "Dome Tilt" attribute.
   
   A Bradbury alignment grid is included for viewing calibrated fulldome imagery.
   
+  Version 1.4 Beta 9
+  --------------------
+  Dec 7, 2013
+
+  Added support for the Quadsphere (starglobe) mesh to the domeViewer
+
+  Updated the window's dock controls so the docked vs floating, and docked left/right window settings are restored
+
+  Added the "Flip the Panoramic Image" checkbox that causes a mirror effect on the panoramic image by flipping the panoramic texture so you are viewing the texture map as if it was an environmental reflection map viewed from the outside. This effect is done by scaling the domeViewer shape (scaleX * -1).
+
+  Version 1.3 Build 1
+  --------------------
+  Nov 22, 2013
+
   Version 1.2 Build 1
   --------------------
   Oct 30, 2013
@@ -45,7 +59,7 @@
 
 
 //Check what Maya version is active
-global proc int getMayaVersion(){
+global proc int getMayaVersionDome(){
   // Check if we are running Maya 2011 or higher
   float $mayaVersion = `getApplicationVersionAsFloat`;
 
@@ -84,6 +98,26 @@ global proc string getMayaPlatform(){
   return $mayaPlatform;
 }
 
+global proc SaveDockedDomeViewerWindowPos(){
+  //Save the DomeViewer dockControl State
+
+  string $dockedArea = `dockControl -query -area domeViewerDockControl`;
+  int $dockedFloating = `dockControl -query -floating domeViewerDockControl`;
+
+  //Save the dockControl window state - options: left,right
+  optionVar -stringValue "domeViewerDockControlArea" $dockedArea; 
+
+  //Save the dockControl floating state - options: 0, 1
+  optionVar -intValue "domeViewerDockControlFloating" $dockedFloating;
+
+  //DockControl Debug Info
+  if($dockedFloating == 0){
+    print("The DomeViewer window is docked to the " + $dockedArea + " side.\n\n");
+  } else {
+    print("The DomeViewer window is floating.\n\n");
+  }
+}
+
 
 //Add a DomeViewer version number attribute to the nodes' extra attribute fields
 global proc addDomeTextVersionAttrs(string $nodeName){
@@ -104,7 +138,7 @@ global proc string getViewerImagePath(){
   string $defaultImagesDir;
   
   // Check if we are running Maya 2011 or higher
-  float $mayaVersion = getMayaVersion();
+  float $mayaVersion = getMayaVersionDome();
   
   //Check the operating system
   string $mayaPlatform = getMayaPlatform();
@@ -120,10 +154,10 @@ global proc string getViewerImagePath(){
   
   if ($mayaPlatform == "darwin"){
   //Mac OS X Detected
-  $advancedFilter = "Media( *.png *.tif *.tga *.jpg *.jpeg *.bmp *.psd *exr *.mov *.mp4 *.m4v);;Images( *.png *.tif *.tga *.jpg *.jpeg *.bmp *.psd *exr);;Movies( *.mov *.qt *.mp4 *.m4v);;PNG (*.png);;Targa (*.tga);;JPG (*.jpg *.jpeg);;Tiff (*.tif);;EXR (*.exr);;Quicktime (*.mov *.qt *.mp4 *.m4v);;Windows Bitmap (*.bmp);;All Files (*.*)";
+  $advancedFilter = "Media( *.png *.tif *.tga *.jpg *.jpeg *.iff *.bmp *.psd *exr *.mov *.mp4 *.m4v);;Images( *.png *.tif *.tga *.jpg *.jpeg *.bmp *.iff *.psd *exr);;Movies( *.mov *.qt *.mp4 *.m4v);;PNG (*.png);;Targa (*.tga);;JPG (*.jpg *.jpeg);;IFF (*.iff);;Tiff (*.tif);;EXR (*.exr);;Quicktime (*.mov *.qt *.mp4 *.m4v);;Windows Bitmap (*.bmp);;All Files (*.*)";
   } else {
   //Windows / Linux
-  $advancedFilter = "Media( *.png *.tif *.tga *.jpg *.jpeg *.bmp *.psd *exr *.avi );;Images( *.png *.tif *.tga *.jpg *.jpeg *.bmp *.psd *exr);;Movies( *.avi );;PNG (*.png);;Targa (*.tga);;JPG (*.jpg *.jpeg);;Tiff (*.tif);;EXR (*.exr);AVI (*.avi);;Windows Bitmap (*.bmp);;All Files (*.*)";
+  $advancedFilter = "Media( *.png *.tif *.tga *.jpg *.jpeg *.iff *.bmp *.psd *exr *.avi );;Images( *.png *.tif *.tga *.jpg *.jpeg *.bmp *.iff *.psd *exr);;Movies( *.avi );;PNG (*.png);;Targa (*.tga);;JPG (*.jpg *.jpeg);;IFF (*.iff);;Tiff (*.tif);;EXR (*.exr);AVI (*.avi);;Windows Bitmap (*.bmp);;All Files (*.*)";
   }
   
   
@@ -242,6 +276,10 @@ global proc setPanoramaPreview(){
     //Mental Ray Horizontal Strip Cube
     picture -edit -image "mentalRayCube1_38px.png" -width 228 -height 38 picturePanoramaPreview;
     break;
+  case 14:
+    //Quadsphere format
+    picture -edit -image "quadsphere_120px.png" -width 120 -height 120 picturePanoramaPreview;
+    break;
   }
 }
 
@@ -262,7 +300,7 @@ global proc domeViewer(){
   string $mayaPlatform = getMayaPlatform();
 
   // Check if we are running Maya 2011 or higher
-  float $mayaVersion = getMayaVersion();
+  float $mayaVersion = getMayaVersionDome();
 
   // Write out the current Maya version number and detected operating system
   print("Maya " + $mayaVersion + " on " + $mayaPlatform  + " detected.\n");
@@ -359,7 +397,8 @@ global proc domeViewer(){
         menuItem -label "Vertical Strip Cube";
         menuItem -label "Horizontal Strip Cube";
         menuItem -label "Mental Ray Horizontal Strip Cube1";
-         
+        menuItem -label "Quadsphere (Starglobe)";
+ 
         //Preselect the first option menu
         optionMenuGrp 
           -edit
@@ -440,12 +479,12 @@ global proc domeViewer(){
           -text $imageFilePath
           -adjustableColumn 2
           -annotation 
-          "Choose an image in the PNG, TIFF, EXR, TGA, JPG, BMP or PSD image formats. \nYou can also choose a video file in either the .avi movie format on Windows, or \na Quicktime .mov, or .qt video on Mac OS X. By clicking on the folder \nicon you can choose an existing file on your hard drive."
+          "Choose an image in the PNG, TIFF, IFF, EXR, TGA, JPG, BMP or PSD image formats. \nYou can also choose a video file in either the .avi movie format on Windows, or \na Quicktime .mov, or .qt video on Mac OS X. By clicking on the folder \nicon you can choose an existing file on your hard drive."
           textDomeViewerImageOutputName;
           
         symbolButton 
           -image "navButtonBrowse.png"
-          -annotation "Choose an image in the PNG, TIFF, EXR, TGA, JPG, BMP or PSD image formats. \nYou can also choose a video file in either the .avi movie format on Windows, or \na Quicktime .mov, or .qt video on Mac OS X. By clicking on the folder \nicon you can choose an existing file on your hard drive."
+          -annotation "Choose an image in the PNG, IFF, TIFF, EXR, TGA, JPG, BMP or PSD image formats. \nYou can also choose a video file in either the .avi movie format on Windows, or \na Quicktime .mov, or .qt video on Mac OS X. By clicking on the folder \nicon you can choose an existing file on your hard drive."
           -command "string $tempPath = getViewerImagePath(); textFieldGrp -edit -text $tempPath textDomeViewerImageOutputName;"
           symbolDomeViewerImageLoadAsbrowser;
           
@@ -560,7 +599,8 @@ global proc domeViewer(){
 
         checkBoxGrp
           -numberOfCheckBoxes 1
-          -label "Bradbury Alignment Grid"
+          -label ""
+          -label1 "Bradbury Alignment Grid"
           -value1 0
           -annotation 
           "Add a transparent dome grid overlay to the dome viewer. You can control the visibility and \ntransparency of the grid by selecting the domeViewerGrid object's transform node in the \noutliner and editing the values in the Attribute Editor's Extra Attributes section."
@@ -568,7 +608,8 @@ global proc domeViewer(){
 
         checkBoxGrp
           -numberOfCheckBoxes 1
-          -label "Link Panorama to Camera"  
+          -label ""
+          -label1 "Link Panorama to Camera"  
           -value1 1
           -annotation "Point constrain the panoramic background to the viewer camera. This checkbox will link the panoramic background's transform so it follows the camera's motion, while allowing the camera view to freely tumble and roll in the viewport."
           checkGrpDomeViewerPointConstrain;
@@ -576,7 +617,8 @@ global proc domeViewer(){
         /*
         checkBoxGrp
           -numberOfCheckBoxes 1
-          -label "Safe Viewing Area Overlay"  
+          -label ""
+          -label1 "Safe Viewing Area Overlay"  
           -value1 0
           -annotation "Add a transparent safe viewing area overlay to the dome viewer."
           checkGrpDomeViewerSafeAreaOverlay;
@@ -584,11 +626,22 @@ global proc domeViewer(){
         
         checkBoxGrp
           -numberOfCheckBoxes 1
-          -label "Show Focal Length in HUD"
+          -label ""
+          -label1 "Show Focal Length in HUD"
           -value1 1
           -annotation 
           "Display the current focal length in the HUD (Heads Up Display)."
           checkGrpDomeViewerFocalLength;
+        
+        checkBoxGrp
+          -numberOfCheckBoxes 1
+          -label ""
+          -label1 "Flip the Panoramic Image"
+          -value1 0
+          -annotation 
+          "This checkbox causes a mirror effect on the panoramic image by\n flipping the panoramic texture so you are viewing the texture\n map as if it was an environmental reflection map viewed from\n the outside. This effect is done by scaling the domeViewer\n shape (scaleX * -1)."
+          checkGrpDomeViewerFlipScale;
+        
         
       setParent ..;
     setParent ..;
@@ -607,7 +660,7 @@ global proc domeViewer(){
     button
       -label "Load Image in Render View"
       -annotation 
-      "This button loads the current image that is listed in the \"Image Name\" text field in the Render View \nwindow. The image is auto sized to fit the window size. You can view the image at the native resolution \nby pressing the 1:1 button in the Render View."
+      "This button loads the current image that is listed in the \"Image Name\" text field in the Render View\n window. The image is auto sized to fit the window size. You can view the image at the native resolution \nby pressing the 1:1 button in the Render View."
       -command "loadDomeViewerImageInRenderView()"; 
       
   setParent ..;
@@ -666,26 +719,48 @@ global proc domeViewer(){
   //On Maya 2011 and higher provide access to the dockable UI 
   //----------------------------------------------------------------------
 
+  string $dockedArea = "";
+  int $dockedFloating = 0;
+
+  //Load the dockControl Settings
+  if ($mayaVersion >= 2011) {
+    //Is the window docked to the left or right of the screen?
+    if(`optionVar -exists "domeViewerDockControlArea"`){
+      $dockedArea = `optionVar -query "domeViewerDockControlArea"`;
+    } else{
+      $dockedArea = "right";
+    }
+
+    //Is the window floating or not?
+    if(`optionVar -exists "domeViewerDockControlFloating"`){
+      $dockedFloating = `optionVar -query "domeViewerDockControlFloating"`;
+    } else {
+      $dockedFloating = 0;
+    }
+  }
+  
   if ( $mayaVersion == 2011 ){
   //Make the Maya 2011 or higher window dockable
   string $domeViewerDockControl = `dockControl 
         -label "Dome Viewer"
-        -area "right" //snap to the right side of the view next to the attribute editor
-        //-area "left"     //snap to the left side of the view next to the tool settings tab
+				-area $dockedArea 
+				// -area "right" //snap to the right side of the view next to the attribute editor
+				//-area "left"     //snap to the left side of the view next to the tool settings tab
         -content domeViewerWin
-        //-floating 1
-        -floating 0 //docked
+				-floating $dockedFloating
+				//-floating 1 //floating window
+				//-floating 0 //docked window
 		    -height $domeViewerWindowHeight
         -width $domeViewerWindowWidth
         //-allowedArea "all"
         -allowedArea "left"
         -allowedArea "right"
         // Disabled for Maya 2011 compatibility testing
-        //-floatChangeCommand "evalDeferred(\"dockControl -e -width $domeViewerWindowWidth domeViewerDockControl;dockControl -e -height $domeViewerWindowHeight domeViewerDockControl;\")"
+        //-floatChangeCommand "evalDeferred(\"dockControl -e -width $domeViewerWindowWidth domeViewerDockControl;dockControl -e -height $domeViewerWindowHeight domeViewerDockControl;SaveDockedDomeViewerWindowPos();\")"
         domeViewerDockControl`;
   
   //Force the window back to the right size
-  evalDeferred("dockControl -e -width $domeViewerWindowWidth domeViewerDockControl;dockControl -e -height $domeViewerWindowHeight domeViewerDockControl;");
+  evalDeferred("dockControl -e -width $domeViewerWindowWidth domeViewerDockControl;dockControl -e -height $domeViewerWindowHeight domeViewerDockControl;SaveDockedDomeViewerWindowPos();");
 
   //Get the current window size
   print ("\nDome Viewer Window Size: " 
@@ -697,22 +772,24 @@ global proc domeViewer(){
   //Make the Maya 2011 or higher window dockable
   string $domeViewerDockControl = `dockControl 
         -label "Dome Viewer"
-        -area "right" //snap to the right side of the view next to the attribute editor
-        //-area "left"     //snap to the left side of the view next to the tool settings tab
+				-area $dockedArea 
+				// -area "right" //snap to the right side of the view next to the attribute editor
+				//-area "left"     //snap to the left side of the view next to the tool settings tab
         -content domeViewerWin
-        //-floating 1
-        -floating 0 //docked
+				-floating $dockedFloating
+				//-floating 1 //floating window
+				//-floating 0 //docked window
 		    -height $domeViewerWindowHeight
         -width $domeViewerWindowWidth
         //-allowedArea "all"
         -allowedArea "left"
         -allowedArea "right"
         // Disabled for Maya 2011 compatibility testing
-        -floatChangeCommand "evalDeferred(\"dockControl -e -width $domeViewerWindowWidth domeViewerDockControl;dockControl -e -height $domeViewerWindowHeight domeViewerDockControl;\")"
+        -floatChangeCommand "evalDeferred(\"dockControl -e -width $domeViewerWindowWidth domeViewerDockControl;dockControl -e -height $domeViewerWindowHeight domeViewerDockControl;SaveDockedDomeViewerWindowPos();\")"
         domeViewerDockControl`;
   
   //Force the window back to the right size
-  evalDeferred("dockControl -e -width $domeViewerWindowWidth domeViewerDockControl;dockControl -e -height $domeViewerWindowHeight domeViewerDockControl;");
+  evalDeferred("dockControl -e -width $domeViewerWindowWidth domeViewerDockControl;dockControl -e -height $domeViewerWindowHeight domeViewerDockControl;SaveDockedDomeViewerWindowPos();");
 
   //Get the current window size
   print ("\nDome Viewer Window Size: " 

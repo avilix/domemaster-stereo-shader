@@ -15,6 +15,18 @@ You can set the file textures to an empty path if you don't want a default textu
 Version History
 ----------------
 
+Version 1.4 Beta 9
+-------------------------------
+Dec 7, 2013
+
+Updated Linux install path to:
+/opt/Domemaster3D
+
+Added support for the Quadsphere (starglobe) mesh to the domeViewer
+
+Added the "Flip the Panoramic Image" checkbox that causes a mirror effect on the panoramic image by flipping the panoramic texture so you are viewing the texture map as if it was an environmental reflection map viewed from the outside. This effect is done by scaling the domeViewer shape (scaleX * -1).
+
+
 Version 1.4 Beta 6 Build 4
 -------------------------------
 Oct 27, 2013
@@ -165,10 +177,10 @@ def getSourceImagesPath(imageFileName):
     baseImagesFolder = "/Applications/Domemaster3D/sourceimages/"
   elif platform.system()== 'Linux':
     #Check if the program is running on Linux
-    baseImagesFolder = "/usr/bin/Domemaster3D/sourceimages/"
+    baseImagesFolder = "/opt/Domemaster3D/sourceimages/"
   elif platform.system()== 'Linux2':
     #Check if the program is running on Linux
-    baseImagesFolder = "/usr/bin/Domemaster3D/sourceimages/"
+    baseImagesFolder = "/opt/Domemaster3D/sourceimages/"
   else:
     # Create the empty variable as a fallback mode
     baseImagesFolder = ""
@@ -209,10 +221,10 @@ def getModelsPath(modelFileName):
     baseModelsFolder = "/Applications/Domemaster3D/sourceimages/"
   elif platform.system()== 'Linux':
     #Check if the program is running on Linux
-    baseModelsFolder = "/usr/bin/Domemaster3D/sourceimages/"
+    baseModelsFolder = "/opt/Domemaster3D/sourceimages/"
   elif platform.system()== 'Linux2':
     #Check if the program is running on Linux
-    baseModelsFolder = "/usr/bin/Domemaster3D/sourceimages/"
+    baseModelsFolder = "/opt/Domemaster3D/sourceimages/"
   else:
     # Create the empty variable as a fallback mode
     baseModelsFolder = ""
@@ -585,8 +597,8 @@ def createDomeViewerCamera( viewerCameraName, meshName, gridMeshName ):
 
 
 #Load a new domeViewer polygon mesh into the scene
-#Syntax: createDomeViewerMesh('pCube1', 'mentalRayCube1_mesh', '45', 300)
-def createDomeViewerMesh(meshName, meshFileName, domeTiltAngle, scale):
+#Syntax: createDomeViewerMesh('pCube1', 'mentalRayCube1_mesh', '45', 300 , viewerFlipScale)
+def createDomeViewerMesh(meshName, meshFileName, domeTiltAngle, scale, viewerFlipScale):
   import os  
   import maya.cmds as cmds
   import maya.mel as mel
@@ -618,12 +630,11 @@ def createDomeViewerMesh(meshName, meshFileName, domeTiltAngle, scale):
   
   #Load the Maya .ma format viewer model into the scene
   domeViewer_mesh_file = cmds.file (domeViewerModelFile, i=True, type=meshFileType)
-
-  #scale = 300
   
   #Set the default size (scale) of the viewer backdrop
+  #Flip the scaleX attribute to mirror the texture direction left/right
   cmds.setAttr( meshName + ".scaleZ", scale)
-  cmds.setAttr( meshName +".scaleX", scale)
+  cmds.setAttr( meshName +".scaleX", (scale * viewerFlipScale))
   cmds.setAttr( meshName +".scaleY", scale)
   
   #Tilt the fulldome screen
@@ -712,13 +723,38 @@ def createDomeViewer():
     #Mental Ray Horizontal Strip Cube
     meshName = 'pCube1'
     meshFileName = 'mentalRayCube1_mesh'
+  elif ( currentPanoFormat == 14 ):
+    #Quadsphere
+    meshName = 'polyStarglobe'
+    meshFileName = 'starglobe_mesh'
   
   #---------------------------------------------------------------------------
   # Create the panoramic elements in Maya
   #---------------------------------------------------------------------------
   
+  #Check if the viewer direction is flipped
+  #This will flip the inside vs outside of the preview shape
+  viewerMeshScale = 0
+  viewerFlipEnabled = cmds.checkBoxGrp('checkGrpDomeViewerFlipScale', query=True, value1=True)
+  
+  # checkbox enabled = flipped / checkbox disabled = not flipping
+  if ( viewerFlipEnabled ):
+    viewerFlipScale = -1
+  else:
+    viewerFlipScale = 1
+  
   #Create the viewer mesh
-  createDomeViewerMesh( meshName, meshFileName, domeTiltAngle, 300 )
+  if ( currentPanoFormat == 14 ):
+    # The starglobe mesh is 23.8x larger than the standard meshes
+    #viewerMeshScale = 12.6 * viewerFlipScale;
+    viewerMeshScale = 12.6
+    createDomeViewerMesh( meshName, meshFileName, domeTiltAngle, viewerMeshScale,  viewerFlipScale)
+  else:
+    # The standard meshes are .042 X smaller than the starglobe mesh
+    #viewerMeshScale = 300 * viewerFlipScale;
+    viewerMeshScale = 300
+    createDomeViewerMesh( meshName, meshFileName, domeTiltAngle, viewerMeshScale, viewerFlipScale )
+
   #Create the surface material
   viewerTextureNode = createDomeViewerTexture( meshName, False )
   
@@ -729,7 +765,7 @@ def createDomeViewer():
     if(gridModeEnabled == 1):
       print("Creating a Bradbury fulldome reference grid.")
       #Create the dome alignment grid mesh
-      createDomeViewerMesh( gridMeshName, gridMeshFileName, domeTiltAngle, 294 )
+      createDomeViewerMesh( gridMeshName, gridMeshFileName, domeTiltAngle, 294, 1 )
       #Create the  dome alignment grid surface material
       viewerTextureNode = createDomeViewerTexture( gridMeshName, True )
       
