@@ -6,6 +6,7 @@
 
 	Version History
 	----------------
+  Domemaster3D V1.4 B10 - Dec 27, 2013
   Domemaster3D V1.4 B9 - Dec 9, 2013
   Domemaster3D V1.4 B8 - Nov 20, 2013
   Domemaster3D V1.4 B7 - Nov 8, 2013
@@ -66,15 +67,14 @@ global proc string getMayaPlatform(){
 //Show the version info window
 global proc domeVersion(){
   string $dialogueButtonSelected = "";
-  string $domemaster3D_version = "1.4 B9";
-  string $release_date = "Dec 9, 2013";
+  string $domemaster3D_version = "1.4 B10";
+  string $release_date = "Dec 27, 2013";
 
   string $domeDialgueString = "";
   $domeDialgueString += "Domemaster3D Shader for Maya" + " - Version " + $domemaster3D_version + "\n";
   $domeDialgueString += "This edition was released on " + $release_date + ".\n";
   $domeDialgueString += "\n";
-  $domeDialgueString += "A 2D/3D angular fisheye rendering system for planetariums and fulldome theatres.\n";
-  $domeDialgueString += "This shader is also available for 3DS Max, and Softimage.\n";
+  $domeDialgueString += "A 2D/3D angular fisheye rendering system for planetariums and fulldome theatres. This shader is also available for 3DS Max, and Softimage.\n";
   $domeDialgueString += "\n";
   $domeDialgueString += "The Domemaster3D shader is distributed under the GPL v3 license.\n";
   

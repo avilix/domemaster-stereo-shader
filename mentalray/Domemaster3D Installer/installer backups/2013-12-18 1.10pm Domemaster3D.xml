@@ -200,7 +200,7 @@
                             <origin>installer files/install/sourceimages/moon_color_quadsphere_4k.jpg</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>latitude_longitude.jpg</origin>
+                            <origin>installer files/install/sourceimages/latitude_longitude.jpg</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>installer files/install/sourceimages/starglobe_mesh.ma</origin>

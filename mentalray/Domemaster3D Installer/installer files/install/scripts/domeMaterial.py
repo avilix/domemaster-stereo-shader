@@ -15,8 +15,15 @@ You can set the file textures to an empty path if you don't want a default textu
 Version History
 ----------------
 
+
+Version 1.4 Beta 10
+----------------------
+Dec 27, 2013
+
+Added double sided shading code
+
 Version 1.4 Beta 9
--------------------------------
+---------------------
 Dec 7, 2013
 
 Updated Linux install path to:
@@ -393,6 +400,18 @@ def createDomeViewerTexture( meshName, isGrid ):
   cmds.addAttr(baseNodeName, longName=attrName, attributeType="enum", en="Off:Wireframe:Shaded:Wireframe on Shaded", defaultValue=2, keyable=True)
   print('Adding custom Attributes ' + baseNodeName + '.' + attrName)
 
+
+  #---------------------------------------------------------------------------
+  #Add a Double Sided Mode control to the domeGrid's transform node
+  #---------------------------------------------------------------------------
+  
+  attrName = 'doubleSidedShading'
+  #if(mel.attributeExists(attrName, baseNodeName) == 0):
+  cmds.addAttr(baseNodeName, longName=attrName, attributeType="enum", en="Double Sided:Show Frontfaces", defaultValue=0, keyable=True)
+  #cmds.addAttr(baseNodeName, longName=attrName, attributeType="enum", en="Double Sided:Show Frontfaces:Show Backfaces", defaultValue=0, keyable=True)
+  print('Adding custom Attributes ' + baseNodeName + '.' + attrName)
+
+
   #---------------------------------------------------------------------------
   #Add an Exposure control to the domeGrid's transform node - Default value 0.25
   #---------------------------------------------------------------------------
@@ -507,6 +526,29 @@ def createDomeViewerTexture( meshName, isGrid ):
   PreviewShapeExpr += "\n"
   PreviewShapeExpr += "\n"
 
+  #----------------------------------------------------
+  # Double Sided Preview Shape Rendering
+  #----------------------------------------------------
+
+  previewAttrName = "doubleSidedShading"
+
+  #Visibility Controls
+  PreviewShapeExpr += "// Custom Double Sided Shading Expressions\n\n"
+  PreviewShapeExpr += "if (" + previewAttrName + " == 0 ){\n"
+  PreviewShapeExpr += "  print(\"Double Sided Shading Enabled\\n\");\n"
+  PreviewShapeExpr += "  setAttr \"" + domeSurfaceShape + ".doubleSided\" 1; \n"
+  PreviewShapeExpr += "  setAttr \"" + domeSurfaceShape + ".opposite\" 0; \n"
+  PreviewShapeExpr += "} else if (" + previewAttrName + " == 1 ){\n"
+  PreviewShapeExpr += "  print(\"Frontface Shading Enabled\\n\");\n"
+  PreviewShapeExpr += "  setAttr \"" + domeSurfaceShape + ".doubleSided\" 0; \n"
+  PreviewShapeExpr += "  setAttr \"" + domeSurfaceShape + ".opposite\" 0; \n"
+  PreviewShapeExpr += "}\n"
+  #PreviewShapeExpr += "} else if (" + previewAttrName + " == 2 ){\n"
+  #PreviewShapeExpr += "  print(\"Backface Shading Enabled\\n\");\n"
+  #PreviewShapeExpr += "  setAttr \"" + domeSurfaceShape + ".doubleSided\" 0; \n"
+  #PreviewShapeExpr += "  setAttr \"" + domeSurfaceShape + ".opposite\" 1; \n"
+  #PreviewShapeExpr += "}\n"
+  
 
   print "DomeGrid Extra Attribute Expressions:"
   print PreviewShapeExpr
@@ -766,7 +808,7 @@ def createDomeViewer():
       print("Creating a Bradbury fulldome reference grid.")
       #Create the dome alignment grid mesh
       createDomeViewerMesh( gridMeshName, gridMeshFileName, domeTiltAngle, 294, 1 )
-      #Create the  dome alignment grid surface material
+      #Create the dome alignment grid surface material
       viewerTextureNode = createDomeViewerTexture( gridMeshName, True )
       
   #Add the camera to the scene

@@ -1,11 +1,11 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.4 B9 - Dec 9, 2013
+Version 1.4 B10 - Dec 27, 2013
 
 About This Shader
 ---------------------
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
 
-The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "Center" camera option in the DomeAFL_FOV_Stereo shader.
+The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "Center" camera option in the DomeAFL_FOV_Stereo shader. Latitude Longitude rendering (also known as spherical or equirectangular output) is supported with the help of the latlong_lens shader.
 
 The Maya Domemaster3D shelf has buttons for the following features:
 
@@ -15,6 +15,7 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "DomeRamp" tool creates a screen space ramp texture
 -The "DomeAFL_FOV" tool creates a standard 2D domeAFL_FOV node + camera
 -The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
+-The "LatLong" tool creates a 2D latlong_lens node + camera
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
 -The "Starglobe" tool creates a mia_material_x_passes based starry background for your fulldome scenes.
@@ -76,6 +77,9 @@ Special Thanks
 -----------------
 I would like to thank the following people for their contributions:
 
+Ralf Habel for the latlong_lens shader
+http://www.vi-motion.de/latlong_Tutorial/
+
 Aaron Bradbury for the installer imagery from his Vortex fulldome short film.
 http://www.luniere.com/project/vortex/
 
@@ -93,20 +97,28 @@ Martin Watt for writing the original galaxies.mel script.
 Version History
 -----------------
 
+Version 1.4 Beta 10 Changes
+-------------------------------
+Dec 27, 2013
+
+Added the latlong_lens shader for rendering spherical/equirectangular imagery.
+
+DomeViewer
+  Added Double sided rendering controls
 
 Version 1.4 Beta 9 Changes
--------------------------------
+------------------------------
 Dec 9, 2013
 
 3DS Max Changes
----------------------
+--------------------
 Updated the 3DS Max Starglobe files to fix rendering issues. The new 3DS Max scenes are stored in the folder:
 C:\Program Files\Domemaster3D\sourceimages
 
 Added install option for 3DS Max 2015 (beta) support
 
 Maya Changes
------------------
+----------------
 Added an install option for Maya 2015 (beta) support
 
 Updated the Galaxy Creator, Starglobe, DomeText, and DomeViewer window's so the window settings are restored from the last setting. This allows the docked vs floating, and docked left/right window settings to be remembered.
@@ -138,7 +150,7 @@ Improved the Mac OS X DomeText font scanning. Fonts that are installed in the /L
 
 
 Version 1.4 Beta 8 Changes
--------------------------------
+------------------------------
 Nov 20, 2013
 
 Maya Changes
@@ -154,7 +166,7 @@ http://www.imagemagick.org/script/binary-releases.php#macosx
 
 
 Version 1.4 Beta 7 Changes
--------------------------------
+------------------------------
 Nov 8, 2013
 
 Maya Changes
@@ -169,7 +181,7 @@ Updated the Starglobe texture maps. The previous version had the starglobe 2K an
 
 
 Version 1.4 Beta 6 Changes
--------------------------------
+------------------------------
 Oct 27, 2013
 
 Maya Changes

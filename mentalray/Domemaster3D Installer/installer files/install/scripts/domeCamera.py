@@ -1,5 +1,5 @@
 """
-Domemaster3D Camera Setup Script V1.4 B8
+Domemaster3D Camera Setup Script V1.4 B10
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
 This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
@@ -8,9 +8,14 @@ This script makes it easy to start creating fulldome stereoscopic content in Aut
 
 Version History
 
+Version 1.4 B10
+-------------------
+Dec 18, 2013
+
+Added the latlong_lens shader
 
 Version 1.4 B9
--------------------------------
+-----------------
 Dec 7, 2013
 
 Updated Linux install path to:
@@ -137,6 +142,16 @@ Run using the command:
 import domeCamera as domeCamera
 reload(domeCamera)
 domeCamera.createFulldomeStereoRig()
+
+------------------------------------------------------------------------------
+
+Domemaster3D createLatLong_Camera
+A python function to create a latitude longitude lens shader and attach it to a camera.
+
+Run using the command:
+import domeCamera as domeCamera
+reload(domeCamera)
+domeCamera.createLatLong_Camera():
 
 ------------------------------------------------------------------------------
 
@@ -388,7 +403,7 @@ def changeRenderRes( renderSizePx ):
   fulldomeRenderHeight = renderSizePx
   
   #Set the active renderer to mental ray to avoid Hypershade red node errors 
-  mel.eval("setCurrentRenderer mentalRay")
+  #mel.eval("setCurrentRenderer mentalRay")
   
   #---------------------------------------------------------------------
   # Setup the default render settings for a square domemaster image output
@@ -625,7 +640,68 @@ def createDomeAFL_WxH_Camera():
   # ---------------------------------------------------------------------
   cmds.setAttr( cameraShape+'.focalLength', 4 )
   
+
+
+"""
+Domemaster3D createLatLong_Camera
+----------------------
+A python function to create a latitude longitude lens shader and attach it to a camera.
+"""	
+
+def createLatLong_Camera():
+  import maya.cmds as cmds
+  #import maya.mel as mm	
+
+  #Variables
+
+  # ---------------------------------------------------------------------
+  # Create the stereo rig
+  # ---------------------------------------------------------------------
+
+  # Create a camera and get the shape name.
+  cameraName = cmds.camera(name='latlong_Camera')
+  cameraShape = cameraName[1]
+
+  # ---------------------------------------------------------------------
+  # Create the domeAFL_WxH node
+  # ---------------------------------------------------------------------
+  latlong_lens_node = cmds.shadingNode( 'latlong_lens', n='latlong_lens', asUtility=True  ) 
+
+  # Primary lens shader connection:
+  # Connect to the .miLensShaderList[0] input on the camera
+  # cmds.connectAttr( latlong_lens_node+'.message', cameraShape+'.miLensShaderList[0]' )
+
+  # Alternate lens shader connection:
+  # Connect directly to the first .miLensShader input on the camera
+  # Note: This first lens shader connection is overwritten by the mental ray Sun & Sky system
+  cmds.connectAttr( latlong_lens_node+'.message', cameraShape+'.miLensShader' )
+
+  # Scale the stereo camera rig locator larger 
+  #cmds.setAttr(cameraShape+'.locatorScale', 1) #Scale Camera icon
+
+  # Link the new attribute 'Cam Locator Scale' to the dome camera's locator size control
+  cmds.addAttr( cameraName[0], longName='Cam_Locator_Scale', niceName='Cam Locator Scale', attributeType='double', defaultValue=1.0, minValue=0.001)
+  cmds.setAttr( cameraName[0]+'.Cam_Locator_Scale', keyable=False, channelBox=True)
+  cmds.connectAttr ( cameraName[0]+'.Cam_Locator_Scale', cameraShape+'.locatorScale', force=True)
+
+
+  cmds.setAttr( cameraName[0]+'.rotateX', 0)
+  cmds.setAttr( cameraName[0]+'.rotateY', 0)
+  cmds.setAttr( cameraName[0]+'.rotateZ', 0)
+
+  # Changes the render settings to set the stereo camera to be a renderable camera
+  cmds.setAttr( cameraShape+'.renderable', 1) #latlong_CameraShape
+  cmds.setAttr( 'topShape.renderable', 0)
+  cmds.setAttr( 'sideShape.renderable', 0)
+  cmds.setAttr( 'frontShape.renderable', 0)
+  cmds.setAttr( 'perspShape.renderable', 0)
+
+  # ---------------------------------------------------------------------
+  # Setup the stereo rig camera attributes
+  # ---------------------------------------------------------------------
+  cmds.setAttr( cameraShape+'.focalLength', 4 )
   
+
 """
 Domemaster3D DomeGrid test background 
 --------------------------------------

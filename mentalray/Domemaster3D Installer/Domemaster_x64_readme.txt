@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.4 B9 - Dec 9, 2013
+Version 1.4 B10 - Dec 27, 2013
 
 Maintained by Andrew Hazelden
 andrew@andrewhazelden.com
@@ -8,22 +8,32 @@ About This Shader
 ----------------------
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings. 
 
-The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "center" camera option in the DomeAFL_FOV_Stereo shader.
+The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "center" camera option in the DomeAFL_FOV_Stereo shader. Latitude Longitude rendering (also known as spherical or equirectangular output) is supported with the help of the latlong_lens shader.
+
+
+Version 1.4 Beta 10 Changes
+-------------------------------
+Dec 27, 2013
+
+Added the latlong_lens shader for rendering spherical/equirectangular imagery.
+
+DomeViewer
+  Added Double sided rendering controls
 
 
 Version 1.4 Beta 9 Changes
--------------------------------
+------------------------------
 Dec 9, 2013
 
 3DS Max Changes
----------------------
+--------------------
 Updated the 3DS Max Starglobe files to fix rendering issues. The new 3DS Max scenes are stored in the folder:
 C:\Program Files\Domemaster3D\sourceimages
 
 Added install option for 3DS Max 2015 (beta) support
 
 Maya Changes
------------------
+----------------
 Added an install option for Maya 2015 (beta) support
 
 Updated the Galaxy Creator, Starglobe, DomeText, and DomeViewer window's so the window settings are restored from the last setting. This allows the docked vs floating, and docked left/right window settings to be remembered.
@@ -55,7 +65,7 @@ Improved the Mac OS X DomeText font scanning. Fonts that are installed in the /L
 
 
 Version 1.4 Beta 8 Changes
--------------------------------
+------------------------------
 Nov 20, 2013
 
 Maya Changes
@@ -71,7 +81,7 @@ http://www.imagemagick.org/script/binary-releases.php#macosx
 
 
 Version 1.4 Beta 7 Changes
--------------------------------
+------------------------------
 Nov 8, 2013
 
 Maya Changes
@@ -86,7 +96,7 @@ Updated the Starglobe texture maps. The previous version had the starglobe 2K an
 
 
 Version 1.4 Beta 6 Changes
--------------------------------
+------------------------------
 Oct 27, 2013
 
 Maya Changes
@@ -118,17 +128,17 @@ Version 1.4 Beta 5 Change
 Oct 24, 2013
 
 Maya Changes
------------------
+----------------
 
 Updated the domeAFL_FOV_Stereo camera preview code to fix a bug that stopped batch rendering from completing with the new domeRender.mel script.
 
 
 Version 1.4 Beta 4 Changes
--------------------------------
+------------------------------
 Oct 21, 2013
 
 Maya Changes
------------------
+----------------
 
 DomeAFL_FOV_Stereo 
   Now with a real-time OpenGL Stereo3D preview viewport using 4mm wide angle (non-fisheye) hardware rendering
@@ -194,10 +204,10 @@ Added DomeText text encoding support for English ASCII, Western Europe cp1252, a
 
 
 Version 1.4 Beta 2 Changes
----------------------------------
+------------------------------
 
 3DS Max Changes
----------------
+-------------------
 
 Starglobe Update
 I've created a few different format starglobe models to make it easier for 3DS MAX users. The files are stored in the C:\Program Files\Domemaster3D\sourceimages folder.
@@ -244,7 +254,7 @@ Added customized AE Template files for the domeAFL_FOV, domeAFL_WxH, and rob_loo
 Added the panotools based mpremap.exe application to the Domemaster3D/bin folder so textures could be remapped to different panoramic formats.
 
 Version 1.3.5 Changes
----------------------------
+------------------------
 
 Included an .obj mesh and a starglobe texture map for 3DS Max users.
 
@@ -256,7 +266,7 @@ Added Glow Intensity attributes to the Galaxy Creator GUI
 
 
 Version 1.3.4 Changes
----------------------------
+-------------------------
 
 Updated the the Automagic tool's dome grid color to a brighter yellow value. This makes the grid more visible in a Physical Sun & Sky scene.
 
@@ -264,7 +274,7 @@ Added a new HELP icon to the Maya Shelf toolset. This shelf item loads the domem
 
 
 Maya Tools
----------------
+------------
 The Maya Domemaster3D shelf has buttons for the following features:
 
 -The "AutoMagic" tool creates a Domemaster3D fulldome stereo camera rig and a hemispherical yellow wireframe test scene
@@ -273,6 +283,7 @@ The Maya Domemaster3D shelf has buttons for the following features:
 -The "DomeRamp" tool creates a screen space ramp texture
 -The "DomeAFL_FOV" tool creates a standard 2D domeAFL_FOV node + camera
 -The "DomeAFL_WxH" tool creates a standard 2D domeAFL_WxH node + camera
+-The "LatLong" tool creates a 2D latlong_lens node + camera
 -The "Color Material" tool creates a mia_material based mental ray shading network with support for color file textures.
 -The "Color + Bump Material" tool creates a mia_material based mental ray shading network with support for color and bump file textures.
 -The "Starglobe" tool creates a mia_material_x_passes based starry background for your fulldome scenes.
@@ -315,7 +326,7 @@ http://code.google.com/p/domemaster-stereo-shader/
 
 
 Documentation and Resources
-----------------------------
+---------------------------------
 
 Domemaster Stereo Shader Wiki
 http://code.google.com/p/domemaster-stereo-shader/w/list
@@ -328,7 +339,7 @@ http://code.google.com/p/domemaster-stereo-shader/
 
 
 Project Developers
--------------------
+---------------------
 
 Domemaster Stereo Shader for 3DS Max Created by Roberto Ziche
 http://www.robertoziche.com/
@@ -344,6 +355,9 @@ http://www.thedott.net/shaders/domeAFL/
 Special Thanks
 -----------------
 I would like to thank the following people for their contributions:
+
+Ralf Habel for the latlong_lens shader
+http://www.vi-motion.de/latlong_Tutorial/
 
 Aaron Bradbury for the installer imagery from his Vortex fulldome short film.
 http://www.luniere.com/project/vortex/

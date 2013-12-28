@@ -1,11 +1,19 @@
 /*
-  Dome Viewer V1.4 Beta 9
+  Dome Viewer V1.4 Beta 10
   by Andrew Hazelden
   
   A fulldome and panoramic image+movie viewer. The viewer supports all image and movie formats that can be opened using the Maya File Texture and Movie Nodes. You can display immersive images, image sequences, and movie files with accelerated RAM playback. Tilted fulldome theater screens can be simulated with the "Dome Tilt" attribute.
   
   A Bradbury alignment grid is included for viewing calibrated fulldome imagery.
   
+
+  Version 1.4 Beta 10
+  --------------------
+  Dec 27, 2013
+
+  Added Double sided rendering controls
+
+
   Version 1.4 Beta 9
   --------------------
   Dec 7, 2013
@@ -120,7 +128,7 @@ global proc SaveDockedDomeViewerWindowPos(){
 
 
 //Add a DomeViewer version number attribute to the nodes' extra attribute fields
-global proc addDomeTextVersionAttrs(string $nodeName){
+global proc addDomeViewerVersionAttrs(string $nodeName){
   //Add DomeViewer Node Version
   string $attrName ="DomeViewerVersion";
   int $DomeViewerVersion = 1;

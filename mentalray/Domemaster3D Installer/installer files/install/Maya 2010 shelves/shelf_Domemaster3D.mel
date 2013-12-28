@@ -150,43 +150,22 @@ global proc shelf_Domemaster3D () {
         -manage 1
         -visible 1
         -preventOverride 0
+        -annotation "LatLong" 
         -align "center" 
-        -label "DomeGrid" 
+        -label "LatLong" 
         -labelOffset 0
         -font "tinyBoldLabelFont" 
-        -image "domeGrid.xpm" 
-        -image1 "domeGrid.xpm" 
+        -image "render_latlong_lens.xpm" 
+        -image1 "render_latlong_lens.xpm" 
         -style "iconOnly" 
         -marginWidth 1
         -marginHeight 1
-        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createDomeGrid()" 
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createLatLong_Camera()" 
         -sourceType "python" 
         -actionIsSubstitute 0
         -commandRepeatable 1
     ;
-    shelfButton
-        -enableCommandRepeat 1
-        -enable 1
-        -width 34
-        -height 34
-        -manage 1
-        -visible 1
-        -preventOverride 0
-        -align "center" 
-        -label "Starglobe" 
-        -labelOffset 0
-        -font "tinyBoldLabelFont" 
-        -image "render_starglobe.xpm" 
-        -image1 "render_starglobe.xpm" 
-        -style "iconOnly" 
-        -marginWidth 1
-        -marginHeight 1
-        -command "source \"domeStarglobe.mel\";\ncreateStarglobe();" 
-        -sourceType "mel" 
-        -actionIsSubstitute 0
-        -commandRepeatable 1
-    ;
-    shelfButton
+   shelfButton
         -enableCommandRepeat 1
         -enable 1
         -width 34
@@ -232,6 +211,51 @@ global proc shelf_Domemaster3D () {
         -actionIsSubstitute 0
         -commandRepeatable 1
     ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -align "center" 
+        -label "Starglobe" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -image "render_starglobe.xpm" 
+        -image1 "render_starglobe.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "source \"domeStarglobe.mel\";\ncreateStarglobe();" 
+        -sourceType "mel" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+    shelfButton
+        -enableCommandRepeat 1
+        -enable 1
+        -width 34
+        -height 34
+        -manage 1
+        -visible 1
+        -preventOverride 0
+        -align "center" 
+        -label "DomeGrid" 
+        -labelOffset 0
+        -font "tinyBoldLabelFont" 
+        -image "domeGrid.xpm" 
+        -image1 "domeGrid.xpm" 
+        -style "iconOnly" 
+        -marginWidth 1
+        -marginHeight 1
+        -command "import domeCamera\nreload(domeCamera)\ndomeCamera.createDomeGrid()" 
+        -sourceType "python" 
+        -actionIsSubstitute 0
+        -commandRepeatable 1
+    ;
+
     shelfButton
         -enableCommandRepeat 1
         -enable 1

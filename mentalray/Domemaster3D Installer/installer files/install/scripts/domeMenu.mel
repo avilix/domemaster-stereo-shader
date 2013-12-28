@@ -1,6 +1,6 @@
 /*
 Create the Domemaster3D Main Menu in the Rendering menu set
-Oct 26, 2013 v1.1 Build 2
+Dec 18, 2013 v1.4 Beta 10
 ------------------------------------------------------------------------------
 
 Notes:
@@ -183,6 +183,11 @@ global proc createDomemaster3DMenu() {
     -tearOff true 
     -label "Dome Cameras" 
     DomeCamerasMenu;
+      menuItem 
+        -label "LatLong Camera" 
+        -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.createLatLong_Camera()\")";
+
+      menuItem -divider true;
 
       menuItem 
         -label "Domemaster WxH Camera" 
