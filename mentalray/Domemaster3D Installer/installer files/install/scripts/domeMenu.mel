@@ -241,7 +241,10 @@ global proc createDomemaster3DMenu() {
   menuItem 
     -label "Create DomeText" 
     -command "source \"domeText.mel\";domeText();";
-    
+  menuItem 
+    -label "Create DomeViewer" 
+    -command "source \"domeViewer.mel\";\ndomeViewer();"; 
+ 
   menuItem -divider true;
   
   menuItem 
@@ -256,7 +259,6 @@ global proc createDomemaster3DMenu() {
   menuItem 
     -label "Domemaster3D Version Info" 
     -command "source \"domeVersion.mel\";domeVersion();";
-
   menuItem 
     -label "Domemaster3D Wiki Help" 
     -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.openDomemasterWiki()\");";
