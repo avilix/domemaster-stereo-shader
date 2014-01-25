@@ -1,0 +1,1 @@
+This is a Softimage version of the mental ray Domemaster3D shader which is used to create fulldome renderings.
