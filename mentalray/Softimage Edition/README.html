@@ -274,20 +274,39 @@ img {
 </head>
 <body>
 <h1>Domemaster3D Lens Shader for Softimage</h1>
-<p><strong>Version 1.1 - January 2014</strong><br />
+<p><strong>Version 1.4 - February 23, 2014</strong><br />
 Ported by Andrew Hazelden</p>
 <p>Email: <a href="&#x6d;a&#x69;&#108;&#x74;&#111;&#58;&#x61;&#110;d&#114;&#x65;&#119;&#104;&#x61;&#122;el&#x64;e&#110;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;">&#x61;&#x6e;&#x64;r&#101;&#119;&#x68;&#x61;&#x7a;&#101;&#108;&#100;&#101;&#x6e;&#x40;g&#109;&#97;&#105;&#108;&#x2e;&#x63;o&#x6d;</a><br />
 Web: <a href="http://www.andrewhazelden.com">www.andrewhazelden.com</a></p>
 <p><code>DomeAFL_FOV_Stereo</code> shader created by Robert Ziche<br />
-<a href="http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images">http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images</a>
-<a href="http://code.google.com/p/domemaster-stereo-shader/">http://code.google.com/p/domemaster-stereo-shader/</a></p>
+<a href="http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images">http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images</a></p>
+<p><a href="http://code.google.com/p/domemaster-stereo-shader/">http://code.google.com/p/domemaster-stereo-shader/</a></p>
 <p>Based upon Daniel Ott's &quot;DomeAFL&quot; Angular fisheye lens shader
 <a href="http://www.thedott.net/shaders/domeAFL/">http://www.thedott.net/shaders/domeAFL/</a></p>
 <p>Domemaster3D Softimage Wiki<br />
 <a href="https://code.google.com/p/domemaster-stereo-shader/wiki/SoftimageDomemasterInstall">https://code.google.com/p/domemaster-stereo-shader/wiki/SoftimageDomemasterInstall</a></p>
 <h2>About This Shader</h2>
 <p>The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings.</p>
-<p><img src="screenshots/domemaster3D_xsi_lens_shader.png" alt="A screenshot of the Domemaster3D Softimage GUI" /></p>
+<p>The Domemaster3D shader for softimage includes a new toolbar which automates the most common tasks.</p>
+<p><img src="screenshots/domemaster-toolbar.png" alt="Domemaster3D Softimage Toolbar" /></p>
+<p>The Softimage Domemaster3D toolbar has buttons for the following features: </p>
+<ul>
+<li>The <strong>Stereo Rig</strong> tool creates a standard Domemaster3D stereo camera rig</li>
+<li>The <strong>Dome Texture</strong> tool creates a screen space file texture </li>
+<li>The <strong>DomeAFL<em>FOV</strong> tool creates a standard 2D domeAFL</em>FOV node + camera</li>
+<li>The <strong>DomeAFL<em>WxH</strong> tool creates a standard 2D domeAFL</em>WxH node + camera </li>
+<li>The <strong>LatLong tool</strong> creates a 2D latlong_lens node + camera </li>
+<li>The <strong>Starglobe tool</strong> creates a mia_material<em>x</em>passes based starry background for your fulldome scenes.</li>
+<li>The <strong>Wiki Help</strong> tool loads the Domemaster Stereo Shader Wiki page in your web browser. </li>
+<li>The <strong>0.5k</strong> button sets the render resolution to 512x512 pixels.</li>
+<li>The <strong>1k</strong> button sets the render resolution to 1024x1024 pixels.</li>
+<li>The <strong>2k</strong> button sets the render resolution to 2048x2048 pixels.</li>
+<li>The <strong>4k</strong> button sets the render resolution to 4096x4096 pixels.</li>
+<li>The <strong>8k</strong> button sets the render resolution to 8192x8192 pixels. </li>
+</ul>
+<h2>Starglobe Screenshot</h2>
+<p>The starglobe tool for Softimage makes it easy to add a starry night backdrop to your fulldome renderings. You can access the tool by opening the Domemaster3D toolbar.</p>
+<p><img src="screenshots/domemaster3d-1.4-softimage-toolbar.png" alt="Domemaster3D Softimage Toolbar" /></p>
 <h2>Installing the Shader</h2>
 <p>Open Softimage.</p>
 <p>From the File Menu Select &gt; Add-On &gt; Install...</p>
@@ -323,6 +342,7 @@ Web: <a href="http://www.andrewhazelden.com">www.andrewhazelden.com</a></p>
 <p>Dome Tilt Compensation: Enabling this option, shifts all the calculations by the # of degrees specified in Dome Forward Tilt. (Basically, it keeps the cameras/head vertical while the dome rotates forward.)</p>
 <p>Maps used for the various multipliers and tilt settings will have to be custom made for the proper dome tilt.</p>
 <p>Vertical Mode: Enable the vertical dome mode, which automatically adjust the head turn and adds a turn compensation for the upper and lower part of the dome. It's a simplified and optimized version of the Dome Tilt Compensation with a 90 degrees tilt. It is faster and easier to use.</p>
+<p><img src="screenshots/domemaster3D_xsi_lens_shader.png" alt="A screenshot of the Domemaster3D Softimage GUI" /></p>
 <h2>Node connections</h2>
 <p>Set the <code>mib_texture_vector</code> &quot;selspace&quot; aka. select space value to 4 (screen space) to enable the camera UV space projection. This means the texture will be loaded using a projection to the UV space coordinates of the camera.</p>
 <pre><code>mib_texture_vector.out -&gt; mib_texture_remap.input

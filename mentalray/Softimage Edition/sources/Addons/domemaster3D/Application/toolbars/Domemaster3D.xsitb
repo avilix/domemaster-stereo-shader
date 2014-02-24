@@ -1,0 +1,688 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<xsi_file type="Shelf" xsi_version="12.1.94.0" syntax_version="1.0">
+   <shelf_view name="Domemaster3D" clsid="{111B430D-D85E-4C53-B67E-390456B404B2}">
+      <properties>
+         <showtabs>false</showtabs>
+      </properties>
+      <definition maxinstances="10000" acceptfocus="true" private="false" defaultsize="0,100,200,300" cmdmap="{00000000-0000-0000-0000-000000000000}" supportedtypes="6" category=""></definition>
+      <tabs layout="top" active="DS Toolbar">
+         <tab label="DS Toolbar" type="toolbar">
+            <properties id="{464A0E9A-B944-45B2-BE7E-8CF7F8252058}" name="" display_preset_as_small="False" display_as_text_only="False"></properties>
+            <item type="separator" mode="group_header" group_name="Tools"></item>
+            <item type="scriptbutton" label="Stereo Rig" bitmap="render_domeAFL_FOV_Stereo" scriptengine="XSI.SIPython.1" tooltip="Fulldome Stereo Rig">
+               <scripttext>&lt;![CDATA[&quot;&quot;&quot;
+Find out the path to the sourceimages folder
+----------------------
+A python function to check the operating system platform and the source images folder. 
+
+&quot;&quot;&quot;
+def getSourceImagesPath(imageFileName):
+
+  # ---------------------------------------------------------------------
+  #Setup the base folder path for the Domemaster3D control maps
+  # ---------------------------------------------------------------------
+
+  #Check OS platform for Windows/Mac/Linux Paths
+  import platform
+
+
+  # Find the Domemaster3D Addon folder
+  import os
+  xsiUserFolder = os.getenv( &quot;XSI_USERHOME&quot; )
+  # C:\Users\hazelden\Autodesk\Softimage_2014_SP1
+
+  #This is the base path for the images folder
+  baseImagesFolder = &quot;&quot;
+
+  if platform.system()=='Windows':
+    #Check if the program is running on Windows 
+    # C:\Users\hazelden\Autodesk\Softimage_2014_SP1\Addons\domemaster3D\Application\bitmaps\
+    baseImagesFolder =  xsiUserFolder + &quot;\\Addons\\domemaster3D\\Application\\bitmaps\\&quot;
+  elif platform.system()== 'win32':
+    #Check if the program is running on Windows 32
+    baseImagesFolder =  xsiUserFolder + &quot;\\Addons\\domemaster3D\\Application\\bitmaps\\&quot;
+  elif platform.system()== 'Linux':
+    #Check if the program is running on Linux
+    baseImagesFolder =  xsiUserFolder + &quot;/Addons/domemaster3D/Application/bitmaps/&quot;
+  elif platform.system()== 'Linux2':
+    #Check if the program is running on Linux
+    baseImagesFolder =  xsiUserFolder + &quot;/Addons/domemaster3D/Application/bitmaps/&quot;
+  else:
+    # Create the empty variable as a fallback mode
+    baseImagesFolder = &quot;&quot;
+
+  combinedFileAndImagePath = baseImagesFolder + imageFileName
+
+  print &quot;[Domemaster3D is running on a &quot; + platform.system() + &quot; System]&quot;
+  print &quot;[Requesting the image file]: &quot; + combinedFileAndImagePath
+
+  return combinedFileAndImagePath
+
+
+
+&quot;&quot;&quot;
+Domemaster3D Fulldome Stereo Rig
+--------------------------------
+A python function to create a fulldome stereo rig in Softimage.
+&quot;&quot;&quot;
+
+def createFulldomeStereoRig():
+
+  # Deselect the objects in the scene
+  Application.DeselectAll() 
+
+  # ---------------------------------------------------------------------
+  # Create the stereo rig
+  # ---------------------------------------------------------------------
+
+  #Setup the base folder path for the Domemaster3D control maps
+  #Variables
+  #separationMapFileTexture = &quot;C:\\Program Files\\Domemaster3D\\sourceimages\\separation_map.png&quot;
+  separationMapFileTexture = getSourceImagesPath(&quot;separation_map.png&quot;)
+  turnMapFileTexture = getSourceImagesPath(&quot;turn_map.png&quot;)
+
+  # Add a stereo camera named &quot;DomeStereoCamera&quot;
+  rigName = &quot;DomeStereoCamera&quot;
+
+  rig = str(Application.GetPrimStereoCamera(rigName))
+  #  DomeStereoCamera_Root1
+  baseRig = rig.replace(&quot;_Root&quot;, &quot;&quot;);
+  #  DomeStereoCamera1
+  leftRig = rig.replace(&quot;_Root&quot;, &quot;_Left&quot;);
+  #  DomeStereoCamera_Left1
+  rightRig = rig.replace(&quot;_Root&quot;, &quot;_Right&quot;);
+  #  DomeStereoCamera_Right1
+  interestRig = rig.replace(&quot;_Root&quot;, &quot;_Interest&quot;);
+  #  DomeStereoCamera_Interest1
+  print(&quot;Stereo Camera Rig:&quot; + rig + &quot; Left: &quot; + leftRig + &quot; Right: &quot; + rightRig + &quot; Interest: &quot; + interestRig )
+
+  # Variable to hold the rig controls name
+  rigControls = rig+&quot;.Domemaster_camera_controls&quot;
+  # DomeStereoCamera_Root1.Domemaster_camera_controls
+
+  # Rotate the camera rig upright
+  Application.SetValue(baseRig+ &quot;.kine.global.rotx&quot;, 90, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.roty&quot;, 0, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.rotz&quot;, 0, &quot;&quot;)
+
+  # Snap the rig to the origin
+  Application.SetValue(baseRig+ &quot;.kine.global.posx&quot;, 0, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.posy&quot;, 0, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.posz&quot;, 0, &quot;&quot;)
+
+  # Set the camera to use a 4 mm focal length
+  Application.SetValue(baseRig+&quot;.camera.fov&quot;, 154.94, &quot;&quot;)
+
+  # Move the center of interest upwards above the origin
+  Application.Translate(interestRig, 0, 10, 0, &quot;siAbsolute&quot;, &quot;siPivot&quot;, &quot;siObj&quot;, &quot;siY&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 0, &quot;&quot;)
+  #Application.Translate(&quot;DomeStereoCamera_Interest&quot;, 0, 10, 0, &quot;siAbsolute&quot;, &quot;siPivot&quot;, &quot;siObj&quot;, &quot;siY&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 0, &quot;&quot;)
+
+  # Turn off the default Softimage stereo controls
+  Application.SetValue(rig+&quot;.Stereo.StereoType&quot;, 0, &quot;&quot;)
+
+  # Add the domeAFL_FOV_Stereo lens shader to the camera rig
+  Application.SIAddArrayElement(leftRig+&quot;.camera.lensshader&quot;)
+  Application.SIApplyShaderToCnxPoint2(&quot;Softimage.domeAFL_FOV_Stereo.1.0&quot;, leftRig+&quot;.camera.Item&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SetValue(leftRig+&quot;.camera.domeAFL_FOV_Stereo.Camera&quot;, 1, &quot;&quot;)
+
+  Application.SIAddArrayElement(rightRig+&quot;.camera.lensshader&quot;)
+  Application.SIApplyShaderToCnxPoint2(&quot;Softimage.domeAFL_FOV_Stereo.1.0&quot;, rightRig+&quot;.camera.Item&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SetValue(rightRig+&quot;.camera.domeAFL_FOV_Stereo.Camera&quot;, 2, &quot;&quot;)
+
+  # Create the user interface controls
+  Application.SelectObj(rig, &quot;&quot;, &quot;&quot;)
+  Application.AddProp(&quot;Custom_parameter_list&quot;, &quot;&quot;, &quot;&quot;, &quot;Domemaster camera controls&quot;, &quot;&quot;)
+  Application.SelectObj(rigControls, &quot;&quot;, &quot;&quot;)
+
+  Application.SIAddCustomParameter(rigControls, &quot;Separation&quot;, &quot;siDouble&quot;, 6, &quot;&quot;, 1000000, &quot;&quot;, 2053, &quot;&quot;, 1000000, &quot;&quot;, &quot;&quot;)
+
+  Application.SIAddCustomParameter(rigControls, &quot;Field of View&quot;, &quot;siDouble&quot;, 180, &quot;&quot;, 360, &quot;&quot;, 2053, &quot;&quot;, 360, &quot;&quot;, &quot;&quot;)
+
+  Application.SIAddCustomParameter(rigControls, &quot;Dome Radius&quot;, &quot;siDouble&quot;, 360, 1, 1000000, &quot;&quot;, 2053, 1, 1000000, &quot;&quot;, &quot;&quot;)
+
+  Application.SIAddCustomParameter(rigControls, &quot;Dome Tilt&quot;, &quot;siDouble&quot;, 0, &quot;&quot;, 90, &quot;&quot;, 2053, &quot;&quot;, 90, &quot;&quot;, &quot;&quot;)
+
+  Application.SIAddCustomParameter(rigControls, &quot;Tilt Compensation&quot;, &quot;siDouble&quot;, 0, &quot;&quot;, 100, &quot;&quot;, 2053, &quot;&quot;, 100, &quot;&quot;, &quot;&quot;)
+
+  Application.SIAddCustomParameter(rigControls, &quot;Vertical Mode&quot;, &quot;siDouble&quot;, 0, &quot;&quot;, 100, &quot;&quot;, 2053, &quot;&quot;, 100, &quot;&quot;, &quot;&quot;)
+
+  Application.SIAddCustomParameter(rigControls, &quot;Separation Multiplier&quot;, &quot;siDouble&quot;, 1, &quot;&quot;, &quot;&quot;, &quot;&quot;, 2053, &quot;&quot;, 1, &quot;&quot;, &quot;&quot;)
+
+  Application.SIAddCustomParameter(rigControls, &quot;Turn Multiplier&quot;, &quot;siDouble&quot;, 1, &quot;&quot;, &quot;&quot;, &quot;&quot;, 2053, &quot;&quot;, 1, &quot;&quot;, &quot;&quot;)
+
+  Application.SIAddCustomParameter(rigControls, &quot;Head Tilt&quot;, &quot;siDouble&quot;, 0.5, &quot;&quot;, &quot;&quot;, &quot;&quot;, 2053, &quot;&quot;, 1, &quot;&quot;, &quot;&quot;)
+
+  # Link the stereo user interface elements
+  Application.CopyPaste(rigControls+&quot;.Separation&quot;, &quot;&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.Cameras_Separation&quot;, 1)
+  Application.CopyPaste(rigControls+&quot;.Separation&quot;, &quot;&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.Cameras_Separation&quot;, 1)
+
+  Application.CopyPaste(rigControls+&quot;.Field_of_View&quot;, &quot;&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.FOV_Angle&quot;, 1)
+  Application.CopyPaste(rigControls+&quot;.Field_of_View&quot;, &quot;&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.FOV_Angle&quot;, 1)
+
+  Application.CopyPaste(rigControls+&quot;.Dome_Radius&quot;, &quot;&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.Dome_Radius&quot;, 1)
+  Application.CopyPaste(rigControls+&quot;.Dome_Radius&quot;, &quot;&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.Dome_Radius&quot;, 1)
+
+  Application.CopyPaste(rigControls+&quot;.Dome_Tilt&quot;, &quot;&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.Dome_Tilt&quot;, 1)
+  Application.CopyPaste(rigControls+&quot;.Dome_Tilt&quot;, &quot;&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.Dome_Tilt&quot;, 1)
+
+  Application.CopyPaste(rigControls+&quot;.Tilt_Compensation&quot;, &quot;&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.Dome_Tilt_Compensation&quot;, 1)
+  Application.CopyPaste(rigControls+&quot;.Tilt_Compensation&quot;, &quot;&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.Dome_Tilt_Compensation&quot;, 1)
+
+  Application.CopyPaste(rigControls+&quot;.Vertical_Mode&quot;, &quot;&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.Vertical_Mode&quot;, 1)
+  Application.CopyPaste(rigControls+&quot;.Vertical_Mode&quot;, &quot;&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.Vertical_Mode&quot;, 1)
+
+  Application.CopyPaste(rigControls+&quot;.Separation_Multiplier&quot;, &quot;&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.Cameras_Separation_Map&quot;, 1)
+  Application.CopyPaste(rigControls+&quot;.Separation_Multiplier&quot;, &quot;&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.Cameras_Separation_Map&quot;, 1)
+
+  Application.CopyPaste(rigControls+&quot;.Turn_Multiplier&quot;, &quot;&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.Head_Turn_Map&quot;, 1)
+  Application.CopyPaste(rigControls+&quot;.Turn_Multiplier&quot;, &quot;&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.Head_Turn_Map&quot;, 1)
+
+  Application.CopyPaste(rigControls+&quot;.Head_Tilt&quot;, &quot;&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.Head_Tilt_Map&quot;, 1)
+  Application.CopyPaste(rigControls+&quot;.Head_Tilt&quot;, &quot;&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.Head_Tilt_Map&quot;, 1)
+
+  # -----------------------------------------------
+
+  # Create the DomeAFL_FOV_Stereo control texture maps
+  #baseRig = &quot;DomeStereoCamera&quot;
+
+  # Add the separation map to the left and right cameras
+  right_separation_map_color_to_scalar_node  = str(Application.SIApplyShaderToCnxPoint(&quot;Conversion\\Color_to_Scalar&quot;,  rightRig+&quot;.camera.domeAFL_FOV_Stereo.Cameras_Separation_Map&quot;, &quot;right_separation_map_color_to_scalar&quot;, &quot;&quot;))
+  left_separation_map_color_to_scalar_node  =  str(Application.SIApplyShaderToCnxPoint(&quot;Conversion\\Color_to_Scalar&quot;,  leftRig+&quot;.camera.domeAFL_FOV_Stereo.Cameras_Separation_Map&quot;, &quot;left_separation_map_color_to_scalar&quot;, &quot;&quot;))
+
+  separation_mib_texture_filter_lookup_node = str(Application.CreateShaderFromProgID(&quot;mentalray.mib_texture_filter_lookup.1.0&quot;, rightRig+&quot;.camera&quot;, &quot;separation_mib_texture_filter_lookup&quot;))
+  Application.SIConnectShaderToCnxPoint(separation_mib_texture_filter_lookup_node+&quot;.out&quot;, right_separation_map_color_to_scalar_node+&quot;.input&quot;, False)
+  Application.SIConnectShaderToCnxPoint(separation_mib_texture_filter_lookup_node+&quot;.out&quot;, left_separation_map_color_to_scalar_node+&quot;.input&quot;, False)
+  separationMapFileTexture_node = str(Application.SICreateImageClip(separationMapFileTexture, &quot;&quot;, &quot;&quot;))
+  Application.SIConnectShaderToCnxPoint(&quot;Clips.separation_map_png&quot;, separation_mib_texture_filter_lookup_node+&quot;.tex&quot;, False)
+  separation_mib_texture_vector_node  = str(Application.CreateShaderFromProgID(&quot;mentalray.mib_texture_vector.1.0&quot;, rightRig+&quot;.camera&quot;, &quot;separation_mib_texture_vector&quot;))
+  separation_mib_texture_remap_node  = str(Application.CreateShaderFromProgID(&quot;mentalray.mib_texture_remap.1.0&quot;, rightRig+&quot;.camera&quot;, &quot;separation_mib_texture_remap&quot;))
+  Application.SetValue(separation_mib_texture_vector_node+&quot;.selspace&quot;, 4, &quot;&quot;)
+  Application.SIConnectShaderToCnxPoint(separation_mib_texture_vector_node+&quot;.out&quot;, separation_mib_texture_remap_node+&quot;.input&quot;, False)
+  Application.SIConnectShaderToCnxPoint(separation_mib_texture_remap_node+&quot;.out&quot;, separation_mib_texture_filter_lookup_node+&quot;.coord&quot;, False)
+
+  # -----------------------------------------------
+
+  # Add the turn map to the left and right cameras
+  right_turn_map_color_to_scalar_node = str(Application.SIApplyShaderToCnxPoint(&quot;Conversion\\Color_to_Scalar&quot;, rightRig+&quot;.camera.domeAFL_FOV_Stereo.Head_Turn_Map&quot;, &quot;right_turn_map_color_to_scalar&quot;, &quot;&quot;))
+  left_turn_map_color_to_scalar_node = str(Application.SIApplyShaderToCnxPoint(&quot;Conversion\\Color_to_Scalar&quot;, leftRig+&quot;.camera.domeAFL_FOV_Stereo.Head_Turn_Map&quot;, &quot;left_turn_map_color_to_scalar&quot;, &quot;&quot;))
+
+  #baseRig = &quot;DomeStereoCamera&quot;
+  turn_mib_texture_filter_lookup_node = str(Application.CreateShaderFromProgID(&quot;mentalray.mib_texture_filter_lookup.1.0&quot;, rightRig+&quot;.camera&quot;, &quot;turn_mib_texture_filter_lookup&quot;))
+  Application.SIConnectShaderToCnxPoint(turn_mib_texture_filter_lookup_node+&quot;.out&quot;, right_turn_map_color_to_scalar_node+&quot;.input&quot;, False)
+  Application.SIConnectShaderToCnxPoint(turn_mib_texture_filter_lookup_node+&quot;.out&quot;, left_turn_map_color_to_scalar_node+&quot;.input&quot;, False)
+  turnMapFileTexture_node = str(Application.SICreateImageClip(turnMapFileTexture, &quot;&quot;, &quot;&quot;))
+  Application.SIConnectShaderToCnxPoint(&quot;Clips.turn_map_png&quot;, turn_mib_texture_filter_lookup_node+&quot;.tex&quot;, False)
+  turn_mib_texture_vector_node  = str(Application.CreateShaderFromProgID(&quot;mentalray.mib_texture_vector.1.0&quot;, rightRig+&quot;.camera&quot;, &quot;turn_mib_texture_vector&quot;))
+  turn_mib_texture_remap_node  = str(Application.CreateShaderFromProgID(&quot;mentalray.mib_texture_remap.1.0&quot;, rightRig+&quot;.camera&quot;, &quot;turn_mib_texture_remap&quot;))
+  Application.SetValue(turn_mib_texture_vector_node+&quot;.selspace&quot;, 4, &quot;&quot;)
+  Application.SIConnectShaderToCnxPoint(turn_mib_texture_vector_node+&quot;.out&quot;, turn_mib_texture_remap_node+&quot;.input&quot;, False)
+  Application.SIConnectShaderToCnxPoint(turn_mib_texture_remap_node+&quot;.out&quot;, turn_mib_texture_filter_lookup_node+&quot;.coord&quot;, False)
+
+ # -----------------------------------------------
+
+  # Create and assign render passes for the left and right cameras
+  Application.CreatePass(&quot;&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SetValue(&quot;Passes.Pass.Name&quot;, leftRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+leftRig+&quot;.Camera&quot;, leftRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+leftRig+&quot;.Main.Filename&quot;, &quot;DomeLeftCam\\[Pass]_[Framebuffer]&quot;, &quot;&quot;)
+
+  Application.CreatePass(&quot;&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SetValue(&quot;Passes.Pass.Name&quot;, rightRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+rightRig+&quot;.Camera&quot;, rightRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+rightRig+&quot;.Main.Filename&quot;, &quot;DomeRightCam\\[Pass]_[Framebuffer]&quot;, &quot;&quot;)
+
+
+# Create the fulldome stereo camera
+createFulldomeStereoRig()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="DomeTexture" bitmap="render_rob_lookup_background" scriptengine="XSI.SIPython.1" tooltip="Screen Space Texture">
+               <scripttext>&lt;![CDATA[
+&quot;&quot;&quot;
+Find out the path to the sourceimages folder
+----------------------
+A python function to check the operating system platform and the source images folder. 
+
+&quot;&quot;&quot;
+def getSourceImagesPath(imageFileName):
+
+  # ---------------------------------------------------------------------
+  #Setup the base folder path for the Domemaster3D control maps
+  # ---------------------------------------------------------------------
+
+  #Check OS platform for Windows/Mac/Linux Paths
+  import platform
+
+
+  # Find the Domemaster3D Addon folder
+  import os
+  xsiUserFolder = os.getenv( &quot;XSI_USERHOME&quot; )
+  # C:\Users\hazelden\Autodesk\Softimage_2014_SP1
+
+  #This is the base path for the images folder
+  baseImagesFolder = &quot;&quot;
+
+  if platform.system()=='Windows':
+    #Check if the program is running on Windows 
+    # C:\Users\hazelden\Autodesk\Softimage_2014_SP1\Addons\domemaster3D\Application\bitmaps\
+    baseImagesFolder =  xsiUserFolder + &quot;\\Addons\\domemaster3D\\Application\\bitmaps\\&quot;
+  elif platform.system()== 'win32':
+    #Check if the program is running on Windows 32
+    baseImagesFolder =  xsiUserFolder + &quot;\\Addons\\domemaster3D\\Application\\bitmaps\\&quot;
+  elif platform.system()== 'Linux':
+    #Check if the program is running on Linux
+    baseImagesFolder =  xsiUserFolder + &quot;/Addons/domemaster3D/Application/bitmaps/&quot;
+  elif platform.system()== 'Linux2':
+    #Check if the program is running on Linux
+    baseImagesFolder =  xsiUserFolder + &quot;/Addons/domemaster3D/Application/bitmaps/&quot;
+  else:
+    # Create the empty variable as a fallback mode
+    baseImagesFolder = &quot;&quot;
+
+  combinedFileAndImagePath = baseImagesFolder + imageFileName
+
+  print &quot;[Domemaster3D is running on a &quot; + platform.system() + &quot; System]&quot;
+  print &quot;[Requesting the image file]: &quot; + combinedFileAndImagePath
+
+  return combinedFileAndImagePath
+
+
+&quot;&quot;&quot;
+Domemaster3D createRobLookup
+----------------------
+A python function to create a mental ray screen space texture 
+and connect it to a robLookupBackground lens shader. 
+&quot;&quot;&quot;
+
+def createRobLookup():
+    
+  #Setup the base folder path for the Domemaster3D control maps
+  #Variables
+  #separationMapFileTexture = &quot;C:\\Program Files\\Domemaster3D\\sourceimages\\separation_map.png&quot;
+  separationMapFileTexture = getSourceImagesPath(&quot;separation_map.png&quot;)
+  print &quot;[Loading Separation Map]: &quot; + separationMapFileTexture 
+
+ # Deselect the objects in the scene
+  Application.DeselectAll() 
+
+  # Add a camera named &quot;robLookupCamera&quot;
+  rigName = &quot;robLookupCamera&quot;
+  rig = str(Application.GetPrimCamera(&quot;&quot;, rigName, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;))
+  #  DomeStereoCamera_Root1
+  baseRig = rig.replace(&quot;_Root&quot;, &quot;&quot;);
+  #  DomeStereoCamera1
+  interestRig = rig.replace(&quot;_Root&quot;, &quot;_Interest&quot;);
+  #  DomeStereoCamera_Interest1
+  print(&quot;Fulldome Camera Rig Name: &quot; + rig)
+
+  # Rotate the camera rig upright
+  Application.SetValue(baseRig+ &quot;.kine.global.rotx&quot;, 90, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.roty&quot;, 0, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.rotz&quot;, 0, &quot;&quot;)
+
+  # Set the camera to use a 4 mm focal length
+  Application.SetValue(baseRig+&quot;.camera.fov&quot;, 154.94, &quot;&quot;)
+
+  # Move the center of interest upwards above the origin
+  Application.Translate(interestRig, 0, 10, 0, &quot;siAbsolute&quot;, &quot;siPivot&quot;, &quot;siObj&quot;, &quot;siY&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 0, &quot;&quot;)
+
+  # Add the rob_lookup_background lens shader to the camera
+  Application.SIAddArrayElement(baseRig+&quot;.camera.lensshader&quot;)
+  Application.SIApplyShaderToCnxPoint2(&quot;Softimage.rob_lookup_background.1.0&quot;, baseRig+&quot;.camera.Item&quot;, &quot;&quot;, &quot;&quot;)
+
+  # Add a screen space separation map to the robLookupCamera
+  Application.SIApplyShaderToCnxPoint(&quot;Conversion\\Color_to_Scalar&quot;,  baseRig+&quot;.camera.rob_lookup_background.tex&quot;, &quot;&quot;, &quot;&quot;)
+  separation_map_color_to_scalar_node  = str(Application.SIApplyShaderToCnxPoint(&quot;Conversion\\Color_to_Scalar&quot;,  baseRig+&quot;.camera.rob_lookup_background.tex&quot;, &quot;separation_map_color_to_scalar&quot;, &quot;&quot;))
+
+  separation_mib_texture_filter_lookup_node = str(Application.CreateShaderFromProgID(&quot;mentalray.mib_texture_filter_lookup.1.0&quot;, baseRig+&quot;.camera&quot;, &quot;separation_mib_texture_filter_lookup&quot;))
+  Application.SIConnectShaderToCnxPoint(separation_mib_texture_filter_lookup_node+&quot;.out&quot;, separation_map_color_to_scalar_node+&quot;.input&quot;, False)
+  Application.SIConnectShaderToCnxPoint(separation_mib_texture_filter_lookup_node+&quot;.out&quot;, separation_map_color_to_scalar_node+&quot;.input&quot;, False)
+  separationMapFileTexture_node = str(Application.SICreateImageClip(separationMapFileTexture, &quot;&quot;, &quot;&quot;))
+  Application.SIConnectShaderToCnxPoint(&quot;Clips.separation_map_png&quot;, separation_mib_texture_filter_lookup_node+&quot;.tex&quot;, False)
+  separation_mib_texture_vector_node  = str(Application.CreateShaderFromProgID(&quot;mentalray.mib_texture_vector.1.0&quot;, baseRig+&quot;.camera&quot;, &quot;separation_mib_texture_vector&quot;))
+  separation_mib_texture_remap_node  = str(Application.CreateShaderFromProgID(&quot;mentalray.mib_texture_remap.1.0&quot;, baseRig+&quot;.camera&quot;, &quot;separation_mib_texture_remap&quot;))
+  Application.SetValue(separation_mib_texture_vector_node+&quot;.selspace&quot;, 4, &quot;&quot;)
+  Application.SIConnectShaderToCnxPoint(separation_mib_texture_vector_node+&quot;.out&quot;, separation_mib_texture_remap_node+&quot;.input&quot;, False)
+  Application.SIConnectShaderToCnxPoint(separation_mib_texture_remap_node+&quot;.out&quot;, separation_mib_texture_filter_lookup_node+&quot;.coord&quot;, False)
+
+
+  # Create and assign render passes for the camera
+  Application.CreatePass(&quot;&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SetValue(&quot;Passes.Pass.Name&quot;, baseRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+baseRig+&quot;.Camera&quot;,  baseRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+baseRig+&quot;.Main.Filename&quot;, &quot;robLookupCamera\\[Pass]_[Framebuffer]&quot;, &quot;&quot;)
+
+# Create a screen space texture
+createRobLookup()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="FOV Camera" bitmap="render_domeAFL_FOV" scriptengine="XSI.SIPython.1" tooltip="domeAFL_FOV">
+               <scripttext>&lt;![CDATA[&quot;&quot;&quot;
+Domemaster3D createDomeAFL_FOV_Camera
+----------------------
+A python function to create a domeAFL_FOV lens shader and attach it to a camera.
+&quot;&quot;&quot;	
+def createDomeAFL_FOV_Camera():
+
+ # Deselect the objects in the scene
+  Application.DeselectAll() 
+
+  # Add a camera named &quot;domeAFL_FOV_Camera&quot;
+  rigName = &quot;domeAFL_FOV_Camera&quot;
+  rig = str(Application.GetPrimCamera(&quot;&quot;, rigName, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;))
+  #  domeAFL_FOV_Camera_Root1
+  baseRig = rig.replace(&quot;_Root&quot;, &quot;&quot;);
+  #  domeAFL_FOV_Camera1
+  interestRig = rig.replace(&quot;_Root&quot;, &quot;_Interest&quot;);
+  #  domeAFL_FOV_Camera_Interest1
+  print(&quot;Fulldome Camera Rig Name: &quot; + rig)
+
+  # Rotate the camera rig upright
+  Application.SetValue(baseRig+ &quot;.kine.global.rotx&quot;, 90, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.roty&quot;, 0, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.rotz&quot;, 0, &quot;&quot;)
+
+  # Set the camera to use a 4 mm focal length
+  Application.SetValue(baseRig+&quot;.camera.fov&quot;, 154.94, &quot;&quot;)
+
+  # Move the center of interest upwards above the origin
+  Application.Translate(interestRig, 0, 10, 0, &quot;siAbsolute&quot;, &quot;siPivot&quot;, &quot;siObj&quot;, &quot;siY&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 0, &quot;&quot;)
+
+  # Add the domeAFL_FOV_Stereo lens shader to the camera
+  Application.SIAddArrayElement(baseRig+&quot;.camera.lensshader&quot;)
+  #Application.SIApplyShaderToCnxPoint2(&quot;Softimage.domeAFL_FOV.1.0&quot;, baseRig+&quot;.camera.Item&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SIApplyShaderToCnxPoint2(&quot;Softimage.domeAFL_FOV_Stereo.1.0&quot;, baseRig+&quot;.camera.Item&quot;, &quot;&quot;, &quot;&quot;)
+
+  #Make sure the fisheye view is set to center
+  Application.SetValue( baseRig+&quot;.camera.domeAFL_FOV_Stereo.Camera&quot;, 0, &quot;&quot;)
+
+  # Create and assign render passes for the camera
+  Application.CreatePass(&quot;&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SetValue(&quot;Passes.Pass.Name&quot;, baseRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+baseRig+&quot;.Camera&quot;,  baseRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+baseRig+&quot;.Main.Filename&quot;, &quot;DomeFOVCam\\[Pass]_[Framebuffer]&quot;, &quot;&quot;)
+
+# Create the FOV camera
+createDomeAFL_FOV_Camera()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="WxH Camera" bitmap="render_domeAFL_WxH" scriptengine="XSI.SIPython.1" tooltip="domeAFL_WxH">
+               <scripttext>&lt;![CDATA[
+&quot;&quot;&quot;
+Domemaster3D createDomeAFL_WxH_Camera
+----------------------
+A python function to create a domeAFL_WxH lens shader and attach it to a camera.
+&quot;&quot;&quot;	
+def createDomeAFL_WxH_Camera():
+
+ # Deselect the objects in the scene
+  Application.DeselectAll() 
+
+  # Add a camera named &quot;domeAFL_WxH_Camera&quot;
+  rigName = &quot;domeAFL_WxH_Camera&quot;
+  rig = str(Application.GetPrimCamera(&quot;&quot;, rigName, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;))
+  #  DomeStereoCamera_Root1
+  baseRig = rig.replace(&quot;_Root&quot;, &quot;&quot;);
+  #  DomeStereoCamera1
+  interestRig = rig.replace(&quot;_Root&quot;, &quot;_Interest&quot;);
+  #  DomeStereoCamera_Interest1
+  print(&quot;Fulldome Camera Rig Name: &quot; + rig)
+
+  # Rotate the camera rig upright
+  Application.SetValue(baseRig+ &quot;.kine.global.rotx&quot;, 90, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.roty&quot;, 0, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.rotz&quot;, 0, &quot;&quot;)
+
+  # Set the camera to use a 4 mm focal length
+  Application.SetValue(baseRig+&quot;.camera.fov&quot;, 154.94, &quot;&quot;)
+
+  # Move the center of interest upwards above the origin
+  Application.Translate(interestRig, 0, 10, 0, &quot;siAbsolute&quot;, &quot;siPivot&quot;, &quot;siObj&quot;, &quot;siY&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 0, &quot;&quot;)
+
+  # Add the domeAFL_FOV_Stereo lens shader to the camera
+  Application.SIAddArrayElement(baseRig+&quot;.camera.lensshader&quot;)
+  Application.SIApplyShaderToCnxPoint2(&quot;Softimage.domeAFL_WxH.1.0&quot;, baseRig+&quot;.camera.Item&quot;, &quot;&quot;, &quot;&quot;)
+
+  # Create and assign render passes for the camera
+  Application.CreatePass(&quot;&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SetValue(&quot;Passes.Pass.Name&quot;, baseRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+baseRig+&quot;.Camera&quot;,  baseRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+baseRig+&quot;.Main.Filename&quot;, &quot;DomeWxHCam\\[Pass]_[Framebuffer]&quot;, &quot;&quot;)
+
+# Create the WxH camera
+createDomeAFL_WxH_Camera()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="Lat Camera" bitmap="render_latlong_lens" scriptengine="XSI.SIPython.1" tooltip="LatLong">
+               <scripttext>&lt;![CDATA[&quot;&quot;&quot;
+Domemaster3D createLatLong_Camera
+----------------------
+A python function to create a latitude longitude lens shader and attach it to a camera.
+&quot;&quot;&quot;	
+def createLatLong_Camera():
+
+ # Deselect the objects in the scene
+  Application.DeselectAll() 
+
+  # Add a camera named &quot;latlong_lens&quot;
+  rigName = &quot;LatLong_Camera&quot;
+  rig = str(Application.GetPrimCamera(&quot;&quot;, rigName, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;))
+  #  DomeStereoCamera_Root1
+  baseRig = rig.replace(&quot;_Root&quot;, &quot;&quot;);
+  #  DomeStereoCamera1
+  interestRig = rig.replace(&quot;_Root&quot;, &quot;_Interest&quot;);
+  #  DomeStereoCamera_Interest1
+  print(&quot;Fulldome Camera Rig Name: &quot; + rig)
+
+  # Rotate the camera rig upright
+  Application.SetValue(baseRig+ &quot;.kine.global.rotx&quot;, 0, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.roty&quot;, 0, &quot;&quot;)
+  Application.SetValue(baseRig+ &quot;.kine.global.rotz&quot;, 0, &quot;&quot;)
+
+  # Set the camera to use a 4 mm focal length
+  Application.SetValue(baseRig+&quot;.camera.fov&quot;, 154.94, &quot;&quot;)
+
+  # Move the center of interest upwards above the origin
+  Application.Translate(interestRig, 0, 10, 0, &quot;siAbsolute&quot;, &quot;siPivot&quot;, &quot;siObj&quot;, &quot;siY&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 0, &quot;&quot;)
+
+  # Add the latlong_lens lens shader to the camera
+  Application.SIAddArrayElement(baseRig+&quot;.camera.lensshader&quot;)
+  Application.SIApplyShaderToCnxPoint2(&quot;Softimage.latlong_lens.1.0&quot;, baseRig+&quot;.camera.Item&quot;, &quot;&quot;, &quot;&quot;)
+
+  # Create and assign render passes for the camera
+  Application.CreatePass(&quot;&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SetValue(&quot;Passes.Pass.Name&quot;, baseRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+baseRig+&quot;.Camera&quot;,  baseRig, &quot;&quot;)
+  Application.SetValue(&quot;Passes.&quot;+baseRig+&quot;.Main.Filename&quot;, &quot;LatLongCam\\[Pass]_[Framebuffer]&quot;, &quot;&quot;)
+
+# Create the latlong camera
+createLatLong_Camera()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="Starglobe" bitmap="render_starglobe" scriptengine="XSI.SIPython.1" tooltip="Starglobe">
+               <scripttext>&lt;![CDATA[
+&quot;&quot;&quot;
+Find out the path to the sourceimages folder
+----------------------
+A python function to check the operating system platform and the source images folder. 
+
+&quot;&quot;&quot;
+def getSourceImagesPath(imageFileName):
+
+  # ---------------------------------------------------------------------
+  #Setup the base folder path for the Domemaster3D control maps
+  # ---------------------------------------------------------------------
+
+  #Check OS platform for Windows/Mac/Linux Paths
+  import platform
+
+
+  # Find the Domemaster3D Addon folder
+  import os
+  xsiUserFolder = os.getenv( &quot;XSI_USERHOME&quot; )
+  # C:\Users\hazelden\Autodesk\Softimage_2014_SP1
+
+  #This is the base path for the images folder
+  baseImagesFolder = &quot;&quot;
+
+  if platform.system()=='Windows':
+    #Check if the program is running on Windows 
+    # C:\Users\hazelden\Autodesk\Softimage_2014_SP1\Addons\domemaster3D\Application\bitmaps\
+    baseImagesFolder =  xsiUserFolder + &quot;\\Addons\\domemaster3D\\Application\\bitmaps\\&quot;
+  elif platform.system()== 'win32':
+    #Check if the program is running on Windows 32
+    baseImagesFolder =  xsiUserFolder + &quot;\\Addons\\domemaster3D\\Application\\bitmaps\\&quot;
+  elif platform.system()== 'Linux':
+    #Check if the program is running on Linux
+    baseImagesFolder =  xsiUserFolder + &quot;/Addons/domemaster3D/Application/bitmaps/&quot;
+  elif platform.system()== 'Linux2':
+    #Check if the program is running on Linux
+    baseImagesFolder =  xsiUserFolder + &quot;/Addons/domemaster3D/Application/bitmaps/&quot;
+  else:
+    # Create the empty variable as a fallback mode
+    baseImagesFolder = &quot;&quot;
+
+  combinedFileAndImagePath = baseImagesFolder + imageFileName
+
+  print &quot;[Domemaster3D is running on a &quot; + platform.system() + &quot; System]&quot;
+  print &quot;[Requesting the image file]: &quot; + combinedFileAndImagePath
+
+  return combinedFileAndImagePath
+
+
+&quot;&quot;&quot;
+Create a starglobe
+---------------------------
+A python function to create a 8K textured starglobe with a mia_material_x_passes shading network.
+&quot;&quot;&quot;
+def createStarglobe():
+  import os
+
+  # ---------------------------------------------------------------------
+  # Set up the base folder path for the Domemaster3D textures
+  # ---------------------------------------------------------------------
+  # Set the file texture variables to &quot;&quot; if you don't want a file to be specified
+  #StarglobeMapFileTexture = &quot;&quot;
+
+  StarglobeMapFileTexture = getSourceImagesPath(&quot;starglobe_quadsphere_2k.jpg&quot;)
+  #StarglobeMapFileTexture = getModelsPath(&quot;starglobe_quadsphere_8k.jpg&quot;)
+
+  starglobe_material_name = &quot;starglobe_material&quot;
+
+  # Get the Domemaster3D Addons path for the obj mesh
+  StarglobeModelFile = getSourceImagesPath(&quot;starglobe_mesh.obj&quot;)
+  #StarglobeModelFile = getModelsPath(&quot;starglobe_mesh.obj&quot;)
+
+  # Remove the old starglobe model and texture
+  #Application.DeleteObj(&quot;starglobe_mesh_starglobe_mesh_polyStarglobe.Scene_Material.starglobe_material&quot;)
+
+  # Load the quads based starglobe sphere model
+  starglobe_mesh_file = str(Application.ObjImport(StarglobeModelFile, 1, 0, False, True, False, True))
+  # starglobe_mesh_starglobe_mesh_polyStarglobe1
+  print (&quot;Starglobe Mesh: &quot; + starglobe_mesh_file)
+
+  # Scale the starglobe model to 25 units
+  #Application.Scale(starglobe_mesh_file, 25, 25, 25, &quot;siAbsolute&quot;, &quot;siPivot&quot;, &quot;siObj&quot;, &quot;siXYZ&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, 0, &quot;&quot;)
+
+ # Add a mental ray mia_material_x shader
+  Application.CreateShaderFromProgID(&quot;mentalray.mia_material_x.1.0&quot;, &quot;Sources.Materials.DefaultLib.Scene_Material&quot;, starglobe_material_name)
+  Application.SIConnectShaderToCnxPoint(&quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.result&quot;, &quot;Sources.Materials.DefaultLib.Scene_Material.surface&quot;, False)
+
+  # Set the mia_material_x properties to be a matte material
+  Application.SetValue(&quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.refl_gloss&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.reflectivity&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.diffuse_roughness&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.diffuse_weight&quot;, 1, &quot;&quot;)
+
+  # Set the diffuse color to black
+  Application.SetValue(&quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.diffuse.red&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.diffuse.green&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.diffuse.blue&quot;, 0, &quot;&quot;)
+
+  # Make the mia material shader act like an incandescent/surface shader material
+  Application.SIApplyShaderToCnxPoint(&quot;Image&quot;, &quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.additional_color&quot;, &quot;&quot;, &quot;&quot;)
+  Application.SICreateImageClip(StarglobeMapFileTexture, &quot;&quot;, &quot;&quot;)
+  starglobeMapFileTexture_node = str(Application.SIConnectShaderToCnxPoint(&quot;Clips.starglobe_quadsphere_2k_jpg&quot;, &quot;Sources.Materials.DefaultLib.Scene_Material.Image.tex&quot;, False))
+  #starglobeMapFileTexture_node = str(Application.SIConnectShaderToCnxPoint(&quot;Clips.starglobe_quadsphere_8k_jpg&quot;, &quot;Sources.Materials.DefaultLib.Scene_Material.Image.tex&quot;, False))
+
+  #note cutout opacity could be used to make the night sky alpha channel transparent or solid
+
+  #Optional Light Linking
+
+  #Set the mia_material_x_passes shader to ignore the illumination from the lights in the scene with &quot;light linking&quot;
+  #starglobe_mia.mode 0 = Custom Linking
+  #starglobe_mia.mode 1 = Inclusive Linking
+  #starglobe_mia.mode 2 = Exclusive Linking
+  #starglobe_mia.mode 4 = Maya Linking
+
+  #Note: All scene lights are skipped by default with &quot;Exclusive linking&quot; mode 2
+  Application.SetValue(&quot;Sources.Materials.DefaultLib.Scene_Material.&quot;+starglobe_material_name+&quot;.mode&quot;, 2, &quot;&quot;)
+
+
+  #Set the views to textured
+  Application.SetDisplayMode(&quot;Camera&quot;, &quot;textured&quot;)
+
+
+# Create a starglobe
+createStarglobe()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="Wiki" bitmap="domeHelp" scriptengine="XSI.SIPython.1" tooltip="Wiki Help">
+               <scripttext>&lt;![CDATA[def openDomemasterWiki():
+  import webbrowser
+
+  # Domemaster Stereo Shader - Wiki Page
+  url = 'https://code.google.com/p/domemaster-stereo-shader/w/list'
+
+  # Open URL in new window, raising the window if possible.
+  webbrowser.open_new(url)
+
+# Open the Wiki page
+openDomemasterWiki()
+
+]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="0.5" bitmap="render_resolution512" scriptengine="XSI.SIPython.1" tooltip="Render 0.5K">
+               <scripttext>&lt;![CDATA[def setRenderRes512():
+  Application.SetValue(&quot;preferences.output_format.preset&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.ir_xres&quot;, 512, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.picture_ratio&quot;, 1, &quot;&quot;)
+
+# Change the output resolution
+setRenderRes512()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="1K" bitmap="render_resolution1k" scriptengine="XSI.SIPython.1" tooltip="Render 1K">
+               <scripttext>&lt;![CDATA[def setRenderRes1K():
+  Application.SetValue(&quot;preferences.output_format.preset&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.ir_xres&quot;, 1024, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.picture_ratio&quot;, 1, &quot;&quot;)
+
+# Change the output resolution
+setRenderRes1K()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="2k" bitmap="render_resolution2k" scriptengine="XSI.SIPython.1" tooltip="Render 2K">
+               <scripttext>&lt;![CDATA[def setRenderRes2K():
+  Application.SetValue(&quot;preferences.output_format.preset&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.ir_xres&quot;, 2048, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.picture_ratio&quot;, 1, &quot;&quot;)
+
+# Change the output resolution
+setRenderRes2K()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="4K" bitmap="render_resolution4k" scriptengine="XSI.SIPython.1" tooltip="Render 4K">
+               <scripttext>&lt;![CDATA[def setRenderRes4K():
+  Application.SetValue(&quot;preferences.output_format.preset&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.ir_xres&quot;, 4096, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.picture_ratio&quot;, 1, &quot;&quot;)
+
+# Change the output resolution
+setRenderRes4K()]]&gt;</scripttext>
+            </item>
+            <item type="scriptbutton" label="8K" bitmap="render_resolution8k" scriptengine="XSI.SIPython.1" tooltip="Render 8K">
+               <scripttext>&lt;![CDATA[def setRenderRes8K():
+  Application.SetValue(&quot;preferences.output_format.preset&quot;, 0, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.ir_xres&quot;, 8192, &quot;&quot;)
+  Application.SetValue(&quot;preferences.output_format.picture_ratio&quot;, 1, &quot;&quot;)
+
+# Change the output resolution
+setRenderRes8K()]]&gt;</scripttext>
+            </item>
+         </tab>
+      </tabs>
+   </shelf_view>
+</xsi_file>

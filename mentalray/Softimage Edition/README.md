@@ -1,5 +1,5 @@
 # Domemaster3D Lens Shader for Softimage #
-**Version 1.1 - January 2014**  
+**Version 1.4 - February 23, 2014**  
 Ported by Andrew Hazelden
 
 Email: [andrewhazelden@gmail.com](mailto:andrewhazelden@gmail.com)  
@@ -8,6 +8,7 @@ Web: [www.andrewhazelden.com](http://www.andrewhazelden.com)
 
 `DomeAFL_FOV_Stereo` shader created by Robert Ziche  
 [http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images](http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images)
+
 [http://code.google.com/p/domemaster-stereo-shader/](http://code.google.com/p/domemaster-stereo-shader/)
 
 
@@ -21,7 +22,30 @@ Domemaster3D Softimage Wiki
 
 The Domemaster Stereo lens shader is a custom mental ray shader that creates a stereoscopic 3D fisheye image. The lens shader provides advanced controls to optimize the viewing experience for stereoscopic dome renderings.
 
-![A screenshot of the Domemaster3D Softimage GUI](screenshots/domemaster3D_xsi_lens_shader.png)
+The Domemaster3D shader for softimage includes a new toolbar which automates the most common tasks.
+
+![Domemaster3D Softimage Toolbar](screenshots/domemaster-toolbar.png)
+
+The Softimage Domemaster3D toolbar has buttons for the following features: 
+
+- The **Stereo Rig** tool creates a standard Domemaster3D stereo camera rig
+- The **Dome Texture** tool creates a screen space file texture 
+- The **DomeAFL_FOV** tool creates a standard 2D domeAFL_FOV node + camera
+- The **DomeAFL_WxH** tool creates a standard 2D domeAFL_WxH node + camera 
+- The **LatLong tool** creates a 2D latlong_lens node + camera 
+- The **Starglobe tool** creates a mia_material_x_passes based starry background for your fulldome scenes.
+- The **Wiki Help** tool loads the Domemaster Stereo Shader Wiki page in your web browser. 
+- The **0.5k** button sets the render resolution to 512x512 pixels.
+- The **1k** button sets the render resolution to 1024x1024 pixels.
+- The **2k** button sets the render resolution to 2048x2048 pixels.
+- The **4k** button sets the render resolution to 4096x4096 pixels.
+- The **8k** button sets the render resolution to 8192x8192 pixels. 
+
+## Starglobe Screenshot ##
+
+The starglobe tool for Softimage makes it easy to add a starry night backdrop to your fulldome renderings. You can access the tool by opening the Domemaster3D toolbar.
+
+![Domemaster3D Softimage Toolbar](screenshots/domemaster3d-1.4-softimage-toolbar.png)
 
 ## Installing the Shader ##
 
@@ -90,6 +114,8 @@ Maps used for the various multipliers and tilt settings will have to be custom m
 
 Vertical Mode: Enable the vertical dome mode, which automatically adjust the head turn and adds a turn compensation for the upper and lower part of the dome. It's a simplified and optimized version of the Dome Tilt Compensation with a 90 degrees tilt. It is faster and easier to use.
 
+
+![A screenshot of the Domemaster3D Softimage GUI](screenshots/domemaster3D_xsi_lens_shader.png)
 
 
 ## Node connections ##
