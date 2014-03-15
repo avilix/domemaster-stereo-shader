@@ -1,5 +1,5 @@
 # Domemaster3D Lens Shader for Softimage #
-**Version 1.4 - February 23, 2014**  
+**Version 1.4 Beta 4 - March 4, 2014**  
 Ported by Andrew Hazelden
 
 Email: [andrewhazelden@gmail.com](mailto:andrewhazelden@gmail.com)  
@@ -8,7 +8,6 @@ Web: [www.andrewhazelden.com](http://www.andrewhazelden.com)
 
 `DomeAFL_FOV_Stereo` shader created by Robert Ziche  
 [http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images](http://fulldome.ning.com/forum/topics/stereoscopic-domemaster-images)
-
 [http://code.google.com/p/domemaster-stereo-shader/](http://code.google.com/p/domemaster-stereo-shader/)
 
 
@@ -28,18 +27,27 @@ The Domemaster3D shader for softimage includes a new toolbar which automates the
 
 The Softimage Domemaster3D toolbar has buttons for the following features: 
 
+- The **AutoMagic** tool creates a Domemaster3D fulldome stereo camera rig and a hemispherical yellow wireframe test scene 
 - The **Stereo Rig** tool creates a standard Domemaster3D stereo camera rig
 - The **Dome Texture** tool creates a screen space file texture 
-- The **DomeAFL_FOV** tool creates a standard 2D domeAFL_FOV node + camera
-- The **DomeAFL_WxH** tool creates a standard 2D domeAFL_WxH node + camera 
+- The **DomeAFL FOV** tool creates a standard 2D domeAFL FOV node + camera
+- The **DomeAFL WxH** tool creates a standard 2D domeAFL WxH node + camera 
 - The **LatLong tool** creates a 2D latlong_lens node + camera 
-- The **Starglobe tool** creates a mia_material_x_passes based starry background for your fulldome scenes.
+- The **Starglobe tool** creates a starry background for your fulldome scenes.
+- The **DomeGrid tool** creates a hemispherical yellow wireframe reference grid. 
 - The **Wiki Help** tool loads the Domemaster Stereo Shader Wiki page in your web browser. 
+- The **Version Info** tool shows the current version number for the Domemaster Stereo Shader. 
 - The **0.5k** button sets the render resolution to 512x512 pixels.
 - The **1k** button sets the render resolution to 1024x1024 pixels.
 - The **2k** button sets the render resolution to 2048x2048 pixels.
 - The **4k** button sets the render resolution to 4096x4096 pixels.
 - The **8k** button sets the render resolution to 8192x8192 pixels. 
+- The **8k** button sets the render resolution to 8192x8192 pixels. 
+- The **1x0.5K** button sets the render resolution to a latlong optimized 1024x512 pixels. 
+- The **2.x1K** button sets the render resolution to a latlong optimized 2048x1024 pixels. 
+- The **4x2K** button sets the render resolution to a latlong optimized 4096x2048 pixels. 
+- The **8x4K** button sets the render resolution to a latlong optimized 8192x4096 pixels. 
+- The **16x8K** button sets the render resolution to a latlong optimized 16384x8192 pixels. 
 
 ## Starglobe Screenshot ##
 
@@ -57,7 +65,13 @@ In the Install Add-On window next to the Filename "Select a File..." section cli
 
 In the file dialogue select the file `domemaster3D.xsiaddon`. This is the add-on package file that contains the Domemaster3D shader .dll and .spdl files. Click the "OK" Button.
 
-The files that are contained in the `domemaster3D.xsiaddon` package will be listed in the Install Add-On window. Click the "Install" button to load the Domemaster3D files. By default the files will be copied into the `C:\Users\<your user id>\Autodesk\Softimage_2013\Addons\domemaster3D` folder.
+The files that are contained in the `domemaster3D.xsiaddon` package will be listed in the Install Add-On window. Click the "Install" button to load the Domemaster3D files. By default the files will be copied into the Softimage Addons folder:
+
+Softimage 2013
+`C:\Users\<your user id>\Autodesk\Softimage_2013\Addons\domemaster3D`
+
+Softimage 2014
+`C:\Users\<your user id>\Autodesk\Softimage_2014\Addons\domemaster3D`
 
 Quit Softimage.
 
@@ -69,7 +83,6 @@ You should now have the following new lens shaders:
     `domeAFL_WxH`  
     `latlong_lens`  
     `rob_lookup_background`  
-
 
 ## How to add a Lens Shader in Softimage ##
 

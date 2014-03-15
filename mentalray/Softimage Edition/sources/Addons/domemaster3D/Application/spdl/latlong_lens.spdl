@@ -50,7 +50,6 @@ Defaults
 	}
 }
 
-
 Plugin = Shader
 {
 	FileName = "latlong_lens";

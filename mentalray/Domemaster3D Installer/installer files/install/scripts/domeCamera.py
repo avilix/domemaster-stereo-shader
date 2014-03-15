@@ -1,5 +1,5 @@
 """
-Domemaster3D Camera Setup Script V1.4 B10
+Domemaster3D Camera Setup Script V1.5 R1
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
 This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
@@ -7,6 +7,12 @@ This script makes it easy to start creating fulldome stereoscopic content in Aut
 ------------------------------------------------------------------------------------------------------------
 
 Version History
+
+Version V1.5 R1
+-------------------
+March 15, 2014
+
+Updated the update checker URL to use Google Code.
 
 Version 1.4 B10
 -------------------
@@ -288,8 +294,9 @@ def openDomemasterDownloads():
 	import webbrowser
 	
 	# Domemaster Stereo Shader - Download Page
-	url = 'https://code.google.com/p/domemaster-stereo-shader/downloads/list'
-	
+	#url = 'https://code.google.com/p/domemaster-stereo-shader/downloads/list'
+	url = 'https://drive.google.com/folderview?id=0ByIHtCd6oXO2ZDU1LXZZSHdMRzA#list'
+
 	# Open URL in new window, raising the window if possible.
 	webbrowser.open_new(url)
 	
