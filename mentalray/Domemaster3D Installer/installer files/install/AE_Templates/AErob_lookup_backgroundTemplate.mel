@@ -1,28 +1,32 @@
-//  Version 1.4 - Oct 6, 2013
-//
-//  Procedure Name:
-//	AErob_lookup_backgroundTemplate
-//
-//  Description:
-//	Creates the attribute editor controls for the rob_lookup_background shader
-//
-//  Version History
-//  -----------------
-//
-//	Version 1.4 - Oct 6, 2013 
-// Initial Release 
-//
-// Copied base AE template file from domeAFL_FOV_Stereo node
-//
-//  Added the dome controls
-//
-//	Author:
-//	Andrew Hazelden
-//
-//	Contact:
-//	andrew@andrewhazelden.com
-//
+/*
+  Version 1.5 - March 15, 2014
 
+  Procedure Name:
+  AErob_lookup_backgroundTemplate
+
+  Description:
+  Creates the attribute editor controls for the rob_lookup_background shader
+
+  Version History
+  -----------------
+
+  Version 1.5 - March 15, 2014
+
+
+  Version 1.4 - Oct 6, 2013 
+  Initial Release 
+
+  Copied base AE template file from domeAFL_FOV_Stereo node
+
+  Added the dome controls
+
+  Author:
+  Andrew Hazelden
+
+  Contact:
+  andrew@andrewhazelden.com
+
+*/
 
 //---------------------------------------------------------------------------------
 // New Dome Radius GUI Controls

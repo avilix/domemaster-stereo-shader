@@ -1,5 +1,5 @@
 """
-Domemaster3D Camera Setup Script V1.5 R1
+Domemaster3D Camera Setup Script V1.5
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
 This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
@@ -8,11 +8,14 @@ This script makes it easy to start creating fulldome stereoscopic content in Aut
 
 Version History
 
-Version V1.5 R1
--------------------
+Version 1.5
+-----------------
 March 15, 2014
 
-Updated the update checker URL to use Google Code.
+Updated the dome version "update" button URL to use Google Code.
+
+Changed the openGL viewport default focal length from 4 mm (160 degree FOV) to 18 mm (90 degree FOV)
+
 
 Version 1.4 B10
 -------------------
@@ -571,7 +574,11 @@ def createDomeAFL_FOV_Camera():
   # ---------------------------------------------------------------------
   # Setup the stereo rig camera attributes
   # ---------------------------------------------------------------------
-  cmds.setAttr( cameraShape+'.focalLength', 4 )
+  # 4 mm focal length = 160 degree FOV
+  #cmds.setAttr( cameraShape+'.focalLength', 4 )
+
+  # 18 mm focal length = 90 degree FOV
+  cmds.setAttr( cameraShape+'.focalLength', 18 )
  
   #Select the center camera domeAFL_FOV_Stereo node in the attribute editor
   #This will add the extra attributes to the camera
@@ -645,8 +652,11 @@ def createDomeAFL_WxH_Camera():
   # ---------------------------------------------------------------------
   # Setup the stereo rig camera attributes
   # ---------------------------------------------------------------------
-  cmds.setAttr( cameraShape+'.focalLength', 4 )
-  
+  # 4 mm focal length = 160 degree FOV
+  #cmds.setAttr( cameraShape+'.focalLength', 4 )
+
+  # 18 mm focal length = 90 degree FOV
+  cmds.setAttr( cameraShape+'.focalLength', 18 )
 
 
 """
@@ -706,8 +716,12 @@ def createLatLong_Camera():
   # ---------------------------------------------------------------------
   # Setup the stereo rig camera attributes
   # ---------------------------------------------------------------------
-  cmds.setAttr( cameraShape+'.focalLength', 4 )
-  
+  # 4 mm focal length = 160 degree FOV
+  #cmds.setAttr( cameraShape+'.focalLength', 4 )
+
+  # 18 mm focal length = 90 degree FOV
+  cmds.setAttr( cameraShape+'.focalLength', 18 )
+
 
 """
 Domemaster3D DomeGrid test background 
@@ -1022,6 +1036,32 @@ def createDomeGrid():
   
   #Connect the domeGrid dome radius control to the sphere's makeNurbCircle radius attribute:
   cmds.connectAttr( (baseNodeName+'.'+attrName), makeCurveObject[0]+'.radius', force=True)
+
+  #---------------------------------------------------------------------------  
+  #Add a Dome Height Spans control to the domeGrid's transform node
+  #---------------------------------------------------------------------------
+  attrName = 'Dome_Spans'
+
+  #Check if the attribute exists on the domeGrid node
+  #if(mel.attributeExists(attrName, baseNodeName) == 0):
+  cmds.addAttr(baseNodeName, longName=attrName, attributeType="double", min=4, max=120, hasSoftMaxValue=True, softMaxValue=40, defaultValue=12 , keyable=True)
+  print('Adding custom Attributes ' + baseNodeName + '.' + attrName)
+  
+  #Connect the domeGrid dome radius control to the sphere's makeNurbCircle sections attribute:
+  cmds.connectAttr( (baseNodeName+'.'+attrName), makeCurveObject[0]+'.sections', force=True)
+    
+  #---------------------------------------------------------------------------  
+  #Add a Dome Width Sections control to the domeGrid's transform node
+  #---------------------------------------------------------------------------
+  attrName = 'Dome_Sections'
+
+  #Check if the attribute exists on the domeGrid node
+  #if(mel.attributeExists(attrName, baseNodeName) == 0):
+  cmds.addAttr(baseNodeName, longName=attrName, attributeType="double", min=4, max=240, hasSoftMaxValue=True, softMaxValue=120, defaultValue=42 , keyable=True)
+  print('Adding custom Attributes ' + baseNodeName + '.' + attrName)
+  
+  #Connect the domeGrid dome radius control to the sphere's revolve sections attribute:
+  cmds.connectAttr( (baseNodeName+'.'+attrName), makeRevolveNodeName+'.sections', force=True)
   
   #---------------------------------------------------------------------------
   #Add a Display Mode control to the domeGrid's transform node

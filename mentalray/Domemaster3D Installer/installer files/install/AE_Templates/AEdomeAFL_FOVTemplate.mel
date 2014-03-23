@@ -1,37 +1,42 @@
-//  Version 1.4 Build 4 - Dec 6, 2013
-//
-// Procedure Name:
-//	AEdomeAFL_FOVTemplate
-//  
-// Description:
-//	Creates the attribute editor controls for the domeAFL_FOV shader
-//
-// Version History
-// -----------------
-//
-//	Version 1.4 - Build 4
-// -----------------------
-// Dec 6, 2013 
-//
-// Changed the default for the domeAFL_FOV node's preview shape to wireframe.
-//
-//	Version 1.4 - Build 3
-// -----------------------
-// Oct 6, 2013 
-// Initial Release 
-//
-// Copied base AE template file from domeAFL_FOV_Stereo node
-//
-// Added new dome controls for FOV Preview Controls
-// The settings are stored as extra attributes on the lens shader node.
-//
-// Author:
-//	Andrew Hazelden
-//
-//	Contact:
-//	andrew@andrewhazelden.com
-//
+/*
+  Version 1.5 - March 15, 2014
 
+  Procedure Name:
+
+  AEdomeAFL_FOVTemplate
+
+  Description:
+  Creates the attribute editor controls for the domeAFL_FOV shader
+
+  Version History
+  -----------------
+
+  Version 1.5 - March 15, 2014
+  ------------------------------------
+
+  Version 1.4 - Build 4
+  -----------------------
+  Dec 6, 2013 
+
+  Changed the default for the domeAFL_FOV node's preview shape to wireframe.
+
+  Version 1.4 - Build 3
+  -----------------------
+  Oct 6, 2013 
+  Initial Release 
+
+  Copied base AE template file from domeAFL_FOV_Stereo node
+
+  Added new dome controls for FOV Preview Controls
+  The settings are stored as extra attributes on the lens shader node.
+
+  Author:
+  Andrew Hazelden
+
+  Contact:
+  andrew@andrewhazelden.com
+
+*/
 
 //---------------------------------------------------------------------------------
 // New Dome Radius GUI Controls

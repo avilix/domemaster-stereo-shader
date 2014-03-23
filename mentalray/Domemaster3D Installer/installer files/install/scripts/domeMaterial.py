@@ -1,5 +1,5 @@
 """
-DomeAFL Mental Ray MIA Material X Passes V1.4
+DomeAFL Mental Ray MIA Material X Passes V1.5
 Created by Andrew Hazelden  andrew@andrewhazelden.com
 
 This script makes it easy to start creating fulldome content in Autodesk Maya.
@@ -14,6 +14,12 @@ You can set the file textures to an empty path if you don't want a default textu
 
 Version History
 ----------------
+
+Version 1.5
+----------------
+March 15, 2014
+
+Updated DomeViewer view reset, and model scale setting
 
 
 Version 1.4 Beta 10
@@ -559,7 +565,24 @@ def createDomeViewerTexture( meshName, isGrid ):
   return domeViewer_maya_tex
   
 
-#Syntax: createDomeViewerCamera( 'viewerCamera', 'domeViewer', 'domeViewerGrid' )
+
+# Move the domeViewer camera back to it's default starting angle
+def resetDomeViewerCameraAngle():
+  import maya.cmds as cmds
+
+  viewerCameraName = 'ViewerCamera1'
+
+  if cmds.objExists(viewerCameraName):
+      #Reset the camera position
+      cmds.setAttr(viewerCameraName+".rx", 0)
+      cmds.setAttr(viewerCameraName+".ry", 0)
+      cmds.setAttr(viewerCameraName+".rz", 0)
+      cmds.setAttr(viewerCameraName+".tx", 0)
+      cmds.setAttr(viewerCameraName+".ty", 0)
+      cmds.setAttr(viewerCameraName+".tz", 0)
+
+
+#Syntax: createDomeViewerCamera( 'ViewerCamera', 'domeViewer', 'domeViewerGrid' )
 def createDomeViewerCamera( viewerCameraName, meshName, gridMeshName ):
   import os
   import math
@@ -786,16 +809,8 @@ def createDomeViewer():
     viewerFlipScale = 1
   
   #Create the viewer mesh
-  if ( currentPanoFormat == 14 ):
-    # The starglobe mesh is 23.8x larger than the standard meshes
-    #viewerMeshScale = 12.6 * viewerFlipScale;
-    viewerMeshScale = 12.6
-    createDomeViewerMesh( meshName, meshFileName, domeTiltAngle, viewerMeshScale,  viewerFlipScale)
-  else:
-    # The standard meshes are .042 X smaller than the starglobe mesh
-    #viewerMeshScale = 300 * viewerFlipScale;
-    viewerMeshScale = 300
-    createDomeViewerMesh( meshName, meshFileName, domeTiltAngle, viewerMeshScale, viewerFlipScale )
+  viewerMeshScale = 300
+  createDomeViewerMesh( meshName, meshFileName, domeTiltAngle, viewerMeshScale, viewerFlipScale )
 
   #Create the surface material
   viewerTextureNode = createDomeViewerTexture( meshName, False )

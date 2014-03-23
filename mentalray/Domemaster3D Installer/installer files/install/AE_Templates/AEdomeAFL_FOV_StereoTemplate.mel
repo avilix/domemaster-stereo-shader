@@ -1,38 +1,44 @@
-//  Version 1.4 Build 3 -  Dec 6, 2013
-//
-//  Procedure Name:
-//	AEdomeAFL_FOV_StereoTemplate
-//
-// Description:
-// Creates the attribute editor controls for the domeAFL_FOV_Stereo shader
-//
-// Version History
-// -----------------
-//
-//	Version 1.4 - Build 4
-// -----------------------
-// Dec 6, 2013 
-//
-// Changed the default for the domeAFL_FOV_Stereo node's preview shape to wireframe.
-//
-//	Version 1.4 Build 2 
-// --------------------
-// Oct 6, 2013
-// Added new dome controls for zero parallax and save viewing volumes
-// The settings are stored as extra attributes on the lens shader node.
-//
-//	Version 1.0
-// --------------------
-// Oct 30 , 2011
-// Initial Release
-//
-//	Author:
-//	Andrew Hazelden
-//
-//	Contact:
-//	andrew@andrewhazelden.com
-//
+/*
+  Version 1.5 - March 15, 2014
 
+  Procedure Name:
+  AEdomeAFL_FOV_StereoTemplate
+
+  Description:
+  Creates the attribute editor controls for the domeAFL_FOV_Stereo shader
+
+  Version History
+  -----------------
+
+  Version 1.5
+  ------------------
+  March 15, 2014
+
+
+  Version 1.4 - Build 4
+  -----------------------
+  Dec 6, 2013 
+
+  Changed the default for the domeAFL_FOV_Stereo node's preview shape to wireframe.
+
+  Version 1.4 Build 2 
+  --------------------
+  Oct 6, 2013
+  Added new dome controls for zero parallax and save viewing volumes
+  The settings are stored as extra attributes on the lens shader node.
+
+  Version 1.0
+  --------------------
+  Oct 30 , 2011
+  Initial Release
+
+  Author:
+  Andrew Hazelden
+
+  Contact:
+  andrew@andrewhazelden.com
+//
+*/
 
 //This creates the Dome_Radius non mappable sliders in the attribute editor
 global proc AEdomeAFL_FOV_Stereo_RadiusNew( string $attrName )

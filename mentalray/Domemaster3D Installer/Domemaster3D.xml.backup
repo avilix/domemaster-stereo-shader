@@ -1,7 +1,7 @@
 <project>
     <shortName>Domemaster3D</shortName>
     <fullName>Domemaster3D Shader</fullName>
-    <version>1.4-Beta10</version>
+    <version>1.5</version>
     <readmeFile>Domemaster_x64_readme.txt</readmeFile>
     <leftImage>vortex_sidebar.png</leftImage>
     <splashImage>splash_screen.png</splashImage>
@@ -200,7 +200,7 @@
                             <origin>installer files/install/sourceimages/moon_color_quadsphere_4k.jpg</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>latitude_longitude.jpg</origin>
+                            <origin>installer files/install/sourceimages/latitude_longitude.jpg</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>installer files/install/sourceimages/starglobe_mesh.ma</origin>
@@ -379,7 +379,7 @@
                             <folderList>
                                 <folder>
                                     <description>Maya Icons</description>
-                                    <destination>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/icons</destination>
+                                    <destination>${Maya_2015_Mac_Icons_Dir}</destination>
                                     <name>icons_mac</name>
                                     <platforms>osx</platforms>
                                     <actionList>
@@ -522,7 +522,7 @@
                                 </folder>
                                 <folder>
                                     <description>Maya Icons</description>
-                                    <destination>${windows_folder_personal}\maya\2015-x64\prefs\icons</destination>
+                                    <destination>${Maya_2015_Win_Icons_Dir}</destination>
                                     <name>icons_win</name>
                                     <platforms>windows</platforms>
                                     <actionList>
@@ -671,7 +671,7 @@
                             <folderList>
                                 <folder>
                                     <description>Maya Scripts</description>
-                                    <destination>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/scripts</destination>
+                                    <destination>${Maya_2015_Mac_Scripts_Dir}</destination>
                                     <name>scripts</name>
                                     <platforms>osx</platforms>
                                     <actionList>
@@ -736,7 +736,7 @@
                                 </folder>
                                 <folder>
                                     <description>Maya Scripts</description>
-                                    <destination>${windows_folder_personal}\maya\2015-x64\prefs\scripts</destination>
+                                    <destination>${Maya_2015_Win_Scripts_Dir}</destination>
                                     <name>scripts_win</name>
                                     <platforms>windows</platforms>
                                     <actionList>
@@ -810,7 +810,7 @@
                             <folderList>
                                 <folder>
                                     <description>Maya Shelves</description>
-                                    <destination>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/shelves</destination>
+                                    <destination>${Maya_2015_Mac_Shelves_Dir}</destination>
                                     <name>shelves_mac</name>
                                     <platforms>osx</platforms>
                                     <actionList>
@@ -827,7 +827,7 @@
                                 </folder>
                                 <folder>
                                     <description>Maya Shelves</description>
-                                    <destination>${windows_folder_personal}\maya\2015-x64\prefs\shelves</destination>
+                                    <destination>${Maya_2015_Win_Shelves_Dir}</destination>
                                     <name>shelves_win</name>
                                     <platforms>windows</platforms>
                                     <actionList>
@@ -853,7 +853,7 @@
                             <folderList>
                                 <folder>
                                     <description>mental ray shaders</description>
-                                    <destination>/Applications/Autodesk/mentalrayForMaya2015/shaders</destination>
+                                    <destination>${Maya_2015_Mac_Shaders_Dir}</destination>
                                     <name>shaders_mac</name>
                                     <platforms>osx</platforms>
                                     <actionList>
@@ -873,7 +873,7 @@
                                 </folder>
                                 <folder>
                                     <description>mental ray shaders</description>
-                                    <destination>${windows_folder_program_files}\Autodesk\mentalrayForMaya2015\shaders</destination>
+                                    <destination>${Maya_2015_Win_Shaders_Dir}</destination>
                                     <name>shaders_win</name>
                                     <platforms>windows</platforms>
                                     <distributionFileList>
@@ -896,7 +896,7 @@
                             <folderList>
                                 <folder>
                                     <description>mental ray include</description>
-                                    <destination>/Applications/Autodesk/mentalrayForMaya2015/shaders/include</destination>
+                                    <destination>${Maya_2015_Mac_Include_Dir}</destination>
                                     <name>include_mac</name>
                                     <platforms>osx</platforms>
                                     <actionList>
@@ -916,7 +916,7 @@
                                 </folder>
                                 <folder>
                                     <description>mental ray include</description>
-                                    <destination>${windows_folder_program_files}\Autodesk\mentalrayForMaya2015\shaders\include</destination>
+                                    <destination>${Maya_2015_Win_Include_Dir}</destination>
                                     <name>include_win</name>
                                     <platforms>windows</platforms>
                                     <distributionFileList>
@@ -939,7 +939,7 @@
                             <folderList>
                                 <folder>
                                     <description>AETemplate</description>
-                                    <destination>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/scripts</destination>
+                                    <destination>${Maya_2015_Mac_Scripts_Dir}</destination>
                                     <name>scripts_mac</name>
                                     <platforms>osx</platforms>
                                     <actionList>
@@ -961,11 +961,14 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
                                     <description>AETemplate</description>
-                                    <destination>${windows_folder_personal}\maya\2015-x64\prefs\scripts</destination>
+                                    <destination>${Maya_2015_Win_Scripts_Dir}</destination>
                                     <name>scripts_win</name>
                                     <platforms>windows</platforms>
                                     <actionList>
@@ -987,11 +990,206 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                             </folderList>
                         </component>
                     </componentList>
+                    <parameterList>
+                        <directoryParameter>
+                            <name>Maya_2015_Win_Shaders_Dir</name>
+                            <title>Maya 2015 Mental Ray Shaders</title>
+                            <description>Mental Ray Shaders Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>${windows_folder_program_files}\Autodesk\mentalrayForMaya2015\shaders</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015_win_shaders</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>windows</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Maya_2015_Mac_Shaders_Dir</name>
+                            <title>Maya 2015 Mental Ray Shaders</title>
+                            <description>Mental Ray Shaders Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>/Applications/Autodesk/mentalrayForMaya2015/shaders</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015_mac_shaders</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>osx</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Maya_2015_Win_Include_Dir</name>
+                            <title>Maya 2015 Mental Ray Include</title>
+                            <description>Mental Ray Include Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>${windows_folder_program_files}\Autodesk\mentalrayForMaya2015\shaders\include</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015_win_include</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>windows</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Maya_2015_Mac_Include_Dir</name>
+                            <title>Maya 2015 Mental Ray Include</title>
+                            <description>Mental Ray Include Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>/Applications/Autodesk/mentalrayForMaya2015/shaders/include</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015__mac_include</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>osx</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Maya_2015_Win_Shelves_Dir</name>
+                            <title>Maya 2015 Shelves</title>
+                            <description>Maya 2015 Shelves Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>${windows_folder_personal}\maya\2015-x64\prefs\shelves</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015_win_include</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>windows</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Maya_2015_Mac_Shelves_Dir</name>
+                            <title>Maya 2015 Shelves</title>
+                            <description>Maya 2015 Shelves Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/shelves</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015__mac_include</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>osx</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Maya_2015_Win_Scripts_Dir</name>
+                            <title>Maya 2015 Scripts</title>
+                            <description>Maya 2015 Scripts Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>${windows_folder_personal}\maya\2015-x64\prefs\scripts</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015_win_include</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>windows</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Maya_2015_Mac_Scripts_Dir</name>
+                            <title>Maya 2015 Scripts</title>
+                            <description>Maya 2015 Scripts Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/scripts</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015__mac_include</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>osx</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Maya_2015_Win_Icons_Dir</name>
+                            <title>Maya 2015 Icons</title>
+                            <description>Maya 2015 Icons Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>${windows_folder_personal}\maya\2015-x64\prefs\icons</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015_win_include</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>windows</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                        <directoryParameter>
+                            <name>Maya_2015_Mac_Icons_Dir</name>
+                            <title>Maya 2015 Icons</title>
+                            <description>Maya 2015 Icons Directory</description>
+                            <explanation>Please specify the directory requested</explanation>
+                            <value></value>
+                            <default>~/Library/Preferences/Autodesk/maya/2015-x64/prefs/scripts</default>
+                            <allowEmptyValue>0</allowEmptyValue>
+                            <cliOptionName>maya2015__mac_include</cliOptionName>
+                            <insertAfter>welcome_label</insertAfter>
+                            <mustBeWritable>1</mustBeWritable>
+                            <mustExist>0</mustExist>
+                            <width>40</width>
+                            <ruleList>
+                                <platformTest>
+                                    <type>osx</type>
+                                </platformTest>
+                            </ruleList>
+                        </directoryParameter>
+                    </parameterList>
                 </componentGroup>
 
 	<!-- Maya 2014 Install files -->
@@ -1744,6 +1942,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/lib/Linux 64-bit LIB/domeAFL_FOV_Stereo.so</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/lib/Linux 64-bit LIB/latlong_lens.so</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -1856,6 +2057,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -1882,6 +2086,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -1907,6 +2114,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -2518,6 +2728,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -2543,6 +2756,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -3324,6 +3540,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -3349,6 +3568,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -3963,6 +4185,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -3988,6 +4213,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -4599,6 +4827,9 @@
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
                                         </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
+                                        </distributionFile>
                                     </distributionFileList>
                                 </folder>
                                 <folder>
@@ -4624,6 +4855,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>
@@ -4918,6 +5152,9 @@
                                         </distributionFile>
                                         <distributionFile>
                                             <origin>installer files/install/AE_Templates/AErob_lookup_backgroundTemplate.mel</origin>
+                                        </distributionFile>
+                                        <distributionFile>
+                                            <origin>installer files/install/AE_Templates/AElatlong_lensTemplate.mel</origin>
                                         </distributionFile>
                                     </distributionFileList>
                                 </folder>

@@ -1,17 +1,25 @@
 """
- Domemaster3D Fulldome Stereo Rig V1.4 B9
- Updated Oct 26, 2013
+ Domemaster3D Fulldome Stereo Rig V1.5
+ Updated March 15, 2014
  by Andrew Hazelden  andrew@andrewhazelden.com
  -----------------------------------------------------------------------
- 
+
  This script makes it easy to start creating fulldome stereoscopic content in Autodesk Maya.
  
+ New in Version 1.5
+ ------------------------
+ Changed the openGL viewport default focal length from 4 mm (160 degree FOV) to 18 mm (90 degree FOV)
+
+
+ Stereo Rig Script Notes
+ --------------------------
  This rig is based upon the example file: stereoCameraDefaultRig.py
- 
+
  The original file can be located at:
  C:\Program Files\Autodesk\Maya2014\Python\Lib\site-packages\maya\app\stereo\stereoCameraDefaultRig.py
  -----------------------------------------------------------------------
 """
+
 def getMayaVersionDome():
   import maya.mel as mel
   import maya.cmds as cmds
@@ -421,7 +429,11 @@ def createRig(basename='DomeStereoCamera'):
   #---------------------------------------------------------------------------
   # Custom Domemaster3D Setup code
   #---------------------------------------------------------------------------
-  cmds.setAttr( centerCam + '.focalLength', 4 )
+  # 4 mm focal length = 160 degree FOV
+  #cmds.setAttr( centerCam + '.focalLength', 4 )
+
+  # 18 mm focal length = 90 degree FOV
+  cmds.setAttr( centerCam + '.focalLength', 18 )
   
   #cmds.setAttr( centerCam + '.stereo', 0 )
   #cmds.setAttr( centerCam + '.zeroParallax', 0.1 )

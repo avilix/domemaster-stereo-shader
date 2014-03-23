@@ -1,27 +1,30 @@
-//  Version 1.4 - Dec 18, 2013
-//
-//  Procedure Name:
-//	AElatlong_lensTemplate
-//
-//  Description:
-//	Creates the attribute editor controls for the latlong_lens shader
-//
-//  Version History
-//  -----------------
-//
-//	Version 1.4 - Dec 18, 2013 
-// Initial Release 
-//
-// Copied base AE template file from domeAFL_FOV_Stereo node
-//
-//
-//	Author:
-//	Andrew Hazelden
-//
-//	Contact:
-//	andrew@andrewhazelden.com
-//
+/*
+  Version 1.5 - March 15, 2014
 
+  Procedure Name:
+  AElatlong_lensTemplate
+
+  Description:
+  Creates the attribute editor controls for the latlong_lens shader
+
+  Version History
+  -----------------
+
+  Version 1.5 - March 15, 2014
+
+  Version 1.4 - Dec 18, 2013 
+  Initial Release 
+
+  Copied base AE template file from domeAFL_FOV_Stereo node
+
+
+  Author:
+  Andrew Hazelden
+
+  Contact:
+  andrew@andrewhazelden.com
+
+  */
 
 //---------------------------------------------------------------------------------
 // New GUI Controls

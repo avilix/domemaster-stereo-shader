@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.5 R1 - March 15, 2014
+Version 1.5 - March 15, 2014
 
 Maintained by Andrew Hazelden
 andrew@andrewhazelden.com
@@ -10,20 +10,28 @@ The Domemaster Stereo lens shader is a custom mental ray shader that creates a s
 
 The shader collection also supports fulldome 2D rendering using either the DomeAFL_FOV shader, the DomeAFL_WxH shader, or the "center" camera option in the DomeAFL_FOV_Stereo shader. Latitude Longitude rendering (also known as spherical or equirectangular output) is supported with the help of the latlong_lens shader.
 
-Version 1.5 Release 1
--------------------------
+Version 1.5
+--------------
+March 15, 2014
+
+Updated the Domemaster3D installer to provide custom path selections for Maya installations.
+
 Updated the DomeViewer mesh UV layouts
   Angular Fisheye 360 Degree
   Fulldome 180 Degree
   Latitude Longitude / Equirectangular
 
-Changed the DomeViewer file selector filter to improve QuickTime and AVI support.
+Changed the DomeViewer file selector filter to improve QuickTime and AVI move selection.
 
-Updated the Maya Domemaster3D Shelf's Version Info tool. The "Update" button URL now points to Google Drive.
+Updated the DomeGrid Attribute Editor Window UI
+  Added domeGrid controls to change number of sections and spans on the dome shape.
 
+Updated the Maya Domemaster3D Shelf's Version tool. The "Update" button URL now points to Google Drive.
+
+Changed the openGL viewport default focal length from 4 mm (160 degree FOV) to 18 mm (90 degree FOV)
 
 Version 1.4 Beta 10 Changes
--------------------------------
+---------------------------------
 Dec 27, 2013
 
 Added the latlong_lens shader for rendering spherical/equirectangular imagery.
@@ -33,7 +41,7 @@ DomeViewer
 
 
 Version 1.4 Beta 9 Changes
-------------------------------
+--------------------------------
 Dec 9, 2013
 
 3DS Max Changes
@@ -44,7 +52,7 @@ C:\Program Files\Domemaster3D\sourceimages
 Added install option for 3DS Max 2015 (beta) support
 
 Maya Changes
-----------------
+-----------------
 Added an install option for Maya 2015 (beta) support
 
 Updated the Galaxy Creator, Starglobe, DomeText, and DomeViewer window's so the window settings are restored from the last setting. This allows the docked vs floating, and docked left/right window settings to be remembered.
@@ -76,11 +84,11 @@ Improved the Mac OS X DomeText font scanning. Fonts that are installed in the /L
 
 
 Version 1.4 Beta 8 Changes
-------------------------------
+--------------------------------
 Nov 20, 2013
 
 Maya Changes
-----------------
+-----------------
 Added a set of Maya shelf tools to change the render resolution.
 
 Added a 16x8k equirectangular starglobe texture "starglobe_equirect_reversed_16x8k.jpg" to the sourceimages folder. This texture has been reversed for the view "inside" the night sky environment.
@@ -92,7 +100,7 @@ http://www.imagemagick.org/script/binary-releases.php#macosx
 
 
 Version 1.4 Beta 7 Changes
-------------------------------
+--------------------------------
 Nov 8, 2013
 
 Maya Changes
@@ -102,16 +110,16 @@ Added Maya shelf tool to force the Mental Ray plugin to load. This is useful if 
 Improved the DomeViewer cylindrical, mirrorball, and angular360 degree meshes.
 
 Maya + 3DS Max
--------------------
+--------------------
 Updated the Starglobe texture maps. The previous version had the starglobe 2K and 8K quadsphere texture direction inverted.
 
 
 Version 1.4 Beta 6 Changes
-------------------------------
+--------------------------------
 Oct 27, 2013
 
 Maya Changes
-----------------
+-----------------
 
 DomeViewer
   Added cylindrical panorama support to the domeViewer
@@ -135,17 +143,17 @@ Improved Maya 2010 support
   Updated the Maya Shelf files.
 
 Version 1.4 Beta 5 Change
------------------------------
+------------------------------
 Oct 24, 2013
 
 Maya Changes
-----------------
+------------------
 
 Updated the domeAFL_FOV_Stereo camera preview code to fix a bug that stopped batch rendering from completing with the new domeRender.mel script.
 
 
 Version 1.4 Beta 4 Changes
-------------------------------
+--------------------------------
 Oct 21, 2013
 
 Maya Changes

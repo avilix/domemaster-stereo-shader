@@ -1,5 +1,5 @@
 /*
-  domeRadius V1.4 Build 1
+  domeRadius V1.5
   by Andrew Hazelden
 
   This is a Maya MEL script for creating the preview shape for the DomeAFL_FOV
@@ -11,12 +11,15 @@
   Version History
   ----------------
 
+  Version 1.5 - March 15, 2014
+  ------------------------------------
+
   Version 1.4 - Dec 6, 2013
-  ------------------------------
+  ----------------------------
   Updated the domeAFL_FOV_Stereo rig's preview shape to default to the wireframe display mode
 
   Version 1 -  Oct 6, 2013
-  ------------------------------
+  ---------------------------
   Initial Creation
 
   To use the domeRadius MEL script run the following MEL commands:

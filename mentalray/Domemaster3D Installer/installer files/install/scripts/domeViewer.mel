@@ -8,10 +8,11 @@
   
   Version 1.5
   -------------
-  March 15, 2013
+  March 15, 2014
 
   Updated file dialog list filter for .exr and .avi files.
-
+  Updated the lat long, Fulldome, and Angular 360 degree meshes for better UV mapping at the poles
+  Added a time control for adjusting the frame rate.
 
   Version 1.4 Beta 10
   --------------------
@@ -530,7 +531,8 @@ global proc domeViewer(){
         -field true
         -minValue 2.06 -maxValue 165
         -fieldMinValue 2.06  -fieldMaxValue 165
-        -value 100
+        //-value 100
+        -value 90
         -annotation 
         "Adjust the panoramic camera's field of view in degrees."
         sliderDomeViewerFOV;
@@ -563,7 +565,49 @@ global proc domeViewer(){
       columnLayout 
         //-width $domeWindowWidth
         -adjustableColumn true;  
-        
+          
+        optionMenuGrp
+          -label "Time" 
+         -annotation "Select the playback frame rate for the scene."
+          menuDomeViewerFrameRate;
+          
+        menuItem -label "15 fps";
+        menuItem -label "Film (24 fps)";
+        menuItem -label "PAL (25 fps)";
+        menuItem -label "NTSC (30 fps)";
+        menuItem -label "Show (48 fps)";
+        menuItem -label "PAL Field (50 fps)";
+        menuItem -label "NTSC Field (60 fps)";
+        menuItem -label "milliseconds";
+        menuItem -label "seconds";
+        menuItem -label "minutes";
+        menuItem -label "hours";
+        menuItem -label "2 fps";
+        menuItem -label "3 fps";
+        menuItem -label "4 fps";
+        menuItem -label "5 fps";
+        menuItem -label "6 fps";
+        menuItem -label "8 fps";
+        menuItem -label "10 fps";
+        menuItem -label "12 fps";
+        menuItem -label "16 fps";
+        menuItem -label "20 fps";
+        menuItem -label "40 fps";
+        menuItem -label "75 fps";
+        menuItem -label "80 fps";
+        menuItem -label "100 fps";
+        menuItem -label "120 fps";
+        menuItem -label "125 fps";
+
+        // Preselect the first option menu
+        // Todo :
+        // Read the current value using "optionVar -query workingUnitTimeDefault;"
+        optionMenuGrp 
+          -edit
+          -select 2
+          menuDomeViewerFrameRate;
+
+
         rowLayout 
           -numberOfColumns 2
           -adjustableColumn 2
@@ -685,46 +729,55 @@ global proc domeViewer(){
   -borderStyle "etchedIn";
 
    rowLayout 
-    -numberOfColumns 6
+    -numberOfColumns 7
     ;
-              
-      iconTextButton 
+    
+      iconTextButton
         -style "iconAndTextVertical"
         -image1 "roll.png" 
         -label "Roll"
         -command "setToolTo rollContext;";  
         
-      iconTextButton 
+      iconTextButton
         -style "iconAndTextVertical"
         -image1 "tumble.png" 
         -label "Tumble"
         -command "TumbleTool";
         
-      iconTextButton 
+      iconTextButton
         -style "iconAndTextVertical"
         -image1 "boxZoom.png" 
         -label "Zoom"
         -command "ZoomTool";
 
-      iconTextButton 
+      iconTextButton
         -style "iconAndTextVertical"
         -image1 "track.png" 
         -label "Track"
         -command "TrackTool";
         
-      iconTextButton 
+      iconTextButton
         -style "iconAndTextVertical"
         -image1 "dolly.png" 
         -label "Dolly"
         -command "DollyTool";
-      
-       iconTextButton 
+
+      iconTextButton
+        -style "iconAndTextVertical"
+        -image1 "cameraAim.png" 
+        -label "Reset"
+        -annotation "Reset the DomeViewer camera to the default view angle."
+        -command "resetDomeViewerCamera()";
+
+      iconTextButton
         -style "iconAndTextVertical"
         -image1 "aselect.png" 
         -label "Deselect"
+        -annotation "Deselect the objects in the scene."
         -command "select -cl;setToolTo selectSuperContext";
-        
+
      setParent ..;
+
    setParent ..;
 
   //----------------------------------------------------------------------
@@ -843,5 +896,17 @@ global proc createDomeViewer(){
   //setFocalLengthVisibility(1);
 
 }
+
+
+
+global proc resetDomeViewerCamera(){
+
+  //Move the camera back to the default viewing angle
+  python("import domeMaterial");
+  python("reload(domeMaterial)");
+  python("domeMaterial.resetDomeViewerCameraAngle()");
+
+}
+
 
 

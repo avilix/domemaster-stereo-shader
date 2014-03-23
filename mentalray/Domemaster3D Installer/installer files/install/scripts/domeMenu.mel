@@ -1,6 +1,6 @@
 /*
 Create the Domemaster3D Main Menu in the Rendering menu set
-Dec 18, 2013 v1.4 Beta 10
+Version 1.5 - March 15, 2014
 ------------------------------------------------------------------------------
 
 Notes:
@@ -241,10 +241,7 @@ global proc createDomemaster3DMenu() {
   menuItem 
     -label "Create DomeText" 
     -command "source \"domeText.mel\";domeText();";
-  menuItem 
-    -label "Create DomeViewer" 
-    -command "source \"domeViewer.mel\";\ndomeViewer();"; 
- 
+    
   menuItem -divider true;
   
   menuItem 
@@ -259,6 +256,7 @@ global proc createDomemaster3DMenu() {
   menuItem 
     -label "Domemaster3D Version Info" 
     -command "source \"domeVersion.mel\";domeVersion();";
+
   menuItem 
     -label "Domemaster3D Wiki Help" 
     -command "python(\"import domeCamera\\nreload(domeCamera)\\ndomeCamera.openDomemasterWiki()\");";

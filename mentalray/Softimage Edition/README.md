@@ -1,5 +1,5 @@
 # Domemaster3D Lens Shader for Softimage #
-**Version 1.4 Beta 4 - March 4, 2014**  
+**Version 1.4 Beta 4 - March 23, 2014**  
 Ported by Andrew Hazelden
 
 Email: [andrewhazelden@gmail.com](mailto:andrewhazelden@gmail.com)  
@@ -35,6 +35,7 @@ The Softimage Domemaster3D toolbar has buttons for the following features:
 - The **LatLong tool** creates a 2D latlong_lens node + camera 
 - The **Starglobe tool** creates a starry background for your fulldome scenes.
 - The **DomeGrid tool** creates a hemispherical yellow wireframe reference grid. 
+- The **DomeViewer tool** creates an immersive fulldome viewer. 
 - The **Wiki Help** tool loads the Domemaster Stereo Shader Wiki page in your web browser. 
 - The **Version Info** tool shows the current version number for the Domemaster Stereo Shader. 
 - The **0.5k** button sets the render resolution to 512x512 pixels.
@@ -55,6 +56,13 @@ The starglobe tool for Softimage makes it easy to add a starry night backdrop to
 
 ![Domemaster3D Softimage Toolbar](screenshots/domemaster3d-1.4-softimage-toolbar.png)
 
+## DomeViewer Screenshot ##
+
+The DomeViewer tool allows you to preview a fulldome angular fisheye image in Softimage.
+
+![Domemaster3D DomeViewer Tool](screenshots/domeviewer_xsi.png)
+
+domeviewer_xsi.png
 ## Installing the Shader ##
 
 Open Softimage.

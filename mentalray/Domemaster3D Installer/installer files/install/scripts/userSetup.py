@@ -1,6 +1,6 @@
 """
-Domemaster3D Startup Code V1.4 Beta 6 Build 1
-October 26, 2013
+Domemaster3D Startup Code Version 1.5
+March 15, 2014
 by Andrew Hazelden
 
 Maya code tip on detecting Maya Batch mode from Michael Scarpa's blog post "MEL Sillyness":

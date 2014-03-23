@@ -1,5 +1,5 @@
 Domemaster3D Stereo Lens Shader for Maya x64 and 3DS Max x64
-Version 1.4 B10 - Dec 27, 2013
+Version 1.5 - March 15, 2014
 
 About This Shader
 ---------------------
@@ -96,6 +96,24 @@ Martin Watt for writing the original galaxies.mel script.
 
 Version History
 -----------------
+
+Version 1.5
+--------------
+March 15, 2014
+
+Updated the DomeViewer mesh UV layouts
+  Angular Fisheye 360 Degree
+  Fulldome 180 Degree
+  Latitude Longitude / Equirectangular
+
+Changed the DomeViewer file selector filter to improve QuickTime and AVI move selection.
+
+Updated the DomeGrid Attribute Editor Window UI
+  Added domeGrid controls to change number of sections and spans on the dome shape.
+
+Updated the Maya Domemaster3D Shelf's Version tool. The "Update" button URL now points to Google Drive.
+
+Changed the openGL viewport default focal length from 4 mm (160 degree FOV) to 18 mm (90 degree FOV)
 
 Version 1.4 Beta 10 Changes
 -------------------------------
